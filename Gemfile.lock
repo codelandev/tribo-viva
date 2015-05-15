@@ -57,10 +57,16 @@ GEM
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.0)
+    autoprefixer-rails (5.1.11)
+      execjs
+      json
     awesome_print (1.6.1)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.3.4.1)
+      autoprefixer-rails (>= 5.0.0.1)
+      sass (>= 3.2.19)
     bourbon (4.2.3)
       sass (~> 3.4)
       thor
@@ -100,6 +106,8 @@ GEM
     eventmachine (1.0.7)
     execjs (2.5.2)
     ffi (1.9.6)
+    font-awesome-rails (4.3.0.0)
+      railties (>= 3.2, < 5.0)
     formtastic (3.1.3)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.4.1)
@@ -141,6 +149,7 @@ GEM
     multi_json (1.11.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    nprogress-rails (0.1.6.6)
     orm_adapter (0.5.0)
     pg (0.18.2)
     polyamorous (1.2.0)
@@ -279,17 +288,21 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  autoprefixer-rails
   awesome_print (~> 1.6.1)
+  bootstrap-sass (~> 3.3.3)
   byebug
   capybara
   coffee-rails (~> 4.1.0)
   database_cleaner (~> 1.4.1)
   devise (~> 3.4.1)
   devise-i18n
+  font-awesome-rails
   initjs (~> 2.1.2)
   jbuilder (~> 2.0)
   jquery-rails
   machinist (~> 2.0)
+  nprogress-rails
   pg
   pundit (~> 0.3.0)
   rails (= 4.2.1)
