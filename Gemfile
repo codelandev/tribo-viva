@@ -73,3 +73,7 @@ gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'font-awesome-rails'
 gem 'nprogress-rails'
+group :production do
+  gem 'rails_12factor', '~> 0.0.3'
+  gem 'passenger', '~> 5.0'
+end
