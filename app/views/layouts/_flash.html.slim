@@ -1,0 +1,6 @@
+.flash
+  - for key, msg in flash
+    - flash_class = key.to_s == "alert" ? "alerts-error" : key
+    div[class="#{flash_class} wrapper"]
+      div[class="#{flash_class}"]
+        = msg

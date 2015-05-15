@@ -16,5 +16,9 @@ window.TriboViva =
   init: ->
     # Something here. This is called in every page.
 
-  modules: -> []
+  modules: ->
+    [
+      TriboViva.Flash
+    ]
+
     # Some modules that will be used on every page.
