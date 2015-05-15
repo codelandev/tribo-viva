@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -43,3 +44,19 @@ group :development, :test do
   gem 'spring'
 end
 
+
+group :development, :test do
+  gem 'machinist', '~> 2.0'
+  gem 'rspec-rails', '~> 3.2.0'
+  gem 'awesome_print', '~> 1.6.1', require: false
+  gem 'spring-commands-rspec', '~> 1.0.4'
+  gem 'thin', '~> 1.6.3'
+end
+
+group :test do
+  gem 'simplecov', '~> 0.9.2', require: false
+  gem 'database_cleaner', '~> 1.4.1'
+  gem 'shoulda-matchers', '~> 2.8.0', require: false
+  gem 'capybara'
+  gem 'selenium-webdriver'
+end
