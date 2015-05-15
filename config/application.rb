@@ -17,6 +17,17 @@ Bundler.require(*Rails.groups)
 
 module TriboViva
   class Application < Rails::Application
+    config.generators do |g|
+      g.javascripts false
+      g.stylesheets false
+      g.helper false
+      g.template_engine :slim
+      g.test_framework :rspec,
+        view_specs: false,
+        helper_specs: false
+      g.fixtures_replacement :machinist
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
