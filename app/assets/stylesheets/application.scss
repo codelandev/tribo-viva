@@ -5,7 +5,7 @@
 @import "base/variables";
 @import "base/variables-colors";
 @import "base/base";
-@import "base/typograph";
+@import "base/typography";
 @import "base/utility";
 
 // ==== Atoms
@@ -15,7 +15,7 @@
 
 // ==== Organisms
 @import "organisms/header";
-@import "organisms/sidebar";
+@import "organisms/footer";
 
 // ==== NProgress
 // $nprogress-color : ;
