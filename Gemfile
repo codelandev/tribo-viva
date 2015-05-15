@@ -64,3 +64,5 @@ end
 gem 'initjs', '~> 2.1.2'
 gem 'rails-i18n', '~> 4.0.4'
 gem 'slim-rails', '~> 3.0.1'
+gem 'devise', '~> 3.4.1'
+gem 'devise-i18n'
