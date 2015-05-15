@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      producer:
+        one: 'Produtor'
+        other: 'Produtores'
+
+    attributes:
+      producer:
+        logo: 'Logotipo'
+        name: 'Nome do Produtor'
+        phone: 'Telefone'
+        email: 'Email'
+        address: 'Endereço'
+        description: 'Descrição'
+        contact_name: 'Nome do contato'

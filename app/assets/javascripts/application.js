@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require nprogress
 //= require nprogress-turbolinks
+//= require bootstrap
 //= require_tree ./lib
 //= require tribo_viva/tribo_viva.js
 //= require init.js
