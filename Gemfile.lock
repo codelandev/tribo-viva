@@ -145,6 +145,8 @@ GEM
     pg (0.18.2)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
+    pundit (0.3.0)
+      activesupport (>= 3.0.0)
     rack (1.6.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -289,6 +291,7 @@ DEPENDENCIES
   jquery-rails
   machinist (~> 2.0)
   pg
+  pundit (~> 0.3.0)
   rails (= 4.2.1)
   rails-i18n (~> 4.0.4)
   rspec-rails (~> 3.2.0)
