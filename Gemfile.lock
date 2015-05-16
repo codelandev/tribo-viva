@@ -196,7 +196,7 @@ GEM
     pg (0.18.2)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
-    pundit (0.3.0)
+    pundit (1.0.0)
       activesupport (>= 3.0.0)
     rack (1.6.1)
     rack-test (0.6.3)
@@ -355,7 +355,7 @@ DEPENDENCIES
   nprogress-rails
   passenger (~> 5.0)
   pg
-  pundit (~> 0.3.0)
+  pundit (~> 1.0.0)
   rails (= 4.2.1)
   rails-i18n (~> 4.0.4)
   rails_12factor (~> 0.0.3)
