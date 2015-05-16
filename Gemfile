@@ -78,6 +78,8 @@ gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'font-awesome-rails'
 gem 'nprogress-rails'
+gem 'rack-zippy', '~> 3.0.0'
+
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
   gem 'passenger', '~> 5.0'
