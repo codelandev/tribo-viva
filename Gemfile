@@ -59,7 +59,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'simplecov', '~> 0.9.2', require: false
+  gem 'simplecov', '~> 0.10.0', require: false
   gem 'database_cleaner', '~> 1.4.1'
   gem 'shoulda-matchers', '~> 2.8.0', require: false
   gem 'capybara'
