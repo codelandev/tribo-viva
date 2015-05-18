@@ -31,4 +31,23 @@ if Rails.env.development? || Rails.env.staging?
   BankAccount.create(cc: '01014278-0', bank: 'Santander', agency: '1208', bank_number: '001',
                      operation_code: '002')
   printf "DONE! ======\n\n"
+
+  printf "====== Creating Example Offers ... "
+  3.times do |index|
+    Offer.create(deliver_coordinator: DeliverCoordinator.last,
+                 bank_account: BankAccount.last,
+                 producer: Producer.last,
+                 title: "Oferta Nº #{index+1}",
+                 remote_image_url: 'http://theoldreader.com/kittens/200/200/',
+                 value: 49.90,
+                 stock: 10,
+                 products_description: "Lorem ipsum Velit minim laboris sint pariatur reprehenderit veniam do quis qui anim ad irure laborum in sint ad est ex id ad ex commodo Duis aliquip aliqua et reprehenderit sed ut culpa laboris culpa ex do ex labore nulla cillum.",
+                 operational_tax: 4.99,
+                 coordinator_tax: 4.99,
+                 offer_starts_at: 1.day.from_now,
+                 offer_ends_at: 9.day.from_now,
+                 collect_starts_at: 10.day.from_now,
+                 collect_ends_at: 20.days.from_now)
+  end
+  printf "DONE! ======\n\n"
 end

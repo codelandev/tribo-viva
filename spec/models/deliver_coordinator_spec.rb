@@ -9,4 +9,8 @@ RSpec.describe DeliverCoordinator, type: :model do
     it { should validate_presence_of :avatar }
     it { should validate_presence_of :address }
   end
+
+  describe "relations" do
+    it { should have_many :offers }
+  end
 end

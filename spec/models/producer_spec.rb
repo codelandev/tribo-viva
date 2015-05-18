@@ -10,4 +10,8 @@ RSpec.describe Producer, type: :model do
     it { should validate_presence_of :description }
     it { should validate_presence_of :contact_name }
   end
+
+  describe "relations" do
+    it { should have_many :offers }
+  end
 end

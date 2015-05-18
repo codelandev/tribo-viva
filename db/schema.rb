@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518173304) do
+ActiveRecord::Schema.define(version: 20150518181234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,29 @@ ActiveRecord::Schema.define(version: 20150518173304) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "offers", force: :cascade do |t|
+    t.integer  "deliver_coordinator_id"
+    t.integer  "bank_account_id"
+    t.integer  "producer_id"
+    t.text     "products_description",                            default: "",  null: false
+    t.string   "title",                                           default: "",  null: false
+    t.string   "image",                                           default: "",  null: false
+    t.decimal  "value",                  precision: 10, scale: 2, default: 0.0, null: false
+    t.decimal  "operational_tax",        precision: 10, scale: 2, default: 0.0, null: false
+    t.decimal  "coordinator_tax",        precision: 10, scale: 2, default: 0.0, null: false
+    t.integer  "stock",                                           default: 0,   null: false
+    t.datetime "collect_starts_at"
+    t.datetime "collect_ends_at"
+    t.datetime "offer_starts_at"
+    t.datetime "offer_ends_at"
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
+  end
+
+  add_index "offers", ["bank_account_id"], name: "index_offers_on_bank_account_id", using: :btree
+  add_index "offers", ["deliver_coordinator_id"], name: "index_offers_on_deliver_coordinator_id", using: :btree
+  add_index "offers", ["producer_id"], name: "index_offers_on_producer_id", using: :btree
+
   create_table "producers", force: :cascade do |t|
     t.text     "description",  default: "", null: false
     t.string   "name",         default: "", null: false
@@ -82,4 +105,7 @@ ActiveRecord::Schema.define(version: 20150518173304) do
     t.datetime "updated_at",                null: false
   end
 
+  add_foreign_key "offers", "bank_accounts"
+  add_foreign_key "offers", "deliver_coordinators"
+  add_foreign_key "offers", "producers"
 end

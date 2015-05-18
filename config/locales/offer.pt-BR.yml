@@ -1,0 +1,23 @@
+pt-BR:
+  activerecord:
+    models:
+      offer:
+        one: 'Oferta'
+        other: 'Ofertas'
+
+    attributes:
+      offer:
+        value: 'Preço total'
+        stock: 'Quantidade'
+        title: 'Nome da oferta'
+        image: 'Imagem da oferta'
+        producer: 'Produtor'
+        bank_account: 'Conta bancária'
+        offer_ends_at: 'Oferta encerra em:'
+        operational_tax: 'Taxa operacional'
+        coordinator_tax: 'Taxa do coordenador'
+        offer_starts_at: 'Oferta começa em:'
+        collect_ends_at: 'Coleta termina em:'
+        collect_starts_at: 'Coleta inicia em:'
+        deliver_coordinator: 'Coordenador de entrega'
+        products_description: 'Descrição dos produtos'
