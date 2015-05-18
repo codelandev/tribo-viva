@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      deliver_coordinator:
+        one: 'Coordenador de Entrega'
+        other: 'Coordenadores de Entrega'
+
+    attributes:
+      deliver_coordinator:
+        cpf: 'CPF'
+        name: 'Nome do Coordenador'
+        phone: 'Telefone'
+        email: 'Email'
+        avatar: 'Avatar'
+        address: 'Endereço'
