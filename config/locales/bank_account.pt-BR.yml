@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      bank_account:
+        one: 'Conta Bancária'
+        other: 'Contas Bancárias'
+
+    attributes:
+      bank_account:
+        cc: 'Conta Corrente'
+        bank: 'Nome do Banco'
+        agency: 'Agência'
+        bank_number: 'Número do Banco'
+        operation_code: 'Código da operação'
