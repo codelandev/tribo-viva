@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'active_admin_editor', github: 'ejholmes/active_admin_editor'
 # For image uploader
 gem 'carrierwave'
-gem 'fog-aws'
+gem 'fog'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
