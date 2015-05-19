@@ -1,12 +1,14 @@
 doctype 5
 html
   head
+    = metamagic
     meta[charset="utf-8"]
+    meta[property="og:locale" content="pt_BR"]
+    meta[property="og:site_name" content="triboviva.com.br"]
     /[if lt IE 9]
       meta[content="text/html; charset=utf-8" http-equiv="Content-Type"]
       = javascript_include_tag "//html5shiv.googlecode.com/svn/trunk/html5.js"
     meta[name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"]
-    title = content_for?(:page_title) ? "#{yield(:page_title)} - Tribo-viva" : "Tribo-viva"
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags

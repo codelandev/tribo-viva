@@ -259,6 +259,8 @@ GEM
     machinist (2.0)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    metamagic (3.1.7)
+      rails (>= 3.0.0)
     mime-types (2.5)
     mini_portile (0.6.2)
     minitest (5.6.1)
@@ -433,6 +435,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   machinist (~> 2.0)
+  metamagic
   nprogress-rails
   passenger (~> 5.0)
   pg

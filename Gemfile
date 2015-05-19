@@ -28,6 +28,8 @@ gem 'active_admin_editor', github: 'ejholmes/active_admin_editor'
 # For image uploader
 gem 'carrierwave'
 gem 'fog'
+# For dynamic meta tags
+gem 'metamagic'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
