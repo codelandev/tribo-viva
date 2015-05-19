@@ -1,7 +1,7 @@
 h1 Ofertas válidas
 - @valid_offers.each do |offer|
   = image_tag offer.image.url
-  h2 = offer.title
+  h2 = link_to offer.title, offer_path(offer)
   p
     strong = t('activerecord.attributes.offer.value')
     br
@@ -54,7 +54,7 @@ h1 Ofertas válidas
 h1 Ofertas concluídas
 - @finished_offers.each do |offer|
   = image_tag offer.image.url
-  h2 = offer.title
+  h2 = link_to offer.title, offer_path(offer)
   p
     strong = t('activerecord.attributes.offer.value')
     br

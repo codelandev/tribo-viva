@@ -1,0 +1,49 @@
+h2 = resource.title
+p
+  strong = t('activerecord.attributes.offer.value')
+  br
+  = number_to_currency resource.value
+p
+  strong = t('activerecord.attributes.offer.products_description')
+  br
+  = resource.products_description
+p
+  strong = t('activerecord.attributes.offer.deliver_coordinator')
+  br
+  = resource.deliver_coordinator.name
+p
+  strong = t('activerecord.attributes.offer.bank_account')
+  br
+  = resource.bank_account.bank
+p
+  strong = t('activerecord.attributes.offer.producer')
+  br
+  = resource.producer.name
+p
+  strong = t('activerecord.attributes.offer.stock')
+  br
+  = resource.stock
+p
+  strong = t('activerecord.attributes.offer.operational_tax')
+  br
+  = number_to_currency resource.operational_tax
+p
+  strong = t('activerecord.attributes.offer.coordinator_tax')
+  br
+  = number_to_currency resource.coordinator_tax
+p
+  strong = t('activerecord.attributes.offer.offer_ends_at')
+  br
+  = l resource.offer_ends_at
+p
+  strong = t('activerecord.attributes.offer.collect_ends_at')
+  br
+  = l resource.collect_ends_at
+p
+  strong = t('activerecord.attributes.offer.offer_starts_at')
+  br
+  = l resource.offer_starts_at
+p
+  strong = t('activerecord.attributes.offer.collect_starts_at')
+  br
+  = l resource.collect_starts_at
