@@ -9,6 +9,6 @@ class Offer < ActiveRecord::Base
 
   mount_uploader :image, OfferUploader
 
-  scope :valid_offers, -> { where('offer_starts_at >= ? AND offer_ends_at <= ? AND stock > 0', DateTime.now, DateTime.now) }
-  scope :finished_offers, -> { where('offer_ends_at > ? OR stock < 1', DateTime.now) }
+  scope :valid_offers, -> { where('offer_ends_at > ? AND stock > 0', DateTime.now) }
+  scope :finished_offers, -> { where('offer_ends_at < ? OR stock <= 0', DateTime.now) }
 end
