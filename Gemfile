@@ -30,6 +30,8 @@ gem 'carrierwave'
 gem 'fog'
 # For dynamic meta tags
 gem 'metamagic'
+# For better enumerations
+gem 'enumerate_it'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

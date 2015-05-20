@@ -119,6 +119,8 @@ GEM
     diff-lcs (1.2.5)
     docile (1.1.5)
     ejs (1.1.1)
+    enumerate_it (1.2.6)
+      activesupport (>= 3.0.0)
     erubis (2.7.0)
     eventmachine (1.0.7)
     excon (0.45.3)
@@ -438,6 +440,7 @@ DEPENDENCIES
   database_cleaner (~> 1.4.1)
   devise (~> 3.4.1)
   devise-i18n
+  enumerate_it
   fog
   font-awesome-rails
   initjs (~> 2.1.2)
