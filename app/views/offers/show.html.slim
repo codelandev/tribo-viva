@@ -1,52 +1,52 @@
-- meta og: { title: "Tribo Viva - #{resource.title}", description: "#{resource.products_description}",
-             url: request.url, image: resource.image.url }
+- meta og: { title: "Tribo Viva - #{@offer.title}", description: "#{@offer.products_description}",
+             url: request.url, image: @offer.image.url }
 
-h2 = resource.title
+h2 = @offer.title
 p
   strong = t('activerecord.attributes.offer.value')
   br
-  = number_to_currency resource.value
+  = number_to_currency @offer.value
 p
   strong = t('activerecord.attributes.offer.products_description')
   br
-  = resource.products_description
+  = @offer.products_description
 p
   strong = t('activerecord.attributes.offer.deliver_coordinator')
   br
-  = resource.deliver_coordinator.name
+  = @offer.deliver_coordinator.name
 p
   strong = t('activerecord.attributes.offer.bank_account')
   br
-  = resource.bank_account.bank
+  = @offer.bank_account.bank
 p
   strong = t('activerecord.attributes.offer.producer')
   br
-  = resource.producer.name
+  = @offer.producer.name
 p
   strong = t('activerecord.attributes.offer.stock')
   br
-  = resource.stock
+  = @offer.stock
 p
   strong = t('activerecord.attributes.offer.operational_tax')
   br
-  = number_to_currency resource.operational_tax
+  = number_to_currency @offer.operational_tax
 p
   strong = t('activerecord.attributes.offer.coordinator_tax')
   br
-  = number_to_currency resource.coordinator_tax
+  = number_to_currency @offer.coordinator_tax
 p
   strong = t('activerecord.attributes.offer.offer_ends_at')
   br
-  = l resource.offer_ends_at
+  = l @offer.offer_ends_at
 p
   strong = t('activerecord.attributes.offer.collect_ends_at')
   br
-  = l resource.collect_ends_at
+  = l @offer.collect_ends_at
 p
   strong = t('activerecord.attributes.offer.offer_starts_at')
   br
-  = l resource.offer_starts_at
+  = l @offer.offer_starts_at
 p
   strong = t('activerecord.attributes.offer.collect_starts_at')
   br
-  = l resource.collect_starts_at
+  = l @offer.collect_starts_at
