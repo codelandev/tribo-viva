@@ -23,4 +23,20 @@ RSpec.describe Offer, type: :model do
     it { should belong_to :bank_account }
     it { should belong_to :deliver_coordinator }
   end
+
+  describe "scopes" do
+    let(:valid) { Offer.make!(offer_ends_at: 1.day.from_now) }
+    let(:invalid_date) { Offer.make!(offer_ends_at: 1.day.ago) }
+    let(:invalid_stock) { Offer.make!(stock: 0) }
+
+    context "when valid_offers" do
+      it { Offer.valid_offers.should == [valid] }
+      it { Offer.valid_offers.should_not == [invalid_stock, invalid_date] }
+    end
+
+    context "when finished_offers" do
+      it { Offer.finished_offers.should == [invalid_stock, invalid_date] }
+      it { Offer.finished_offers.should_not == [valid] }
+    end
+  end
 end

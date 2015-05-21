@@ -1,2 +1,108 @@
-h1 Pages#home
-p Find me in app/views/pages/home.html.slim
+- meta og: { title: "Tribo Viva", description: "Lorem ipsum Dolore mollit nisi ad consectetur in do quis do labore incididunt consequat sit Ut fugiat cupidatat aliqua enim sed.",
+             url: request.url, image: "#{asset_url('logo.png')}" }
+
+h1 Ofertas válidas
+- @valid_offers.each do |offer|
+  = image_tag offer.image.url
+  h2 = link_to offer.title, offer_path(offer)
+  p
+    strong = t('activerecord.attributes.offer.value')
+    br
+    = number_to_currency offer.value
+  p
+    strong = t('activerecord.attributes.offer.products_description')
+    br
+    = offer.products_description
+  p
+    strong = t('activerecord.attributes.offer.deliver_coordinator')
+    br
+    = offer.deliver_coordinator.name
+  p
+    strong = t('activerecord.attributes.offer.bank_account')
+    br
+    = offer.bank_account.bank
+  p
+    strong = t('activerecord.attributes.offer.producer')
+    br
+    = offer.producer.name
+  p
+    strong = t('activerecord.attributes.offer.stock')
+    br
+    = offer.stock
+  p
+    strong = t('activerecord.attributes.offer.operational_tax')
+    br
+    = number_to_currency offer.operational_tax
+  p
+    strong = t('activerecord.attributes.offer.coordinator_tax')
+    br
+    = number_to_currency offer.coordinator_tax
+  p
+    strong = t('activerecord.attributes.offer.offer_ends_at')
+    br
+    = l offer.offer_ends_at
+  p
+    strong = t('activerecord.attributes.offer.collect_ends_at')
+    br
+    = l offer.collect_ends_at
+  p
+    strong = t('activerecord.attributes.offer.offer_starts_at')
+    br
+    = l offer.offer_starts_at
+  p
+    strong = t('activerecord.attributes.offer.collect_starts_at')
+    br
+    = l offer.collect_starts_at
+
+h1 Ofertas concluídas
+- @finished_offers.each do |offer|
+  = image_tag offer.image.url
+  h2 = link_to offer.title, offer_path(offer)
+  p
+    strong = t('activerecord.attributes.offer.value')
+    br
+    = number_to_currency offer.value
+  p
+    strong = t('activerecord.attributes.offer.products_description')
+    br
+    = offer.products_description
+  p
+    strong = t('activerecord.attributes.offer.deliver_coordinator')
+    br
+    = offer.deliver_coordinator.name
+  p
+    strong = t('activerecord.attributes.offer.bank_account')
+    br
+    = offer.bank_account.bank
+  p
+    strong = t('activerecord.attributes.offer.producer')
+    br
+    = offer.producer.name
+  p
+    strong = t('activerecord.attributes.offer.stock')
+    br
+    = offer.stock
+  p
+    strong = t('activerecord.attributes.offer.operational_tax')
+    br
+    = number_to_currency offer.operational_tax
+  p
+    strong = t('activerecord.attributes.offer.coordinator_tax')
+    br
+    = number_to_currency offer.coordinator_tax
+  p
+    strong = t('activerecord.attributes.offer.offer_ends_at')
+    br
+    = l offer.offer_ends_at
+  p
+    strong = t('activerecord.attributes.offer.collect_ends_at')
+    br
+    = l offer.collect_ends_at
+  p
+    strong = t('activerecord.attributes.offer.offer_starts_at')
+    br
+    = l offer.offer_starts_at
+  p
+    strong = t('activerecord.attributes.offer.collect_starts_at')
+    br
+    = l offer.collect_starts_at

@@ -28,6 +28,8 @@ gem 'active_admin_editor', github: 'ejholmes/active_admin_editor'
 # For image uploader
 gem 'carrierwave'
 gem 'fog'
+# For dynamic meta tags
+gem 'metamagic'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -56,6 +58,7 @@ group :development, :test do
   gem 'awesome_print', '~> 1.6.1', require: false
   gem 'spring-commands-rspec', '~> 1.0.4'
   gem 'thin', '~> 1.6.3'
+  gem 'pry-rails'
 end
 
 group :test do
