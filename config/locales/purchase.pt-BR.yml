@@ -1,0 +1,21 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase:
+        one: 'Compra'
+        other: 'Compras'
+
+    attributes:
+      purchase:
+        amount: 'Quantidade'
+        status: 'Status'
+        user_id: 'Usuário'
+        receipt: 'Recibo'
+        offer_id: 'Oferta'
+        transaction_id: 'ID da transação'
+
+  enumerations:
+    purchase_status:
+      pending: "Pendente"
+      confirmed: "Confirmada"
+      canceled: "Cancelada"

@@ -1,0 +1,39 @@
+h2 = @offer.title
+
+= form_tag create_purchase_offer_path do |params|
+  = label_tag :amount, 'Quantidade (max 3)'
+  = number_field_tag 'params[amount]', nil, min: 1, max: 3, label: 'Quantidade (max 3)'
+
+  br
+
+  p Já realizou alguma compra antes?
+  = radio_button_tag 'params[status]', true, checked: true
+  = label_tag :status, 'Sim'
+  = radio_button_tag 'params[status]', false, checked: false
+  = label_tag :status, 'Não'
+
+  p Caso sim, preencha seu email a seguir
+
+  = label_tag :registered_user_email, 'Email'
+  = text_field_tag 'params[registered_user_email]'
+
+  br
+
+  p Caso não, preencha os campos abaixo
+
+  = label_tag :unregistered_user_name, 'Nome completo'
+  = text_field_tag 'params[unregistered_user_name]'
+
+  br
+
+  = label_tag :unregistered_user_email, 'Email'
+  = text_field_tag 'params[unregistered_user_email]'
+
+  br
+
+  = label_tag :unregistered_user_cpf, 'CPF'
+  = text_field_tag 'params[unregistered_user_cpf]'
+
+  br
+
+  = submit_tag 'Confirmar compra'

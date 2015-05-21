@@ -7,7 +7,15 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 if Rails.env.development? || Rails.env.staging?
+  printf "====== Creating consumers ... "
+
+  10.times do |index|
+    User.create(name: "User Test #{index+1}", email: "user_#{index+1}@test.com", cpf: "0000000000#{index+1}")
+  end
+
+  printf "DONE! ======\n\n"
   printf "====== Creating Producers & Deliver Coordinators ... "
+
   10.times do |index|
     Producer.create(name: "Produtor #{index}",
                     phone: "321321321",
@@ -26,13 +34,14 @@ if Rails.env.development? || Rails.env.staging?
   end
 
   printf "DONE! ======\n\n"
-
   printf "====== Creating Example Bank Accounts ... "
+
   BankAccount.create(cc: '01014278-0', bank: 'Santander', agency: '1208', bank_number: '001',
                      operation_code: '002')
-  printf "DONE! ======\n\n"
 
+  printf "DONE! ======\n\n"
   printf "====== Creating Example Offers ... "
+
   3.times do |index|
     Offer.create(deliver_coordinator: DeliverCoordinator.last,
                  bank_account: BankAccount.last,
@@ -48,6 +57,12 @@ if Rails.env.development? || Rails.env.staging?
                  offer_ends_at: 9.day.from_now,
                  collect_starts_at: 10.day.from_now,
                  collect_ends_at: 20.days.from_now)
+
+    5.times do |index|
+      Purchase.create(user: User.find(index+1), offer: Offer.last, amount: 2, status: PurchaseStatus::CONFIRMED,
+                      receipt: File.open('spec/support/example.jpg'))
+    end
   end
+
   printf "DONE! ======\n\n"
 end
