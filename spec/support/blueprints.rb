@@ -8,6 +8,12 @@ require 'machinist/active_record'
 #     body  { "Lorem ipsum..." }
 #   end
 
+User.blueprint do
+  cpf { '12345678901' }
+  name { 'User Test' }
+  email { 'user@test.com' }
+end
+
 Producer.blueprint do
   name { "Produtor" }
   phone { "321321321" }
