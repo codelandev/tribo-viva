@@ -1,5 +1,8 @@
 .hero {
-  background-color: $brown-light;
+  background-image: asset-url('bg-cover.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   width: 100%;
   min-height: 600px;
   height: 600px;
