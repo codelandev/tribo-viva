@@ -1,0 +1,13 @@
+.header {
+  height: 100px;
+  width: 100%;
+  position: absolute;
+}
+
+.header__logo {
+  background-color: $brown-dark;
+  display: block;
+  height: 100px;
+  width: 200px;
+}
+

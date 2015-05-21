@@ -1,0 +1,19 @@
+.hero {
+  background-color: $brown-light;
+  width: 100%;
+  min-height: 600px;
+  height: 600px;
+  padding: 20px 0 40px 0;
+
+  display: table;
+}
+
+.hero__slogan {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.hero__description {
+  font-weight: 300;
+  font-size: 21px;
+}

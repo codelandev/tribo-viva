@@ -1,0 +1,33 @@
+// ==== Titles
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+}
+
+h1 { font-size: 33px; }
+
+.title--xl { font-size: 61px; }
+
+.title--up {
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+
+
+
+// ==== Text colors
+
+.text--green { color: $green-light !important; }
+
+.text--yellow { color: $yellow-medium !important; }
+
+.text--brown { color: $brown-dark !important}
+
+.text--brown__medium { color: $brown-medium !important}
+
+.text--white { color: #fff !important; }

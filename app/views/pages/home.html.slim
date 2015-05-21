@@ -1,6 +1,16 @@
 - meta og: { title: "Tribo Viva", description: "Lorem ipsum Dolore mollit nisi ad consectetur in do quis do labore incididunt consequat sit Ut fugiat cupidatat aliqua enim sed.",
              url: request.url, image: "#{asset_url('logo.png')}" }
 
+section.hero
+ .hero__slogan.text-center.text--white
+   .container
+     .row
+       .col-md-8.col-centered
+         h1.title--xl Slogan da Tribo Viva
+         span.hero__description Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris
+
+section.offers
+
 h1 Ofertas válidas
 - @valid_offers.each do |offer|
   = image_tag offer.image.url

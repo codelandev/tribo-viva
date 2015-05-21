@@ -11,11 +11,10 @@
 // ==== Atoms
 
 // ==== Molecules
-@import "molecules/flash";
+@import "molecules/*";
 
 // ==== Organisms
-@import "organisms/header";
-@import "organisms/footer";
+@import "organisms/*";
 
 // ==== NProgress
 // $nprogress-color : ;
