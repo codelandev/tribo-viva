@@ -1,11 +1,10 @@
 .btn {
   border-radius: 0;
   text-transform: uppercase;
-  font-weight: bold;
 }
 
 .btn--md {
-  padding: 10px;
+  padding: 10px 20px;
   font-size: 16px;
 }
 
@@ -13,10 +12,9 @@
 
 .btn--green {
   background-color: $brown-dark;
-  color: $brown-light;
+  color: $yellow-medium;
   &:hover {
-    // color: $yellow-medium;
-    color: $brown-light;
-    background-color: $green-light;
+    color: $brown-dark;
+    background-color: $yellow-medium;
   }
 }

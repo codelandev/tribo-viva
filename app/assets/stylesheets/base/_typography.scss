@@ -6,6 +6,7 @@ h3,
 h4 {
   font-family: 'Oswald', sans-serif;
   font-weight: 300;
+  margin-bottom: 20px;
 
   // Nesting to ovewrite bootstrap's specificity
   .small {
@@ -20,10 +21,9 @@ h1 { font-size: 33px; }
 
 .title--xl { font-size: 61px; }
 
-.title--up {
-  text-transform: uppercase;
-  font-weight: 400;
-}
+.title--up { text-transform: uppercase; }
+
+.big { font-size: 115%; }
 
 // ==== Text colors
 

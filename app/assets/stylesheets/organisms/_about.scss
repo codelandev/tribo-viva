@@ -1,0 +1,19 @@
+.about {
+  background-color: $green-light;
+  color: white;
+  padding: 60px 0 80px 0;
+  font-weight: 300;
+
+  a { color: white; }
+
+  .big { margin-bottom: 5px; }
+
+  .btn--green:hover {
+    color: $brown-dark;
+    background-color: $yellow-medium;
+  }
+
+  .input-group { margin-top: 5px; }
+
+  input[type="text"] { height: 45px; }
+}
