@@ -34,7 +34,9 @@ ActiveAdmin.register Offer do
       row :value do |offer|
         number_to_currency offer.value
       end
-      row :stock
+      row :stock do |offer|
+        "Resta #{offer.remaining} de #{offer.stock}"
+      end
       row :products_description do |offer|
         simple_format offer.products_description
       end
@@ -48,6 +50,23 @@ ActiveAdmin.register Offer do
       row :offer_ends_at
       row :collect_starts_at
       row :collect_ends_at
+    end
+
+    panel 'Compras para esta oferta' do
+      table_for offer.purchases.order(status: :desc) do
+        column :transaction_id do |purchase|
+          link_to purchase.transaction_id, admin_purchase_path(purchase)
+        end
+        column :status do |purchase|
+          PurchaseStatus.t purchase.status
+        end
+        column :user
+        column :offer
+        column :amount
+        column :total do |purchase|
+          number_to_currency purchase.total
+        end
+      end
     end
   end
 

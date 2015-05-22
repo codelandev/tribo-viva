@@ -14,6 +14,6 @@ class Offer < ActiveRecord::Base
   scope :finished_offers, -> { where('offer_ends_at < ? OR stock <= 0', DateTime.now) }
 
   def remaining
-    stock - purchases.where(status: [PurchaseStatus::PENDING, PurchaseStatus::CONFIRMED]).count
+    stock - purchases.where(status: [PurchaseStatus::PENDING, PurchaseStatus::CONFIRMED]).map(&:amount).sum
   end
 end

@@ -45,17 +45,23 @@ RSpec.describe Purchase, type: :model do
   describe "methods" do
     describe "#confirm!" do
       it "must update status to confirmed" do
-        @purchase = Purchase.make!(:pending)
-        @purchase.confirm!
-        expect(@purchase.status).to eql('confirmed')
+        purchase = Purchase.make!(:pending)
+        purchase.confirm!
+        expect(purchase.status).to eql('confirmed')
       end
     end
 
     describe "#cancel!" do
       it "must update status to canceled" do
-        @purchase = Purchase.make!(:pending)
-        @purchase.cancel!
-        expect(@purchase.status).to eql('canceled')
+        purchase = Purchase.make!(:pending)
+        purchase.cancel!
+        expect(purchase.status).to eql('canceled')
+      end
+    end
+
+    describe "#total" do
+      it "must show the amount times offer value" do
+        expect(Purchase.make!(:confirmed).total).to eql(99.8)
       end
     end
   end

@@ -1,6 +1,7 @@
 class Purchase < ActiveRecord::Base
   attr_accessor :user_status, :registered_user_email, :unregistered_user_name, :unregistered_user_email,
                 :unregistered_user_cpf
+
   before_validation :generate_transaction_id, on: :create
 
   belongs_to :user
@@ -14,6 +15,8 @@ class Purchase < ActiveRecord::Base
   scope :canceled, -> { where(status: PurchaseStatus::CANCELED) }
   scope :confirmed, -> { where(status: PurchaseStatus::CONFIRMED) }
 
+  has_enumeration_for :status, with: PurchaseStatus, create_helpers: true
+
   mount_uploader :receipt, PurchaseUploader
 
   def confirm!
@@ -22,6 +25,10 @@ class Purchase < ActiveRecord::Base
 
   def cancel!
     update_attributes(status: PurchaseStatus::CANCELED)
+  end
+
+  def total
+    offer.value * amount
   end
 
   protected
