@@ -9,13 +9,13 @@
 @import "base/utility";
 
 // ==== Atoms
+@import "atoms/*";
 
 // ==== Molecules
-@import "molecules/flash";
+@import "molecules/*";
 
 // ==== Organisms
-@import "organisms/header";
-@import "organisms/footer";
+@import "organisms/*";
 
 // ==== NProgress
 // $nprogress-color : ;

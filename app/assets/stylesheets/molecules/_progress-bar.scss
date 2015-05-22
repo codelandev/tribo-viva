@@ -1,0 +1,11 @@
+.progress {
+  height: 8px;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: $brown-medium;
+  clear:both;
+}
+
+.progress-bar { box-shadow: none; }
+
+.progress-bar-yellow { background-color: $yellow-medium; }

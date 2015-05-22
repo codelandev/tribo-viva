@@ -1,108 +1,69 @@
 - meta og: { title: "Tribo Viva", description: "Lorem ipsum Dolore mollit nisi ad consectetur in do quis do labore incididunt consequat sit Ut fugiat cupidatat aliqua enim sed.",
              url: request.url, image: "#{asset_url('logo.png')}" }
 
-h1 Ofertas válidas
-- @valid_offers.each do |offer|
-  = image_tag offer.image.url
-  h2 = link_to offer.title, offer_path(offer)
-  p
-    strong = t('activerecord.attributes.offer.value')
-    br
-    = number_to_currency offer.value
-  p
-    strong = t('activerecord.attributes.offer.products_description')
-    br
-    = offer.products_description
-  p
-    strong = t('activerecord.attributes.offer.deliver_coordinator')
-    br
-    = offer.deliver_coordinator.name
-  p
-    strong = t('activerecord.attributes.offer.bank_account')
-    br
-    = offer.bank_account.bank
-  p
-    strong = t('activerecord.attributes.offer.producer')
-    br
-    = offer.producer.name
-  p
-    strong = t('activerecord.attributes.offer.stock')
-    br
-    = offer.stock
-  p
-    strong = t('activerecord.attributes.offer.operational_tax')
-    br
-    = number_to_currency offer.operational_tax
-  p
-    strong = t('activerecord.attributes.offer.coordinator_tax')
-    br
-    = number_to_currency offer.coordinator_tax
-  p
-    strong = t('activerecord.attributes.offer.offer_ends_at')
-    br
-    = l offer.offer_ends_at
-  p
-    strong = t('activerecord.attributes.offer.collect_ends_at')
-    br
-    = l offer.collect_ends_at
-  p
-    strong = t('activerecord.attributes.offer.offer_starts_at')
-    br
-    = l offer.offer_starts_at
-  p
-    strong = t('activerecord.attributes.offer.collect_starts_at')
-    br
-    = l offer.collect_starts_at
+section.hero
+ .hero__slogan.text-center.text--white
+   .container
+     .row
+       .col-md-8.col-centered
+         h1.title--xl Slogan da Tribo Viva
+         span.hero__description Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris
 
-h1 Ofertas concluídas
-- @finished_offers.each do |offer|
-  = image_tag offer.image.url
-  h2 = link_to offer.title, offer_path(offer)
-  p
-    strong = t('activerecord.attributes.offer.value')
-    br
-    = number_to_currency offer.value
-  p
-    strong = t('activerecord.attributes.offer.products_description')
-    br
-    = offer.products_description
-  p
-    strong = t('activerecord.attributes.offer.deliver_coordinator')
-    br
-    = offer.deliver_coordinator.name
-  p
-    strong = t('activerecord.attributes.offer.bank_account')
-    br
-    = offer.bank_account.bank
-  p
-    strong = t('activerecord.attributes.offer.producer')
-    br
-    = offer.producer.name
-  p
-    strong = t('activerecord.attributes.offer.stock')
-    br
-    = offer.stock
-  p
-    strong = t('activerecord.attributes.offer.operational_tax')
-    br
-    = number_to_currency offer.operational_tax
-  p
-    strong = t('activerecord.attributes.offer.coordinator_tax')
-    br
-    = number_to_currency offer.coordinator_tax
-  p
-    strong = t('activerecord.attributes.offer.offer_ends_at')
-    br
-    = l offer.offer_ends_at
-  p
-    strong = t('activerecord.attributes.offer.collect_ends_at')
-    br
-    = l offer.collect_ends_at
-  p
-    strong = t('activerecord.attributes.offer.offer_starts_at')
-    br
-    = l offer.offer_starts_at
-  p
-    strong = t('activerecord.attributes.offer.collect_starts_at')
-    br
-    = l offer.collect_starts_at
+section.offers
+  .container
+    .row
+      .col-sm-12.col-md-10.col-centered
+        h2.text--green
+          span.title--up Ofertas da Semana
+          span.small Porto Alegre
+        .row
+          - @valid_offers.each do |offer|
+            .col-md-4
+              = link_to offer do
+                article.card
+                  .card__image style="background-image: url(#{offer.image.url});"
+                  .card__info
+                    p.card__info__price
+                      span = number_to_currency offer.value
+                      span.small
+                        |  / valor un. cota
+                    h1.card__info__title.title--up = link_to offer.title, offer_path(offer)
+                    span.card__info__place
+                      span.glyphicon.glyphicon-map-marker
+                      = offer.producer.name
+                  .card__action
+                    button.btn.btn--md.btn--block.btn--yellow Comprar
+                  .card__progress
+                    .pull-left.text-left
+                      .span
+                        = offer.stock
+                        |   cotas
+                      .small restantes
+                    .pull-right.text-right
+                      .span
+                        = l offer.offer_starts_at
+                        |  dias
+                      .small restantes
+                    .progress
+                      .progress-bar.progress-bar-yellow role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"
+
+section.about
+  .container
+    .row
+      .col-sm-12.col-md-10.col-centered
+        .row
+          .col-md-4
+            h2.title--up.text--yellow Sobre a TriboViva
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt u labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          .col-md-4
+            h2.title--up.text--yellow Guia de Produtores
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt u labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          .col-md-4
+            h2.title--up.text--brown Fique Conectado
+            .big
+              = link_to 'Facebook', root_path
+            .big Inscreva-se na nossa newsletter
+            .input-group
+              input.form-control type="text" placeholder="example@email.com"
+                .span.input-group-btn
+                  button.btn.btn--md.btn--block.btn--brown type="button" OK

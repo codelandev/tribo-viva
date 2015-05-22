@@ -1,0 +1,15 @@
+footer.footer
+  .container
+    .row
+      .col-sm-12.col-md-10.col-centered
+        .row
+          .col-md-6
+            .pull-left
+              = link_to image_tag('logo-triboviva.png'), root_path, class: 'footer__logo'
+          .col-md-6
+            .pull-right
+              ul
+                li
+                  = link_to 'Sobre', root_path
+                li
+                  = link_to 'Contato', 'mailto:contato@codeland.com.br?subject=Olá Tribo Viva!'

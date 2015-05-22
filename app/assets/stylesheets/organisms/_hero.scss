@@ -1,0 +1,22 @@
+.hero {
+  background-image: asset-url('bg-cover.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100%;
+  min-height: 600px;
+  height: 600px;
+  padding: 20px 0 40px 0;
+
+  display: table;
+}
+
+.hero__slogan {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.hero__description {
+  font-weight: 300;
+  font-size: 21px;
+}

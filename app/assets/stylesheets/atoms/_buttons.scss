@@ -1,0 +1,29 @@
+.btn {
+  border-radius: 0;
+  text-transform: uppercase;
+}
+
+.btn--md {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.btn--block { width: 100%; }
+
+.btn--brown {
+  background-color: $brown-dark;
+  color: $yellow-medium;
+  &:hover {
+    color: $brown-dark;
+    background-color: $yellow-medium;
+  }
+}
+
+.btn--yellow {
+  background-color: $yellow-medium;
+  color: $brown-dark;
+  &:hover {
+    color: $yellow-medium;
+    background-color: $brown-medium;
+  }
+}

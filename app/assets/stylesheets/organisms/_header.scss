@@ -1,0 +1,14 @@
+.header {
+  height: 100px;
+  width: 100%;
+  position: absolute;
+}
+
+.header__logo {
+  background-color: $green-light;
+  display: block;
+  height: 100px;
+  width: 310px;
+  padding: 20px 30px;
+}
+
