@@ -1,39 +1,39 @@
 h2 = @offer.title
 
-= form_tag create_purchase_offer_path do |params|
-  = label_tag :amount, 'Quantidade (max 3)'
-  = number_field_tag 'params[amount]', nil, min: 1, max: 3, label: 'Quantidade (max 3)'
+= simple_form_for @purchase, url: create_purchase_offer_path do |f|
+  = f.label :amount, 'Quantidade (max 3)'
+  = f.number_field :amount, min: 1, max: 3, label: 'Quantidade (max 3)'
 
   br
 
   p Já realizou alguma compra antes?
-  = radio_button_tag 'params[status]', true, checked: true
-  = label_tag :status, 'Sim'
-  = radio_button_tag 'params[status]', false, checked: false
-  = label_tag :status, 'Não'
+  = f.radio_button :user_status, true, checked: true
+  = f.label :user_status, 'Sim'
+  = f.radio_button :user_status, false, checked: false
+  = f.label :user_status, 'Não'
 
   p Caso sim, preencha seu email a seguir
 
-  = label_tag :registered_user_email, 'Email'
-  = text_field_tag 'params[registered_user_email]'
+  = f.label :registered_user_email, 'Email'
+  = f.text_field :registered_user_email
 
   br
 
   p Caso não, preencha os campos abaixo
 
-  = label_tag :unregistered_user_name, 'Nome completo'
-  = text_field_tag 'params[unregistered_user_name]'
+  = f.label :unregistered_user_name, 'Nome completo'
+  = f.text_field :unregistered_user_name
 
   br
 
-  = label_tag :unregistered_user_email, 'Email'
-  = text_field_tag 'params[unregistered_user_email]'
+  = f.label :unregistered_user_email, 'Email'
+  = f.text_field :unregistered_user_email
 
   br
 
-  = label_tag :unregistered_user_cpf, 'CPF'
-  = text_field_tag 'params[unregistered_user_cpf]'
+  = f.label :unregistered_user_cpf, 'CPF'
+  = f.text_field :unregistered_user_cpf
 
   br
 
-  = submit_tag 'Confirmar compra'
+  = f.submit 'Confirmar compra'

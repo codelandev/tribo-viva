@@ -43,7 +43,7 @@ RSpec.describe OffersController, type: :controller do
 
     context 'when stock is zero' do
       it "return error even with valid parameters" do
-        post :create_purchase, id: invalid_offer.id, params: @valid_registered_user
+        post :create_purchase, id: invalid_offer.id, purchase: @valid_registered_user
 
         expect(Purchase.count).to eq(0)
         expect(response).to redirect_to offer_path(invalid_offer)
@@ -53,7 +53,7 @@ RSpec.describe OffersController, type: :controller do
 
     context 'when user is registered' do
       it "returns success and redirect to root if valid parameters" do
-        post :create_purchase, id: offer.id, params: @valid_registered_user
+        post :create_purchase, id: offer.id, purchase: @valid_registered_user
 
         expect(Purchase.count).to eq(1)
         expect(Purchase.last.amount).to eq(@valid_registered_user[:amount].to_i)
@@ -65,7 +65,7 @@ RSpec.describe OffersController, type: :controller do
       end
 
       it "returns error and render purchase if invalid parameters" do
-        post :create_purchase, id: offer.id, params: @invalid_registered_user
+        post :create_purchase, id: offer.id, purchase: @invalid_registered_user
         expect(response).to render_template :new_purchase
         expect(flash[:alert]).to be_present
       end
@@ -73,7 +73,7 @@ RSpec.describe OffersController, type: :controller do
 
     context 'when user is not registered' do
       it "returns success and redirect to root if valid parameters" do
-        post :create_purchase, id: offer.id, params: @valid_unregistered_user
+        post :create_purchase, id: offer.id, purchase: @valid_unregistered_user
 
         expect(User.where(email: @valid_unregistered_user[:unregistered_user_email]).any?).to be_truthy
         expect(Purchase.count).to eq(1)
@@ -86,7 +86,7 @@ RSpec.describe OffersController, type: :controller do
       end
 
       it "returns error and render purchase if invalid parameters" do
-        post :create_purchase, id: offer.id, params: @invalid_unregistered_user
+        post :create_purchase, id: offer.id, purchase: @invalid_unregistered_user
         expect(response).to render_template :new_purchase
         expect(flash[:alert]).to be_present
       end

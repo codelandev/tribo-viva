@@ -27,7 +27,7 @@ p
 p
   strong = t('activerecord.attributes.offer.stock')
   br
-  = @offer.stock
+  = "#{@offer.remaining} de #{@offer.stock}"
 p
   strong = t('activerecord.attributes.offer.operational_tax')
   br

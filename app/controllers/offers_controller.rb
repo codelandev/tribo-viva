@@ -5,6 +5,7 @@ class OffersController < ApplicationController
 
   def new_purchase
     @offer = Offer.find(params[:id])
+    @purchase = Purchase.new
   end
 
   def create_purchase
@@ -50,11 +51,11 @@ class OffersController < ApplicationController
   protected
 
   def purchase_params
-    params.require(:params).permit(:amount)
+    params.require(:purchase).permit(:amount)
   end
 
   def user_params
-    params.require(:params).permit(:status, :registered_user_email, :unregistered_user_name,
-                                   :unregistered_user_email, :unregistered_user_cpf)
+    params.require(:purchase).permit(:status, :registered_user_email, :unregistered_user_name,
+                                     :unregistered_user_email, :unregistered_user_cpf)
   end
 end
