@@ -12,7 +12,7 @@ class OffersController < ApplicationController
     @offer = Offer.find(params[:id])
 
     if @offer.remaining >= purchase_params[:amount].to_i
-      if user_params[:status] == 'true'
+      if user_params[:user_status] == 'true'
         user     = User.find_by(email: user_params[:registered_user_email])
         purchase = Purchase.new(purchase_params.merge(user: user).merge(offer: @offer))
 
@@ -21,11 +21,12 @@ class OffersController < ApplicationController
           PurchaseMailer.confirm(purchase).deliver_now
           redirect_to root_path, notice: 'Em breve você receberá o email de confirmação da sua compra!'
         else
-          flash[:alert] = 'Desculpe, um erro ocorreu, por favor revise suas informações'
+          flash[:alert] = 'Preenchas corretamente suas informações'
+          @purchase = purchase
           render :new_purchase
         end
 
-      elsif user_params[:status] == 'false'
+      elsif user_params[:user_status] == 'false'
         cpf      = user_params[:unregistered_user_cpf]
         name     = user_params[:unregistered_user_name]
         email    = user_params[:unregistered_user_email]
@@ -38,13 +39,14 @@ class OffersController < ApplicationController
           PurchaseMailer.confirm(purchase).deliver_now
           redirect_to root_path, notice: 'Em breve você receberá o email de confirmação da sua compra!'
         else
-          flash[:alert] = 'Desculpe, um erro ocorreu, por favor revise suas informações'
+          flash[:alert] = 'Preenchas corretamente suas informações'
+          @purchase = purchase
           render :new_purchase
         end
       end
 
     else
-      redirect_to offer_path(@offer), alert: 'Não há esta quantidade disponível.'
+      redirect_to new_purchase_offer_path(@offer), alert: 'Não há esta quantidade disponível.'
     end
   end
 
@@ -55,7 +57,7 @@ class OffersController < ApplicationController
   end
 
   def user_params
-    params.require(:purchase).permit(:status, :registered_user_email, :unregistered_user_name,
+    params.require(:purchase).permit(:user_status, :registered_user_email, :unregistered_user_name,
                                      :unregistered_user_email, :unregistered_user_cpf)
   end
 end

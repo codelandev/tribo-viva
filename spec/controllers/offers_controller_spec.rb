@@ -35,10 +35,10 @@ RSpec.describe OffersController, type: :controller do
     let(:invalid_offer) { Offer.make!(stock: 0) }
 
     before do
-      @valid_registered_user     = { amount: '1', status: 'true', registered_user_email: user.email }
-      @invalid_registered_user   = { amount: '4', status: 'true', registered_user_email: user.email }
-      @valid_unregistered_user   = { amount: '1', status: 'false', unregistered_user_name: 'User Test', unregistered_user_email: 'test@test.com', unregistered_user_cpf: '00000000000' }
-      @invalid_unregistered_user = { amount: '4', status: 'false', unregistered_user_name: 'User Test', unregistered_user_email: 'test@test.com', unregistered_user_cpf: '00000000000' }
+      @valid_registered_user     = { amount: '1', user_status: 'true', registered_user_email: user.email }
+      @invalid_registered_user   = { amount: '4', user_status: 'true', registered_user_email: user.email }
+      @valid_unregistered_user   = { amount: '1', user_status: 'false', unregistered_user_name: 'User Test', unregistered_user_email: 'test@test.com', unregistered_user_cpf: '00000000000' }
+      @invalid_unregistered_user = { amount: '4', user_status: 'false', unregistered_user_name: 'User Test', unregistered_user_email: 'test@test.com', unregistered_user_cpf: '00000000000' }
     end
 
     context 'when stock is zero' do
@@ -46,7 +46,7 @@ RSpec.describe OffersController, type: :controller do
         post :create_purchase, id: invalid_offer.id, purchase: @valid_registered_user
 
         expect(Purchase.count).to eq(0)
-        expect(response).to redirect_to offer_path(invalid_offer)
+        expect(response).to redirect_to new_purchase_offer_path(invalid_offer)
         expect(flash[:alert]).to be_present
       end
     end
