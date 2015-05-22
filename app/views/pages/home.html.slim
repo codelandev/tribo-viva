@@ -29,10 +29,10 @@ section.offers
                         |  / valor un. cota
                     h1.card__info__title.title--up = link_to offer.title, offer_path(offer)
                     span.card__info__place
-                      span.glyphicon.glyphicon-map-marker
+                      span.glyphicon.glyphicon-grain
                       = offer.producer.name
                   .card__action
-                    button.btn.btn--md.btn--block.btn--yellow Comprar
+                    = link_to 'COMPRAR', new_purchase_offer_path(offer), class: 'btn btn--md btn--block btn--yellow'
                   .card__progress
                     .pull-left.text-left
                       .span
