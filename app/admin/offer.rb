@@ -1,5 +1,5 @@
 ActiveAdmin.register Offer do
-  permit_params :deliver_coordinator, :bank_account, :producer, :title, :image, :value, :stock,
+  permit_params :deliver_coordinator_id, :bank_account_id, :producer_id, :title, :image, :value, :stock,
                 :products_description, :offer_ends_at, :operational_tax, :coordinator_tax,
                 :collect_ends_at, :offer_starts_at, :collect_starts_at
 

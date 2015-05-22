@@ -10,11 +10,20 @@
 
 .btn--block { width: 100%; }
 
-.btn--green {
+.btn--brown {
   background-color: $brown-dark;
   color: $yellow-medium;
   &:hover {
     color: $brown-dark;
     background-color: $yellow-medium;
+  }
+}
+
+.btn--yellow {
+  background-color: $yellow-medium;
+  color: $brown-dark;
+  &:hover {
+    color: $yellow-medium;
+    background-color: $brown-medium;
   }
 }

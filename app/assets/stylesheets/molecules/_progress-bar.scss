@@ -2,10 +2,10 @@
   height: 8px;
   border-radius: 0;
   box-shadow: none;
-  background-color: white;
+  background-color: $brown-medium;
   clear:both;
 }
 
 .progress-bar { box-shadow: none; }
 
-.progress-bar-yellow { background-color: $green-light; }
+.progress-bar-yellow { background-color: $yellow-medium; }
