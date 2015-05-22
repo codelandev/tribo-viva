@@ -1,54 +1,82 @@
 - meta og: { title: "Tribo Viva - #{@offer.title}", description: "#{@offer.products_description}",
              url: request.url, image: @offer.image.url }
 
-h2 = link_to 'COMPRAR', new_purchase_offer_path(@offer)
+section.offer-header
+  .container
+    .row
+      .col-md-10.col-centered
+        .row
+          .col-sm-6.col-md-8
+            .offer__header__image style="background-image: url(#{@offer.image.url});"
+          .col-sm-6.col-md-4
+            h1.offer__header__title.title--up.text--yellow = @offer.title
+            .offer__header__producer
+              span.glyphicon.glyphicon-grain
+              = @offer.producer.name
+            .offer__header__stock
+              span = "#{@offer.remaining}/#{@offer.stock}"
+              .small cotas restantes
+            .offer__header__date
+              span = distance_of_time_in_words(@offer.offer_ends_at, Time.now)
+              .small restantes
+            .offer__header__price
+              span = number_to_currency @offer.value
+              .small valor un. da cota
+            .offer__header__action
+              = link_to 'COMPRAR', new_purchase_offer_path(@offer), class: 'btn btn--md btn--block btn--yellow'
 
-h2 = @offer.title
-p
-  strong = t('activerecord.attributes.offer.value')
-  br
-  = number_to_currency @offer.value
-p
-  strong = t('activerecord.attributes.offer.products_description')
-  br
-  = @offer.products_description
-p
-  strong = t('activerecord.attributes.offer.deliver_coordinator')
-  br
-  = @offer.deliver_coordinator.name
-p
-  strong = t('activerecord.attributes.offer.bank_account')
-  br
-  = @offer.bank_account.bank
-p
-  strong = t('activerecord.attributes.offer.producer')
-  br
-  = @offer.producer.name
-p
-  strong = t('activerecord.attributes.offer.stock')
-  br
-  = "#{@offer.remaining} de #{@offer.stock}"
-p
-  strong = t('activerecord.attributes.offer.operational_tax')
-  br
-  = number_to_currency @offer.operational_tax
-p
-  strong = t('activerecord.attributes.offer.coordinator_tax')
-  br
-  = number_to_currency @offer.coordinator_tax
-p
-  strong = t('activerecord.attributes.offer.offer_ends_at')
-  br
-  = l @offer.offer_ends_at
-p
-  strong = t('activerecord.attributes.offer.collect_ends_at')
-  br
-  = l @offer.collect_ends_at
-p
-  strong = t('activerecord.attributes.offer.offer_starts_at')
-  br
-  = l @offer.offer_starts_at
-p
-  strong = t('activerecord.attributes.offer.collect_starts_at')
-  br
-  = l @offer.collect_starts_at
+section.offer-info
+  .container
+    .row
+      .col-md-10.col-centered
+        h2 = link_to 'COMPRAR', new_purchase_offer_path(@offer)
+
+        h2 = @offer.title
+        p
+          strong = t('activerecord.attributes.offer.value')
+          br
+          = number_to_currency @offer.value
+        p
+          strong = t('activerecord.attributes.offer.products_description')
+          br
+          = @offer.products_description
+        p
+          strong = t('activerecord.attributes.offer.deliver_coordinator')
+          br
+          = @offer.deliver_coordinator.name
+        p
+          strong = t('activerecord.attributes.offer.bank_account')
+          br
+          = @offer.bank_account.bank
+        p
+          strong = t('activerecord.attributes.offer.producer')
+          br
+          = @offer.producer.name
+        p
+          strong = t('activerecord.attributes.offer.stock')
+          br
+          = "#{@offer.remaining} de #{@offer.stock}"
+        p
+          strong = t('activerecord.attributes.offer.operational_tax')
+          br
+          = number_to_currency @offer.operational_tax
+        p
+          strong = t('activerecord.attributes.offer.coordinator_tax')
+          br
+          = number_to_currency @offer.coordinator_tax
+        p
+          strong = t('activerecord.attributes.offer.offer_ends_at')
+          br
+          = l @offer.offer_ends_at
+        p
+          strong = t('activerecord.attributes.offer.collect_ends_at')
+          br
+          = l @offer.collect_ends_at
+        p
+          strong = t('activerecord.attributes.offer.offer_starts_at')
+          br
+          = l @offer.offer_starts_at
+        p
+          strong = t('activerecord.attributes.offer.collect_starts_at')
+          br
+          = l @offer.collect_starts_at

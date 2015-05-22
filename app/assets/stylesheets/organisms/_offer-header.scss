@@ -1,0 +1,35 @@
+.offer-header {
+  color: white;
+  background-color: $brown-dark;
+  padding: 130px 0 70px 0;
+
+  .offer__header__title { margin-bottom: 5px; }
+}
+
+.offer__header__image {
+  background-color: $brown-dark;
+  background-size: cover;
+  background-position: center center;
+  height: 460px;
+  width: 100%;
+}
+
+.offer__header__producer { margin-bottom: 30px; }
+
+.offer__header__stock,
+.offer__header__date,
+.offer__header__price {
+  span {
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .small {
+    color: $brown-medium;
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 20px;
+    line-height: 1;
+  }
+}
+.offer__header__action { margin-top: 40px; }
