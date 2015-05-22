@@ -2,7 +2,13 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root 'pages#home'
-  resources :offers, only: :show
+  resources :offers, only: :show do
+    member do
+      get 'purchase', to: 'offers#new_purchase', as: :new_purchase
+      post 'purchase', to: 'offers#create_purchase', as: :create_purchase
+    end
+  end
+  resources :purchases, only: [:show, :update]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,10 @@
+h1 #{@purchase.offer.title}
+
+p #{number_to_currency @purchase.offer.value}
+
+- if @purchase.receipt.blank?
+  = simple_form_for @purchase, url: purchase_path, method: :patch do |f|
+    = f.input :receipt
+    = f.submit 'Enviar comprovante'
+- else
+  p Você já realizou o envio do comprovante dessa compra!

@@ -8,6 +8,12 @@ require 'machinist/active_record'
 #     body  { "Lorem ipsum..." }
 #   end
 
+User.blueprint do
+  cpf { '12345678901' }
+  name { 'User Test' }
+  email { 'user@test.com' }
+end
+
 Producer.blueprint do
   name { "Produtor" }
   phone { "321321321" }
@@ -50,4 +56,27 @@ Offer.blueprint do
   offer_ends_at { 9.day.from_now }
   collect_starts_at { 10.day.from_now }
   collect_ends_at { 20.days.from_now }
+end
+
+Purchase.blueprint(:pending) do
+  user
+  offer
+  amount { 2 }
+  status { PurchaseStatus::PENDING }
+end
+
+Purchase.blueprint(:confirmed) do
+  user
+  offer
+  amount { 2 }
+  status { PurchaseStatus::CONFIRMED }
+  receipt { File.open('spec/support/example.jpg') }
+end
+
+Purchase.blueprint(:canceled) do
+  user
+  offer
+  amount { 2 }
+  status { PurchaseStatus::CANCELED }
+  receipt { File.open('spec/support/example.jpg') }
 end

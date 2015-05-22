@@ -1,0 +1,5 @@
+h1 Olá #{purchase.user.name}
+
+p Sua compra está pendente de pagamento, assim que o tiver, por favor, faça upload do comprovante no seguinte link:
+
+p = link_to 'Confirmar pagamento', purchase_path(id: @purchase.transaction_id)

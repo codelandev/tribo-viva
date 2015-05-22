@@ -1,5 +1,5 @@
 require File.expand_path('../boot', __FILE__)
-
+require "simplecov"
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
@@ -13,6 +13,10 @@ require "sprockets/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
+SimpleCov.start do
+  add_filter "app/admin"
+end
+
 Bundler.require(*Rails.groups)
 
 module TriboViva
@@ -32,6 +36,8 @@ module TriboViva
         helper_specs: false
       g.fixtures_replacement :machinist
     end
+
+    config.autoload_paths << "#{Rails.root}/app/enumerations"
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

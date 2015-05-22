@@ -1,0 +1,39 @@
+h2 = @offer.title
+
+= simple_form_for @purchase, url: create_purchase_offer_path do |f|
+  = f.label :amount, 'Quantidade (max 3)'
+  = f.number_field :amount, min: 1, max: 3, label: 'Quantidade (max 3)'
+
+  br
+
+  p Já realizou alguma compra antes?
+  = f.radio_button :user_status, true, checked: true
+  = f.label :user_status, 'Sim'
+  = f.radio_button :user_status, false, checked: false
+  = f.label :user_status, 'Não'
+
+  p Caso sim, preencha seu email a seguir
+
+  = f.label :registered_user_email, 'Email'
+  = f.text_field :registered_user_email
+
+  br
+
+  p Caso não, preencha os campos abaixo
+
+  = f.label :unregistered_user_name, 'Nome completo'
+  = f.text_field :unregistered_user_name
+
+  br
+
+  = f.label :unregistered_user_email, 'Email'
+  = f.text_field :unregistered_user_email
+
+  br
+
+  = f.label :unregistered_user_cpf, 'CPF'
+  = f.text_field :unregistered_user_cpf
+
+  br
+
+  = f.submit 'Confirmar compra'

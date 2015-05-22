@@ -22,6 +22,7 @@ RSpec.describe Offer, type: :model do
     it { should belong_to :producer }
     it { should belong_to :bank_account }
     it { should belong_to :deliver_coordinator }
+    it { should have_many :purchases }
   end
 
   describe "scopes" do
@@ -29,14 +30,29 @@ RSpec.describe Offer, type: :model do
     let(:invalid_date) { Offer.make!(offer_ends_at: 1.day.ago) }
     let(:invalid_stock) { Offer.make!(stock: 0) }
 
-    context "when valid_offers" do
+    context "#valid_offers" do
       it { Offer.valid_offers.should == [valid] }
       it { Offer.valid_offers.should_not == [invalid_stock, invalid_date] }
     end
 
-    context "when finished_offers" do
+    context "#finished_offers" do
       it { Offer.finished_offers.should == [invalid_stock, invalid_date] }
       it { Offer.finished_offers.should_not == [valid] }
+    end
+  end
+
+  describe "methods" do
+    describe "#remaining!" do
+      it "show the remaining offers" do
+        offer = Offer.make!
+        stock_before = offer.stock
+
+        3.times do
+          Purchase.make!(:confirmed, offer: offer)
+        end
+
+        expect(offer.remaining).to eql(stock_before - 3)
+      end
     end
   end
 end

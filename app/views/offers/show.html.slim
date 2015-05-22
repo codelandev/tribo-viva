@@ -1,6 +1,8 @@
 - meta og: { title: "Tribo Viva - #{@offer.title}", description: "#{@offer.products_description}",
              url: request.url, image: @offer.image.url }
 
+h2 = link_to 'COMPRAR', new_purchase_offer_path(@offer)
+
 h2 = @offer.title
 p
   strong = t('activerecord.attributes.offer.value')
@@ -25,7 +27,7 @@ p
 p
   strong = t('activerecord.attributes.offer.stock')
   br
-  = @offer.stock
+  = "#{@offer.remaining} de #{@offer.stock}"
 p
   strong = t('activerecord.attributes.offer.operational_tax')
   br
