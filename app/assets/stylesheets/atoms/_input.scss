@@ -1,5 +1,23 @@
-input[type="text"] {
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+  background-color: $brown-light;
   border: 0;
   border-radius: 0;
+  color: $brown-dark;
+  height: 45px;
   width: 100%;
+}
+::-webkit-input-placeholder {
+   color: $brown-medium !important;
+}
+
+:-moz-placeholder {
+   color: $brown-medium !important;
+}
+
+::-moz-placeholder {
+   color: $brown-medium !important;
+}
+
+:-ms-input-placeholder {
+   color: $brown-medium !important;
 }

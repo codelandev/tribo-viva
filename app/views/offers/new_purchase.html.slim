@@ -1,39 +1,79 @@
-h2 = @offer.title
+section.purchase
+  .container
+    .row
+      .col-md-10.col-centered
+        .purchase-table
+          .purchase-info
+            h2.title--up.text--brown Resumo da Oferta
+            h3.title--up.text--green = @offer.title
+            .purchase-info__producer
+              span.glyphicon.glyphicon-grain
+              = @offer.producer.name
+            .offer-info__products
+              p = simple_format @offer.products_description
+            .offer-info__collect
+              h3.title--up.text--green Sobre a coleta
+              p As compras devem ser retiradas na data e local abaixo:
+              ul
+                li
+                  span.glyphicon.glyphicon-calendar
+                  span = l @offer.collect_starts_at
+                li
+                  span.glyphicon.glyphicon-calendar
+                  span = l @offer.collect_ends_at
+                li
+                  span.glyphicon.glyphicon-map-marker
+                  span = @offer.deliver_coordinator.address
+          .purchase-form
+            h2.title--up.text--yellow Dados da Compra
+            = simple_form_for @purchase, url: create_purchase_offer_path do |f|
+              .row
+                .col-sm-6
+                  = f.label :amount, 'Cotas (máx 3)'
+                  = f.number_field :amount, min: 1, max: 3, class: 'form-control'
+                .col-sm-6
+                  .purchase-form__total
+                    label Total
+                    / TODO multiply by the number_field
+                    h2 = number_to_currency (@offer.coordinator_tax + @offer.operational_tax + @offer.value)
+              .row
+                .col-sm-12
+                  .small.text--brown__medium As taxas são aplicáveis sobre o valor unitário de cada cota da oferta.
+                  .small
+                    strong.text--green Valor un. cota:
+                    | &nbsp;
+                    = number_to_currency @offer.value
+                  - if @offer.operational_tax.present?
+                    .small
+                      strong.text--green = t('activerecord.attributes.offer.operational_tax')
+                      | &nbsp;
+                      = number_to_currency @offer.operational_tax
+                  - if @offer.coordinator_tax.present?
+                    .small
+                      strong.text--green = t('activerecord.attributes.offer.coordinator_tax')
+                      | &nbsp;
+                      = number_to_currency @offer.coordinator_tax
 
-= simple_form_for @purchase, url: create_purchase_offer_path do |f|
-  = f.label :amount, 'Quantidade (max 3)'
-  = f.number_field :amount, min: 1, max: 3, label: 'Quantidade (max 3)'
+              br
+              h4.title--up.text--yellow Já realizou alguma compra antes?
+              = f.radio_button :user_status, true, checked: true
+              = f.label :user_status, 'Sim'
+              = f.radio_button :user_status, false, checked: false, class: 'radio-pad'
+              = f.label :user_status, 'Não'
+              br
+              br
+              h4.title--up.text--yellow Caso sim, preencha seu email a seguir:
+              = f.label :registered_user_email, 'Email'
+              = f.text_field :registered_user_email, class: 'form-control', placeholder: 'exemplo@email.com'
+              br
+              h4.title--up.text--yellow Caso não, preencha os campos a seguir:
+              = f.label :unregistered_user_name, 'Nome completo'
+              = f.text_field :unregistered_user_name, class: 'form-control', placeholder: 'Nome Completo'
+              = f.label :unregistered_user_email, 'Email'
+              = f.text_field :unregistered_user_email, class: 'form-control', placeholder: 'exemplo@email.com'
+              = f.label :unregistered_user_cpf, 'CPF (necessário para emissão de NF)'
+              = f.text_field :unregistered_user_cpf, class: 'form-control'
+              br
+              br
 
-  br
-
-  p Já realizou alguma compra antes?
-  = f.radio_button :user_status, true, checked: true
-  = f.label :user_status, 'Sim'
-  = f.radio_button :user_status, false, checked: false
-  = f.label :user_status, 'Não'
-
-  p Caso sim, preencha seu email a seguir
-
-  = f.label :registered_user_email, 'Email'
-  = f.text_field :registered_user_email
-
-  br
-
-  p Caso não, preencha os campos abaixo
-
-  = f.label :unregistered_user_name, 'Nome completo'
-  = f.text_field :unregistered_user_name
-
-  br
-
-  = f.label :unregistered_user_email, 'Email'
-  = f.text_field :unregistered_user_email
-
-  br
-
-  = f.label :unregistered_user_cpf, 'CPF'
-  = f.text_field :unregistered_user_cpf
-
-  br
-
-  = f.submit 'Confirmar compra'
+              = f.submit 'Continuar para Confirmação', class: 'btn btn--md btn--block btn--yellow'
