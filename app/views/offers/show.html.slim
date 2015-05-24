@@ -49,7 +49,7 @@ section.offer-info
                   span = @offer.deliver_coordinator.address
             .offer-info__tax
               h2.title--up.text--green Taxas operacionais
-              p As taxas operacionais são aplicáveis sobre o valor unitário de cada cota da oferta.
+              p As taxas são aplicáveis sobre o valor unitário de cada cota da oferta.
               - if @offer.operational_tax.present?
                 p
                   strong.text--green = t('activerecord.attributes.offer.operational_tax')

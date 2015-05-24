@@ -9,7 +9,7 @@ footer.footer
           .col-md-6
             .pull-right
               ul
-                li
+                li style="#{'display: none;' if params[:action] == 'new_purchase'}"
                   = link_to 'Sobre', root_path
                 li
                   = link_to 'Contato', 'mailto:contato@codeland.com.br?subject=Olá Tribo Viva!'
