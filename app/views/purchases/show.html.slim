@@ -1,10 +1,55 @@
-h1 #{@purchase.offer.title}
+section.purchase
+  .container
+    .row
+      .col-sm-10.col-md-8.col-centered
+        .purchase-form__full
+          h2.title--up.text--yellow Pague e confirme sua compra
+          p
+            Falta pouco, agora você só precisa fazer um depósito no valor do pedido na nossa conta e anexar o comprovante neste formulário a seguir. Você tem um prazo de
+            strong.text--yellow  12h 30 min
+            |  para confirmar a sua compra.
+          h3.title--up.text--yellow Dados bancários para depósito
+          .table-responsive
+            table.table.table-bordered
+              tbody
+                tr
+                  th.title--up.small Banco
+                  td #{@purchase.offer.bank_account.bank}
+                tr
+                  th.title--up.small Agência
+                  td #{@purchase.offer.bank_account.agency}
+                tr
+                  th.title--up.small Conta Corrente
+                  td #{@purchase.offer.bank_account.cc}
+                tr
+                  th.title--up.small Operação
+                  td #{@purchase.offer.bank_account.operation_code}
+                / TODO add cpf/cpnj and Name/Razão Social
+                / tr
+                /   th CPF/CNPJ
+                /   td 000.000.000-00
+                / tr
+                /   th Nome/Razão Social
+                /   td Nome Completo
 
-p #{number_to_currency @purchase.offer.value}
+          h3.title--up.text--yellow Resumo da Compra
+          .table-responsive
+            table.table.table-bordered
+              tbody
+                tr
+                  th.title--up.small Oferta
+                  th.title--up.small Quantidade
+                  th.title--up.small Valor Total
+                tr
+                  td #{@purchase.amount} un
+                  td #{@purchase.offer.title}
+                  td #{number_to_currency (@purchase.amount * (@purchase.offer.value + @purchase.offer.coordinator_tax + @purchase.offer.operational_tax))}
 
-- if @purchase.receipt.blank?
-  = simple_form_for @purchase, url: purchase_path, method: :patch do |f|
-    = f.input :receipt
-    = f.submit 'Enviar comprovante'
-- else
-  p Você já realizou o envio do comprovante dessa compra!
+          h3.title--up.text--yellow Anexe o Comprovante de Pagamento
+          .alert.alert-warning.title--up Prazo para Envio do Comprovante: 12h 30min
+          - if @purchase.receipt.blank?
+            = simple_form_for @purchase, url: purchase_path, method: :patch do |f|
+              = f.input :receipt, label: 'Comprovante de Pagamento:'
+              = f.submit 'Enviar comprovante', class: 'btn btn--md btn--block btn--yellow'
+          - else
+            p Você já realizou o envio do comprovante dessa compra!
