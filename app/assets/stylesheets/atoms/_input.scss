@@ -6,6 +6,7 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
   height: 45px;
   width: 100%;
 }
+
 ::-webkit-input-placeholder {
    color: $brown-medium !important;
 }

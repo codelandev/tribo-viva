@@ -40,9 +40,18 @@
   }
 }
 
+.purchase-form__full {
+  @extend .purchase-form;
+  width: 100%;
+  background-color: $brown-dark;
+}
+
 .purchase-form__total {
   h2 { margin: 5px 0 0 0; }
 }
+
+.table-bordered > tbody > tr > th,
+.table-bordered > tbody > tr > td { border: 1px solid $brown-medium; }
 
 @media only screen and (max-width: 640px) {
   .purchase-info,
