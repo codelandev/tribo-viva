@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root 'pages#home'
+  get 'sobre', to: 'pages#about', as: 'about'
   resources :offers, only: :show do
     member do
       get 'purchase', to: 'offers#new_purchase', as: :new_purchase

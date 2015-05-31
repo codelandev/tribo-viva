@@ -1,0 +1,65 @@
+.about-page {
+  padding: 140px 0 100px;
+  background-color: $brown-medium;
+}
+
+.about__card {
+  background-color: $brown-dark;
+  color: white;
+  padding: 20px 25px 30px;
+  border-top: 3px solid $green-medium;
+  border-bottom: 3px solid $green-medium;
+  min-height: 530px;
+
+  h2 {
+    margin: 0px;
+    color: $yellow-medium
+  }
+
+  ol {
+    padding-left: 20px ;
+    font-size: 14px;
+
+    li { margin-bottom: 5px; }
+  }
+}
+
+.about__card__icon {
+  font-size: 71px;
+  margin: 20px 0 0;
+  .glyphicon { color: $yellow-medium; }
+}
+
+.about__arrow {
+  background-color: $brown-medium;
+  display: table;
+  width: 100%;
+}
+
+.arrow__block {
+  width: 15px;
+  height: 60px;
+  background-color: $brown-light;
+  display: table-cell;
+  float: left;
+}
+
+.arrow__right {
+  width: 0;
+  height: 0;
+  border-top: 30px solid transparent;
+  border-bottom: 30px solid transparent;
+  border-left: 30px solid $brown-light;
+  display: table-cell;
+  float: left;
+}
+
+.about__arrow__text {
+  float: left;
+  height: 60px;
+
+  h2 {
+    line-height: 60px;
+    padding-left: 10px;
+  }
+}
