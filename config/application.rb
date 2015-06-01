@@ -1,5 +1,4 @@
 require File.expand_path('../boot', __FILE__)
-require "simplecov"
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
@@ -13,8 +12,11 @@ require "sprockets/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-SimpleCov.start do
-  add_filter "app/admin"
+if Rails.env.test?
+  require "simplecov"
+  SimpleCov.start do
+    add_filter "app/admin"
+  end
 end
 
 Bundler.require(*Rails.groups)
