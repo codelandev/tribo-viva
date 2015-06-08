@@ -34,8 +34,9 @@ section.purchase
                 .col-sm-6
                   .purchase-form__total
                     label Total
-                    / TODO multiply by the number_field
-                    h2 = number_to_currency (@offer.coordinator_tax + @offer.operational_tax + @offer.value)
+                    - total = @offer.coordinator_tax + @offer.operational_tax + @offer.value
+                    h2#total-sum[data-original="#{total}" data-unit="#{I18n.t('number.currency.format.unit')}" data-delimiter="#{I18n.t('number.currency.format.delimiter')}" data-separator="#{I18n.t('number.currency.format.separator')}" data-currency="#{I18n.t('number.currency.format.unit')}" data-format="#{I18n.t('number.currency.format.format')}"]
+                      = number_to_currency(total)
               .row
                 .col-sm-12
                   .small.text--brown__medium As taxas são aplicáveis sobre o valor unitário de cada cota da oferta.
