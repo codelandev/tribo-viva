@@ -8,9 +8,8 @@ CarrierWave.configure do |config|
       region:                Rails.application.secrets.aws_region,
     }
     config.fog_directory = Rails.application.secrets.aws_bucket_name
-  elsif Rails.env.test? or Rails.env.cucumber?
-    config.enable_processing = false
   else
     config.storage = :file
+    config.enable_processing = false if Rails.env.test? || Rails.env.cucumber?
   end
 end
