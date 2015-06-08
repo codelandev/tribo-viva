@@ -30,15 +30,15 @@ RSpec.describe Purchase, type: :model do
     let(:confirmed) { Purchase.make!(:confirmed) }
 
     context "#pending" do
-      it { Purchase.pending.should == [pending] }
+      it { expect(Purchase.pending).to eq [pending] }
     end
 
     context "#canceled" do
-      it { Purchase.canceled.should == [canceled] }
+      it { expect(Purchase.canceled).to eq [canceled] }
     end
 
     context "#confirmed" do
-      it { Purchase.confirmed.should == [confirmed] }
+      it { expect(Purchase.confirmed).to eq [confirmed] }
     end
   end
 

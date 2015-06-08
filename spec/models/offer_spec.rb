@@ -31,13 +31,13 @@ RSpec.describe Offer, type: :model do
     let(:invalid_stock) { Offer.make!(stock: 0) }
 
     context "#valid_offers" do
-      it { Offer.valid_offers.should == [valid] }
-      it { Offer.valid_offers.should_not == [invalid_stock, invalid_date] }
+      it { expect(Offer.valid_offers).to eq [valid] }
+      it { expect(Offer.valid_offers).not_to eq [invalid_stock, invalid_date] }
     end
 
     context "#finished_offers" do
-      it { Offer.finished_offers.should == [invalid_stock, invalid_date] }
-      it { Offer.finished_offers.should_not == [valid] }
+      it { expect(Offer.finished_offers).to eq [invalid_stock, invalid_date] }
+      it { expect(Offer.finished_offers).not_to eq [valid] }
     end
   end
 
