@@ -10,5 +10,7 @@ pt-BR:
         cc: 'Conta Corrente'
         bank: 'Nome do Banco'
         agency: 'Agência'
+        cnpj_cpf: 'CPF/CNPJ'
+        owner_name: 'Nome/Razão Social'
         bank_number: 'Número do Banco'
         operation_code: 'Código da operação'

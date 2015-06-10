@@ -24,13 +24,12 @@ section.purchase
                 tr
                   th.title--up.small Operação
                   td #{@purchase.offer.bank_account.operation_code}
-                / TODO add cpf/cpnj and Name/Razão Social
-                / tr
-                /   th CPF/CNPJ
-                /   td 000.000.000-00
-                / tr
-                /   th Nome/Razão Social
-                /   td Nome Completo
+                tr
+                  th.title--up.small CPF/CNPJ
+                  td #{@purchase.offer.bank_account.cnpj_cpf}
+                tr
+                  th.title--up.small Nome/Razão Social
+                  td #{@purchase.offer.bank_account.owner_name}
 
           h3.title--up.text--yellow Resumo da Compra
           .table-responsive
