@@ -37,7 +37,7 @@ if Rails.env.development? || Rails.env.staging?
   printf "====== Creating Example Bank Accounts ... "
 
   BankAccount.create(cc: '01014278-0', bank: 'Santander', agency: '1208', bank_number: '001',
-                     operation_code: '002')
+                     operation_code: '002', owner_name: 'John Doe', cnpj_cpf: '000000000000')
 
   printf "DONE! ======\n\n"
   printf "====== Creating Example Offers ... "
