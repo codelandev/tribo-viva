@@ -37,6 +37,8 @@ BankAccount.blueprint do
   cc { '01014278-0' }
   bank { 'Santander' }
   agency { '1208' }
+  cnpj_cpf { '0000000000' }
+  owner_name { 'Dono da Conta Bancária' }
   bank_number { '001' }
   operation_code { '002' }
 end
