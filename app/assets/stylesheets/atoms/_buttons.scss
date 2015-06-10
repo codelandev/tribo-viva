@@ -27,3 +27,12 @@
     background-color: $brown-medium;
   }
 }
+
+.btn--green {
+  background-color: $green-medium;
+  color: white;
+  &:hover {
+    color: white;
+    // background-color: $brown-medium;
+  }
+}
