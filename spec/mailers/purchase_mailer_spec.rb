@@ -13,7 +13,6 @@ RSpec.describe PurchaseMailer, type: :mailer do
 
     it "renders the body" do
       expect(mail.body.encoded).to match("Olá #{purchase.user.name}")
-      expect(mail.body.encoded).to match("Sua compra está pendente de pagamento, assim que o tiver, por favor, faça upload do comprovante no seguinte link")
       expect(mail.body.encoded).to match("#{purchase_url(purchase.transaction_id)}")
     end
   end

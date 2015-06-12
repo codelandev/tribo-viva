@@ -5,6 +5,8 @@ RSpec.describe BankAccount, type: :model do
     it  { should validate_presence_of :cc }
     it  { should validate_presence_of :bank }
     it  { should validate_presence_of :agency }
+    it  { should validate_presence_of :cnpj_cpf }
+    it  { should validate_presence_of :owner_name }
     it  { should validate_presence_of :bank_number }
     it  { should validate_presence_of :operation_code }
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150521204322) do
+ActiveRecord::Schema.define(version: 20150610200640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 20150521204322) do
     t.string   "operation_code", default: "t", null: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.string   "owner_name"
+    t.string   "cnpj_cpf"
   end
 
   create_table "deliver_coordinators", force: :cascade do |t|

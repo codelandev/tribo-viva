@@ -17,10 +17,10 @@ section.purchase
               ul
                 li
                   span.glyphicon.glyphicon-calendar
-                  span = l @offer.collect_starts_at
+                  span = l(@offer.collect_starts_at, format: :long)
                 li
                   span.glyphicon.glyphicon-calendar
-                  span = l @offer.collect_ends_at
+                  span = l(@offer.collect_ends_at, format: :long)
                 li
                   span.glyphicon.glyphicon-map-marker
                   span = @offer.deliver_coordinator.address
@@ -57,24 +57,28 @@ section.purchase
 
               br
               h4.title--up.text--yellow Já realizou alguma compra antes?
-              = f.radio_button :user_status, true, checked: true
+              = f.radio_button :user_status, true, checked: false
               = f.label :user_status, 'Sim'
-              = f.radio_button :user_status, false, checked: false, class: 'radio-pad'
+              = f.radio_button :user_status, false, checked: true, class: 'radio-pad'
               = f.label :user_status, 'Não'
               br
               br
-              h4.title--up.text--yellow Caso sim, preencha seu email a seguir:
-              = f.label :registered_user_email, 'Email'
-              = f.text_field :registered_user_email, class: 'form-control', placeholder: 'exemplo@email.com'
-              br
-              h4.title--up.text--yellow Caso não, preencha os campos a seguir:
-              = f.label :unregistered_user_name, 'Nome completo'
-              = f.text_field :unregistered_user_name, class: 'form-control', placeholder: 'Nome Completo'
-              = f.label :unregistered_user_email, 'Email'
-              = f.text_field :unregistered_user_email, class: 'form-control', placeholder: 'exemplo@email.com'
-              = f.label :unregistered_user_cpf, 'CPF (necessário para emissão de NF)'
-              = f.text_field :unregistered_user_cpf, class: 'form-control'
-              br
+
+              .registered-user-form
+                h4.title--up.text--yellow Caso sim, preencha seu email a seguir:
+                = f.label :registered_user_email, 'Email'
+                = f.text_field :registered_user_email, class: 'form-control', placeholder: 'exemplo@email.com'
+                br
+
+              .unregistered-user-form
+                h4.title--up.text--yellow Caso não, preencha os campos a seguir:
+                = f.label :unregistered_user_name, 'Nome completo'
+                = f.text_field :unregistered_user_name, class: 'form-control', placeholder: 'Nome Completo'
+                = f.label :unregistered_user_email, 'Email'
+                = f.text_field :unregistered_user_email, class: 'form-control', placeholder: 'exemplo@email.com'
+                = f.label :unregistered_user_cpf, 'CPF (necessário para emissão de NF)'
+                = f.text_field :unregistered_user_cpf, class: 'form-control'
+                br
               br
 
               = f.submit 'Continuar para Confirmação', class: 'btn btn--md btn--block btn--yellow'

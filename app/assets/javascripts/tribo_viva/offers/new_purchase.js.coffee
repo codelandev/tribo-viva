@@ -1,6 +1,14 @@
 TriboViva.Offers ?= {}
 
-TriboViva.Offers.NewPurchase =
+TriboViva.Offers.CreatePurchase = TriboViva.Offers.NewPurchase =
+  checkRadioButtons: ->
+    if document.getElementById("purchase_user_status_true").checked
+      $('.unregistered-user-form').hide()
+      $('.registered-user-form').show()
+    else if document.getElementById("purchase_user_status_false").checked
+      $('.registered-user-form').hide()
+      $('.unregistered-user-form').show()
+
   init: ->
     total = $('#total-sum')
     original = total.data('original')
@@ -24,5 +32,10 @@ TriboViva.Offers.NewPurchase =
           total.text(formatedErrorValue)
       else
         total.text(formatedErrorValue)
+
+    TriboViva.Offers.NewPurchase.checkRadioButtons() # check on load
+
+    $('#purchase_user_status_true, #purchase_user_status_false').change ->
+      TriboViva.Offers.NewPurchase.checkRadioButtons() # check on change
 
   modules: -> []
