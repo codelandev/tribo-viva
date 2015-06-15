@@ -16,4 +16,8 @@ class Offer < ActiveRecord::Base
   def remaining
     stock - purchases.where(status: PurchaseStatus::CONFIRMED).map(&:amount).sum
   end
+
+  def delivery_time_range
+    "#{I18n.l(collect_starts_at, format: :long)} até #{collect_ends_at.strftime('%H:%M')}"
+  end
 end

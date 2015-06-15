@@ -17,10 +17,7 @@ section.purchase
               ul
                 li
                   span.glyphicon.glyphicon-calendar
-                  span = l(@offer.collect_starts_at, format: :long)
-                li
-                  span.glyphicon.glyphicon-calendar
-                  span = l(@offer.collect_ends_at, format: :long)
+                  span = @offer.delivery_time_range
                 li
                   span.glyphicon.glyphicon-map-marker
                   span = @offer.deliver_coordinator.address
