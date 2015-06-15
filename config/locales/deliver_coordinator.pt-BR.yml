@@ -13,3 +13,4 @@ pt-BR:
         email: 'Email'
         avatar: 'Avatar'
         address: 'Endereço'
+        partial_address: 'Endereço Parcial'

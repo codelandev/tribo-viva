@@ -11,6 +11,7 @@ ActiveAdmin.register DeliverCoordinator do
     column :cpf
     column :phone
     column :address
+    column :partial_address
     actions
   end
 
@@ -23,6 +24,7 @@ ActiveAdmin.register DeliverCoordinator do
       row :phone
       row :email
       row :address
+      row :partial_address
       row :cpf
     end
   end
@@ -34,6 +36,7 @@ ActiveAdmin.register DeliverCoordinator do
       f.input :phone
       f.input :email
       f.input :address
+      f.input :partial_address
       f.input :cpf
     end
 

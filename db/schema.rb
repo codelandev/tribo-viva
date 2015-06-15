@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150610200640) do
+ActiveRecord::Schema.define(version: 20150615211357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,14 +62,15 @@ ActiveRecord::Schema.define(version: 20150610200640) do
   end
 
   create_table "deliver_coordinators", force: :cascade do |t|
-    t.string   "cpf",        default: "t", null: false
-    t.string   "name",       default: "t", null: false
-    t.string   "phone",      default: "t", null: false
-    t.string   "email",      default: "t", null: false
-    t.string   "avatar",     default: "t", null: false
-    t.string   "address",    default: "t", null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "cpf",             default: "t", null: false
+    t.string   "name",            default: "t", null: false
+    t.string   "phone",           default: "t", null: false
+    t.string   "email",           default: "t", null: false
+    t.string   "avatar",          default: "t", null: false
+    t.string   "address",         default: "t", null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "partial_address", default: "",  null: false
   end
 
   create_table "offers", force: :cascade do |t|

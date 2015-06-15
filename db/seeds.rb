@@ -29,6 +29,7 @@ if Rails.env.development? || Rails.env.staging?
                               phone: "321321321",
                               email: "email_do_coordenador_#{index}@test.com",
                               address: "Rua do coordenador #{index}",
+                              partial_address: "Rua do coordenador",
                               cpf: "00914969000",
                               remote_avatar_url: 'http://theoldreader.com/kittens/200/200/')
   end

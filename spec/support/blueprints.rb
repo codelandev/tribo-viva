@@ -28,7 +28,8 @@ DeliverCoordinator.blueprint do
   name { "Coordenador" }
   phone { "321321321" }
   email { "email_do_coordenador@test.com" }
-  address { "Rua do coordenador" }
+  address { "Rua do coordenador completa" }
+  partial_address { "Rua do coordenador" }
   cpf { "000.000.000-00" }
   avatar { File.open('spec/support/example.jpg') }
 end
