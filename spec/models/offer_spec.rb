@@ -51,7 +51,7 @@ RSpec.describe Offer, type: :model do
           Purchase.make!(:confirmed, offer: offer)
         end
 
-        expect(offer.remaining).to eql(stock_before - 3)
+        expect(offer.remaining).to eql(stock_before - 6)
       end
     end
   end

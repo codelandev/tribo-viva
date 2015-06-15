@@ -58,9 +58,9 @@ RSpec.describe OffersController, type: :controller do
         expect(Purchase.count).to eq(1)
         expect(Purchase.last.amount).to eq(@valid_registered_user[:amount].to_i)
         expect(Purchase.last.status).to eq(PurchaseStatus::PENDING)
-        expect(Purchase.last.offer.remaining).to eq(9)
+        expect(Purchase.last.offer.remaining).to eq(10)
         expect(ActionMailer::Base.deliveries.last.to.first).to eql @valid_registered_user[:registered_user_email]
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to purchase_path(Purchase.last)
         expect(flash[:notice]).to be_present
       end
 
@@ -79,9 +79,9 @@ RSpec.describe OffersController, type: :controller do
         expect(Purchase.count).to eq(1)
         expect(Purchase.last.amount).to eq(@valid_unregistered_user[:amount].to_i)
         expect(Purchase.last.status).to eq(PurchaseStatus::PENDING)
-        expect(Purchase.last.offer.remaining).to eq(9)
+        expect(Purchase.last.offer.remaining).to eq(10)
         expect(ActionMailer::Base.deliveries.last.to.first).to eql @valid_unregistered_user[:unregistered_user_email]
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to purchase_path(Purchase.last)
         expect(flash[:notice]).to be_present
       end
 
