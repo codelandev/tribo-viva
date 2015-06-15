@@ -59,7 +59,7 @@ if Rails.env.development? || Rails.env.staging?
                  collect_ends_at: 20.days.from_now)
 
     5.times do |index|
-      Purchase.create(user: User.find(index+1), offer: Offer.last, amount: 2, status: PurchaseStatus::CONFIRMED,
+      Purchase.create(user: User.find(index+1), offer: Offer.last, amount: 1, status: PurchaseStatus::CONFIRMED,
                       receipt: File.open('spec/support/example.jpg'))
     end
   end

@@ -12,7 +12,9 @@ ActiveAdmin.register Offer do
     column :value do |offer|
       number_to_currency offer.value
     end
-    column :stock
+    column :stock do |offer|
+      "Resta #{offer.remaining} de #{offer.stock}"
+    end
     column :offer_starts_at
     column :offer_ends_at
     column :collect_starts_at

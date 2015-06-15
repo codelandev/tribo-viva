@@ -6,6 +6,7 @@ class PurchasesController < ApplicationController
   def update
     purchase = Purchase.find_by(transaction_id: params[:id])
     if params[:purchase].present? && purchase.update_attributes(purchase_params)
+      purchase.confirm!
       flash[:notice] = 'Recibo enviado, aguarde até confirmarmos sua compra!'
     else
       flash[:alert] = 'Você deve fazer o upload do recibo de pagamento!'

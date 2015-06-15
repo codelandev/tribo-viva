@@ -19,6 +19,10 @@ class Purchase < ActiveRecord::Base
 
   mount_uploader :receipt, PurchaseUploader
 
+  def to_param
+    transaction_id
+  end
+
   def confirm!
     update_attributes(status: PurchaseStatus::CONFIRMED)
   end
