@@ -4,10 +4,25 @@ section.purchase
       .col-sm-10.col-md-8.col-centered
         .purchase-form__full
           h2.title--up.text--yellow Pague e confirme sua compra
-          p
-            Falta pouco, agora você só precisa fazer um depósito no valor do pedido na nossa conta e anexar o comprovante neste formulário a seguir. Você tem um prazo de
-            strong.text--yellow  12h 30 min
-            |  para confirmar a sua compra.
+          p Agora, falta pouco. Você só precisa fazer um depósito ou uma transferência bancária no valor total do pedido na nossa conta e anexar o comprovante no campo a seguir. Você pode fazer isto de 2 maneiras:
+          .row
+            .col-sm-6
+              h3.title--up.text--yellow Transferência ou depósito ONLINE:
+              ul.small.instructions
+                li Salve o comprovante no seu computador
+                li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
+                li Selecione a imagem do comprovante
+                li Clique no botão "Finalizar Compra" para enviá-lo.
+            .col-sm-6
+              h3.title--up.text--yellow Transferência ou depósito em uma AGÊNCIA BANCÁRIA:
+              ul.small.instructions
+                li Imprima o comprovante
+                li Tire uma foto do mesmo com seu celular.
+                li Abra o email que você recebeu da Tribo Viva (chamado de "Confirmação de compra de cota") e clique no link de confirmação
+                li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
+                li Selecione a foto do comprovante
+                li Clique no botão "Finalizar Compra" para enviá-lo.
+
           h3.title--up.text--yellow Dados bancários para depósito
           .table-responsive
             table.table.table-bordered
@@ -25,10 +40,10 @@ section.purchase
                   th.title--up.small Operação
                   td #{@purchase.offer.bank_account.operation_code}
                 tr
-                  th.title--up.small CPF/CNPJ
+                  th.title--up.small CNPJ
                   td #{@purchase.offer.bank_account.cnpj_cpf}
                 tr
-                  th.title--up.small Nome/Razão Social
+                  th.title--up.small Razão Social
                   td #{@purchase.offer.bank_account.owner_name}
 
           h3.title--up.text--yellow Resumo da Compra
@@ -45,10 +60,9 @@ section.purchase
                   td #{number_to_currency (@purchase.amount * (@purchase.offer.value + @purchase.offer.coordinator_tax + @purchase.offer.operational_tax))}
 
           h3.title--up.text--yellow Anexe o Comprovante de Pagamento
-          .alert.alert-warning.title--up Prazo para Envio do Comprovante: 12h 30min
           - if @purchase.receipt.blank?
             = simple_form_for @purchase, url: purchase_path, method: :patch do |f|
-              = f.input :receipt, label: 'Comprovante de Pagamento:'
-              = f.submit 'Enviar comprovante', class: 'btn btn--md btn--block btn--yellow'
+              = f.input :receipt, label: false
+              = f.submit 'Finalizar Compra', class: 'btn btn--md btn--block btn--yellow'
           - else
             p Você já realizou o envio do comprovante dessa compra!

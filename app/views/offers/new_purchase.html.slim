@@ -13,6 +13,11 @@ section.purchase
               p = simple_format @offer.products_description
             .offer-info__collect
               h3.title--up.text--green Sobre a coleta
+              .offer-info__coordinator
+                span.offer-info__coordinator__avatar style="background-image: url(#{@offer.deliver_coordinator.avatar});"
+                span.offer-info__coordinator__name
+                  p = @offer.deliver_coordinator.name
+                  .small Coordeandor(a) de Entrega
               p As compras devem ser retiradas na data e local abaixo:
               ul
                 li
@@ -36,23 +41,29 @@ section.purchase
                       = number_to_currency(total)
               .row
                 .col-sm-12
-                  .small.text--brown__medium As taxas são aplicáveis sobre o valor unitário de cada cota da oferta.
-                  .small
-                    strong.text--green Valor un. cota:
-                    | &nbsp;
-                    = number_to_currency @offer.value
-                  - if @offer.operational_tax.present?
-                    .small
-                      strong.text--green = t('activerecord.attributes.offer.operational_tax')
-                      | &nbsp;
-                      = number_to_currency @offer.operational_tax
-                  - if @offer.coordinator_tax.present?
-                    .small
-                      strong.text--green = t('activerecord.attributes.offer.coordinator_tax')
-                      | &nbsp;
-                      = number_to_currency @offer.coordinator_tax
+                  table.table.table-taxes
+                    tbody
+                      tr
+                        td.width-80
+                          .small
+                            strong.text--green VALOR DA COTA (repassados integralmente ao produtor):
+                        td.text-right
+                          .small = number_to_currency @offer.value
+                      - if @offer.operational_tax.present?
+                        tr
+                          td.width-80
+                            .small
+                              strong.text--green = t('activerecord.attributes.offer.operational_tax')
+                          td.text-right
+                            .small = number_to_currency @offer.operational_tax
+                      - if @offer.coordinator_tax.present?
+                        tr
+                          td.width-80
+                            .small
+                              strong.text--green = t('activerecord.attributes.offer.coordinator_tax')
+                          td.text-right
+                            .small = number_to_currency @offer.coordinator_tax
 
-              br
               h4.title--up.text--yellow Já realizou alguma compra antes?
               = f.radio_button :user_status, true, checked: false
               = f.label :user_status, 'Sim'

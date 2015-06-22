@@ -45,9 +45,49 @@
   }
 }
 
+.offer-info__coordinator {
+  margin-bottom: 10px;
+}
+
+.offer-info__coordinator__avatar {
+  background-repeat: no-repeat;
+  background-size: 55px 55px;
+  border-radius: 55px;
+  display: table-cell;
+  height: 55px;
+  width: 55px;
+}
+
+.offer-info__coordinator__name {
+  display: table-cell;
+  font-weight: bold;
+  padding-left: 10px;
+  vertical-align: middle;
+  p { margin: 0; }
+  .small {
+    font-size: 70%;
+    text-transform: uppercase;
+    color: $brown-medium;
+  }
+}
+
 .offer-info__tax,
 .offer-info__collect,
 .offer-info__products { margin-bottom: 60px; }
+
+.offer-info__tax {
+  table {
+    background-color: $brown-light;
+    tr {
+      border-bottom: 1px solid $brown-medium;
+      &:last-child { border-bottom: 0px; }
+      td {
+        padding: 15px 20px;
+        border-top: 0px;
+      }
+    }
+  }
+}
 
 .offer-info__widget__info { display: table; }
 

@@ -24,7 +24,7 @@ section.offers
                   .card__image style="background-image: url(#{offer.image.url});"
                   .card__info
                     p.card__info__price
-                      span = number_to_currency offer.value
+                      span = number_to_currency offer.coordinator_tax + offer.operational_tax + offer.value
                       span.small
                         |  / valor un. cota
                     h1.card__info__title.title--up = link_to offer.title, offer_path(offer)
@@ -60,13 +60,13 @@ section.about
             h2.title--up.text--yellow SEJA UM COORDENADOR DE ENTREGA
             p
               | Receba alimentos orgânicos no endereço da sua escolha, pagando pouco ou nada, conheça pessoas como você e seja um agente transformador da sua comunidade.
-              = link_to ' Clique aqui.', root_path
+              = link_to ' Clique aqui.', 'https://triboviva.typeform.com/to/ua7QEp'
           .col-md-4
             h2.title--up.text--brown Fique Conectado
             .big
               = link_to 'Facebook', root_path
-            .big Inscreva-se na nossa newsletter
-            .input-group
-              input.form-control type="text" placeholder="example@email.com"
-                .span.input-group-btn
-                  button.btn.btn--md.btn--block.btn--brown type="button" OK
+            / .big Inscreva-se na nossa newsletter
+            / .input-group
+            /   input.form-control type="text" placeholder="example@email.com"
+            /     .span.input-group-btn
+            /       button.btn.btn--md.btn--block.btn--brown type="button" OK

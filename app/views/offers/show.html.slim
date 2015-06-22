@@ -20,7 +20,7 @@ section.offer-header
               span = distance_of_time_in_words(@offer.offer_ends_at, Time.now)
               .small restantes
             .offer__header__price
-              span = number_to_currency @offer.value
+              span = number_to_currency @offer.coordinator_tax + @offer.operational_tax + @offer.value
               .small valor un. cota
             .offer__header__action
               = link_to 'COMPRAR', new_purchase_offer_path(@offer), class: 'btn btn--md btn--block btn--yellow'
@@ -36,6 +36,11 @@ section.offer-info
               p = simple_format @offer.products_description
             .offer-info__collect
               h2.title--up.text--green Sobre a coleta
+              .offer-info__coordinator
+                span.offer-info__coordinator__avatar style="background-image: url(#{@offer.deliver_coordinator.avatar});"
+                span.offer-info__coordinator__name
+                  p = @offer.deliver_coordinator.name
+                  .small Coordeandor(a) de Entrega
               p As compras devem ser retiradas na data e local abaixo:
               ul
                 li
@@ -46,17 +51,25 @@ section.offer-info
                   span = @offer.deliver_coordinator.address
             .offer-info__tax
               h2.title--up.text--green Taxas operacionais
-              p As taxas são aplicáveis sobre o valor unitário de cada cota da oferta.
-              - if @offer.operational_tax.present?
-                p
-                  strong.text--green = t('activerecord.attributes.offer.operational_tax')
-                  |&nbsp;
-                  = number_to_currency @offer.operational_tax
-              - if @offer.coordinator_tax.present?
-                p
-                  strong.text--green = t('activerecord.attributes.offer.coordinator_tax')
-                  |&nbsp;
-                  = number_to_currency @offer.coordinator_tax
+              table.table
+                tbody
+                  tr
+                    td.width-80
+                      strong.text--green VALOR DA COTA (repassados integralmente ao produtor):
+                    td.text-right
+                      = number_to_currency @offer.value
+                  - if @offer.operational_tax.present?
+                    tr
+                      td.width-80
+                        strong.text--green = t('activerecord.attributes.offer.operational_tax')
+                      td.text-right
+                        = number_to_currency @offer.operational_tax
+                  - if @offer.coordinator_tax.present?
+                    tr
+                      td.width-80
+                        strong.text--green = t('activerecord.attributes.offer.coordinator_tax')
+                      td.text-right
+                        = number_to_currency @offer.coordinator_tax
 
           .col-sm-6.col-md-4
             .offer-info__widget
