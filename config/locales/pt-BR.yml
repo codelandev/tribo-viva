@@ -1,4 +1,3 @@
----
 pt-BR:
   date:
     abbr_day_names:
@@ -57,13 +56,13 @@ pt-BR:
     distance_in_words:
       about_x_hours:
         one: 1 hora
-        other: %{count} horas
+        other: '%{count} horas'
       about_x_months:
         one: 1 mês
-        other: %{count} meses
+        other: '%{count} meses'
       about_x_years:
         one: 1 ano
-        other: %{count} anos
+        other: '%{count} anos'
       almost_x_years:
         one: quase 1 ano
         other: quase %{count} anos
