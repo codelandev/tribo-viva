@@ -5,8 +5,8 @@ section.hero
  .hero__slogan.text-center.text--white
    .container
      .row
-       .col-md-8.col-centered
-         h1.title--xl Rede de Consumo Colaborativo
+       .col-md-7.col-centered
+         h1.title--xl.title--up Rede de Consumo Colaborativo
          span.hero__description A Tribo Viva é um novo sistema de consumo, formado por cidadãos e produtores locais de alimentos orgânicos. Nossa rede exclui atravessadores, viabilizando o acesso contínuo e sustentável a uma alimentação com mais saúde, inclusão social e melhor custo-benefício para todos os envolvidos.
 
 section.offers
@@ -64,7 +64,11 @@ section.about
           .col-md-4
             h2.title--up.text--brown Fique Conectado
             .big
-              = link_to 'Facebook', root_path
+              = link_to 'Facebook', 'https://www.facebook.com/triboviva', title: 'Curta nossa página'
+              br
+              = link_to 'Twitter', 'https://twitter.com/TriboViva', title: 'Siga-nos no Twitter'
+              br
+              = link_to 'Instagram', 'https://instagram.com/triboviva/', title: 'Siga-nos no Instagram'
             / .big Inscreva-se na nossa newsletter
             / .input-group
             /   input.form-control type="text" placeholder="example@email.com"
