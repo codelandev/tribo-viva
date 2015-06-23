@@ -9,7 +9,11 @@ Rails.application.routes.draw do
       post 'purchase', to: 'offers#create_purchase', as: :create_purchase
     end
   end
-  resources :purchases, only: [:show, :update]
+  resources :purchases, only: [:show, :update] do
+    member do
+      get '/success', to: 'purchases#success', as: :success
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
