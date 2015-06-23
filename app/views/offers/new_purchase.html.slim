@@ -25,7 +25,7 @@ section.purchase
                   span = @offer.delivery_time_range
                 li
                   span.glyphicon.glyphicon-map-marker
-                  span = @offer.deliver_coordinator.address
+                  span = @offer.deliver_coordinator.partial_address
           .purchase-form
             h2.title--up.text--yellow Dados da Compra
             = simple_form_for @purchase, url: create_purchase_offer_path do |f|
