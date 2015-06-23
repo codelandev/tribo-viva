@@ -5,8 +5,7 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of :cpf }
     it { should validate_presence_of :name }
     it { should validate_presence_of :email }
-    # it { should validate_uniqueness_of(:cpf).scoped_to(:email) }
-    # it { should validate_uniqueness_of(:email).scoped_to(:cpf) }
+    it { should validate_presence_of :phone }
   end
 
   describe "relations" do

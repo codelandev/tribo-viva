@@ -20,3 +20,4 @@
 //= require tribo_viva/tribo_viva.js
 //= require init.js
 //= require_tree ./tribo_viva
+//= require maskedinput

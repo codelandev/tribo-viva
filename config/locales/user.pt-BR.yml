@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      user:
+        one: 'Usuário'
+        other: 'Usuários'
+
+    attributes:
+      user:
+        cpf: 'CPF'
+        name: 'Nome completo'
+        phone: 'Telefone'
+        email: 'Email'

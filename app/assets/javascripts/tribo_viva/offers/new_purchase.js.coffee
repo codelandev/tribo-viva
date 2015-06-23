@@ -10,6 +10,8 @@ TriboViva.Offers.CreatePurchase = TriboViva.Offers.NewPurchase =
       $('.unregistered-user-form').show()
 
   init: ->
+    $(".cpf").mask("999.999.999-99")
+    $(".phone").mask("(99) 9999-9999")
     total = $('#total-sum')
     original = total.data('original')
     format = total.data('format')

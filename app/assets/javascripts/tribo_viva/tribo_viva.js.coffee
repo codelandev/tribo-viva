@@ -8,6 +8,7 @@ window.TriboViva =
     respond_with: # To not use respond_with, just set false.
       'Create': 'New' # Respond the Create action with the New.
       'Update': 'Edit' # Respond the Update action with the Edit.
+      'CreatePurchase': 'NewPurchase'
 
   initPage: ->
     # If you're using the Turbolinks or pjax and you need run a code once, put something here.

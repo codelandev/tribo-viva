@@ -37,6 +37,8 @@ gem 'enumerate_it'
 # gem 'unicorn'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+# For masked fields
+gem 'maskedinput-rails'
 
 group :development do
   gem 'letter_opener'

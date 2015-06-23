@@ -12,6 +12,7 @@ User.blueprint do
   cpf { '12345678901' }
   name { 'User Test' }
   email { 'user@test.com' }
+  phone { '(51) 3779-9710' }
 end
 
 Producer.blueprint do

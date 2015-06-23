@@ -37,8 +37,8 @@ RSpec.describe OffersController, type: :controller do
     before do
       @valid_registered_user     = { amount: '1', user_status: 'true', registered_user_email: user.email }
       @invalid_registered_user   = { amount: '4', user_status: 'true', registered_user_email: user.email }
-      @valid_unregistered_user   = { amount: '1', user_status: 'false', unregistered_user_name: 'User Test', unregistered_user_email: 'test@test.com', unregistered_user_cpf: '00000000000' }
-      @invalid_unregistered_user = { amount: '4', user_status: 'false', unregistered_user_name: 'User Test', unregistered_user_email: 'test@test.com', unregistered_user_cpf: '00000000000' }
+      @valid_unregistered_user   = { amount: '1', user_status: 'false', unregistered_user_name: 'User Test', unregistered_user_email: 'test@test.com', unregistered_user_cpf: '00000000000', unregistered_user_phone: '(51) 3779-9710' }
+      @invalid_unregistered_user = { amount: '4', user_status: 'false', unregistered_user_name: 'User Test', unregistered_user_email: 'test@test.com', unregistered_user_cpf: '00000000000', unregistered_user_phone: '(51) 3779-9710' }
     end
 
     context 'when stock is zero' do

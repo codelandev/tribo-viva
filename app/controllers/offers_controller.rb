@@ -30,7 +30,8 @@ class OffersController < ApplicationController
         cpf      = user_params[:unregistered_user_cpf]
         name     = user_params[:unregistered_user_name]
         email    = user_params[:unregistered_user_email]
-        user     = User.new(email: email, cpf: cpf, name: name)
+        phone    = user_params[:unregistered_user_phone]
+        user     = User.new(email: email, cpf: cpf, name: name, phone: phone)
         purchase = Purchase.new(purchase_params.merge(user: user).merge(offer: @offer))
 
         if user.valid? && purchase.valid?
@@ -58,6 +59,7 @@ class OffersController < ApplicationController
 
   def user_params
     params.require(:purchase).permit(:user_status, :registered_user_email, :unregistered_user_name,
-                                     :unregistered_user_email, :unregistered_user_cpf)
+                                     :unregistered_user_email, :unregistered_user_cpf,
+                                     :unregistered_user_phone)
   end
 end
