@@ -1,13 +1,68 @@
-h1 Olá #{@purchase.user.name}
+h1 Oi, #{@purchase.user.name}!
+p
+  | Não se esqueça de finalizar a sua compra na Rede de Consumo Colaborativo Tribo Viva.
+  | São poucas ações para que você e sua família desfrutem de uma alimentação mais saudável com excelente custo-benefício.
+  | É só seguir os passos descritos abaixo. Até mais!
+hr
+h3
+  strong DADOS PARA FINALIZAÇÃO DA COMPRA
+p
+  | VALOR TOTAL COTA: #{number_to_currency @purchase.offer.value}
+  br
+  | QTD. DE COTA(S): #{@purchase.amount} cota(s)
+  br
+  | VALOR TOTAL COMPRA: #{number_to_currency @purchase.total}
 
-p Sua compra está pendente de pagamento, você pode realizar o depósito na seguinte conta:
+p A OFERTA EXPIRA EM: #{distance_of_time_in_words(@purchase.offer.offer_ends_at, Time.now)}
+hr
+h3
+  strong CONTA PARA DEPÓSITO OU TRANSFERÊNCIA BANCÁRIA
+.row
+  .col-sm-6
+    h3.title--up.text--green Transferência ou depósito ONLINE:
+    ul.small.instructions
+      li Salve o comprovante no seu computador
+      li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
+      li Selecione a imagem do comprovante
+      li Clique no botão "Finalizar Compra" para enviá-lo.
+  .col-sm-6
+    h3.title--up.text--green Transferência ou depósito em uma AGÊNCIA BANCÁRIA:
+    ul.small.instructions
+      li Imprima o comprovante
+      li Tire uma foto do mesmo com seu celular.
+      li Abra o email que você recebeu da Tribo Viva (chamado de "Confirmação de compra de cota") e clique no link de confirmação
+      li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
+      li Selecione a foto do comprovante
+      li Clique no botão "Finalizar Compra" para enviá-lo.
 
-p = "<strong>#{t('activerecord.attributes.bank_account.cc')}:</strong> #{@purchase.offer.bank_account.cc}".html_safe
-p = "<strong>#{t('activerecord.attributes.bank_account.bank')}:</strong> #{@purchase.offer.bank_account.bank}".html_safe
-p = "<strong>#{t('activerecord.attributes.bank_account.agency')}:</strong> #{@purchase.offer.bank_account.agency}".html_safe
-p = "<strong>#{t('activerecord.attributes.bank_account.cnpj_cpf')}:</strong> #{@purchase.offer.bank_account.cnpj_cpf}".html_safe
-p = "<strong>#{t('activerecord.attributes.bank_account.owner_name')}:</strong> #{@purchase.offer.bank_account.owner_name}".html_safe
-p = "<strong>#{t('activerecord.attributes.bank_account.bank_number')}:</strong> #{@purchase.offer.bank_account.bank_number}".html_safe
-p = "<strong>#{t('activerecord.attributes.bank_account.operation_code')}:</strong> #{@purchase.offer.bank_account.operation_code}".html_safe
+  .col-sm-6
+  	br
+    br
+    = "<strong>#{t('activerecord.attributes.bank_account.cc')}:</strong> #{@purchase.offer.bank_account.cc}".html_safe
+    br
+    = "<strong>#{t('activerecord.attributes.bank_account.bank')}:</strong> #{@purchase.offer.bank_account.bank}".html_safe
+    br
+    = "<strong>#{t('activerecord.attributes.bank_account.agency')}:</strong> #{@purchase.offer.bank_account.agency}".html_safe
+    br
 
-p = link_to 'Confirmar pagamento', purchase_url(id: @purchase.transaction_id), class: 'btn btn--md btn--block btn--green'
+  .col-sm-6
+  	br
+    br
+    = "<strong>#{t('activerecord.attributes.bank_account.cnpj_cpf')}:</strong> #{@purchase.offer.bank_account.cnpj_cpf}".html_safe
+    br
+    = "<strong>#{t('activerecord.attributes.bank_account.owner_name')}:</strong> #{@purchase.offer.bank_account.owner_name}".html_safe
+    br
+    = "<strong>#{t('activerecord.attributes.bank_account.bank_number')}:</strong> #{@purchase.offer.bank_account.bank_number}".html_safe
+    br
+    = "<strong>#{t('activerecord.attributes.bank_account.operation_code')}:</strong> #{@purchase.offer.bank_account.operation_code}".html_safe
+hr
+h3
+  strong DADOS DA COLETA
+p
+  | DATA E HORÁRIO: #{@purchase.offer.delivery_time_range}
+  br
+  | LOCAL: #{@purchase.offer.deliver_coordinator.partial_address}
+
+p = link_to 'Clique aqui para enviar o comprovante', purchase_url(id: @purchase.transaction_id), class: 'btn btn--md btn--block btn--green'
+
+p SUGESTÕES OU DÚVIDAS? ENVIE E-MAIL PARA #{mail_to 'tribo@triboviva.com.br'}
