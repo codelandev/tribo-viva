@@ -18,7 +18,7 @@ class OffersController < ApplicationController
 
         if purchase.valid?
           purchase.save
-          PurchaseMailer.confirm(purchase).deliver_now
+          PurchaseMailer.pending_payment(purchase).deliver_now
           redirect_to purchase_path(purchase), notice: 'Em breve você receberá o email de confirmação da sua compra!'
         else
           flash[:alert] = 'Preenchas corretamente suas informações'
@@ -37,7 +37,7 @@ class OffersController < ApplicationController
         if user.valid? && purchase.valid?
           user.save
           purchase.save
-          PurchaseMailer.confirm(purchase).deliver_now
+          PurchaseMailer.pending_payment(purchase).deliver_now
           redirect_to purchase_path(purchase), notice: 'Em breve você receberá o email de confirmação da sua compra!'
         else
           flash[:alert] = 'Preenchas corretamente suas informações'
