@@ -21,7 +21,7 @@ section.offer-header
               .small restantes
             .offer__header__price
               span = number_to_currency @offer.coordinator_tax + @offer.operational_tax + @offer.value
-              .small valor un. cota
+              .small valor de 1 cota
             .offer__header__action
               = link_to 'COMPRAR', new_purchase_offer_path(@offer), class: 'btn btn--md btn--block btn--yellow'
 
@@ -55,7 +55,7 @@ section.offer-info
                 tbody
                   tr
                     td.width-80
-                      strong.text--green VALOR DA COTA (repassados integralmente ao produtor):
+                      strong.text--green VALOR DA COTA (repassados ao produtor)
                     td.text-right
                       = number_to_currency @offer.value
                   - if @offer.operational_tax.present?

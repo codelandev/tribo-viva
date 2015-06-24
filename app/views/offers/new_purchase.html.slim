@@ -46,7 +46,7 @@ section.purchase
                       tr
                         td.width-80
                           .small
-                            strong.text--green VALOR DA COTA (repassados integralmente ao produtor):
+                            strong.text--green VALOR DA COTA (repassados ao produtor)
                         td.text-right
                           .small = number_to_currency @offer.value
                       - if @offer.operational_tax.present?

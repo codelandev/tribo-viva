@@ -7,11 +7,9 @@ hr
 h3
   strong DADOS PARA FINALIZAÇÃO DA COMPRA
 p
-  | VALOR TOTAL COTA: #{number_to_currency @purchase.offer.value}
-  br
   | QTD. DE COTA(S): #{@purchase.amount} cota(s)
   br
-  | VALOR TOTAL COMPRA: #{number_to_currency @purchase.total}
+  | VALOR TOTAL DA COMPRA: #{number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))} #{number_to_currency @purchase.offer.value}
 
 p A OFERTA EXPIRA EM: #{distance_of_time_in_words(@purchase.offer.offer_ends_at, Time.now)}
 hr
