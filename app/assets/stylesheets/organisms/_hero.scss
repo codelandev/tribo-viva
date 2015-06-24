@@ -22,7 +22,10 @@
   display: table-cell;
   vertical-align: middle;
 
-  h1 { font-size: 51px; }
+  h1 {
+    font-size: 50px;
+    @media screen and (max-width: 1199px) { font-size: 40px; }
+  }
 }
 
 .hero__description {
