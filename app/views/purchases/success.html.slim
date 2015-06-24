@@ -4,13 +4,17 @@ section.purchase
       .col-sm-10.col-md-7.col-centered
         .success
           h1.title--up.text--green SUCESSO!
-          span.small ID da compra #{@purchase.transaction_id}
+          p Sua compra foi realizada com sucesso. Veja abaixo os detalhes da compra e da coleta:
+          p
+            | QTD. DE COTA(S): #{@purchase.amount} cota(s)
+            br
+            | TOTAL DA COMPRA: #{number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))}
+            br
+            span.small ID da compra: #{@purchase.transaction_id}
 
           h2.title--up.text--brown Detalhes da sua Compra:
           h3.title--up.text--green
             = @purchase.offer.title
-            | &nbsp; - &nbsp;
-            = number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))
           .purchase-info__producer
             span.glyphicon.glyphicon-grain
             = @purchase.offer.producer.name

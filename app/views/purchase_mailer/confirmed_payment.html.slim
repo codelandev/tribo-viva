@@ -7,11 +7,9 @@ p
 h3
   strong DADOS DA COMPRA
 p
-  | VALOR TOTAL COTA: #{number_to_currency @purchase.offer.value}
-  br
   | QTD. DE COTA(S): #{@purchase.amount} cota(s)
   br
-  | VALOR TOTAL COMPRA: #{number_to_currency @purchase.total}
+  | VALOR TOTAL DA COMPRA: #{number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))} #{number_to_currency @purchase.offer.value}
 
 h3
   strong DADOS DA COLETA
@@ -20,7 +18,7 @@ p
   br
   | LOCAL: #{@purchase.offer.deliver_coordinator.partial_address}
   br
-  | COORDENADOR(A) DE ENTREGA: #{@purchase.offer.deliver_coordinator.name}
+  | COORDENADOR DE ENTREGA: #{@purchase.offer.deliver_coordinator.name}
 
 p
   small
