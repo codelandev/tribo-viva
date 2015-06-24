@@ -68,7 +68,7 @@ ActiveAdmin.register Offer do
         column :offer
         column :amount
         column :total do |purchase|
-          number_to_currency purchase.total
+          number_to_currency (purchase.amount * (purchase.offer.value + purchase.offer.operational_tax + purchase.offer.coordinator_tax))
         end
       end
     end
