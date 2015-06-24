@@ -1,6 +1,8 @@
 ActiveAdmin.register Purchase do
   permit_params :user, :offer, :amount, :status, :receipt
 
+  menu priority: 8
+
   member_action :confirm do
     p = Purchase.find(params[:id])
     p.confirm!

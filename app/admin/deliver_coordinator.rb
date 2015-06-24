@@ -1,6 +1,8 @@
 ActiveAdmin.register DeliverCoordinator do
   permit_params :cpf, :name, :phone, :email, :avatar, :address, :partial_address
 
+  menu priority: 5
+
   index do
     column :id
     column :avatar do |coordinator|
