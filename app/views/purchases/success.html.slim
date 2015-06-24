@@ -1,3 +1,38 @@
-h1 SUCESSO !!
+section.purchase
+  .container
+    .row
+      .col-sm-10.col-md-7.col-centered
+        .success
+          h1.title--up.text--green SUCESSO!
+          span.small ID da compra #{@purchase.transaction_id}
 
-h1 Compra com ID #{@purchase.transaction_id}
+          h2.title--up.text--brown Detalhes da sua Compra:
+          h3.title--up.text--green
+            = @purchase.offer.title
+            | &nbsp; - &nbsp;
+            = number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))
+          .purchase-info__producer
+            span.glyphicon.glyphicon-grain
+            = @purchase.offer.producer.name
+          .offer-info__products
+            p = simple_format @purchase.offer.products_description
+
+
+          h2.title--up.text--brown Detalhes da coleta:
+          .offer-info__collect
+            .offer-info__coordinator
+              span.offer-info__coordinator__avatar style="background-image: url(#{@purchase.offer.deliver_coordinator.avatar});"
+              span.offer-info__coordinator__name
+                p = @purchase.offer.deliver_coordinator.name
+                .small Coordeandor(a) de Entrega
+            p As compras devem ser retiradas na data e local abaixo:
+            ul
+              li
+                span.glyphicon.glyphicon-calendar
+                span = @purchase.offer.delivery_time_range
+              li
+                span.glyphicon.glyphicon-map-marker
+                span = @purchase.offer.deliver_coordinator.address
+              li
+                span.glyphicon.glyphicon-phone
+                span = @purchase.offer.deliver_coordinator.phone

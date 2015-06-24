@@ -64,6 +64,18 @@
 .table-bordered > tbody > tr > th,
 .table-bordered > tbody > tr > td { border: 1px solid $brown-medium; }
 
+.success {
+  background-color: $brown-light;
+  padding: 20px 30px 30px 30px;
+
+  h1,
+  h2 { margin-bottom: 5px; }
+
+  h3 { margin-top: 10px; }
+
+  .offer-info__collect { margin-top: 10px; }
+}
+
 @media only screen and (max-width: 640px) {
   .purchase-info,
   .purchase-form {
