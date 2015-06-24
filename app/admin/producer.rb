@@ -1,6 +1,8 @@
 ActiveAdmin.register Producer do
   permit_params :name, :address, :logo, :description, :contact_name, :phone, :email
 
+  menu priority: 6
+
   index do
     column :id
     column :logo do |producer|

@@ -3,6 +3,8 @@ ActiveAdmin.register Offer do
                 :products_description, :offer_ends_at, :operational_tax, :coordinator_tax,
                 :collect_ends_at, :offer_starts_at, :collect_starts_at
 
+  menu priority: 7
+
   index do
     column :id
     column :title
@@ -80,13 +82,13 @@ ActiveAdmin.register Offer do
       f.input :deliver_coordinator
       f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image.url, size: '200x200') : content_tag(:span, "Nenhuma imagem presente.")
       f.input :title
-      f.input :value
+      f.input :value, label: 'Valor da Cota'
       f.input :stock
       f.input :products_description, as: :html_editor
       f.input :operational_tax
       f.input :coordinator_tax
-      f.input :offer_ends_at
       f.input :offer_starts_at
+      f.input :offer_ends_at
       f.input :collect_starts_at
       f.input :collect_ends_at
     end
