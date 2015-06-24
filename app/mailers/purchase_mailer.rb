@@ -4,11 +4,11 @@ class PurchaseMailer < ActionMailer::Base
 
   def pending_payment(purchase)
     @purchase = purchase
-    mail to: @purchase.user.email, subject: 'Confirme sua compra e envie o seu comprovante'
+    mail to: @purchase.user.email, subject: 'Pague sua Compra e envie o comprovante'
   end
 
   def confirmed_payment(purchase)
     @purchase = purchase
-    mail to: @purchase.user.email, subject: 'Confirmação de compra Tribo Viva'
+    mail to: @purchase.user.email, subject: 'Compra Confirmada'
   end
 end
