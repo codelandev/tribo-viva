@@ -55,8 +55,8 @@ section.purchase
                   th.title--up.small Quantidade
                   th.title--up.small Valor Total
                 tr
-                  td #{@purchase.amount} un
                   td #{@purchase.offer.title}
+                  td #{@purchase.amount}
                   td #{number_to_currency (@purchase.amount * (@purchase.offer.value + @purchase.offer.coordinator_tax + @purchase.offer.operational_tax))}
 
           h3.title--up.text--yellow Anexe o Comprovante de Pagamento

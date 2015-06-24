@@ -18,7 +18,7 @@ section.purchase
                 span.offer-info__coordinator__name
                   p = @offer.deliver_coordinator.name
                   .small Coordeandor(a) de Entrega
-              p As compras devem ser retiradas na data e local abaixo:
+              p As compras devem ser retiradas nas seguintes data e local (por motivos de segurança, o número do endereço só será fornecido para os participantes da oferta):
               ul
                 li
                   span.glyphicon.glyphicon-calendar
@@ -86,7 +86,7 @@ section.purchase
                 = f.text_field :unregistered_user_email, class: 'form-control', placeholder: 'exemplo@email.com'
                 = f.label :unregistered_user_cpf, 'CPF (necessário para emissão de NF)'
                 = f.text_field :unregistered_user_cpf, class: 'form-control cpf', placeholder: '999.999.999-99'
-                = f.label :unregistered_user_phone, 'Telephone'
+                = f.label :unregistered_user_phone, 'Telefone'
                 = f.text_field :unregistered_user_phone, class: 'form-control phone', placeholder: '(51) 3779-9710'
                 br
               br
