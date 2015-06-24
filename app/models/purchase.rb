@@ -1,6 +1,6 @@
 class Purchase < ActiveRecord::Base
   attr_accessor :user_status, :registered_user_email, :unregistered_user_name, :unregistered_user_email,
-                :unregistered_user_cpf, :unregistered_user_phone
+                :unregistered_user_cpf, :unregistered_user_phone, :unregistered_user_address
 
   before_validation :generate_transaction_id, on: :create
 

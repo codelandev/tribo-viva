@@ -31,7 +31,8 @@ class OffersController < ApplicationController
         name     = user_params[:unregistered_user_name]
         email    = user_params[:unregistered_user_email]
         phone    = user_params[:unregistered_user_phone]
-        user     = User.new(email: email, cpf: cpf, name: name, phone: phone)
+        address  = user_params[:unregistered_user_address]
+        user     = User.new(email: email, cpf: cpf, name: name, phone: phone, address: address)
         purchase = Purchase.new(purchase_params.merge(user: user).merge(offer: @offer))
 
         if user.valid? && purchase.valid?

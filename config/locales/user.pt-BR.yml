@@ -11,3 +11,4 @@ pt-BR:
         name: 'Nome completo'
         phone: 'Telefone'
         email: 'Email'
+        address: 'Endereço'
