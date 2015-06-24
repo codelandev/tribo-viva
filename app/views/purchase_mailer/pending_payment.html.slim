@@ -1,59 +1,18 @@
 h1 Oi, #{@purchase.user.name}!
-p
-  | Não se esqueça de finalizar a sua compra na Rede de Consumo Colaborativo Tribo Viva.
-  | São poucas ações para que você e sua família desfrutem de uma alimentação mais saudável com excelente custo-benefício.
-  | É só seguir os passos descritos abaixo. Até mais!
+p Para finalizar sua compra na Rede de Consumo Colaborativo Tribo Viva, basta você efetuar o pagamento e nos enviar o comprovante. Não esqueça: sua compra só será confirmada depois que o comprovante for enviado. ;)
 hr
+
+p = link_to 'CLIQUE AQUI PARA ENTRAR NO NOSSO SITE E ENVIAR O SEU COMPROVANTE', purchase_url(id: @purchase.transaction_id), class: 'btn btn--md btn--block btn--green'
+hr
+
 h3
-  strong DADOS PARA FINALIZAÇÃO DA COMPRA
-p
-  | QTD. DE COTA(S): #{@purchase.amount} cota(s)
-  br
-  | VALOR TOTAL DA COMPRA: #{number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))}
-
-p A OFERTA EXPIRA EM: #{distance_of_time_in_words(@purchase.offer.offer_ends_at, Time.now)}
+  strong RESUMO DA COMPRA
+ul
+  li QTD. DE COTA(S): #{@purchase.amount} cota(s)
+  li VALOR TOTAL DA COMPRA: #{number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))}
+  li A OFERTA EXPIRA EM: #{distance_of_time_in_words(@purchase.offer.offer_ends_at, Time.now)} (ou quando todas as cotas tiverem sido adquiridas).
 hr
-h3
-  strong CONTA PARA DEPÓSITO OU TRANSFERÊNCIA BANCÁRIA
-.row
-  .col-sm-6
-    h3.title--up.text--green Transferência ou depósito ONLINE:
-    ul.small.instructions
-      li Salve o comprovante no seu computador
-      li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
-      li Selecione a imagem do comprovante
-      li Clique no botão "Finalizar Compra" para enviá-lo.
-  .col-sm-6
-    h3.title--up.text--green Transferência ou depósito em uma AGÊNCIA BANCÁRIA:
-    ul.small.instructions
-      li Imprima o comprovante
-      li Tire uma foto do mesmo com seu celular.
-      li Abra o email que você recebeu da Tribo Viva (chamado de "Confirmação de compra de cota") e clique no link de confirmação
-      li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
-      li Selecione a foto do comprovante
-      li Clique no botão "Finalizar Compra" para enviá-lo.
 
-  .col-sm-6
-  	br
-    br
-    = "<strong>#{t('activerecord.attributes.bank_account.cc')}:</strong> #{@purchase.offer.bank_account.cc}".html_safe
-    br
-    = "<strong>#{t('activerecord.attributes.bank_account.bank')}:</strong> #{@purchase.offer.bank_account.bank}".html_safe
-    br
-    = "<strong>#{t('activerecord.attributes.bank_account.agency')}:</strong> #{@purchase.offer.bank_account.agency}".html_safe
-    br
-
-  .col-sm-6
-  	br
-    br
-    = "<strong>#{t('activerecord.attributes.bank_account.cnpj_cpf')}:</strong> #{@purchase.offer.bank_account.cnpj_cpf}".html_safe
-    br
-    = "<strong>#{t('activerecord.attributes.bank_account.owner_name')}:</strong> #{@purchase.offer.bank_account.owner_name}".html_safe
-    br
-    = "<strong>#{t('activerecord.attributes.bank_account.bank_number')}:</strong> #{@purchase.offer.bank_account.bank_number}".html_safe
-    br
-    = "<strong>#{t('activerecord.attributes.bank_account.operation_code')}:</strong> #{@purchase.offer.bank_account.operation_code}".html_safe
-hr
 h3
   strong DADOS DA COLETA
 p
@@ -61,6 +20,54 @@ p
   br
   | LOCAL: #{@purchase.offer.deliver_coordinator.partial_address}
 
-p = link_to 'Clique aqui para enviar o comprovante', purchase_url(id: @purchase.transaction_id), class: 'btn btn--md btn--block btn--green'
+hr
 
-p SUGESTÕES OU DÚVIDAS? ENVIE E-MAIL PARA #{mail_to 'tribo@triboviva.com.br'}
+h3
+  strong CONTA PARA DEPÓSITO OU TRANSFERÊNCIA BANCÁRIA
+h4
+  strong Transferência ou depósito ONLINE:
+ul
+  li Salve o comprovante no seu computador
+  li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
+  li Selecione a imagem do comprovante
+  li Clique no botão "Finalizar Compra" para enviá-lo.
+br
+h4
+  strong Transferência ou depósito em uma AGÊNCIA BANCÁRIA:
+ul
+  li Imprima o comprovante
+  li Tire uma foto do mesmo com seu celular.
+  li Abra o email que você recebeu da Tribo Viva (chamado de "Confirmação de compra de cota") e clique no link de confirmação
+  li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
+  li Selecione a foto do comprovante
+  li Clique no botão "Finalizar Compra" para enviá-lo.
+
+h3
+  strong DADOS DA CONTA
+p
+  | BANCO:
+  = "<strong>#{t('activerecord.attributes.bank_account.bank')}:</strong> #{@purchase.offer.bank_account.bank}".html_safe
+  br
+  | NÚMERO DO BANCO:
+  = "<strong>#{t('activerecord.attributes.bank_account.bank_number')}:</strong> #{@purchase.offer.bank_account.bank_number}".html_safe
+  br
+  | AGÊNCIA:
+  = "<strong>#{t('activerecord.attributes.bank_account.agency')}:</strong> #{@purchase.offer.bank_account.agency}".html_safe
+  br
+  | CONTA CORRENTE:
+  = "<strong>#{t('activerecord.attributes.bank_account.cc')}:</strong> #{@purchase.offer.bank_account.cc}".html_safe
+  br
+  | OPERAÇÃO:
+  = "<strong>#{t('activerecord.attributes.bank_account.operation_code')}:</strong> #{@purchase.offer.bank_account.operation_code}".html_safe
+  br
+  | CNPJ:
+  = "<strong>#{t('activerecord.attributes.bank_account.cnpj_cpf')}:</strong> #{@purchase.offer.bank_account.cnpj_cpf}".html_safe
+  br
+  | RAZÃO SOCIAL:
+  = "<strong>#{t('activerecord.attributes.bank_account.owner_name')}:</strong> #{@purchase.offer.bank_account.owner_name}".html_safe
+hr
+
+h3
+  strong  SUGESTÕES OU DÚVIDAS?
+p Envie email para #{mail_to 'tribo@triboviva.com.br'}
+hr

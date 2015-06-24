@@ -33,7 +33,7 @@ ActiveAdmin.register Purchase do
     column :transaction_id
     column :amount
     column 'Valor total' do |purchase|
-      number_to_currency purchase.total
+      number_to_currency (purchase.amount * (purchase.offer.value + purchase.offer.operational_tax + purchase.offer.coordinator_tax))
     end
     column :receipt do |purchase|
       image_tag purchase.receipt.url, size: '100'

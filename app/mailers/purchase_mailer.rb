@@ -4,7 +4,7 @@ class PurchaseMailer < ActionMailer::Base
 
   def pending_payment(purchase)
     @purchase = purchase
-    mail to: @purchase.user.email, subject: 'Sua cota está pendente de pagamento'
+    mail to: @purchase.user.email, subject: 'Confirme sua compra e envie o seu comprovante'
   end
 
   def confirmed_payment(purchase)
