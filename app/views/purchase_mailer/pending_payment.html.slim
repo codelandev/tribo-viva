@@ -1,5 +1,6 @@
 h1 Oi, #{@purchase.user.name}!
 p Para finalizar sua compra na Rede de Consumo Colaborativo Tribo Viva, basta você efetuar o pagamento e nos enviar o comprovante. Não esqueça: sua compra só será confirmada depois que o comprovante for enviado. ;)
+p Se você já efetuou o pagamento e nos enviou o comprovante, por favor desconsidere este email.
 hr
 
 p = link_to 'CLIQUE AQUI PARA ENTRAR NO NOSSO SITE E ENVIAR O SEU COMPROVANTE', purchase_url(id: @purchase.transaction_id)

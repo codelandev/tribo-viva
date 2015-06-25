@@ -7,7 +7,7 @@ h3
 p
   | QTD. DE COTA(S): #{@purchase.amount} cota(s)
   br
-  | VALOR TOTAL DA COMPRA: #{number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))} #{number_to_currency @purchase.offer.value}
+  | VALOR TOTAL DA COMPRA: #{number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))}
 h3
   strong DADOS DA COLETA
 p
