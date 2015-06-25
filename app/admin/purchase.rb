@@ -40,7 +40,7 @@ ActiveAdmin.register Purchase do
       number_to_currency (purchase.amount * (purchase.offer.value + purchase.offer.operational_tax + purchase.offer.coordinator_tax))
     end
     column :receipt do |purchase|
-      image_tag purchase.receipt.url, size: '100'
+      link_to image_tag(purchase.receipt.url, size: '100'), purchase.receipt.url
     end
     column :user
     column :offer
@@ -63,7 +63,7 @@ ActiveAdmin.register Purchase do
       row :user
       row :offer
       row :receipt do |purchase|
-        image_tag purchase.receipt.url, size: '100'
+        link_to image_tag(purchase.receipt.url), purchase.receipt.url
       end
     end
   end
