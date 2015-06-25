@@ -1,8 +1,6 @@
 h1 Oi, #{@purchase.user.name}!
 
-p
-  | Sua compra na Rede de Consumo Colaborativo Tribo Viva está confirmada!
-  | Compareça no local, data e horário pré-definidos para coletar seus alimentos orgânicos e aproveite. Valeu!
+p Sua compra na Rede de Consumo Colaborativo Tribo Viva está confirmada! Compareça no local, data e horário pré-definidos para coletar seus alimentos orgânicos e aproveite. Valeu!
 
 h3
   strong DADOS DA COMPRA
@@ -10,7 +8,6 @@ p
   | QTD. DE COTA(S): #{@purchase.amount} cota(s)
   br
   | VALOR TOTAL DA COMPRA: #{number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))} #{number_to_currency @purchase.offer.value}
-
 h3
   strong DADOS DA COLETA
 p
@@ -20,10 +17,9 @@ p
   br
   | COORDENADOR DE ENTREGA: #{@purchase.offer.deliver_coordinator.name}
 
-p
-  small
-    | * Você tem até 24hs antes do horário da coleta para indicar uma pessoa para buscar sua cota em seu lugar.
-    | essa pessoa deverá portar documento de identificação com foto.
-    | envie e-mail para #{mail_to 'tribo@triboviva.com.br'}
+p * Você tem até 24h antes do horário da coleta para indicar uma pessoa para buscar sua cota em seu lugar. Essa pessoa deverá portar documento de identificação com foto.
+hr
 
-p SUGESTÕES OU DÚVIDAS? ENVIE E-MAIL PARA #{mail_to 'TRIBO@TRIBOVIVA.COM.BR'}
+h3
+  strong  SUGESTÕES OU DÚVIDAS?
+p Envie email para #{mail_to 'tribo@triboviva.com.br'}

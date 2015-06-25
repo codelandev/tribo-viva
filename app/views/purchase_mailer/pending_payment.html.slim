@@ -2,13 +2,13 @@ h1 Oi, #{@purchase.user.name}!
 p Para finalizar sua compra na Rede de Consumo Colaborativo Tribo Viva, basta você efetuar o pagamento e nos enviar o comprovante. Não esqueça: sua compra só será confirmada depois que o comprovante for enviado. ;)
 hr
 
-p = link_to 'CLIQUE AQUI PARA ENTRAR NO NOSSO SITE E ENVIAR O SEU COMPROVANTE', purchase_url(id: @purchase.transaction_id), class: 'btn btn--md btn--block btn--green'
+p = link_to 'CLIQUE AQUI PARA ENTRAR NO NOSSO SITE E ENVIAR O SEU COMPROVANTE', purchase_url(id: @purchase.transaction_id)
 hr
 
 h3
   strong RESUMO DA COMPRA
 ul
-  li QTD. DE COTA(S): #{@purchase.amount} cota(s)
+  li QTD. DE COTA(S) ADQUIRIDAS: #{@purchase.amount} cota(s)
   li VALOR TOTAL DA COMPRA: #{number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))}
   li A OFERTA EXPIRA EM: #{distance_of_time_in_words(@purchase.offer.offer_ends_at, Time.now)} (ou quando todas as cotas tiverem sido adquiridas).
 hr
@@ -19,6 +19,7 @@ p
   | DATA E HORÁRIO: #{@purchase.offer.delivery_time_range}
   br
   | LOCAL: #{@purchase.offer.deliver_coordinator.partial_address}
+  p Por motivos de segurança, o número do endereço só será fornecido para os participantes da oferta.
 
 hr
 
@@ -28,43 +29,37 @@ h4
   strong Transferência ou depósito ONLINE:
 ul
   li Salve o comprovante no seu computador
+  li = link_to 'Clique no aqui para entrar no nosso site e enviar o seu comprovante', purchase_url(id: @purchase.transaction_id)
   li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
   li Selecione a imagem do comprovante
-  li Clique no botão "Finalizar Compra" para enviá-lo.
+  li Clique no botão "Finalizar Compra" para enviá-lo
 br
 h4
   strong Transferência ou depósito em uma AGÊNCIA BANCÁRIA:
 ul
   li Imprima o comprovante
-  li Tire uma foto do mesmo com seu celular.
-  li Abra o email que você recebeu da Tribo Viva (chamado de "Confirmação de compra de cota") e clique no link de confirmação
+  li Tire uma foto do mesmo com seu celular
+  li = link_to 'Clique no aqui para entrar no nosso site e enviar o seu comprovante', purchase_url(id: @purchase.transaction_id)
   li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
   li Selecione a foto do comprovante
-  li Clique no botão "Finalizar Compra" para enviá-lo.
+  li Clique no botão "Finalizar Compra" para enviá-lo
 
 h3
   strong DADOS DA CONTA
 p
-  | BANCO:
-  = "<strong>#{t('activerecord.attributes.bank_account.bank')}:</strong> #{@purchase.offer.bank_account.bank}".html_safe
+  | BANCO: #{@purchase.offer.bank_account.bank}
   br
-  | NÚMERO DO BANCO:
-  = "<strong>#{t('activerecord.attributes.bank_account.bank_number')}:</strong> #{@purchase.offer.bank_account.bank_number}".html_safe
+  | NÚMERO DO BANCO: #{@purchase.offer.bank_account.bank_number}
   br
-  | AGÊNCIA:
-  = "<strong>#{t('activerecord.attributes.bank_account.agency')}:</strong> #{@purchase.offer.bank_account.agency}".html_safe
+  | AGÊNCIA: #{@purchase.offer.bank_account.agency}
   br
-  | CONTA CORRENTE:
-  = "<strong>#{t('activerecord.attributes.bank_account.cc')}:</strong> #{@purchase.offer.bank_account.cc}".html_safe
+  | CONTA CORRENTE: #{@purchase.offer.bank_account.cc}
   br
-  | OPERAÇÃO:
-  = "<strong>#{t('activerecord.attributes.bank_account.operation_code')}:</strong> #{@purchase.offer.bank_account.operation_code}".html_safe
+  | OPERAÇÃO: #{@purchase.offer.bank_account.operation_code}
   br
-  | CNPJ:
-  = "<strong>#{t('activerecord.attributes.bank_account.cnpj_cpf')}:</strong> #{@purchase.offer.bank_account.cnpj_cpf}".html_safe
+  | CNPJ: #{@purchase.offer.bank_account.cnpj_cpf}
   br
-  | RAZÃO SOCIAL:
-  = "<strong>#{t('activerecord.attributes.bank_account.owner_name')}:</strong> #{@purchase.offer.bank_account.owner_name}".html_safe
+  | RAZÃO SOCIAL: #{@purchase.offer.bank_account.owner_name}
 hr
 
 h3

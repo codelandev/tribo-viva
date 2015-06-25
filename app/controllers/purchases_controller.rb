@@ -8,7 +8,6 @@ class PurchasesController < ApplicationController
     if params[:purchase].present? && purchase.update_attributes(purchase_params)
       purchase.confirm!
       PurchaseMailer.confirmed_payment(purchase).deliver_now
-      flash[:notice] = 'Recibo enviado, aguarde até confirmarmos sua compra!'
       redirect_to success_purchase_path(purchase)
     else
       flash[:alert] = 'Você deve fazer o upload do recibo de pagamento!'
