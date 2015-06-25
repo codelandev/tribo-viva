@@ -46,7 +46,7 @@ end
 
 group :development, :test do
   gem 'machinist', '~> 2.0'
-  gem 'rspec-rails', '~> 3.2.0'
+  gem 'rspec-rails', '~> 3.3.2'
   gem 'awesome_print', '~> 1.6.1', require: false
   gem 'spring-commands-rspec', '~> 1.0.4'
   gem 'thin', '~> 1.6.3'
@@ -72,7 +72,7 @@ end
 gem 'initjs', '~> 2.1.2'
 gem 'rails-i18n', '~> 4.0.4'
 gem 'slim-rails', '~> 3.0.1'
-gem 'devise', '~> 3.4.1'
+gem 'devise', '~> 3.5.1'
 gem 'devise-i18n'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'simple_form', '~> 3.1.0'
