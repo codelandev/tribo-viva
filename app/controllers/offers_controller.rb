@@ -61,6 +61,7 @@ class OffersController < ApplicationController
   def user_params
     params.require(:purchase).permit(:user_status, :registered_user_email, :unregistered_user_name,
                                      :unregistered_user_email, :unregistered_user_cpf,
-                                     :unregistered_user_phone)
+                                     :unregistered_user_phone,
+                                     :unregistered_user_address)
   end
 end
