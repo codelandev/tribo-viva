@@ -37,7 +37,7 @@ RSpec.describe OffersController, type: :controller do
     before do
       @valid_registered_user     = { amount: '1', user_status: 'true', registered_user_email: user.email }
       @invalid_registered_user   = { amount: '4', user_status: 'true', registered_user_email: user.email }
-      @valid_unregistered_user   = { amount: '1', user_status: 'false', unregistered_user_name: 'User Test', unregistered_user_email: 'test@test.com', unregistered_user_cpf: '00000000000', unregistered_user_phone: '(51) 3779-9710' }
+      @valid_unregistered_user   = { amount: '1', user_status: 'false', unregistered_user_name: 'User Test', unregistered_user_email: 'test@test.com', unregistered_user_cpf: '00000000000', unregistered_user_phone: '(51) 3779-9710', unregistered_user_address: 'Felipe neri' }
       @invalid_unregistered_user = { amount: '4', user_status: 'false', unregistered_user_name: 'User Test', unregistered_user_email: 'test@test.com', unregistered_user_cpf: '00000000000', unregistered_user_phone: '(51) 3779-9710' }
     end
 
@@ -73,9 +73,9 @@ RSpec.describe OffersController, type: :controller do
 
     context 'when user is not registered' do
       it "returns success and redirect to root if valid parameters" do
-        post :create_purchase, id: offer.id, purchase: @valid_unregistered_user
+        post :create_purchase, id: offer.to_param, purchase: @valid_unregistered_user
 
-        expect(User.where(email: @valid_unregistered_user[:unregistered_user_email]).any?).to be_truthy
+        expect(User.exists?(email: @valid_unregistered_user[:unregistered_user_email])).to be_truthy
         expect(Purchase.count).to eq(1)
         expect(Purchase.last.amount).to eq(@valid_unregistered_user[:amount].to_i)
         expect(Purchase.last.status).to eq(PurchaseStatus::PENDING)
