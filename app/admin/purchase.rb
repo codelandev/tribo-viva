@@ -1,30 +1,34 @@
 ActiveAdmin.register Purchase do
   permit_params :user, :offer, :amount, :status, :receipt
 
+  controller do
+    defaults finder: :find_by_transaction_id
+  end
+
   menu priority: 8
 
   member_action :confirm do
-    p = Purchase.find(params[:id])
-    p.confirm!
-    redirect_to admin_offer_path(p.offer), notice: "Compra confirmada com sucesso!"
+    purchase = Purchase.find_by(transaction_id: params[:id])
+    purchase.confirm!
+    redirect_to admin_purchase_path(purchase), notice: "Compra confirmada com sucesso!"
   end
 
   member_action :cancel do
-    p = Purchase.find(params[:id])
-    p.cancel!
-    redirect_to admin_offer_path(p.offer), notice: "Compra cancelada com sucesso!"
+    purchase = Purchase.find_by(transaction_id: params[:id])
+    purchase.cancel!
+    redirect_to admin_purchase_path(purchase), notice: "Compra cancelada com sucesso!"
   end
 
   action_item only: :show do
-    p = Purchase.find(params[:id])
-    unless p.confirmed?
+    purchase = Purchase.find_by(transaction_id: params[:id])
+    unless purchase.confirmed?
       link_to 'Confirmar', confirm_admin_purchase_path
     end
   end
 
   action_item only: :show do
-    p = Purchase.find(params[:id])
-    unless p.canceled?
+    purchase = Purchase.find_by(transaction_id: params[:id])
+    unless purchase.canceled?
       link_to 'Cancelar', cancel_admin_purchase_path
     end
   end
