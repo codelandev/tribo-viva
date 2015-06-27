@@ -15,7 +15,7 @@ TriboViva.Offers.CreatePurchase = TriboViva.Offers.NewPurchase =
     format = total.data('format')
     unit = total.data('unit')
     formatedErrorValue = format.replace('%u', unit).replace('%n', '--')
-    $('#purchase_amount').on 'keyup change', ->
+    $('#purchase_form_amount').on 'keyup change', ->
       $this = $(this)
       val = $this.val()
       if val.match(/\d+/)
