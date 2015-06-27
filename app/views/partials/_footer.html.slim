@@ -3,14 +3,14 @@ footer.footer
     .row
       .col-sm-12.col-md-10.col-centered
         .row
-          .col-md-6
+          .col-sm-6
             .pull-left
               = link_to image_tag('logo-triboviva.png'), root_path, class: 'footer__logo'
               = link_to image_tag('logo-codeland.png'), 'http://www.codeland.com.br', title: 'Desenvolvido por CODELAND - Desenvolvimento de sistemas web', class: 'footer__logo'
-          .col-md-6
+          .col-sm-6
             .pull-right
               ul
                 li style="#{'display: none;' if params[:action] == 'new_purchase' || params[:controller] == 'purchases'}"
-                  = link_to 'Sobre', about_path
+                  = link_to 'Como Funciona', about_path
                 li
                   = link_to 'Contato', 'mailto:tribo@triboviva.com.br?subject=Olá Tribo Viva!'

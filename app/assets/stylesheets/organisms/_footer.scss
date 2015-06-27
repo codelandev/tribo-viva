@@ -11,12 +11,33 @@
     padding: 0;
     li {
       display: inline-block;
-      margin-left: 10px;
+      &:last-child {
+        margin-left: 10px;
+      }
     }
   }
 }
 
-.footer__logo img {
+.footer__logo {
+  &:first-child {
+    margin-right: 30px;
+  }
+
+  img {
   height: 25px;
-  margin-right: 30px;
+  }
+}
+
+@media screen and (max-width: 719px) {
+  .footer {
+    .pull-left,
+    .pull-right {
+      float: none !important;
+      text-align: center;
+    }
+
+    ul {
+      margin-top: 15px;
+    }
+  }
 }
