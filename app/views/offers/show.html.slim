@@ -23,7 +23,10 @@ section.offer-header
               span = number_to_currency @offer.coordinator_tax + @offer.operational_tax + @offer.value
               .small valor de 1 cota
             .offer__header__action
-              = link_to 'COMPRAR', new_purchase_offer_path(@offer), class: 'btn btn--md btn--block btn--yellow'
+              - if @offer.remaining == 0
+                = link_to 'OFERTA FINALIZADA', '', class: 'btn btn--md btn--block btn--disable'
+              - else
+                = link_to 'COMPRAR', new_purchase_offer_path(@offer), class: 'btn btn--md btn--block btn--yellow'
 
 section.offer-info
   .container

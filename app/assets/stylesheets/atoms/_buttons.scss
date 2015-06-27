@@ -33,6 +33,18 @@
   color: white;
   &:hover {
     color: white;
-    // background-color: $brown-medium;
+  }
+}
+
+.btn--disable {
+  color: $yellow-medium;
+  background-color: $brown-medium;
+  cursor: default;
+  &:hover,
+  &:active,
+  &:visited,
+  &:focus {
+    color: $yellow-medium;
+    background-color: $brown-medium;
   }
 }
