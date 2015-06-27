@@ -2,11 +2,9 @@ TriboViva.Offers ?= {}
 
 TriboViva.Offers.CreatePurchase = TriboViva.Offers.NewPurchase =
   checkRadioButtons: ->
-    if document.getElementById("purchase_user_status_true").checked
+    if document.getElementById("purchase_form_user_status_true").checked
       $('.unregistered-user-form').hide()
-      $('.registered-user-form').show()
-    else if document.getElementById("purchase_user_status_false").checked
-      $('.registered-user-form').hide()
+    else if document.getElementById("purchase_form_user_status_false").checked
       $('.unregistered-user-form').show()
 
   init: ->
@@ -37,7 +35,7 @@ TriboViva.Offers.CreatePurchase = TriboViva.Offers.NewPurchase =
 
     TriboViva.Offers.NewPurchase.checkRadioButtons() # check on load
 
-    $('#purchase_user_status_true, #purchase_user_status_false').change ->
+    $('#purchase_form_user_status_true, #purchase_form_user_status_false').change ->
       TriboViva.Offers.NewPurchase.checkRadioButtons() # check on change
 
   modules: -> []

@@ -72,25 +72,13 @@ section.purchase
               br
               br
 
-              .registered-user-form
-                h4.title--up.text--yellow Caso sim, preencha seu email a seguir:
-                = f.label :registered_user_email, 'Email'
-                = f.text_field :registered_user_email, class: 'form-control', placeholder: 'exemplo@email.com'
-                br
+              = f.input :email, placeholder: 'exemplo@email.com'
 
               .unregistered-user-form
-                h4.title--up.text--yellow Caso não, preencha os campos a seguir:
-                = f.label :unregistered_user_name, 'Nome completo'
-                = f.text_field :unregistered_user_name, class: 'form-control', placeholder: 'Nome Completo'
-                = f.label :unregistered_user_email, 'Email'
-                = f.text_field :unregistered_user_email, class: 'form-control', placeholder: 'exemplo@email.com'
-                = f.label :unregistered_user_cpf, 'CPF (necessário para emissão de NF)'
-                = f.text_field :unregistered_user_cpf, class: 'form-control cpf', placeholder: '999.999.999-99'
-                = f.label :unregistered_user_phone, 'Telefone'
-                = f.text_field :unregistered_user_phone, class: 'form-control phone', placeholder: '(51) 3779-9710'
-                = f.label :unregistered_user_address, 'Endereço'
-                = f.text_field :unregistered_user_address, class: 'form-control', placeholder: 'Rua Logradouro 555'
-                br
+                = f.input :name, placeholder: 'Nome completo', label: 'Nome completo'
+                = f.input :cpf, placeholder: '999.999.999-99', label: 'CPF (necessário para emissão de NF)', input_html: { class: 'cpf' }
+                = f.input :phone, placeholder: '(51) 3779-9710', label: 'Telefone', input_html: { class: 'phone' }
+                = f.input :address, placeholder: 'Rua Logradouro 555', label: 'Endereço'
               br
 
               = f.submit 'Continuar para Confirmação', class: 'btn btn--md btn--block btn--yellow'

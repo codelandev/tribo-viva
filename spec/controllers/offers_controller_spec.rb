@@ -35,15 +35,15 @@ RSpec.describe OffersController, type: :controller do
     let(:invalid_offer) { Offer.make!(stock: 0) }
 
     before do
-      @valid_registered_user     = { amount: '1', user_status: 'true', registered_user_email: user.email }
-      @invalid_registered_user   = { amount: '4', user_status: 'true', registered_user_email: user.email }
-      @valid_unregistered_user   = { amount: '1', user_status: 'false', unregistered_user_name: 'User Test', unregistered_user_email: 'test@test.com', unregistered_user_cpf: '00000000000', unregistered_user_phone: '(51) 3779-9710', unregistered_user_address: 'Felipe neri' }
-      @invalid_unregistered_user = { amount: '4', user_status: 'false', unregistered_user_name: 'User Test', unregistered_user_email: 'test@test.com', unregistered_user_cpf: '00000000000', unregistered_user_phone: '(51) 3779-9710' }
+      @valid_registered_user     = { amount: '1', user_status: 'true', email: user.email }
+      @invalid_registered_user   = { amount: '4', user_status: 'true', email: user.email }
+      @valid_unregistered_user   = { amount: '1', user_status: 'false', name: 'User Test', email: 'test@test.com', cpf: '00000000000', phone: '(51) 3779-9710', address: 'Felipe neri' }
+      @invalid_unregistered_user = { amount: '4', user_status: 'false', name: 'User Test', email: 'test@test.com', cpf: '00000000000', phone: '(51) 3779-9710' }
     end
 
     context 'when stock is zero' do
       it "return error even with valid parameters" do
-        post :create_purchase, id: invalid_offer.id, purchase: @valid_registered_user
+        post :create_purchase, id: invalid_offer.id, purchase_form: @valid_registered_user
 
         expect(Purchase.count).to eq(0)
         expect(response).to redirect_to new_purchase_offer_path(invalid_offer)
@@ -53,19 +53,19 @@ RSpec.describe OffersController, type: :controller do
 
     context 'when user is registered' do
       it "returns success and redirect to root if valid parameters" do
-        post :create_purchase, id: offer.id, purchase: @valid_registered_user
+        post :create_purchase, id: offer.id, purchase_form: @valid_registered_user
 
         expect(Purchase.count).to eq(1)
         expect(Purchase.last.amount).to eq(@valid_registered_user[:amount].to_i)
         expect(Purchase.last.status).to eq(PurchaseStatus::PENDING)
         expect(Purchase.last.offer.remaining).to eq(10)
-        expect(ActionMailer::Base.deliveries.last.to.first).to eql @valid_registered_user[:registered_user_email]
+        expect(ActionMailer::Base.deliveries.last.to.first).to eql @valid_registered_user[:email]
         expect(response).to redirect_to purchase_path(Purchase.last)
         expect(flash[:notice]).to be_present
       end
 
       it "returns error and render purchase if invalid parameters" do
-        post :create_purchase, id: offer.id, purchase: @invalid_registered_user
+        post :create_purchase, id: offer.id, purchase_form: @invalid_registered_user
         expect(response).to render_template :new_purchase
         expect(flash[:alert]).to be_present
       end
@@ -73,20 +73,20 @@ RSpec.describe OffersController, type: :controller do
 
     context 'when user is not registered' do
       it "returns success and redirect to root if valid parameters" do
-        post :create_purchase, id: offer.to_param, purchase: @valid_unregistered_user
+        post :create_purchase, id: offer.to_param, purchase_form: @valid_unregistered_user
 
-        expect(User.exists?(email: @valid_unregistered_user[:unregistered_user_email])).to be_truthy
+        expect(User.exists?(email: @valid_unregistered_user[:email])).to be_truthy
         expect(Purchase.count).to eq(1)
         expect(Purchase.last.amount).to eq(@valid_unregistered_user[:amount].to_i)
         expect(Purchase.last.status).to eq(PurchaseStatus::PENDING)
         expect(Purchase.last.offer.remaining).to eq(10)
-        expect(ActionMailer::Base.deliveries.last.to.first).to eql @valid_unregistered_user[:unregistered_user_email]
+        expect(ActionMailer::Base.deliveries.last.to.first).to eql @valid_unregistered_user[:email]
         expect(response).to redirect_to purchase_path(Purchase.last)
         expect(flash[:notice]).to be_present
       end
 
       it "returns error and render purchase if invalid parameters" do
-        post :create_purchase, id: offer.id, purchase: @invalid_unregistered_user
+        post :create_purchase, id: offer.id, purchase_form: @invalid_unregistered_user
         expect(response).to render_template :new_purchase
         expect(flash[:alert]).to be_present
       end
