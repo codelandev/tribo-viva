@@ -3,11 +3,20 @@ require 'rails_helper'
 RSpec.describe PurchasesController, type: :controller do
 
   describe "GET #show" do
-    let(:purchase) { Purchase.make!(:pending) }
+    context 'Existing purchase' do
+      let(:purchase) { Purchase.make!(:pending) }
 
-    it "returns http success" do
-      get :show, id: purchase.transaction_id
-      expect(response).to have_http_status(:success)
+      it "returns http success" do
+        get :show, id: purchase.to_param
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context '404' do
+      it 'returns 404' do
+        get :show, id: 'not-found'
+        expect(response).to have_http_status(:not_found)
+      end
     end
   end
 
