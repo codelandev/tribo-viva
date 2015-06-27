@@ -21,7 +21,6 @@ RSpec.describe PurchasesController, type: :controller do
       expect(purchase.receipt.file.file).to be_present
       expect(purchase.status).to eql PurchaseStatus::CONFIRMED
       expect(response).to redirect_to success_purchase_path(purchase)
-      expect(flash[:notice]).to be_present
     end
 
     it "returns to purchase_path if empty file with alert flash" do
