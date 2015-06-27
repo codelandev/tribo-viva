@@ -18,7 +18,7 @@ section.offers
           span.small Porto Alegre
         .row
           - @valid_offers.each do |offer|
-            .col-md-4
+            .col-sm-6.col-md-4
               = link_to offer do
                 article.card
                   .card__image style="background-image: url(#{offer.image.url});"
@@ -55,17 +55,17 @@ section.about
     .row
       .col-sm-12.col-md-10.col-centered
         .row
-          .col-md-4
+          .col-sm-4
             h2.title--up.text--yellow COMO COMPRAR
             p
               | Quer consumir alimentos orgânicos com preços acessíveis, diretamente de produtores locais, por meio da colaboração com outros cidadãos e cidadãs?
               = link_to ' Clique aqui.', about_path
-          .col-md-4
+          .col-sm-4
             h2.title--up.text--yellow SEJA UM COORDENADOR DE ENTREGA
             p
               | Receba alimentos orgânicos no endereço da sua escolha, pagando pouco ou nada, conheça pessoas como você e seja um agente transformador da sua comunidade.
               = link_to ' Clique aqui.', 'https://triboviva.typeform.com/to/ua7QEp'
-          .col-md-4
+          .col-sm-4
             h2.title--up.text--brown Fique Conectado
             .big
               = link_to 'Facebook', 'https://www.facebook.com/triboviva', title: 'Curta nossa página'
