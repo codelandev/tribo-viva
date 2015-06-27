@@ -1,3 +1,16 @@
 header.header style="#{'display: none;' if params[:action] == 'new_purchase' || params[:controller] == 'purchases'}"
-  .container
-    = link_to image_tag('logo-triboviva.png'), root_path, class: 'header__logo'
+  nav.navbar.navbar-default
+    .container
+      .navbar-header
+        button.navbar-toggle.collapsed type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        = link_to image_tag('logo-triboviva.png'), root_path, class: 'header__logo navbar-brand'
+      .collapse.navbar-collapse#navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          li
+            = link_to 'Como Funciona', about_path
+          li
+            = link_to 'Contato', 'mailto:tribo@triboviva.com.br?subject=Olá Tribo Viva!'
