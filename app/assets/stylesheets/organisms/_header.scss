@@ -53,19 +53,19 @@
     &.collapsing {
       margin-top: 22px;
       background: $brown-tribo;
+
+      .navbar-nav > li > a {
+        padding: 30px 15px;
+
+        &:hover {
+          background-color: $brown-dark;
+          text-decoration: none;
+        }
+      }
     }
 
     ul {
       margin: 0 -15px;
-    }
-
-    .navbar-nav > li > a {
-      padding: 30px 15px;
-
-      &:hover {
-        background-color: $brown-dark;
-        text-decoration: none;
-      }
     }
   }
 }
