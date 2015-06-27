@@ -1,6 +1,6 @@
 class PurchasesController < ApplicationController
   def show
-    @purchase = Purchase.find_by(transaction_id: params[:id])
+    @purchase = Purchase.find_by!(transaction_id: params[:id])
   end
 
   def update
