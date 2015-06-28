@@ -1,7 +1,6 @@
 .header {
   height: 100px;
   width: 100%;
-  z-index: 1000;
   background-color: $brown-tribo;
 }
 
@@ -10,8 +9,8 @@
     padding-top: 9px;
 
     @media screen and (max-width: 420px) {
-      width: 230px;
-      padding-top: 14px;
+      width: 205px;
+      padding-top: 16px;
     }
   }
 }
@@ -19,6 +18,7 @@
 .navbar-default {
   background: transparent;
   border: 0;
+  z-index: 1000;
 
   .navbar-nav > li > a {
     padding: 40px 10px;
