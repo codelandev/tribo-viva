@@ -70,7 +70,7 @@ ActiveAdmin.register Purchase do
 
   form do |f|
     f.inputs do
-      f.input :status, collection: PruchaseStatus.to_a, as: :select
+      f.input :status, collection: PurchaseStatus.to_a, as: :select
       f.input :amount
       f.input :user
       f.input :offer
