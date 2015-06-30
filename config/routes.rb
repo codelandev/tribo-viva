@@ -14,6 +14,9 @@ Rails.application.routes.draw do
       get '/success', to: 'purchases#success', as: :success
     end
   end
+
+  get '/index', format: :php, to: redirect('/')
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
