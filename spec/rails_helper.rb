@@ -2,9 +2,12 @@
 ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
 require 'simplecov'
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
 SimpleCov.start do
   add_filter 'app/admin'
   add_filter 'config/initializers/rack_zippy.rb'
+  add_filter 'config/initializers/carrierwave.rb'
 end
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
