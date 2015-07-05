@@ -83,10 +83,10 @@ ActiveAdmin.register Offer do
       f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image.url, size: '200x200') : content_tag(:span, "Nenhuma imagem presente.")
       f.input :title
       f.input :value, label: 'Valor da Cota'
-      f.input :stock
-      f.input :products_description, as: :html_editor
       f.input :operational_tax
       f.input :coordinator_tax
+      f.input :stock
+      f.input :products_description, as: :html_editor
       f.input :offer_starts_at
       f.input :offer_ends_at
       f.input :collect_starts_at
