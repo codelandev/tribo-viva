@@ -10,8 +10,9 @@ if Rails.env.development? || Rails.env.staging?
   printf "====== Creating consumers ... "
 
   10.times do |index|
-    User.create(name: "User Test #{index+1}", email: "user_#{index+1}@test.com",
-                cpf: "0000000000#{index+1}", phone: "51377897#{index+10}")
+    User.create!(name: "User Test #{index+1}", email: "user_#{index+1}@test.com",
+                cpf: "0000000000#{index+1}", phone: "51377897#{index+10}",
+                address: "Rua do usuário comum", password: '123123123')
   end
 
   printf "DONE! ======\n\n"

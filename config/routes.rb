@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
+
   ActiveAdmin.routes(self)
   root 'pages#home'
   get 'sobre', to: 'pages#about', as: 'about'
@@ -9,6 +11,7 @@ Rails.application.routes.draw do
       post 'purchase', to: 'offers#create_purchase', as: :create_purchase
     end
   end
+
   resources :purchases, only: [:show, :update] do
     member do
       get '/success', to: 'purchases#success', as: :success

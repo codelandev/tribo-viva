@@ -14,3 +14,8 @@ header.header style="#{'display: none;' if params[:action] == 'new_purchase' || 
             = link_to 'Como Funciona', about_path
           li
             = link_to 'Contato', 'mailto:tribo@triboviva.com.br?subject=Olá Tribo Viva!'
+          - if user_signed_in?
+            li = link_to 'Sair', destroy_user_session_path, method: :delete
+          - else
+            li = link_to 'Entrar', new_user_session_path
+            li = link_to 'Cadastrar', new_user_registration_path

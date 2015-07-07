@@ -14,6 +14,7 @@ User.blueprint do
   email { 'user@test.com' }
   phone { '(51) 3779-9710' }
   address { 'Felipe Neri, 128' }
+  password { '123123123' }
 end
 
 Producer.blueprint do
