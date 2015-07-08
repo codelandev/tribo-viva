@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
-
   ActiveAdmin.routes(self)
+
   root 'pages#home'
-  get 'sobre', to: 'pages#about', as: 'about'
+  get 'sobre', to: 'pages#about', as: :about
+  get 'cart', to: 'pages#cart', as: :cart
+  delete 'clean_cart', to: 'offers#clean_cart', as: :clean_cart
+
   resources :offers, only: :show do
     member do
       get 'purchase', to: 'offers#new_purchase', as: :new_purchase
       post 'purchase', to: 'offers#create_purchase', as: :create_purchase
+      post 'add_to_cart', to: 'offers#add_to_cart', as: :add_to_cart
+      delete 'remove_from_cart', to: 'offers#remove_from_cart', as: :remove_from_cart
     end
   end
 

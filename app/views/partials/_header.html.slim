@@ -14,6 +14,12 @@ header.header style="#{'display: none;' if params[:action] == 'new_purchase' || 
             = link_to 'Como Funciona', about_path
           li
             = link_to 'Contato', 'mailto:tribo@triboviva.com.br?subject=Olá Tribo Viva!'
+
+          - if session[:shopping_cart].any?
+            li = link_to "#{session[:shopping_cart].length} Produtos no carrinho", cart_path
+          - else
+            li = link_to 'Carrinho Vazio', cart_path
+
           - if user_signed_in?
             li = link_to 'Sair', destroy_user_session_path, method: :delete
           - else

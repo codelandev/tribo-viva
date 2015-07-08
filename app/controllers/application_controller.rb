@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  before_action :build_shopping_cart
 
   protected
 
@@ -15,5 +16,9 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:error] = "Você não tem permissão para fazer isso."
     redirect_to(request.referrer || root_path)
+  end
+
+  def build_shopping_cart
+    session[:shopping_cart] ||= Array.new
   end
 end

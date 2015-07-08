@@ -6,4 +6,7 @@ class PagesController < ApplicationController
 
   def about
   end
+
+  def cart
+  end
 end
