@@ -3,6 +3,7 @@ class Offer < ActiveRecord::Base
   belongs_to :bank_account
   belongs_to :deliver_coordinator
   has_many :old_purchases
+  has_many :orders
 
   validates :deliver_coordinator, :bank_account, :producer, :title, :image, :value, :stock,
             :products_description, :offer_ends_at, :operational_tax, :coordinator_tax,

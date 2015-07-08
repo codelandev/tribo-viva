@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150708191151) do
+ActiveRecord::Schema.define(version: 20150708204650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,18 @@ ActiveRecord::Schema.define(version: 20150708191151) do
   add_index "old_purchases", ["offer_id"], name: "index_old_purchases_on_offer_id", using: :btree
   add_index "old_purchases", ["user_id"], name: "index_old_purchases_on_user_id", using: :btree
 
+  create_table "orders", force: :cascade do |t|
+    t.integer  "offer_id"
+    t.integer  "purchase_id"
+    t.integer  "quantity"
+    t.decimal  "offer_value"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "orders", ["offer_id"], name: "index_orders_on_offer_id", using: :btree
+  add_index "orders", ["purchase_id"], name: "index_orders_on_purchase_id", using: :btree
+
   create_table "producers", force: :cascade do |t|
     t.text     "description",  default: "", null: false
     t.string   "name",         default: "", null: false
@@ -121,6 +133,18 @@ ActiveRecord::Schema.define(version: 20150708191151) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
+
+  create_table "purchases", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "token"
+    t.string   "status"
+    t.decimal  "total",      precision: 10, scale: 2, default: 0.0, null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+  end
+
+  add_index "purchases", ["token"], name: "index_purchases_on_token", unique: true, using: :btree
+  add_index "purchases", ["user_id"], name: "index_purchases_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "cpf",                    default: "", null: false
@@ -149,4 +173,7 @@ ActiveRecord::Schema.define(version: 20150708191151) do
   add_foreign_key "offers", "producers"
   add_foreign_key "old_purchases", "offers"
   add_foreign_key "old_purchases", "users"
+  add_foreign_key "orders", "offers"
+  add_foreign_key "orders", "purchases"
+  add_foreign_key "purchases", "users"
 end

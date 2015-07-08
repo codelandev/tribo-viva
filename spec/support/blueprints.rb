@@ -86,3 +86,17 @@ OldPurchase.blueprint(:canceled) do
   status { PurchaseStatus::CANCELED }
   receipt { File.open('spec/support/example.jpg') }
 end
+
+Purchase.blueprint do
+  user
+  token { 'h43u24h3u2h4u32hu' }
+  status { 'confirmed' }
+  total { 1_000_00 }
+end
+
+Order.blueprint do
+  offer
+  purchase
+  quantity { 1 }
+  offer_value { 49.99 }
+end

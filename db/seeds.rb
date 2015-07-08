@@ -61,9 +61,13 @@ if Rails.env.development? || Rails.env.staging?
                  collect_starts_at: 10.day.from_now,
                  collect_ends_at: 20.days.from_now)
 
-    5.times do |index|
-      OldPurchase.create(user: User.find(index+1), offer: Offer.last, amount: 1, status: PurchaseStatus::CONFIRMED,
+    5.times do |index2|
+      user  = User.find(index2+1)
+      offer = Offer.last
+      OldPurchase.create(user: user, offer: offer, amount: 1, status: PurchaseStatus::CONFIRMED,
                       receipt: File.open('spec/support/example.jpg'))
+      Purchase.create(user: user, token: "32h1u3hu21uh32#{index}#{index2}", status: 'confirmed', total: 0)
+      Order.create(offer: offer, purchase: Purchase.last, offer_value: offer.value, quantity: 1)
     end
   end
 

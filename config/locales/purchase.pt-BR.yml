@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      purchase:
+        one: 'Compra'
+        other: 'Compras'
+
+    attributes:
+      purchase:
+        user: 'Usuário'
+        token: 'Token'
+        total: 'Total'
+        status: 'Status'

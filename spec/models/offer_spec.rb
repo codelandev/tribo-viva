@@ -19,10 +19,11 @@ RSpec.describe Offer, type: :model do
   end
 
   describe "relations" do
+    it { should have_many :orders }
     it { should belong_to :producer }
     it { should belong_to :bank_account }
-    it { should belong_to :deliver_coordinator }
     it { should have_many :old_purchases }
+    it { should belong_to :deliver_coordinator }
   end
 
   describe "scopes" do
