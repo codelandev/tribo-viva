@@ -2,7 +2,7 @@ class Offer < ActiveRecord::Base
   belongs_to :producer
   belongs_to :bank_account
   belongs_to :deliver_coordinator
-  has_many :purchases
+  has_many :old_purchases
 
   validates :deliver_coordinator, :bank_account, :producer, :title, :image, :value, :stock,
             :products_description, :offer_ends_at, :operational_tax, :coordinator_tax,
@@ -14,7 +14,7 @@ class Offer < ActiveRecord::Base
   scope :finished_offers, -> { where('offer_ends_at < ? OR stock <= 0', DateTime.now) }
 
   def remaining
-    stock - purchases.where(status: PurchaseStatus::CONFIRMED).map(&:amount).sum
+    stock - old_purchases.where(status: PurchaseStatus::CONFIRMED).map(&:amount).sum
   end
 
   def delivery_time_range

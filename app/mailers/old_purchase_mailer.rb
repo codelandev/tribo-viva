@@ -1,4 +1,4 @@
-class PurchaseMailer < ActionMailer::Base
+class OldPurchaseMailer < ActionMailer::Base
   layout 'mailer'
   default from: 'confirmacao@triboviva.com.br'
 

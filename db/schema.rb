@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150707175305) do
+ActiveRecord::Schema.define(version: 20150708191151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,20 @@ ActiveRecord::Schema.define(version: 20150707175305) do
   add_index "offers", ["deliver_coordinator_id"], name: "index_offers_on_deliver_coordinator_id", using: :btree
   add_index "offers", ["producer_id"], name: "index_offers_on_producer_id", using: :btree
 
+  create_table "old_purchases", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "offer_id"
+    t.integer  "amount",         default: 0,         null: false
+    t.string   "status",         default: "pending", null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "transaction_id", default: "",        null: false
+    t.string   "receipt"
+  end
+
+  add_index "old_purchases", ["offer_id"], name: "index_old_purchases_on_offer_id", using: :btree
+  add_index "old_purchases", ["user_id"], name: "index_old_purchases_on_user_id", using: :btree
+
   create_table "producers", force: :cascade do |t|
     t.text     "description",  default: "", null: false
     t.string   "name",         default: "", null: false
@@ -107,20 +121,6 @@ ActiveRecord::Schema.define(version: 20150707175305) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
-
-  create_table "purchases", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "offer_id"
-    t.integer  "amount",         default: 0,         null: false
-    t.string   "status",         default: "pending", null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.string   "transaction_id", default: "",        null: false
-    t.string   "receipt"
-  end
-
-  add_index "purchases", ["offer_id"], name: "index_purchases_on_offer_id", using: :btree
-  add_index "purchases", ["user_id"], name: "index_purchases_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "cpf",                    default: "", null: false
@@ -147,6 +147,6 @@ ActiveRecord::Schema.define(version: 20150707175305) do
   add_foreign_key "offers", "bank_accounts"
   add_foreign_key "offers", "deliver_coordinators"
   add_foreign_key "offers", "producers"
-  add_foreign_key "purchases", "offers"
-  add_foreign_key "purchases", "users"
+  add_foreign_key "old_purchases", "offers"
+  add_foreign_key "old_purchases", "users"
 end

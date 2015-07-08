@@ -17,9 +17,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :purchases, only: [:show, :update] do
+  resources :old_purchases, only: [:show, :update] do
     member do
-      get '/success', to: 'purchases#success', as: :success
+      get '/success', to: 'old_purchases#success', as: :success
     end
   end
 

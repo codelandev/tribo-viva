@@ -1,4 +1,4 @@
-ActiveAdmin.register Purchase do
+ActiveAdmin.register OldPurchase do
   permit_params :user, :offer, :amount, :status, :receipt
 
   controller do

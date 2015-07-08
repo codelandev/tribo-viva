@@ -1,4 +1,4 @@
-class Purchase < ActiveRecord::Base
+class OldPurchase < ActiveRecord::Base
   attr_accessor :user_status, :registered_user_email, :unregistered_user_name, :unregistered_user_email,
                 :unregistered_user_cpf, :unregistered_user_phone, :unregistered_user_address
 
@@ -17,7 +17,7 @@ class Purchase < ActiveRecord::Base
 
   has_enumeration_for :status, with: PurchaseStatus, create_helpers: true
 
-  mount_uploader :receipt, PurchaseUploader
+  mount_uploader :receipt, OldPurchaseUploader
 
   def to_param
     transaction_id

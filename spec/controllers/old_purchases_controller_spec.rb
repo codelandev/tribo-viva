@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe PurchasesController, type: :controller do
+RSpec.describe OldPurchasesController, type: :controller do
 
   describe "GET #show" do
     context 'Existing purchase' do
-      let(:purchase) { Purchase.make!(:pending) }
+      let(:purchase) { OldPurchase.make!(:pending) }
 
       it "returns http success" do
         get :show, id: purchase.to_param
@@ -21,28 +21,28 @@ RSpec.describe PurchasesController, type: :controller do
   end
 
   describe "PATCH #update" do
-    let(:purchase) { Purchase.make!(:pending) }
+    let(:purchase) { OldPurchase.make!(:pending) }
 
-    it "returns to purchase_path if valid file with notice flash" do
+    it "returns to old_purchase_path if valid file with notice flash" do
       file = fixture_file_upload('example.jpg', 'text/jpg')
       patch :update, id: purchase.transaction_id, purchase: { receipt: file }
       purchase.reload # need to reload the class to get changes
       expect(purchase.receipt.file.file).to be_present
       expect(purchase.status).to eql PurchaseStatus::CONFIRMED
-      expect(response).to redirect_to success_purchase_path(purchase)
+      expect(response).to redirect_to success_old_purchase_path(purchase)
     end
 
-    it "returns to purchase_path if empty file with alert flash" do
+    it "returns to old_purchase_path if empty file with alert flash" do
       patch :update, id: purchase.transaction_id, purchase: { receipt: '' }
       expect(purchase.receipt).to_not be_present
-      expect(response).to redirect_to purchase_path(purchase)
+      expect(response).to redirect_to old_purchase_path(purchase)
       expect(flash[:alert]).to be_present
     end
   end
 
   describe "GET #success" do
-    let(:pending_purchase) { Purchase.make!(:pending) }
-    let(:confirmed_purchase) { Purchase.make!(:confirmed) }
+    let(:pending_purchase) { OldPurchase.make!(:pending) }
+    let(:confirmed_purchase) { OldPurchase.make!(:confirmed) }
 
     it "returns http success" do
       get :success, id: confirmed_purchase.transaction_id

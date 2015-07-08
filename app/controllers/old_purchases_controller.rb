@@ -1,26 +1,26 @@
-class PurchasesController < ApplicationController
+class OldPurchasesController < ApplicationController
   def show
-    @purchase = Purchase.find_by!(transaction_id: params[:id])
+    @purchase = OldPurchase.find_by!(transaction_id: params[:id])
   end
 
   def update
-    purchase = Purchase.find_by(transaction_id: params[:id])
+    purchase = OldPurchase.find_by(transaction_id: params[:id])
     if params[:purchase].present? && purchase.update_attributes(purchase_params)
       purchase.confirm!
-      PurchaseMailer.confirmed_payment(purchase).deliver_now
-      redirect_to success_purchase_path(purchase)
+      OldPurchaseMailer.confirmed_payment(purchase).deliver_now
+      redirect_to success_old_purchase_path(purchase)
     else
       flash[:alert] = 'Você deve fazer o upload do recibo de pagamento!'
-      redirect_to purchase_path(purchase)
+      redirect_to old_purchase_path(purchase)
     end
   end
 
   def success
-    @purchase = Purchase.find_by(transaction_id: params[:id])
+    @purchase = OldPurchase.find_by(transaction_id: params[:id])
 
     if @purchase.status != PurchaseStatus::CONFIRMED
       flash[:alert] = 'Você deve fazer o upload do recibo de pagamento!'
-      redirect_to purchase_path(@purchase)
+      redirect_to old_purchase_path(@purchase)
     end
   end
 

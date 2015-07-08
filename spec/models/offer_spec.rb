@@ -22,7 +22,7 @@ RSpec.describe Offer, type: :model do
     it { should belong_to :producer }
     it { should belong_to :bank_account }
     it { should belong_to :deliver_coordinator }
-    it { should have_many :purchases }
+    it { should have_many :old_purchases }
   end
 
   describe "scopes" do
@@ -48,7 +48,7 @@ RSpec.describe Offer, type: :model do
         stock_before = offer.stock
 
         3.times do
-          Purchase.make!(:confirmed, offer: offer)
+          OldPurchase.make!(:confirmed, offer: offer)
         end
 
         expect(offer.remaining).to eql(stock_before - 6)

@@ -10,6 +10,6 @@ RSpec.describe User, type: :model do
   end
 
   describe "relations" do
-    it { should have_many :purchases }
+    it { should have_many :old_purchases }
   end
 end

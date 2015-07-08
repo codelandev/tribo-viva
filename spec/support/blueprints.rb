@@ -64,14 +64,14 @@ Offer.blueprint do
   collect_ends_at { 20.days.from_now }
 end
 
-Purchase.blueprint(:pending) do
+OldPurchase.blueprint(:pending) do
   user
   offer
   amount { 2 }
   status { PurchaseStatus::PENDING }
 end
 
-Purchase.blueprint(:confirmed) do
+OldPurchase.blueprint(:confirmed) do
   user
   offer
   amount { 2 }
@@ -79,7 +79,7 @@ Purchase.blueprint(:confirmed) do
   receipt { File.open('spec/support/example.jpg') }
 end
 
-Purchase.blueprint(:canceled) do
+OldPurchase.blueprint(:canceled) do
   user
   offer
   amount { 2 }

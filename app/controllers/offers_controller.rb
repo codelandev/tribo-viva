@@ -70,16 +70,16 @@ class OffersController < ApplicationController
 
   def new_purchase
     @offer = Offer.find(params[:id])
-    @purchase = PurchaseForm.new(@offer)
+    @purchase = OldPurchaseForm.new(@offer)
   end
 
   def create_purchase
     @offer = Offer.find(params[:id])
 
     if @offer.remaining >= permitted_params[:amount].to_i
-      @purchase = PurchaseForm.new(@offer, permitted_params)
+      @purchase = OldPurchaseForm.new(@offer, permitted_params)
       if @purchase.save
-        redirect_to purchase_path(@purchase.purchase), notice: 'Em breve você receberá o email de confirmação da sua compra!'
+        redirect_to old_purchase_path(@purchase.purchase), notice: 'Em breve você receberá o email de confirmação da sua compra!'
       else
         flash[:alert] = 'Preenchas corretamente suas informações'
         render :new_purchase

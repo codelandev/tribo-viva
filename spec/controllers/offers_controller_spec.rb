@@ -45,7 +45,7 @@ RSpec.describe OffersController, type: :controller do
       it "return error even with valid parameters" do
         post :create_purchase, id: invalid_offer.id, purchase_form: @valid_registered_user
 
-        expect(Purchase.count).to eq(0)
+        expect(OldPurchase.count).to eq(0)
         expect(response).to redirect_to new_purchase_offer_path(invalid_offer)
         expect(flash[:alert]).to be_present
       end
@@ -55,12 +55,12 @@ RSpec.describe OffersController, type: :controller do
       it "returns success and redirect to root if valid parameters" do
         post :create_purchase, id: offer.id, purchase_form: @valid_registered_user
 
-        expect(Purchase.count).to eq(1)
-        expect(Purchase.last.amount).to eq(@valid_registered_user[:amount].to_i)
-        expect(Purchase.last.status).to eq(PurchaseStatus::PENDING)
-        expect(Purchase.last.offer.remaining).to eq(10)
+        expect(OldPurchase.count).to eq(1)
+        expect(OldPurchase.last.amount).to eq(@valid_registered_user[:amount].to_i)
+        expect(OldPurchase.last.status).to eq(PurchaseStatus::PENDING)
+        expect(OldPurchase.last.offer.remaining).to eq(10)
         expect(ActionMailer::Base.deliveries.last.to.first).to eql @valid_registered_user[:email]
-        expect(response).to redirect_to purchase_path(Purchase.last)
+        expect(response).to redirect_to old_purchase_path(OldPurchase.last)
         expect(flash[:notice]).to be_present
       end
 
@@ -76,12 +76,12 @@ RSpec.describe OffersController, type: :controller do
         post :create_purchase, id: offer.to_param, purchase_form: @valid_unregistered_user
 
         expect(User.exists?(email: @valid_unregistered_user[:email])).to be_truthy
-        expect(Purchase.count).to eq(1)
-        expect(Purchase.last.amount).to eq(@valid_unregistered_user[:amount].to_i)
-        expect(Purchase.last.status).to eq(PurchaseStatus::PENDING)
-        expect(Purchase.last.offer.remaining).to eq(10)
+        expect(OldPurchase.count).to eq(1)
+        expect(OldPurchase.last.amount).to eq(@valid_unregistered_user[:amount].to_i)
+        expect(OldPurchase.last.status).to eq(PurchaseStatus::PENDING)
+        expect(OldPurchase.last.offer.remaining).to eq(10)
         expect(ActionMailer::Base.deliveries.last.to.first).to eql @valid_unregistered_user[:email]
-        expect(response).to redirect_to purchase_path(Purchase.last)
+        expect(response).to redirect_to old_purchase_path(OldPurchase.last)
         expect(flash[:notice]).to be_present
       end
 

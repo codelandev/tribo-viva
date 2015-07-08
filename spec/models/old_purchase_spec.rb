@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Purchase, type: :model do
+RSpec.describe OldPurchase, type: :model do
   describe "validations" do
     it { should validate_presence_of :user }
     it { should validate_presence_of :offer }
@@ -18,34 +18,34 @@ RSpec.describe Purchase, type: :model do
   describe "callbacks" do
     describe "before_save" do
       it "#generate_transaction_id" do
-        purchase = Purchase.make!(:pending)
+        purchase = OldPurchase.make!(:pending)
         expect(purchase.transaction_id).to be_present
       end
     end
   end
 
   describe "scopes" do
-    let(:pending) { Purchase.make!(:pending) }
-    let(:canceled) { Purchase.make!(:canceled) }
-    let(:confirmed) { Purchase.make!(:confirmed) }
+    let(:pending) { OldPurchase.make!(:pending) }
+    let(:canceled) { OldPurchase.make!(:canceled) }
+    let(:confirmed) { OldPurchase.make!(:confirmed) }
 
     context "#pending" do
-      it { expect(Purchase.pending).to eq [pending] }
+      it { expect(OldPurchase.pending).to eq [pending] }
     end
 
     context "#canceled" do
-      it { expect(Purchase.canceled).to eq [canceled] }
+      it { expect(OldPurchase.canceled).to eq [canceled] }
     end
 
     context "#confirmed" do
-      it { expect(Purchase.confirmed).to eq [confirmed] }
+      it { expect(OldPurchase.confirmed).to eq [confirmed] }
     end
   end
 
   describe "methods" do
     describe "#confirm!" do
       it "must update status to confirmed" do
-        purchase = Purchase.make!(:pending)
+        purchase = OldPurchase.make!(:pending)
         purchase.confirm!
         expect(purchase.status).to eql('confirmed')
       end
@@ -53,7 +53,7 @@ RSpec.describe Purchase, type: :model do
 
     describe "#cancel!" do
       it "must update status to canceled" do
-        purchase = Purchase.make!(:pending)
+        purchase = OldPurchase.make!(:pending)
         purchase.cancel!
         expect(purchase.status).to eql('canceled')
       end
@@ -61,7 +61,7 @@ RSpec.describe Purchase, type: :model do
 
     describe "#total" do
       it "must show the amount times offer value" do
-        expect(Purchase.make!(:confirmed).total).to eql(99.8)
+        expect(OldPurchase.make!(:confirmed).total).to eql(99.8)
       end
     end
   end

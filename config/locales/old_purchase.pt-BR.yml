@@ -1,12 +1,12 @@
 pt-BR:
   activerecord:
     models:
-      purchase:
-        one: 'Compra'
-        other: 'Compras'
+      old_purchase:
+        one: 'Compra Antiga'
+        other: 'Compras Antigas'
 
     attributes:
-      purchase:
+      old_purchase:
         amount: 'Quantidade'
         status: 'Status'
         user: 'Usuário'

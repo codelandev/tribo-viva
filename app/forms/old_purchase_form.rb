@@ -1,4 +1,4 @@
-class PurchaseForm
+class OldPurchaseForm
   include ActiveModel::Model
 
   attr_accessor :user, :purchase, :email, :cpf, :name, :phone, :address, :amount
@@ -13,14 +13,14 @@ class PurchaseForm
       u.phone = params[:phone]
       u.address = params[:address]
     end
-    @purchase = Purchase.new(amount: params[:amount], user: user, offer: offer)
+    @purchase = OldPurchase.new(amount: params[:amount], user: user, offer: offer)
     super params
   end
 
   def save
     return false unless valid? && user.valid? && purchase.valid?
     user.save && purchase.save
-    PurchaseMailer.pending_payment(purchase).deliver_now
+    OldPurchaseMailer.pending_payment(purchase).deliver_now
     true
   end
 
