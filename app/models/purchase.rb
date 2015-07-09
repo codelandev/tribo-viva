@@ -1,6 +1,8 @@
 class Purchase < ActiveRecord::Base
+  has_secure_token
+
   belongs_to :user
   has_many :orders, dependent: :destroy
 
-  validates :user_id, :token, :status, :total, presence: true
+  validates :user_id, :status, :total, presence: true
 end
