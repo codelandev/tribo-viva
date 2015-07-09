@@ -1,4 +1,15 @@
 .offers {
-  padding: 60px 0 80px 0;
-  h2 { margin-bottom: 30px; }
+  padding: 60px 0 30px 0;
+
+  h2 {
+    margin-bottom: 30px;
+  }
+}
+
+.old-offers {
+  padding-bottom: 80px;
+
+  .card__action {
+    padding-bottom: 30px;
+  }
 }
