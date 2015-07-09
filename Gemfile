@@ -49,6 +49,10 @@ gem 'bootstrap-sass', '~> 3.3.3'
 gem 'font-awesome-rails'
 gem 'nprogress-rails'
 gem 'rack-zippy', '~> 3.0.0'
+# Payment gateway
+gem 'iugu'
+# For secure tokens
+gem 'has_secure_token'
 
 group :development do
   gem 'letter_opener'
