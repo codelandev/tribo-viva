@@ -21,5 +21,7 @@ h1 Meu carrinho de compras
 
   h3 = "Total: #{number_to_currency total}"
 
+  = link_to 'Ir para o Pagamento', checkout_path, class: 'btn btn--md btn--green'
+
 - else
   h2 Não há produtos no seu carrinho

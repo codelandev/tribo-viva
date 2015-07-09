@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+
+  devise_for :users, controllers: { sessions: 'users/sessions' }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -22,6 +23,9 @@ Rails.application.routes.draw do
       get '/success', to: 'old_purchases#success', as: :success
     end
   end
+
+  get 'checkout', to: 'checkouts#checkout', as: :checkout
+  post 'checkout/process_payment', to: 'checkouts#process_payment', as: :process_payment
 
   get '/index', format: :php, to: redirect('/')
 
