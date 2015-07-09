@@ -6,7 +6,11 @@
   background-color: $brown-dark;
   color: white;
   font-size: 80%;
-  padding: 20px 30px;
+  padding-bottom: 20px;
+
+  p {
+    padding: 0 30px;
+  }
 }
 
 .offer-info__products {
@@ -89,19 +93,15 @@
   }
 }
 
-.offer-info__widget__info { display: table; }
-
 .widget__producer__logo {
   background-repeat: no-repeat;
-  background-size: 55px 55px;
-  border-radius: 55px;
-  display: table-cell;
-  height: 55px;
-  width: 55px;
+  background-size: cover;
+  background-position: center center;
+  height: 200px;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .widget__producer__name {
-  display: table-cell;
-  padding-left: 10px;
-  vertical-align: middle;
+  padding: 0 30px;
 }

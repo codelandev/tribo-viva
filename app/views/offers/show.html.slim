@@ -75,10 +75,10 @@ section.offer-info
                         = number_to_currency @offer.coordinator_tax
 
           .col-sm-6.col-md-4
+            h2.title--up.text--green Sobre o Produtor
             .offer-info__widget
-              h2.title--up.text--yellow Sobre o Produtor
               .offer-info__widget__info
                 .widget__info__producer
-                  span.widget__producer__logo style="background-image: url(#{@offer.producer.logo});"
-                  span.widget__producer__name = @offer.producer.name
-              p = simple_format @offer.producer.description
+                  .widget__producer__logo style="background-image: url(#{@offer.producer.logo});"
+                  h4.widget__producer__name.text--yellow = @offer.producer.name
+                p = simple_format @offer.producer.description
