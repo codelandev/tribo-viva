@@ -6,4 +6,8 @@ class Purchase < ActiveRecord::Base
 
   # Check PurchaseStatus class to all statuses availables
   scope :by_status, -> (status) { where(status: status) }
+
+  def total
+    orders.sum("quantity * offer_value").to_f
+  end
 end

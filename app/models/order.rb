@@ -7,6 +7,10 @@ class Order < ActiveRecord::Base
   validates :offer_id, :quantity, :purchase_id, :offer_value, presence: true
   validates :quantity, numericality: { only_integer: true, greater_than: 0, less_than: 4 }
 
+  def total
+    offer_value * quantity
+  end
+
   protected
 
   def update_purchase_value

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -23,11 +24,13 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'purchases', to: 'purchases#index', as: :purchases
+  # checkout/update is used by Iugu to trigger payment update callbacks
+  post 'purchases/update', to: 'purchases#update', as: :purchase_update
+
   get 'checkout', to: 'checkouts#checkout', as: :checkout
   get 'checkout/success/:invoice_id', to: 'checkouts#success', as: :checkout_success
   post 'checkout/process_payment', to: 'checkouts#process_payment', as: :process_payment
-  # checkout/update is used by Iugu to trigger payment update callbacks
-  post 'checkout/update', to: 'checkouts#update', as: :checkout_update
 
   get '/index', format: :php, to: redirect('/')
 

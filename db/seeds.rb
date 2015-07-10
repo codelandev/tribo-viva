@@ -66,8 +66,8 @@ if Rails.env.development? || Rails.env.staging?
       offer = Offer.last
       OldPurchase.create(user: user, offer: offer, amount: 1, status: OldPurchaseStatus::CONFIRMED,
                       receipt: File.open('spec/support/example.jpg'))
-      Purchase.create(user: user, token: "32h1u3hu21uh32#{index}#{index2}", status: 'confirmed', total: 0)
-      Order.create(offer: offer, purchase: Purchase.last, offer_value: offer.value, quantity: 1)
+      Purchase.create(user: user, token: "32h1u3hu21uh32#{index}#{index2}", status: 'paid', total: 0)
+      Order.create(offer: offer, purchase: Purchase.last, offer_value: offer.value, quantity: 3)
     end
   end
 
