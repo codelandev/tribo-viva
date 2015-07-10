@@ -13,9 +13,14 @@ class OffersController < ApplicationController
     if offer_on_cart.any?
       # Check the quantity already present on cart
       # if more or equal than 3, don't add
-      if offer_on_cart.first['quantity'] >= 3
+      if not offer.have_stock?
         respond_to do |format|
-          format.json { render json: offer, status: :created, location: offer }
+          format.json { render json: offer, status: :unprocessable_entity, location: offer }
+          format.html { redirect_to request.referer, alert: 'Não há mais quantidades para esta oferta'}
+        end
+      elsif offer_on_cart.first['quantity'] >= 3
+        respond_to do |format|
+          format.json { render json: offer, status: :unprocessable_entity, location: offer }
           format.html { redirect_to request.referer, alert: 'Excedeu o limite de 3 cotas para esta oferta'}
         end
       # if less than 3, add +1 to the offer quantity
@@ -54,7 +59,7 @@ class OffersController < ApplicationController
       end
     else
       respond_to do |format|
-        format.json { render json: offer, status: :created, location: offer }
+        format.json { render json: offer, status: :unprocessable_entity, location: offer }
         format.html { redirect_to request.referer, notice: 'Esta cota não está no seu carrinho'}
       end
     end
@@ -79,7 +84,8 @@ class OffersController < ApplicationController
     if @offer.remaining >= permitted_params[:amount].to_i
       @purchase = OldPurchaseForm.new(@offer, permitted_params)
       if @purchase.save
-        redirect_to old_purchase_path(@purchase.purchase), notice: 'Em breve você receberá o email de confirmação da sua compra!'
+        flash[:notice] = 'Em breve você receberá o email de confirmação da sua compra!'
+        redirect_to old_purchase_path(@purchase.purchase)
       else
         flash[:alert] = 'Preenchas corretamente suas informações'
         render :new_purchase

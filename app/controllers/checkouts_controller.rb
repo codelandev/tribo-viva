@@ -55,9 +55,9 @@ class CheckoutsController < ApplicationController
       session[:shopping_cart] = Array.new
       path = checkout_success_path(purchase.invoice_id)
     else
+      purchase.destroy        # remove the purchase if fail
       flash[:alert]           = "Foram imputados dados errados do cartão"
       flash[:charge_messages] = charge.message if payment_method == 'credit_card'
-      purchase.destroy # remove the purchase if fail
       path = checkout_path
     end
 
