@@ -1,5 +1,6 @@
 class CheckoutsController < ApplicationController
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized, except: :update
+  protect_from_forgery except: :update
   before_action :store_location
 
   def checkout
@@ -66,6 +67,23 @@ class CheckoutsController < ApplicationController
 
   def success
     @purchase = Purchase.find_by(invoice_id: params[:invoice_id])
+  end
+
+  def update
+    data     = params[:data]
+    event    = params[:event]
+    purchase = Purchase.where(invoice_id: data[:id])
+
+    if purchase.exists? ||
+       event == 'invoice.refund' ||
+       event == 'invoice.payment_failed' ||
+       event == 'invoice.status_changed'
+
+      purchase.first.update_attributes(status: data[:status])
+      render nothing: true, status: :ok, content_type: "text/html"
+    else
+      render nothing: true, status: :not_found, content_type: "text/html"
+    end
   end
 
   protected

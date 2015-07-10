@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   get 'checkout', to: 'checkouts#checkout', as: :checkout
   get 'checkout/success/:invoice_id', to: 'checkouts#success', as: :checkout_success
   post 'checkout/process_payment', to: 'checkouts#process_payment', as: :process_payment
+  # checkout/update is used by Iugu to trigger payment update callbacks
+  post 'checkout/update', to: 'checkouts#update', as: :checkout_update
 
   get '/index', format: :php, to: redirect('/')
 
