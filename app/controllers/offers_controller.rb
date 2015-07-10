@@ -13,7 +13,7 @@ class OffersController < ApplicationController
     if offer_on_cart.any?
       # Check the quantity already present on cart
       # if more or equal than 3, don't add
-      if not offer.have_stock?
+      if !offer.have_stock? || offer_on_cart.first['quantity'] >= offer.remaining
         respond_to do |format|
           format.json { render json: offer, status: :unprocessable_entity, location: offer }
           format.html { redirect_to request.referer, alert: 'Não há mais quantidades para esta oferta'}

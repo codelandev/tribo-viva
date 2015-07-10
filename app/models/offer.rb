@@ -27,6 +27,6 @@ class Offer < ActiveRecord::Base
   end
 
   def have_stock?
-    remaining < stock
+    0 < remaining
   end
 end
