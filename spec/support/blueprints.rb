@@ -68,14 +68,14 @@ OldPurchase.blueprint(:pending) do
   user
   offer
   amount { 2 }
-  status { PurchaseStatus::PENDING }
+  status { OldPurchaseStatus::PENDING }
 end
 
 OldPurchase.blueprint(:confirmed) do
   user
   offer
   amount { 2 }
-  status { PurchaseStatus::CONFIRMED }
+  status { OldPurchaseStatus::CONFIRMED }
   receipt { File.open('spec/support/example.jpg') }
 end
 
@@ -83,7 +83,7 @@ OldPurchase.blueprint(:canceled) do
   user
   offer
   amount { 2 }
-  status { PurchaseStatus::CANCELED }
+  status { OldPurchaseStatus::CANCELED }
   receipt { File.open('spec/support/example.jpg') }
 end
 

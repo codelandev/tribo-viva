@@ -15,7 +15,7 @@ class Offer < ActiveRecord::Base
   scope :finished_offers, -> { where('offer_ends_at < ? OR stock <= 0', DateTime.now) }
 
   def remaining
-    stock - old_purchases.where(status: PurchaseStatus::CONFIRMED).map(&:amount).sum
+    stock - old_purchases.where(status: OldPurchaseStatus::CONFIRMED).map(&:amount).sum
   end
 
   def delivery_time_range

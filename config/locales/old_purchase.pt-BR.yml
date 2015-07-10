@@ -15,7 +15,7 @@ pt-BR:
         transaction_id: 'ID da transação'
 
   enumerations:
-    purchase_status:
+    old_purchase_status:
       pending: "Pendente"
       confirmed: "Confirmada"
       canceled: "Cancelada"

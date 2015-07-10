@@ -28,7 +28,7 @@ RSpec.describe OldPurchasesController, type: :controller do
       patch :update, id: purchase.transaction_id, purchase: { receipt: file }
       purchase.reload # need to reload the class to get changes
       expect(purchase.receipt.file.file).to be_present
-      expect(purchase.status).to eql PurchaseStatus::CONFIRMED
+      expect(purchase.status).to eql OldPurchaseStatus::CONFIRMED
       expect(response).to redirect_to success_old_purchase_path(purchase)
     end
 

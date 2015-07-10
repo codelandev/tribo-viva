@@ -45,7 +45,7 @@ ActiveAdmin.register OldPurchase do
     column :user
     column :offer
     column :status do |purchase|
-      PurchaseStatus.t purchase.status
+      OldPurchaseStatus.t purchase.status
     end
     actions
   end
@@ -54,7 +54,7 @@ ActiveAdmin.register OldPurchase do
     attributes_table do
       row :transaction_id
       row :status do |purchase|
-        PurchaseStatus.t purchase.status
+        OldPurchaseStatus.t purchase.status
       end
       row :amount
       row 'Valor total' do |purchase|
@@ -70,7 +70,7 @@ ActiveAdmin.register OldPurchase do
 
   form do |f|
     f.inputs do
-      f.input :status, collection: PurchaseStatus.to_a, as: :select
+      f.input :status, collection: OldPurchaseStatus.to_a, as: :select
       f.input :amount
       f.input :user
       f.input :offer

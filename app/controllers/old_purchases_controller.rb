@@ -18,7 +18,7 @@ class OldPurchasesController < ApplicationController
   def success
     @purchase = OldPurchase.find_by(transaction_id: params[:id])
 
-    if @purchase.status != PurchaseStatus::CONFIRMED
+    if @purchase.status != OldPurchaseStatus::CONFIRMED
       flash[:alert] = 'Você deve fazer o upload do recibo de pagamento!'
       redirect_to old_purchase_path(@purchase)
     end

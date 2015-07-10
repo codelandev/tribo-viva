@@ -11,11 +11,11 @@ class OldPurchase < ActiveRecord::Base
   validates :receipt, presence: true, on: :update
   validates :amount, numericality: { only_integer: true, greater_than: 0, less_than: 4 }
 
-  scope :pending, -> { where(status: PurchaseStatus::PENDING) }
-  scope :canceled, -> { where(status: PurchaseStatus::CANCELED) }
-  scope :confirmed, -> { where(status: PurchaseStatus::CONFIRMED) }
+  scope :pending, -> { where(status: OldPurchaseStatus::PENDING) }
+  scope :canceled, -> { where(status: OldPurchaseStatus::CANCELED) }
+  scope :confirmed, -> { where(status: OldPurchaseStatus::CONFIRMED) }
 
-  has_enumeration_for :status, with: PurchaseStatus, create_helpers: true
+  has_enumeration_for :status, with: OldPurchaseStatus, create_helpers: true
 
   mount_uploader :receipt, OldPurchaseUploader
 
@@ -24,11 +24,11 @@ class OldPurchase < ActiveRecord::Base
   end
 
   def confirm!
-    update_attributes(status: PurchaseStatus::CONFIRMED)
+    update_attributes(status: OldPurchaseStatus::CONFIRMED)
   end
 
   def cancel!
-    update_attributes(status: PurchaseStatus::CANCELED)
+    update_attributes(status: OldPurchaseStatus::CANCELED)
   end
 
   def total

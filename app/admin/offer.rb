@@ -62,7 +62,7 @@ ActiveAdmin.register Offer do
           link_to purchase.transaction_id, admin_purchase_path(purchase)
         end
         column :status do |purchase|
-          PurchaseStatus.t purchase.status
+          OldPurchaseStatus.t purchase.status
         end
         column :user
         column :offer
