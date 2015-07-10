@@ -57,8 +57,11 @@ class CheckoutsController < ApplicationController
       path = checkout_success_path(purchase.invoice_id)
     else
       purchase.destroy        # remove the purchase if fail
-      flash[:alert]           = "Foram imputados dados errados do cartão"
-      flash[:charge_messages] = charge.message if payment_method == 'credit_card'
+      if payment_method == 'credit_card' && charge.errors.blank?
+        flash[:charge_messages] = charge.message
+      else
+        flash[:alert] = "Foram imputados dados errados do cartão"
+      end
       path = checkout_path
     end
 
