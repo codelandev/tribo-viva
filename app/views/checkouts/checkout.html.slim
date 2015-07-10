@@ -1,2 +1,53 @@
-h1 Checkout#checkout
-p Find me in app/views/checkout/checkout.html.slim
+h1 Pagamento
+
+
+h3 Resumo da sua compra
+
+- total = 0
+table.table-hover
+  tr
+    th Oferta
+    th Quantidade
+    th Preço Unitário
+    th Preço Total
+  - session[:shopping_cart].each do |item|
+    - offer = Offer.find(item['id'])
+    - total += offer.value*item['quantity']
+    tr
+      td = offer.title
+      td = item['quantity']
+      td = number_to_currency offer.value
+      td = number_to_currency offer.value*item['quantity']
+
+h3 = "Total: #{number_to_currency total}"
+
+= form_tag process_payment_path, id: 'js-payment-form' do
+  = hidden_field_tag :token, nil, readonly: true, size: 64
+
+  .btn-group.payment-method-btn-group data-toggle="buttons"
+    label#js-credit-card-checkbox-label.btn.btn-default.active Cartão de crédito
+    // leave value blank, this is correct
+    = check_box_tag :method, '', true, id: 'js-payment-method-credit-card', style: 'display: none;'
+
+    label#js-bank-slip-checkbox-label.btn.btn-default Boleto Bancário
+    = check_box_tag :method, 'bank_slip', false, id: 'js-payment-method-bank-slip', style: 'display: none;'
+
+  #js-creditcard-form
+    p style="color:red;" = flash[:charge_messages]
+    p.js-errors style="color: red;"
+    .wrapper
+      .input-group.nmb_a
+        .icon.ccic-brand
+        = text_field_tag :cc_number, nil, autocomplete: 'off', placeholder: 'Número do cartão', class: 'js-credit-card-number', data: { iugu: 'number'}
+      .input-group.nmb_b
+        .icon.ccic-cvv
+        = text_field_tag :cvv, nil, autocomplete: 'off', placeholder: 'CVV', class: 'js-credit-card-cvv', data: { iugu: 'verification_value'}
+      .input-group.nmb_c
+        .icon.ccic-name
+        = text_field_tag :full_name, nil, autocomplete: 'off', placeholder: 'Titular do Cartão', class: 'js-credit-card-card-name', data: { iugu: 'full_name'}
+      .input-group.nmb_d
+        .icon.ccic-exp
+        = text_field_tag :card_expiration, nil, autocomplete: 'off', placeholder: 'MM/AA', class: 'js-credit-card-card-expiration', data: { iugu: 'expiration'}
+
+  .submit-div
+    = submit_tag 'Pagar', class: 'btn btn--md btn--green'

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   end
 
   get 'checkout', to: 'checkouts#checkout', as: :checkout
+  get 'checkout/success/:invoice_id', to: 'checkouts#success', as: :checkout_success
   post 'checkout/process_payment', to: 'checkouts#process_payment', as: :process_payment
 
   get '/index', format: :php, to: redirect('/')

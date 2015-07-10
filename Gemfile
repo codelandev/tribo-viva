@@ -51,8 +51,6 @@ gem 'nprogress-rails'
 gem 'rack-zippy', '~> 3.0.0'
 # Payment gateway
 gem 'iugu'
-# For secure tokens
-gem 'has_secure_token'
 
 group :development do
   gem 'letter_opener'

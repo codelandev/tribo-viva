@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Purchase, type: :model do
   describe 'Validations' do
-    it { is_expected.to validate_presence_of :token }
     it { is_expected.to validate_presence_of :total }
     it { is_expected.to validate_presence_of :status }
     it { is_expected.to validate_presence_of :user_id }

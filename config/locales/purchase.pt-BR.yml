@@ -11,3 +11,13 @@ pt-BR:
         token: 'Token'
         total: 'Total'
         status: 'Status'
+
+  enumerations:
+    purchase_status:
+      paid: 'Paga'
+      draft: 'Rascunho'
+      pending: 'Pendente'
+      expired: 'Expirada'
+      canceled: 'Cancelada'
+      refunded: 'Estornada'
+      partially_paid: 'Parcialmente paga'

@@ -1,6 +1,6 @@
 class CheckoutPolicy < ApplicationPolicy
   def checkout?
-    user
+    user.user && user.cart.any?
   end
 
   def process_payment?
