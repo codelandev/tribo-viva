@@ -10,40 +10,47 @@ TriboViva.Checkouts.Checkout =
     $(".js-credit-card-card-expiration").mask("99/99")
 
     # To hide or show credit card form
-    cc_checkbox       = $('#js-payment-method-credit-card')
-    bs_checkbox       = $('#js-payment-method-bank-slip')
-    cc_checkbox_label = $('#js-credit-card-checkbox-label')
-    bs_checkbox_label = $('#js-bank-slip-checkbox-label')
-    credit_card_form  = $('#js-creditcard-form')
+    creditCardForm          = $('#js-creditcard-form')
+    creditCardTerms         = $('.js-terms')
+    bankSlipCheckBox        = $('#js-payment-method-bank-slip')
+    creditCardCheckBox      = $('#js-payment-method-credit-card')
+    bankSlipCheckBoxLabel   = $('#js-bank-slip-checkbox-label')
+    creditCardCheckBoxLabel = $('#js-credit-card-checkbox-label')
 
-    cc_checkbox_label.on 'click', ->
-      cc_checkbox_label.addClass('active')
-      cc_checkbox.prop('checked', true).attr('checked', true)
+    creditCardCheckBoxLabel.on 'click', ->
+      creditCardCheckBoxLabel.addClass('active')
+      creditCardCheckBox.prop('checked', true).attr('checked', true)
 
-      bs_checkbox_label.removeClass('active')
-      bs_checkbox.prop('checked', false).attr('checked', false)
+      bankSlipCheckBoxLabel.removeClass('active')
+      bankSlipCheckBox.prop('checked', false).attr('checked', false)
 
-      credit_card_form.show()
+      creditCardForm.show()
 
-    bs_checkbox_label.on 'click', ->
-      bs_checkbox_label.addClass('active')
-      bs_checkbox.prop('checked', true).attr('checked', true)
+    bankSlipCheckBoxLabel.on 'click', ->
+      bankSlipCheckBoxLabel.addClass('active')
+      bankSlipCheckBox.prop('checked', true).attr('checked', true)
 
-      cc_checkbox_label.removeClass('active')
-      cc_checkbox.prop('checked', false).attr('checked', false)
+      creditCardCheckBoxLabel.removeClass('active')
+      creditCardCheckBox.prop('checked', false).attr('checked', false)
 
-      credit_card_form.hide()
+      creditCardForm.hide()
+
+    creditCardTerms.on 'change', ->
+      if $(this).is(':checked')
+        $('.js-submit-payment').attr('disabled', false)
+      else
+        $('.js-submit-payment').attr('disabled', true)
 
     # start form validation and submit
     $('#js-payment-form').submit (e) ->
-      form           = $(this)
-      cc             = $('.js-credit-card-number').val()
-      cvv            = $('.js-credit-card-cvv').val()
-      brand          = Iugu.utils.getBrandByCreditCardNumber(cc)
-      cardName       = $('.js-credit-card-card-name').val()
-      cardExpiration = $('.js-credit-card-card-expiration').val()
+      form            = $(this)
+      cc              = $('.js-credit-card-number').val()
+      cvv             = $('.js-credit-card-cvv').val()
+      brand           = Iugu.utils.getBrandByCreditCardNumber(cc)
+      cardName        = $('.js-credit-card-card-name').val()
+      cardExpiration  = $('.js-credit-card-card-expiration').val()
 
-      if cc_checkbox.attr('checked')
+      if creditCardCheckBox.attr('checked')
         # first of all, handle errors on credit card form
         if !Iugu.utils.validateCreditCardNumber(cc, brand)
           $('.js-errors').text("Número do cartão incorreto")
@@ -59,6 +66,10 @@ TriboViva.Checkouts.Checkout =
 
         else if cardName == ''
           $('.js-errors').text("Preencha o nome do cartão")
+          e.preventDefault()
+
+        else if not creditCardTerms.is(':checked')
+          $('.js-errors').text("Você deve aceitar os termos de compra")
           e.preventDefault()
 
         else

@@ -49,5 +49,8 @@ h3 = "Total: #{number_to_currency total}"
         .icon.ccic-exp
         = text_field_tag :card_expiration, nil, autocomplete: 'off', placeholder: 'MM/AA', class: 'js-credit-card-card-expiration', data: { iugu: 'expiration'}
 
+    .form-acceptance
+      = check_box_tag :terms, '1', false, class: 'js-terms'
+      = label_tag :terms, 'Eu aceito os termos de compra'
   .submit-div
-    = submit_tag 'Pagar', class: 'btn btn--md btn--green'
+    = submit_tag 'Pagar', class: 'js-submit-payment btn btn--md btn--green', disabled: true
