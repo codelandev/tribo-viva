@@ -5,21 +5,19 @@
     text-align: right;
 }
 /* Credit Card Form */
-#js-creditcard-form, #js-creditcard-form * {
-  font-size: 13px;
-}
 #js-creditcard-form {
+    font-size: 13px;
+    color: white !important;
     position: relative;
     padding: 0px;
     width: 300px;
-    margin-left: auto;
     margin-right: auto;
 }
 #js-creditcard-form .wrapper {
     border: 1px solid #CCC;
     border-top: 1px solid #AAA;
     border-right: 1px solid #AAA;
-    height: 74px;
+    height: 90px;
     width: 300px;
     position: relative;
     -webkit-border-radius: 5px;
@@ -48,13 +46,13 @@
 #js-creditcard-form .input-group.nmb_c {
     position: absolute;
     width: 200px;
-    top: 37px;
+    top: 44px;
     left: 0px;
 }
 #js-creditcard-form .input-group.nmb_d {
     position: absolute;
     width: 100px;
-    top: 37px;
+    top: 44px;
     right: 0px;
 }
 #js-creditcard-form input {
@@ -169,7 +167,6 @@
 }
 .payment-method-btn-group {
     width: 300;
-    margin: 5px;
     margin-bottom: 10px;
 }
 .payment-method-btn-group label.btn.btn-default {
