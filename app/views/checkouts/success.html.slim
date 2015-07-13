@@ -1,9 +1,15 @@
-h1 Compra realizada com sucesso
+section.purchase
+  .container
+    .row
+      .col-md-12.col-centered
+        h1.text-center Compra realizada com sucesso
 
-h2 Aqui estão as informações sobre a sua compra!
+        h2.text-center Aqui estão as informações sobre a sua compra!
+      .col-md-10.col-centered
+        - if @purchase.payment_method == 'credit_card'
+          iframe src="#{@purchase.invoice_url}" width="100%" height="500"
+          p Não consegue visualizar a sua nota? #{link_to 'Clique aqui', @purchase.invoice_url, target: 'blank'}
 
-- if @purchase.payment_method == 'credit_card'
-  p você pode acessar o extrato da cobrança #{link_to 'aqui', @purchase.invoice_url, target: 'blank'}
-
-- elsif @purchase.payment_method == 'bank_slip'
-  p você pode acessar o boleto da cobrança #{link_to 'aqui', @purchase.invoice_url, target: 'blank'}
+        - elsif @purchase.payment_method == 'bank_slip'
+          iframe src="#{@purchase.invoice_url}" width="100%" height="500"
+          p Não consegue visualizar o boleto? #{link_to 'Clique aqui', @purchase.invoice_url, target: 'blank'}
