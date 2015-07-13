@@ -54,6 +54,7 @@ class CheckoutsController < ApplicationController
       flash[:notice]          = "Compra realizada com sucesso!"
       flash[:charge_messages] = charge.message if payment_method == 'credit_card'
       session[:shopping_cart] = Array.new
+      PurchaseMailer.pending_payment(purchase).deliver_now
       path = checkout_success_path(purchase.invoice_id)
     else
       purchase.destroy        # remove the purchase if fail
@@ -70,23 +71,6 @@ class CheckoutsController < ApplicationController
 
   def success
     @purchase = Purchase.find_by(invoice_id: params[:invoice_id])
-  end
-
-  def update
-    data     = params[:data]
-    event    = params[:event]
-    purchase = Purchase.where(invoice_id: data[:id])
-
-    if purchase.exists? ||
-       event == 'invoice.refund' ||
-       event == 'invoice.payment_failed' ||
-       event == 'invoice.status_changed'
-
-      purchase.first.update_attributes(status: data[:status])
-      render nothing: true, status: :ok, content_type: "text/html"
-    else
-      render nothing: true, status: :not_found, content_type: "text/html"
-    end
   end
 
   protected

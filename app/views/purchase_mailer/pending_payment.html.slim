@@ -1,0 +1,30 @@
+h1 Oi, #{@purchase.user.name}!
+
+- if @purchase.payment_method == 'credit_card'
+  p Você efetuou a compra de cotas de produtos através da opção de cartão de crédito.
+- elsif @purchase.payment_method == 'bank_slip'
+  p
+    | Você efetuou a compra da cota de produtos "#{@offer.title}" através da opção de boleto bancário.
+    | Caso ainda não tenha efetuado o pagamento do boleto ou tenha perdido o acesso ao mesmo,
+    |  #{link_to 'clique aqui', @purchase.invoice_url}
+
+hr
+
+p
+  | Sua compra ainda está em processo de avaliação do pagamento. Assim que ela for confirmada, você receberá outro email
+  |  com os dados da coleta, entre outras informações. Fique ligado na sua caixa de correio!
+
+
+h3
+  strong RESUMO DA COMPRA
+ul
+  - @purchase.orders.each do |order|
+    li COTA: #{order.offer.title} | QUANTIDADE: #{order.quantity} | TOTAL: #{number_to_currency order.offer_value*order.quantity}
+
+  li TOTAL DA COMPRA: #{number_to_currency @purchase.total}
+hr
+
+h3
+  strong  SUGESTÕES OU DÚVIDAS?
+p Envie email para #{mail_to 'tribo@triboviva.com.br'}
+hr

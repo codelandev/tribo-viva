@@ -11,6 +11,7 @@ class PurchasesController < ApplicationController
 
     if purchase.exists?
       if event == 'invoice.refund' || event == 'invoice.status_changed'
+        PurchaseMailer.confirmed_payment(purchase).deliver_now if data[:status] == 'paid'
         purchase.first.update_attributes(status: data[:status])
         render nothing: true, status: :ok, content_type: "text/html"
       elsif event == 'invoice.payment_failed'

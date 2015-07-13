@@ -1,0 +1,32 @@
+h1 Oi, #{@purchase.user.name}!
+
+p Sua compra foi confirmada com sucesso!
+
+h3
+  strong DADOS DA COMPRA
+
+ul
+  - @purchase.orders.each do |order|
+    li COTA: #{order.offer.title} | QUANTIDADE: #{order.quantity} | TOTAL: #{number_to_currency order.offer_value*order.quantity}
+  li TOTAL DA COMPRA: #{number_to_currency @purchase.total}
+
+h3
+  strong DADOS DA COLETA
+
+- @purchase.orders.each do |order|
+  ul
+    li OEFRTA #{order.offer.title}
+    li DATA E HORÁRIO: #{order.offer.delivery_time_range}
+    li LOCAL: #{order.offer.deliver_coordinator.address}
+    li COORDENADOR DE ENTREGA: #{order.offer.deliver_coordinator.name}
+    li TELEFONE: #{order.offer.deliver_coordinator.phone}
+    li EMAIL: #{order.offer.deliver_coordinator.email}
+  hr
+
+p * Você tem até 24h antes do horário da coleta para indicar uma pessoa para buscar sua cota em seu lugar. Essa pessoa deverá portar documento de identificação com foto.
+hr
+
+h3
+  strong  SUGESTÕES OU DÚVIDAS?
+
+p Envie email para #{mail_to 'tribo@triboviva.com.br'}
