@@ -1,30 +1,49 @@
-h1 Desejar acessar suas compras passadas?
-p = link_to 'Compras passadas', purchases_path
+section.purchase
+  h1.text-center Meu carrinho de compras
+  - if session[:shopping_cart].any?
+    .container
+      .row
+        .col-md-10.col-centered
+          .purchase-table
+            .purchase-info
+              - total = 0
+              - session[:shopping_cart].each do |item|
+                - offer = Offer.find(item['id'])
+                - total += offer.value*item['quantity']
+                .offer-info__products
+                  .row
+                    .col-md-12
+                      strong = offer.title
+                  .row
+                    .col-md-3
+                      span.btn.btn--md Unidade
+                    .col-md-2
+                    .col-md-2
+                    .col-md-2
+                    .col-md-3
+                      span.btn.btn--md Total
+                  .row
+                    .col-md-3
+                      span.btn.btn--md = number_to_currency offer.value
+                    .col-md-2
+                      span = link_to '-1', remove_from_cart_offer_path(offer), method: :delete, class: 'btn btn--md btn--yellow'
+                    .col-md-2
+                      span.btn.btn--md = item['quantity']
+                    .col-md-2
+                      span = link_to '+1', add_to_cart_offer_path(offer), method: :post, class: 'btn btn--md btn--yellow'
+                    .col-md-3
+                      span.btn.btn--md = number_to_currency offer.value*item['quantity']
 
-h1 Meu carrinho de compras
+            .purchase-form
+              h3 = "Total: #{number_to_currency total}"
+              p = link_to 'Ir para o Pagamento', checkout_path, class: 'btn btn--md btn--green'
+              p = link_to 'Limpar meu carrinho', clean_cart_path,
+                  class: 'btn btn--md btn--yellow',
+                  method: :delete,
+                  data: { confirm: 'Tem certeza que deseja fazer isso?' }
 
-- if session[:shopping_cart].any?
-  p = link_to 'Limpar meu carrinho', clean_cart_path, method: :delete, data: { confirm: 'Tem certeza que deseja fazer isso?' }
-
-  - total = 0
-  table.table-hover
-    tr
-      th Oferta
-      th Quantidade
-      th Preço Unitário
-      th Preço Total
-    - session[:shopping_cart].each do |item|
-      - offer = Offer.find(item['id'])
-      - total += offer.value*item['quantity']
-      tr
-        td = offer.title
-        td = "#{link_to '-1', remove_from_cart_offer_path(offer), method: :delete, class: 'Button'} | #{item['quantity']} | #{link_to '+1', add_to_cart_offer_path(offer), method: :post}".html_safe
-        td = number_to_currency offer.value
-        td = number_to_currency offer.value*item['quantity']
-
-  h3 = "Total: #{number_to_currency total}"
-
-  = link_to 'Ir para o Pagamento', checkout_path, class: 'btn btn--md btn--green'
-
-- else
-  h2 Não há produtos no seu carrinho
+  - else
+    .container
+      .row
+        .col-md-10.col-centered
+          h2.text-center Não há produtos no seu carrinho
