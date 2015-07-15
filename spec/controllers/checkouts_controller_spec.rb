@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CheckoutController, type: :controller do
+RSpec.describe CheckoutsController, type: :controller do
 
   describe "GET #checkout" do
     it "returns http success" do
