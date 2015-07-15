@@ -86,8 +86,6 @@ TriboViva.Checkouts.Checkout =
               e.preventDefault()
             else
               $('#token').val(data.id)
-              console.log $('#token').val()
-              console.log form.get(0)
               form.get(0).submit()
 
         # call the token handler
