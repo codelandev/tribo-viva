@@ -11,7 +11,7 @@ class CheckoutsController < ApplicationController
     authorize :checkout
 
     # get payment method, if blank, it's credit card, if not, it's bank_slip
-    param          = (params[:token].empty? ? "method" : "token").to_sym
+    param          = params[:token].empty? ? :method : :token
     payment_method = params[:method] == '' ? 'credit_card' : 'bank_slip'
 
     # initialize the purchase object
