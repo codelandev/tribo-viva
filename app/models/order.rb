@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
   belongs_to :offer
   belongs_to :purchase
 
-  validates :offer_id, :quantity, :purchase_id, :offer_value, presence: true
+  validates :offer, :quantity, :purchase, :offer_value, presence: true
   validates :quantity, numericality: { only_integer: true, greater_than: 0, less_than: 4 }
 
   def total
