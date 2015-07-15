@@ -7,15 +7,15 @@ class PurchasesController < ApplicationController
   def update
     data     = params[:data]
     event    = params[:event]
-    purchase = Purchase.where(invoice_id: data[:id])
+    purchase = Purchase.find_by(invoice_id: data[:id])
 
-    if purchase.exists?
+    if purchase
       if event == 'invoice.refund' || event == 'invoice.status_changed'
         PurchaseMailer.confirmed_payment(purchase).deliver_now if data[:status] == 'paid'
-        purchase.first.update_attributes(status: data[:status])
+        purchase.update_attributes(status: data[:status])
         render nothing: true, status: :ok, content_type: "text/html"
       elsif event == 'invoice.payment_failed'
-        purchase.first.update_attributes(status: PurchaseStatus::CANCELED)
+        purchase.update_attributes(status: PurchaseStatus::CANCELED)
         render nothing: true, status: :ok, content_type: "text/html"
       end
     else
