@@ -2,8 +2,10 @@ TriboViva.Checkouts ?= {}
 
 TriboViva.Checkouts.Checkout =
   init: ->
-    Iugu.setAccountID("79d7660c-6169-4e07-aed9-8a0883d5249a")
-    Iugu.setTestMode(true) # disable on production
+    widget = $('#iugu-widget')
+    Iugu.setAccountID(widget.data('account'))
+    if widget.data('environment') != 'production'
+      Iugu.setTestMode(true)
 
     # Set mask for card expiration date
     $(".js-credit-card-number").mask("9999 9999 9999 9999")

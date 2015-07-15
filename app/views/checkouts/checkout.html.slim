@@ -30,6 +30,7 @@ section.purchase
                       span.btn.btn--md = number_to_currency offer.value*item['quantity']
 
             .purchase-form
+              #iugu-widget[data-account="#{Rails.application.secrets.iugu_account_id}" data-environment="#{Rails.env}"]
               = form_tag process_payment_path, id: 'js-payment-form' do
                 = hidden_field_tag :token, nil, readonly: true, size: 64
 
