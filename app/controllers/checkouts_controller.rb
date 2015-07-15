@@ -89,6 +89,6 @@ class CheckoutsController < ApplicationController
   end
 
   def store_location
-    store_location_for(:user, request.path)
+    store_location_for(:user, request.path) if request.method == 'GET'
   end
 end
