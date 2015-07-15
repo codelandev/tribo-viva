@@ -19,10 +19,10 @@ class CheckoutsController < ApplicationController
     # Add all current items from cart to orders and purchase
     session[:shopping_cart].each do |item|
       offer = Offer.find(item['id'])
-      order = Order.create(offer: offer,
-                           purchase: purchase,
-                           offer_value: offer.value,
-                           quantity: item['quantity'])
+      Order.create(offer: offer,
+                   purchase: purchase,
+                   offer_value: offer.value,
+                   quantity: item['quantity'])
     end
 
     charge = Iugu::Charge.create({
