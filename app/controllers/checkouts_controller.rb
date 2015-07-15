@@ -1,6 +1,5 @@
 class CheckoutsController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  before_action :store_location
 
   def checkout
     authorize :checkout
@@ -86,9 +85,5 @@ class CheckoutsController < ApplicationController
       flash[:alert] = "Faça login para acessar esta página"
       redirect_to new_user_session_path
     end
-  end
-
-  def store_location
-    store_location_for(:user, request.path) if request.method == 'GET'
   end
 end

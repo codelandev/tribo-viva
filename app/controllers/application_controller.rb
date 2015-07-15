@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   before_action :build_shopping_cart
+  before_action :store_location
 
   protected
 
@@ -20,5 +21,9 @@ class ApplicationController < ActionController::Base
 
   def build_shopping_cart
     session[:shopping_cart] ||= Array.new
+  end
+
+  def store_location
+    store_location_for(:user, request.path) if request.method == 'GET'
   end
 end
