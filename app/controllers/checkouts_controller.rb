@@ -1,5 +1,5 @@
 class CheckoutsController < ApplicationController
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized, except: :update
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery except: :update
   before_action :store_location
 
