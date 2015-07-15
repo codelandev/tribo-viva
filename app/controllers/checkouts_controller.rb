@@ -1,6 +1,5 @@
 class CheckoutsController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  protect_from_forgery except: :update
   before_action :store_location
 
   def checkout
@@ -70,7 +69,7 @@ class CheckoutsController < ApplicationController
   end
 
   def success
-    @purchase = Purchase.find_by(invoice_id: params[:invoice_id])
+    @purchase = Purchase.find_by!(invoice_id: params[:invoice_id])
   end
 
   protected
