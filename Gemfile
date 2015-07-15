@@ -50,7 +50,7 @@ gem 'font-awesome-rails'
 gem 'nprogress-rails'
 gem 'rack-zippy', '~> 3.0.0'
 # Payment gateway
-gem 'iugu'
+gem 'iugu', '~> 1.0.8'
 
 group :development do
   gem 'letter_opener'

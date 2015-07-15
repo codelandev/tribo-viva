@@ -468,7 +468,7 @@ DEPENDENCIES
   fog
   font-awesome-rails
   initjs (~> 2.1.2)
-  iugu
+  iugu (~> 1.0.8)
   jbuilder (~> 2.0)
   jquery-rails
   letter_opener
