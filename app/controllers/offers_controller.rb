@@ -5,68 +5,30 @@ class OffersController < ApplicationController
 
   def add_to_cart
     offer = Offer.find(params[:id])
-    quantity = params[:quantity] ? params[:quantity] : 1
-
-    offer_on_cart = session[:shopping_cart].select{|item| item['id'].to_i == offer.id}
-
-    # Check if have any offer like this in cart
-    if offer_on_cart.any?
-      # Check the quantity already present on cart
-      # if more or equal than 3, don't add
-      if !offer.have_stock? || offer_on_cart.first['quantity'] >= offer.remaining
-        respond_to do |format|
-          format.json { render json: offer, status: :unprocessable_entity, location: offer }
-          format.html { redirect_to cart_path, alert: 'Não há mais quantidades para esta oferta'}
-        end
-      elsif offer_on_cart.first['quantity'] >= 3
-        respond_to do |format|
-          format.json { render json: offer, status: :unprocessable_entity, location: offer }
-          format.html { redirect_to cart_path, alert: 'Excedeu o limite de 3 cotas para esta oferta'}
-        end
-      # if less than 3, add +1 to the offer quantity
-      elsif offer_on_cart.first['quantity'] < 3
-        session[:shopping_cart].map{|item| item['quantity'] += quantity if item['id'] == offer.id}
-        respond_to do |format|
-          format.json { render json: offer, status: :created, location: offer }
-          format.html { redirect_to cart_path, notice: 'Cota adicionada ao carrinho!'}
-        end
-      end
-    # if not, add the offer for the first time
-    else
-      session[:shopping_cart] << {id: offer.id, quantity: quantity}
+    if cart_session.add(offer, params[:quantity])
       respond_to do |format|
         format.json { render json: offer, status: :created, location: offer }
         format.html { redirect_to cart_path, notice: 'Cota adicionada ao carrinho!'}
+      end
+    else
+      respond_to do |format|
+        format.json { render json: cart_session.errors.join('; '), status: :unprocessable_entity, location: offer }
+        format.html { redirect_to cart_path, alert: cart_session.errors.join('; ')}
       end
     end
   end
 
   def remove_from_cart
     offer = Offer.find(params[:id])
-    quantity = params[:quantity] ? params[:quantity] : 1
-
-    offer_on_cart = session[:shopping_cart].select{|item| item['id'].to_i == offer.id}
-
-    if offer_on_cart.any?
-      if offer_on_cart.first['quantity'] <= quantity
-        session[:shopping_cart].delete_if {|item| item['id'] == offer.id}
-      else
-        session[:shopping_cart].map{|item| item['quantity'] -= quantity if item['id'] == offer.id}
-      end
-      respond_to do |format|
-        format.json { render json: offer, status: :created, location: offer }
-        format.html { redirect_to cart_path, notice: 'Removido do carrinho!'}
-      end
-    else
-      respond_to do |format|
-        format.json { render json: offer, status: :unprocessable_entity, location: offer }
-        format.html { redirect_to cart_path, notice: 'Esta cota não está no seu carrinho'}
-      end
+    cart_session.remove(offer, params[:quantity])
+    respond_to do |format|
+      format.json { render json: offer, status: :created, location: offer }
+      format.html { redirect_to cart_path, notice: 'Removido do carrinho!'}
     end
   end
 
   def clean_cart
-    if session[:shopping_cart] = Array.new
+    if cart_session.clean
       redirect_to cart_path, notice: 'Carrinho limpo com sucesso!'
     else
       redirect_to cart_path, alert: 'Erro ao limpar carrinho.'

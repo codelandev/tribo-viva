@@ -32,7 +32,7 @@ module TriboViva
       g.fixtures_replacement :machinist
     end
 
-    config.autoload_paths << "#{Rails.root}/app/enumerations"
+    config.autoload_paths << "#{Rails.root}/app/services/concerns"
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

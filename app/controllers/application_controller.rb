@@ -26,4 +26,9 @@ class ApplicationController < ActionController::Base
   def store_location
     store_location_for(:user, request.path) if request.method == 'GET'
   end
+
+  def cart_session
+    @cart_session ||= CartSession.new(session)
+  end
+  helper_method :cart_session
 end

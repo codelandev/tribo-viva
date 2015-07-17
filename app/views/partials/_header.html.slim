@@ -15,8 +15,8 @@ header.header style="#{'display: none;' if params[:action] == 'new_purchase' || 
           li
             = link_to 'Contato', 'mailto:tribo@triboviva.com.br?subject=Olá Tribo Viva!'
 
-          - if session[:shopping_cart].any?
-            li = link_to "#{session[:shopping_cart].length} Produtos no carrinho", cart_path
+          - if cart_session.items_count > 0
+            li = link_to "#{cart_session.items_count} Produtos no carrinho", cart_path
           - else
             li = link_to 'Carrinho Vazio', cart_path
 
