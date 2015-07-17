@@ -6,25 +6,16 @@ class OffersController < ApplicationController
   def add_to_cart
     offer = Offer.find(params[:id])
     if cart_session.add(offer, params[:quantity])
-      respond_to do |format|
-        format.json { render json: offer, status: :created, location: offer }
-        format.html { redirect_to cart_path, notice: 'Cota adicionada ao carrinho!'}
-      end
+      redirect_to cart_path, notice: 'Cota adicionada ao carrinho!'
     else
-      respond_to do |format|
-        format.json { render json: cart_session.errors.join('; '), status: :unprocessable_entity, location: offer }
-        format.html { redirect_to cart_path, alert: cart_session.errors.join('; ')}
-      end
+      redirect_to cart_path, alert: cart_session.errors.join('; ')
     end
   end
 
   def remove_from_cart
     offer = Offer.find(params[:id])
     cart_session.remove(offer, params[:quantity])
-    respond_to do |format|
-      format.json { render json: offer, status: :created, location: offer }
-      format.html { redirect_to cart_path, notice: 'Removido do carrinho!'}
-    end
+    redirect_to cart_path, notice: 'Removido do carrinho!'
   end
 
   def clean_cart
