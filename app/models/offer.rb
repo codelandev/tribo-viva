@@ -23,10 +23,10 @@ class Offer < ActiveRecord::Base
     stock - Purchase.joins(:orders)
                     .where(status: PurchaseStatus::PAID,
                            orders:{offer_id: self.id})
-                    .sum(:quantity)
+                    .sum(:quantity) - 1
   end
 
   def have_stock?
-    0 < remaining
+    0 < remaining && DateTime.now < offer_ends_at
   end
 end
