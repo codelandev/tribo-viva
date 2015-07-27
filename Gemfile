@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
-
 ruby '2.2.2'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.2'
+gem 'rails-i18n', '~> 4.0.4'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -31,14 +30,25 @@ gem 'fog'
 gem 'metamagic'
 # For better enumerations
 gem 'enumerate_it'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-# Use Unicorn as the app server
-# gem 'unicorn'
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-# For masked fields
+# For beautiful masked inputs
 gem 'maskedinput-rails'
+# To organize JS files
+gem 'initjs', '~> 2.1.2'
+# Support for SLIM files
+gem 'slim-rails', '~> 3.0.1'
+gem 'devise', '~> 3.5.1'
+gem 'devise-i18n'
+# For administrative interface
+gem 'activeadmin', github: 'gregbell/active_admin'
+# Well...simple forms
+gem 'simple_form', '~> 3.1.0'
+# Handle authorizations
+gem 'pundit', '~> 1.0.0'
+gem 'autoprefixer-rails'
+gem 'bootstrap-sass', '~> 3.3.3'
+gem 'font-awesome-rails'
+gem 'nprogress-rails'
+gem 'rack-zippy', '~> 3.0.0'
 
 group :development do
   gem 'letter_opener'
@@ -53,10 +63,8 @@ group :development, :test do
   gem 'pry-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
@@ -70,21 +78,8 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-gem 'initjs', '~> 2.1.2'
-gem 'rails-i18n', '~> 4.0.4'
-gem 'slim-rails', '~> 3.0.1'
-gem 'devise', '~> 3.5.1'
-gem 'devise-i18n'
-gem 'activeadmin', github: 'gregbell/active_admin'
-gem 'simple_form', '~> 3.1.0'
-gem 'pundit', '~> 1.0.0'
-gem 'autoprefixer-rails'
-gem 'bootstrap-sass', '~> 3.3.3'
-gem 'font-awesome-rails'
-gem 'nprogress-rails'
-gem 'rack-zippy', '~> 3.0.0'
-
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
   gem 'passenger', '~> 5.0'
+  gem 'newrelic_rpm'
 end
