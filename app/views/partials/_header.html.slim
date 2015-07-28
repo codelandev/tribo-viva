@@ -11,17 +11,21 @@ header.header style="#{'display: none;' if params[:action] == 'new_purchase' || 
       .collapse.navbar-collapse#navbar-collapse
         ul.nav.navbar-nav.navbar-right
           li
-            = link_to 'Como Funciona', about_path
+            = link_to 'Como Funciona', about_path, title: 'Como funciona a Tribo Viva'
           li
-            = link_to 'Contato', 'mailto:tribo@triboviva.com.br?subject=Olá Tribo Viva!'
-
-          - if cart_session.items_count > 0
-            li = link_to "#{cart_session.items_count} Produtos no carrinho", cart_path
-          - else
-            li = link_to 'Carrinho Vazio', cart_path
+            = link_to 'Contato', 'mailto:tribo@triboviva.com.br?subject=Olá Tribo Viva!', title: 'Envie um email para a Tribo Viva'
 
           - if user_signed_in?
-            li = link_to 'Sair', destroy_user_session_path, method: :delete
+            li = link_to 'Sair', destroy_user_session_path, method: :delete, title: 'Sair de sua conta'
           - else
-            li = link_to 'Entrar', new_user_session_path
-            li = link_to 'Cadastrar', new_user_registration_path
+            li = link_to 'Entre', new_user_session_path, title: 'Entre com sua conta'
+            li = link_to 'Cadastre-se', new_user_registration_path, title: 'Cadastre-se no TriboViva'
+
+          - if cart_session.items_count > 0
+            li = link_to cart_path, title: "#{cart_session.items_count} Produtos no carrinho" do
+              span.fa.fa-shopping-cart
+              span.badge = cart_session.items_count
+          - else
+            li = link_to cart_path, title: 'Meu Carrinho' do
+              span.fa.fa-shopping-cart
+

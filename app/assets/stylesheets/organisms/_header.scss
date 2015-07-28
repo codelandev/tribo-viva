@@ -15,17 +15,34 @@
   }
 }
 
+.badge {
+  position: absolute;
+  background-color: $yellow-medium;
+  color: $brown-dark;
+}
+
 .navbar-default {
   background: transparent;
   border: 0;
   z-index: 1000;
 
+  .navbar-nav > li:last-child {
+    &> a {
+      padding: 36px 10px !important;
+    }
+  }
+
   .navbar-nav > li > a {
     padding: 40px 10px;
     color: white;
+
     &:hover {
       color: white;
       text-decoration: underline;
+    }
+
+    .fa-shopping-cart {
+      font-size: 24px;
     }
   }
 

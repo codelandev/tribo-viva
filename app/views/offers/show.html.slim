@@ -23,7 +23,7 @@ section.offer-header
               span = number_to_currency @offer.coordinator_tax + @offer.operational_tax + @offer.value
               .small valor de 1 cota
             .offer__header__action
-              - if @offer.have_stock?
+              - if @offer.is_valid_offer?
                 = link_to 'OFERTA FINALIZADA', '', class: 'btn btn--md btn--block btn--disable'
               - else
                 = link_to 'COMPRAR', add_to_cart_offer_path(@offer), method: :post, class: 'btn btn--md btn--block btn--green'
