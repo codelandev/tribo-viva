@@ -4,7 +4,7 @@ module CartAdd
   def add(offer, quantity)
     quantity = quantity.to_i
     quantity = 1 if quantity < 1
-    @errors << 'Sem estoque' unless offer.have_stock?
+    @errors << 'Sem estoque' unless offer.is_valid_offer?
     if have_offer_in_cart?(offer)
       add_existing_item(offer, quantity)
     else

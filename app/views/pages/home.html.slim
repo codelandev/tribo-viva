@@ -36,7 +36,7 @@ section.offers
                       = offer.producer.name
 
                   .card__action
-                    - if offer.have_stock?
+                    - if offer.is_valid_offer?
                       = link_to 'OFERTA FINALIZADA', offer_path(offer), class: 'btn btn--md btn--block btn--disable'
                     - else
                       = link_to 'DETALHES', offer_path(offer), class: 'btn btn--md btn--block btn--yellow'

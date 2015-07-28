@@ -26,7 +26,7 @@ class Offer < ActiveRecord::Base
                     .sum(:quantity) - 1
   end
 
-  def have_stock?
-    0 < remaining && DateTime.now < offer_ends_at
+  def is_valid_offer?
+    0 >= remaining && DateTime.now < offer_ends_at
   end
 end
