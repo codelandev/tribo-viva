@@ -1,72 +1,73 @@
-section.purchase
-  h1.text-center Pagamento
+section.checkout
   - if session[:shopping_cart].any?
     .container
       .row
-        .col-md-10.col-centered
-          .purchase-table
-            .purchase-info
-              - total = 0
-              - session[:shopping_cart].each do |item|
-                - offer = Offer.find(item['id'])
-                - total += offer.value*item['quantity']
-                .offer-info__products
-                  .row
-                    .col-md-12
+        .col-sm-12.col-md-9.col-centered
+          .form.brown-dark
+            h1.title--up.text--yellow Pagamento
+            .row
+              .col-sm-7
+                #iugu-widget[data-account="#{Rails.application.secrets.iugu_account_id}" data-environment="#{Rails.env}"]
+                = form_tag process_payment_path, id: 'js-payment-form' do
+                  = hidden_field_tag :token, nil, readonly: true, size: 64
+
+                  h3.title--up Selecione a opção de pagamento
+                  .btn-group.payment-method-btn-group data-toggle="buttons"
+                    label#js-credit-card-checkbox-label.btn.btn--sm.btn--yellow.active Cartão de crédito
+                    = check_box_tag :method, '', true, id: 'js-payment-method-credit-card', style: 'display: none;'
+
+                    label#js-bank-slip-checkbox-label.btn.btn--sm.btn--yellow Boleto Bancário
+                    = check_box_tag :method, 'bank_slip', false, id: 'js-payment-method-bank-slip', style: 'display: none;'
+
+                  #js-creditcard-form
+                    h3.title--up Preencha as Informações
+                    p style="color:red;" = flash[:charge_messages]
+                    p.js-errors style="color: red;"
+                    .wrapper
+                      .input-group.nmb_a
+                        .icon.ccic-brand
+                        = text_field_tag :cc_number, nil, autocomplete: 'off', placeholder: 'Número do cartão', class: 'js-credit-card-number', data: { iugu: 'number'}, title: 'Número do cartão'
+                      .input-group.nmb_b
+                        .icon.ccic-cvv
+                        = text_field_tag :cvv, nil, autocomplete: 'off', placeholder: 'CVV', class: 'js-credit-card-cvv', data: { iugu: 'verification_value'}, title: 'CVV'
+                      .input-group.nmb_c
+                        .icon.ccic-name
+                        = text_field_tag :full_name, nil, autocomplete: 'off', placeholder: 'Titular do Cartão', class: 'js-credit-card-card-name', data: { iugu: 'full_name'}, title: 'Nome do titular do cartão'
+                      .input-group.nmb_d
+                        .icon.ccic-exp
+                        = text_field_tag :card_expiration, nil, autocomplete: 'off', placeholder: 'MM/AA', class: 'js-credit-card-card-expiration', data: { iugu: 'expiration'}, title: 'Data de expiração do cartão'
+                    .hint.text--brown__medium Não armazenamos os dados do seu cartão.
+
+                  h3.title--up Aceite os termos
+                  .form-acceptance
+                    = check_box_tag :terms, '1', false, class: 'js-terms', style: "margin-right: 10px;", title: 'Eu aceito os termos de compra'
+                    = label_tag :terms, 'Eu aceito os termos de compra', class: 'text--white', title: 'Eu aceito os termos de compra'
+
+                  h3.title--up Finalize a compra!
+                  = submit_tag 'Pagar', class: 'js-submit-payment btn btn--md btn--yellow btn--block', disabled: true
+                  br
+                  br
+                  br
+                  = link_to 'Voltar para o Carrinho', cart_path, title: 'Voltar para o Carrinho'
+
+              .col-sm-5
+                h3.title--up.text--brown__light Resumo do Carrinho
+                - total = 0
+                - session[:shopping_cart].each do |item|
+                  - offer = Offer.find(item['id'])
+                  - total += offer.value*item['quantity']
+                  .text--brown__light
+                    p
                       strong = offer.title
-                  .row
-                    .col-md-4
-                      span.btn.btn--md Unidade
-                    .col-md-4
-                      span.btn.btn--md Quantidade
-                    .col-md-4
-                      span.btn.btn--md Total
-                  .row
-                    .col-md-4
-                      span.btn.btn--md = number_to_currency offer.value
-                    .col-md-4.text-center
-                      span.btn.btn--md = item['quantity']
-                    .col-md-4
-                      span.btn.btn--md = number_to_currency offer.value*item['quantity']
-
-            .purchase-form
-              #iugu-widget[data-account="#{Rails.application.secrets.iugu_account_id}" data-environment="#{Rails.env}"]
-              = form_tag process_payment_path, id: 'js-payment-form' do
-                = hidden_field_tag :token, nil, readonly: true, size: 64
-
-                h3 1. Selecione a opção de pagamento
-                .btn-group.payment-method-btn-group data-toggle="buttons"
-                  label#js-credit-card-checkbox-label.btn.btn-default.active Cartão de crédito
-                  = check_box_tag :method, '', true, id: 'js-payment-method-credit-card', style: 'display: none;'
-
-                  label#js-bank-slip-checkbox-label.btn.btn-default Boleto Bancário
-                  = check_box_tag :method, 'bank_slip', false, id: 'js-payment-method-bank-slip', style: 'display: none;'
-
-                #js-creditcard-form
-                  h3 2. Preencha as Informações
-                  p style="color:red;" = flash[:charge_messages]
-                  p.js-errors style="color: red;"
-                  .wrapper
-                    .input-group.nmb_a
-                      .icon.ccic-brand
-                      = text_field_tag :cc_number, nil, autocomplete: 'off', placeholder: 'Número do cartão', class: 'js-credit-card-number', data: { iugu: 'number'}
-                    .input-group.nmb_b
-                      .icon.ccic-cvv
-                      = text_field_tag :cvv, nil, autocomplete: 'off', placeholder: 'CVV', class: 'js-credit-card-cvv', data: { iugu: 'verification_value'}
-                    .input-group.nmb_c
-                      .icon.ccic-name
-                      = text_field_tag :full_name, nil, autocomplete: 'off', placeholder: 'Titular do Cartão', class: 'js-credit-card-card-name', data: { iugu: 'full_name'}
-                    .input-group.nmb_d
-                      .icon.ccic-exp
-                      = text_field_tag :card_expiration, nil, autocomplete: 'off', placeholder: 'MM/AA', class: 'js-credit-card-card-expiration', data: { iugu: 'expiration'}
-
-                h3 3. Aceite os termos
-                .form-acceptance
-                  = check_box_tag :terms, '1', false, class: 'js-terms', style: "margin-right: 10px;"
-                  = label_tag :terms, 'Eu aceito os termos de compra'
-
-                h3 4. Finalize a compra!
-                = submit_tag 'Pagar', class: 'js-submit-payment btn btn--md btn--green', disabled: true
+                    span
+                      = item['quantity']
+                      | x&nbsp;
+                    span = number_to_currency offer.value
+                    span
+                      |  -&nbsp;
+                      strong = number_to_currency offer.value*item['quantity']
+                  br
+                h3.text--yellow.no-Margin = "Valor Total: #{number_to_currency cart_session.total_value}"
 
   - else
     .container

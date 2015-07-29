@@ -29,7 +29,8 @@
 .btn--yellow {
   background-color: $yellow-medium;
   color: $brown-dark !important;
-  &:hover {
+  &:hover,
+  &.active {
     color: $yellow-medium !important;
     background-color: $brown-medium !important;
   }
