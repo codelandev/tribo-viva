@@ -4,6 +4,12 @@
   border: 0;
 }
 
+.btn--sm {
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
 .btn--md {
   padding: 10px 20px;
   font-size: 16px;
@@ -22,10 +28,10 @@
 
 .btn--yellow {
   background-color: $yellow-medium;
-  color: $brown-dark;
+  color: $brown-dark !important;
   &:hover {
-    color: $yellow-medium;
-    background-color: $brown-medium;
+    color: $yellow-medium !important;
+    background-color: $brown-medium !important;
   }
 }
 

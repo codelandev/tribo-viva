@@ -23,7 +23,7 @@ module CartList
   end
 
   def offer_attributes
-    %i(id value coordinator_tax operational_tax title)
+    %i(id value coordinator_tax operational_tax title image)
   end
 
   def offer_ids

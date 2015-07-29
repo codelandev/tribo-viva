@@ -1,13 +1,17 @@
 .form {
   width: 100%;
-  display: inline-block;
   padding: 20px 40px 60px 40px;
+
+  &.half-size {
+    width: 50%;
+    display: inline-block;
+  }
 
   &.brown-dark {
     background-color: $brown-dark;
 
     .help-block {
-      color: $brown-medium;
+      color: #fff;
     }
 
     label {
@@ -44,7 +48,8 @@
   }
 }
 
-.users {
+.users,
+.cart {
   padding: 80px 0 80px 0;
   background-color: $brown-medium;
 }

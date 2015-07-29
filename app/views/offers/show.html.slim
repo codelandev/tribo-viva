@@ -26,7 +26,7 @@ section.offer-header
               - if @offer.is_valid_offer?
                 = link_to 'OFERTA FINALIZADA', '', class: 'btn btn--md btn--block btn--disable'
               - else
-                = link_to 'COMPRAR', add_to_cart_offer_path(@offer), method: :post, class: 'btn btn--md btn--block btn--green'
+                = link_to 'COMPRAR', add_to_cart_offer_path(@offer), method: :post, class: 'btn btn--md btn--block btn--yellow'
 
 section.offer-info
   .container

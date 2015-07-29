@@ -1,46 +1,54 @@
-section.purchase
-  h1.text-center Meu carrinho de compras
+section.cart
   - if cart_session.items_count > 0
     .container
       .row
-        .col-md-10.col-centered
-          .purchase-table
-            .purchase-info
-              - cart_session.cart_list.each do |item|
-                .offer-info__products
-                  .row
-                    .col-md-12
-                      strong = item.offer.title
-                  .row
-                    .col-md-3
-                      span.btn.btn--md Unidade
-                    .col-md-2
-                    .col-md-2
-                    .col-md-2
-                    .col-md-3
-                      span.btn.btn--md Total
-                  .row
-                    .col-md-3
-                      span.btn.btn--md = number_to_currency item.piece_price
-                    .col-md-2
-                      span = link_to '-1', remove_from_cart_offer_path(item.offer), method: :delete, class: 'btn btn--md btn--yellow'
-                    .col-md-2
-                      span.btn.btn--md = item.quantity
-                    .col-md-2
-                      span = link_to '+1', add_to_cart_offer_path(item.offer), method: :post, class: 'btn btn--md btn--yellow'
-                    .col-md-3
-                      span.btn.btn--md = number_to_currency item.total_price
-
-            .purchase-form
-              h3 = "Total: #{number_to_currency cart_session.total_value}"
-              p = link_to 'Ir para o Pagamento', checkout_path, class: 'btn btn--md btn--green'
-              p = link_to 'Limpar meu carrinho', clean_cart_path,
-                  class: 'btn btn--md btn--yellow',
-                  method: :delete,
-                  data: { confirm: 'Tem certeza que deseja fazer isso?' }
+        .col-sm-12.col-md-9.col-centered
+          .form.brown-dark
+            h1.title--up.text--yellow Meu carrinho de compras
+            table.table.table-cart.table-bordered
+              thead
+                tr
+                  td Oferta
+                  td Quantidade
+                  td Valor Unitário
+                  td Valor Total
+              tbody
+                - cart_session.cart_list.each do |item|
+                  tr
+                    td
+                      = item.offer.title
+                    td
+                      = link_to '-', remove_from_cart_offer_path(item.offer), method: :delete, class: 'btn btn--sm btn--yellow'
+                      span.cart-quantity = item.quantity
+                      = link_to '+', add_to_cart_offer_path(item.offer), method: :post, class: 'btn btn--sm btn--yellow'
+                    td
+                      = number_to_currency item.piece_price
+                    td
+                      = number_to_currency item.total_price
+            .row
+              .col-sm-6
+                .pull-left = link_to 'Limpar meu carrinho', clean_cart_path, method: :delete, data: { confirm: 'Tem certeza que deseja fazer isso?' }
+              .col-sm-6
+                h2.pull-right.no-Margin = "Valor Total: #{number_to_currency cart_session.total_value}"
+            .row
+              .col-sm-6.col-sm-offset-6
+                br
+                = link_to 'Concluír Compra', checkout_path, class: 'btn btn--md btn--yellow btn--block'
+                br
+                br
+                .pull-right = link_to 'Continuar Comprando', root_path
 
   - else
     .container
       .row
-        .col-md-10.col-centered
-          h2.text-center Não há produtos no seu carrinho
+        .col-sm-12.col-md-9.col-centered
+          .form.brown-dark
+            h1.title--up.text--yellow.text-center Não há produtos no seu carrinho
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br

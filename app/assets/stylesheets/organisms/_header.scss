@@ -43,6 +43,10 @@
 
     .fa-shopping-cart {
       font-size: 24px;
+
+      &:hover {
+        color: $brown-light;
+      }
     }
   }
 
