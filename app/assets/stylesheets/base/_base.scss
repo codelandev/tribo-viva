@@ -11,4 +11,13 @@ body {
   margin-right: 3px;
 }
 
-.radio-pad { margin-left: 10px !important; }
+.radio-pad {
+  margin-left: 10px !important;
+}
+
+.hint,
+.help-block {
+  font-size: 13px;
+  line-height: 1.2;
+  margin-top: 4px;
+}

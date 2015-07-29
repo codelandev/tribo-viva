@@ -1,0 +1,19 @@
+section.users
+  .container
+    .row
+      .col-sm-10.col-md-6.col-centered
+        .form.brown-dark
+          h1.title--up.text--yellow Troque sua senha
+
+          = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+            = f.error_notification
+            = f.input :reset_password_token, as: :hidden
+            = f.full_error :reset_password_token
+
+            .form-inputs
+              = f.input :password, label: "Nova senha", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), title: 'Nova senha'
+              = f.input :password_confirmation, label: "Repita a nova senha", required: true, title: 'Repita a nova senha'
+            .form-actions
+              = f.button :submit, "Trocar minha senha", class: 'btn btn--md btn--block btn--yellow', title: 'Trocar minha senha'
+
+          = render "devise/shared/links"

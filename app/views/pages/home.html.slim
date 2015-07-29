@@ -13,9 +13,10 @@ section.offers
   .container
     .row
       .col-sm-12.col-md-10.col-centered
-        h2.text--green
-          span.title--up Ofertas da Semana
-          span.small Porto Alegre
+        - if @valid_offers.present?
+          h2.text--green
+            span.title--up Ofertas da Semana
+            span.small Porto Alegre
         .row
           - @valid_offers.each do |offer|
             .col-sm-6.col-md-4
