@@ -48,6 +48,17 @@
   }
 }
 
+.has-error {
+  input {
+    border: 1px solid $error !important;
+    background-color: lighten($error, 30%) !important;
+  }
+  .help-block {
+    color: $error !important;
+    margin-bottom: 0;
+  }
+}
+
 .users,
 .cart {
   padding: 80px 0 80px 0;

@@ -7,5 +7,5 @@ class User < ActiveRecord::Base
   has_many :purchases
   has_many :old_purchases
 
-  validates :cpf, :name, :phone, :address, presence: true
+  validates :cpf, :name, :email, :phone, :address, presence: true
 end
