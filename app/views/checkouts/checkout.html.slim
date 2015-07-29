@@ -57,15 +57,23 @@ section.checkout
                   - offer = Offer.find(item['id'])
                   - total += offer.value*item['quantity']
                   .text--brown__light
-                    p
+                    div
                       strong = offer.title
-                    span
+                    div
                       = item['quantity']
-                      | x&nbsp;
-                    span = number_to_currency offer.value
-                    span
-                      |  -&nbsp;
-                      strong = number_to_currency offer.value*item['quantity']
+                      |  cota(s)
+                    div
+                      | Valor Unitário:&nbsp;
+                      = number_to_currency offer.value
+                    div
+                      | Taxa coordenação:&nbsp;
+                      = number_to_currency offer.coordinator_tax
+                    div
+                      | Taxa operacional:&nbsp;
+                      = number_to_currency offer.operational_tax
+                    div
+                      strong Total:&nbsp;
+                      strong = number_to_currency (offer.value+offer.coordinator_tax+offer.operational_tax)*item['quantity']
                   br
                 h3.text--yellow.no-Margin = "Valor Total: #{number_to_currency cart_session.total_value}"
 
