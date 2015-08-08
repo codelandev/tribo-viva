@@ -8,6 +8,21 @@
 
   .big { margin-bottom: 5px; }
 
+  .socialLinks {
+    a:not(:first-child) {
+      margin-left: 10px;
+    }
+  }
+
+  .fa {
+    font-size: 41px;
+    color: $brown-dark;
+    
+    &:hover { 
+      color: $yellow-medium;
+    }
+  }
+
   .btn--green:hover {
     color: $brown-dark;
     background-color: $yellow-medium;

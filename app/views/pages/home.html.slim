@@ -102,12 +102,13 @@ section.about
               = link_to ' Clique aqui.', 'https://triboviva.typeform.com/to/ua7QEp'
           .col-sm-4
             h2.title--up.text--brown Fique Conectado
-            .big
-              = link_to 'Facebook', 'https://www.facebook.com/triboviva', title: 'Curta nossa página'
-              br
-              = link_to 'Twitter', 'https://twitter.com/TriboViva', title: 'Siga-nos no Twitter'
-              br
-              = link_to 'Instagram', 'https://instagram.com/triboviva/', title: 'Siga-nos no Instagram'
+            .socialLinks
+              = link_to 'https://www.facebook.com/triboviva', title: 'Curta nossa página' do
+                span.fa.fa-facebook-square
+              = link_to 'https://twitter.com/TriboViva', title: 'Siga-nos no Twitter' do
+                span.fa.fa-twitter-square
+              = link_to 'https://instagram.com/triboviva/', title: 'Siga-nos no Instagram' do
+                span.fa.fa-instagram
             / .big Inscreva-se na nossa newsletter
             / .input-group
             /   input.form-control type="text" placeholder="example@email.com"
