@@ -44,7 +44,9 @@ section.checkout
                   h3.title--up Aceite os termos
                   .form-acceptance
                     = check_box_tag :terms, '1', false, class: 'js-terms', style: "margin-right: 10px;", title: 'Eu aceito os termos de compra'
-                    = label_tag :terms, 'Eu aceito os termos de compra', class: 'text--white', title: 'Eu aceito os termos de compra'
+                    = label_tag :terms, class: 'text--white' do
+                      | Eu aceito os 
+                      = link_to 'termos de compras', terms_path, target: '_blank', title: 'Veja nossos Termos de Compras'
 
                   h3.title--up Finalize a compra!
                   = submit_tag 'Pagar', class: 'js-submit-payment btn btn--md btn--yellow btn--block', disabled: true
@@ -78,7 +80,12 @@ section.checkout
                       strong Total:&nbsp;
                       strong = number_to_currency (offer.value+offer.coordinator_tax+offer.operational_tax)*item['quantity']
                   br
-                h3.text--yellow.no-Margin = "Valor Total: #{number_to_currency cart_session.total_value}"
+                h4.text--yellow.no-Margin = "Subtotal: #{number_to_currency cart_session.total_value}"
+                /TODO add transaction fee
+                h4.text--yellow.no-Margin = "Custo da Transação: 20,00"
+                br
+                /TODO add total(subtotal + transaction fee)
+                h3.text--yellow.no-Margin = "Total a Pagar: #{number_to_currency cart_session.total_value}"
 
   - else
     .container

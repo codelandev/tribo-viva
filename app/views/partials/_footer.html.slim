@@ -10,7 +10,10 @@ footer.footer
           .col-sm-6
             .pull-right
               ul
-                li style="#{'display: none;' if params[:action] == 'new_purchase' || params[:controller] == 'purchases'}"
-                  = link_to 'Como Funciona', about_path
+                li style="#{'display: none;' if params[:controller] == 'checkouts' || params[:controller] == 'purchases'}"
+                  = link_to 'Como Funciona', about_path, title: 'Como Funciona'
                 li
-                  = link_to 'Contato', 'mailto:tribo@triboviva.com.br?subject=Olá Tribo Viva!'
+                  = link_to 'Termos de Compras', terms_path, title: 'Termos de Compras'
+                li
+                  = link_to 'Contato', 'mailto:tribo@triboviva.com.br?subject=Olá Tribo Viva!', title: 'Mande um email para nós'
+
