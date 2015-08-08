@@ -11,7 +11,7 @@
 }
 
 .btn--md {
-  padding: 10px 20px;
+  padding: 11px 20px;
   font-size: 16px;
 }
 
@@ -55,4 +55,9 @@
     color: $yellow-medium;
     background-color: $brown-medium;
   }
+}
+
+.input-group-btn:last-child > .btn, 
+.input-group-btn:last-child > .btn-group {
+  margin: 0;  
 }

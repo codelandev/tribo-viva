@@ -109,8 +109,20 @@ section.about
                 span.fa.fa-twitter-square
               = link_to 'https://instagram.com/triboviva/', title: 'Siga-nos no Instagram' do
                 span.fa.fa-instagram
-            / .big Inscreva-se na nossa newsletter
-            / .input-group
-            /   input.form-control type="text" placeholder="example@email.com"
-            /     .span.input-group-btn
-            /       button.btn.btn--md.btn--block.btn--brown type="button" OK
+            h3.text--brown Inscreva-se na nossa newsletter:
+            .input-group
+              /! Begin MailChimp Signup Form
+              #mc_embed_signup
+                form#mc-embedded-subscribe-form.validate action="//triboviva.us10.list-manage.com/subscribe/post?u=1f1e4e1052601b742b6863a53&amp;id=2dbbea5be5" method="post" name="mc-embedded-subscribe-form" novalidate="" target="_blank" 
+                  #mc_embed_signup_scroll
+                    .mc-field-group.input-group
+                      input#mce-EMAIL.required.email.form-control name="EMAIL" type="email" value="" placeholder="exemplo@email.com"
+                      #mce-responses.clear
+                        #mce-error-response.response style="display:none" 
+                        #mce-success-response.response style="display:none" 
+                      div style=("position: absolute; left: -5000px;") 
+                        input name="b_1f1e4e1052601b742b6863a53_2dbbea5be5" tabindex="-1" type="text" value=""
+                      .input-group-btn
+                        input#mc-embedded-subscribe.btn.btn--md.btn--brown name="subscribe" type="submit" value="OK" 
+              /! End mc_embed_signup
+              

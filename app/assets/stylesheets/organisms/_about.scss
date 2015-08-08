@@ -6,12 +6,14 @@
 
   a { color: white; }
 
-  .big { margin-bottom: 5px; }
-
   .socialLinks {
     a:not(:first-child) {
       margin-left: 10px;
     }
+  }
+
+  h3 { 
+    margin-bottom: 5px;
   }
 
   .fa {
