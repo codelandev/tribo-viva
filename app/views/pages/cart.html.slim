@@ -13,6 +13,7 @@ section.cart
                     td Quantidade
                     td Valor Unitário
                     td Valor Total
+                    td.small
                 tbody
                   - cart_session.cart_list.each do |item|
                     tr
@@ -26,6 +27,10 @@ section.cart
                         = number_to_currency item.piece_price
                       td title="Valor total: #{number_to_currency item.total_price}"
                         = number_to_currency item.total_price
+                      td.small title="Remover item do carrinho"
+                        /TODO add remove item from cart link
+                        = link_to '#' do 
+                          .fa.fa-trash-o
             .row
               .col-sm-6
                 .pull-left = link_to 'Limpar meu carrinho', clean_cart_path, method: :delete, data: { confirm: 'Tem certeza que deseja fazer isso?' }, title: 'Limpar meu carrinho'

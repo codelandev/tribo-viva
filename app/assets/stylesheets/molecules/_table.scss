@@ -4,9 +4,26 @@
 	}
 }
 
+td.small {
+  width: 50px !important;
+}
+
 .table-cart {
   &.table-bordered {
     border: 0;
+  }
+
+  .fa {
+    font-size: 21px;
+    display: middle;
+  }
+
+  a {
+    .fa {
+      &:hover {
+        color: $brown-medium;
+      }
+    }
   }
 
   thead {
