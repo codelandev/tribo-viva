@@ -5,26 +5,27 @@ section.cart
         .col-sm-12.col-md-9.col-centered
           .form.brown-dark
             h1.title--up.text--yellow Meu carrinho de compras
-            table.table.table-cart.table-bordered
-              thead
-                tr
-                  td Oferta
-                  td Quantidade
-                  td Valor Unitário
-                  td Valor Total
-              tbody
-                - cart_session.cart_list.each do |item|
+            .table.table-responsive  
+              table.table.table-cart.table-bordered
+                thead
                   tr
-                    td title="#{item.offer.title}"
-                      = item.offer.title
-                    td
-                      = link_to '-', remove_from_cart_offer_path(item.offer), method: :delete, class: 'btn btn--sm btn--yellow', title: 'Remover item'
-                      span.cart-quantity = item.quantity
-                      = link_to '+', add_to_cart_offer_path(item.offer), method: :post, class: 'btn btn--sm btn--yellow', title: 'Adicionar item'
-                    td title="Valor unitário: #{number_to_currency item.piece_price}"
-                      = number_to_currency item.piece_price
-                    td title="Valor total: #{number_to_currency item.total_price}"
-                      = number_to_currency item.total_price
+                    td Oferta
+                    td Quantidade
+                    td Valor Unitário
+                    td Valor Total
+                tbody
+                  - cart_session.cart_list.each do |item|
+                    tr
+                      td title="#{item.offer.title}"
+                        = item.offer.title
+                      td
+                        = link_to '-', remove_from_cart_offer_path(item.offer), method: :delete, class: 'btn btn--sm btn--yellow', title: 'Remover item'
+                        span.cart-quantity = item.quantity
+                        = link_to '+', add_to_cart_offer_path(item.offer), method: :post, class: 'btn btn--sm btn--yellow', title: 'Adicionar item'
+                      td title="Valor unitário: #{number_to_currency item.piece_price}"
+                        = number_to_currency item.piece_price
+                      td title="Valor total: #{number_to_currency item.total_price}"
+                        = number_to_currency item.total_price
             .row
               .col-sm-6
                 .pull-left = link_to 'Limpar meu carrinho', clean_cart_path, method: :delete, data: { confirm: 'Tem certeza que deseja fazer isso?' }, title: 'Limpar meu carrinho'
