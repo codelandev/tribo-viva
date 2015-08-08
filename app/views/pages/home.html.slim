@@ -79,6 +79,11 @@ section.old-offers
                     = offer.producer.name
                 .card__action
                   = link_to 'OFERTA FINALIZADA', offer_path(offer), class: 'btn btn--md btn--block btn--disable'
+        .row
+          .col-sm-12
+            br
+            .text-center
+              = link_to 'Ver Mais Ofertas passadas', finished_offers_path, class: 'btn btn--md btn--yellow', title: 'Ver mais ofertas passadas'
 
 section.about
   .container

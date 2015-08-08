@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   root 'pages#home'
   get 'sobre', to: 'pages#about', as: :about
+  get 'ofertaspassadas', to: 'pages#finished_offers', as: :finished_offers
   get 'termosdecompras', to: 'pages#terms', as: :terms
   get 'cart', to: 'pages#cart', as: :cart
   delete 'clean_cart', to: 'offers#clean_cart', as: :clean_cart

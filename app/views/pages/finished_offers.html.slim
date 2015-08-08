@@ -1,0 +1,26 @@
+.finished_offers-page
+  / section.old-offers
+  .container
+    .row
+      .col-sm-12.col-md-10.col-centered
+        h2.text--green
+          span.title--up Ofertas Passadas
+        .row
+          - @finished_offers.each do |offer|
+            .col-sm-6.col-md-4
+              article.card
+                .card__image style="background-image: url(#{offer.image.url});"
+                .card__info
+                  span.card__info__price title="Preço total da cota"
+                    = number_to_currency offer.coordinator_tax + offer.operational_tax + offer.value
+                    span.small
+                      |  / 1 cota
+                    span.pull-right title="Data da Coleta"
+                      span.glyphicon.glyphicon-calendar
+                      = offer.collect_starts_at.strftime('%d/%m')
+                  h1.card__info__title.title--up = link_to offer.title, offer_path(offer)
+                  span.card__info__place title="Nome do Produtor"
+                    span.glyphicon.glyphicon-grain
+                    = offer.producer.name
+                .card__action
+                  = link_to 'OFERTA FINALIZADA', offer_path(offer), class: 'btn btn--md btn--block btn--disable'
