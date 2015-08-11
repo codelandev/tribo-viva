@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   before_action :build_shopping_cart
-  before_action :store_location
   before_action :configure_permitted_parameters, if: :devise_controller?
   helper_method :cart_session
 
@@ -26,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def store_location
-    store_location_for(:user, request.path) if request.method == 'GET'
+    store_location_for(:user, request.path)
   end
 
   def cart_session
