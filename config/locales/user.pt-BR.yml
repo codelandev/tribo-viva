@@ -12,3 +12,6 @@ pt-BR:
         phone: 'Telefone'
         email: 'Email'
         address: 'Endereço'
+        password: 'Senha'
+        current_password: 'Senha atual'
+        password_confirmation: 'Confirme sua senha'

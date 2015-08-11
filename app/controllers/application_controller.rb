@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   before_action :build_shopping_cart
   before_action :store_location
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  helper_method :cart_session
 
   protected
 
@@ -30,5 +32,8 @@ class ApplicationController < ActionController::Base
   def cart_session
     @cart_session ||= CartSession.new(session)
   end
-  helper_method :cart_session
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << [:name, :cpf, :phone, :address]
+  end
 end

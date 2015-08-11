@@ -6,23 +6,21 @@ section.users
           h1.title--up.text--yellow Cadastre-se
 
           = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-            = f.error_notification
-
             .form-inputs
               = f.input :name, required: true, autofocus: true, placeholder: 'Seu nome completo', title: 'Seu nome completo'
               = f.input :email, required: true, placeholder: 'exemplo@email.com', title: 'Seu email de contato'
               .row
                 .col-sm-6
-                  = f.input :cpf, required: true, title: 'Seu CPF'
+                  = f.input :cpf, required: true, title: 'Seu CPF', input_html: { class: 'js-cpf' }
                   .hint.text--brown__medium Necessário para emissão da NF
                 .col-sm-6
-                  = f.input :phone, required: true, label: 'Celular', title: 'Celular para contato'
+                  = f.input :phone, required: true, label: 'Celular', title: 'Celular para contato', input_html: { class: 'js-phone' }
                   .hint.text--brown__medium Utilizado para avisos de coleta e emergências
               = f.input :address, required: true, label: 'Endereço completo', placeholder: 'Endereço completo', title: 'Seu endereço completo'
               .hint.text--brown__medium Necessário para emissão da NF
               .row
                 .col-sm-6
-                  = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), label: 'Sua senha', title: 'Sua senha'
+                  = f.input :password, required: true, hint: ("mínimo de #{@minimum_password_length} caracteres" if @minimum_password_length), label: 'Sua senha', title: 'Sua senha'
                 .col-sm-6
                   = f.input :password_confirmation, required: true, label: 'Repita a senha', title: 'Repita sua senha'
 

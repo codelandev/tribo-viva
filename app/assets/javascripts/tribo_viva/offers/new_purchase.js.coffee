@@ -8,8 +8,6 @@ TriboViva.Offers.CreatePurchase = TriboViva.Offers.NewPurchase =
       $('.unregistered-user-form').show()
 
   init: ->
-    $(".cpf").mask("999.999.999-99")
-    $(".phone").mask("(99) 9999-9999")
     total = $('#total-sum')
     original = total.data('original')
     format = total.data('format')
@@ -38,4 +36,4 @@ TriboViva.Offers.CreatePurchase = TriboViva.Offers.NewPurchase =
     $('#purchase_form_user_status_true, #purchase_form_user_status_false').change ->
       TriboViva.Offers.NewPurchase.checkRadioButtons() # check on change
 
-  modules: -> []
+  modules: -> [TriboViva.CPFMask, TriboViva.PhoneMask]

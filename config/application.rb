@@ -19,7 +19,7 @@ module TriboViva
     config.time_zone = 'Brasilia'
     config.i18n.locale = :'pt-BR'
     config.i18n.default_locale = :'pt-BR'
-    config.i18n.available_locales = %i(pt-BR en)
+    config.i18n.available_locales = %i(pt-BR)
     config.i18n.enforce_available_locales = false
     config.generators do |g|
       g.javascripts false
