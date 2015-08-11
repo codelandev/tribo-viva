@@ -76,8 +76,8 @@ section.purchase
 
               .unregistered-user-form
                 = f.input :name, placeholder: 'Nome completo', label: 'Nome completo'
-                = f.input :cpf, placeholder: '999.999.999-99', label: 'CPF (necessário para emissão de NF)', input_html: { class: 'cpf' }
-                = f.input :phone, placeholder: '(51) 3779-9710', label: 'Telefone', input_html: { class: 'phone' }
+                = f.input :cpf, placeholder: '999.999.999-99', label: 'CPF (necessário para emissão de NF)', input_html: { class: 'js-cpf' }
+                = f.input :phone, placeholder: '(51) 3779-9710', label: 'Telefone', input_html: { class: 'js-phone' }
                 = f.input :address, placeholder: 'Rua Logradouro 555', label: 'Endereço'
               br
 
