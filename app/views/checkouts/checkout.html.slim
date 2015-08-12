@@ -14,7 +14,7 @@ section.checkout
                   h3.title--up Selecione a opção de pagamento
                   .btn-group.payment-method-btn-group data-toggle="buttons"
                     label#js-credit-card-checkbox-label.btn.btn--sm.btn--yellow.active Cartão de crédito
-                    = check_box_tag :method, '', true, id: 'js-payment-method-credit-card', style: 'display: none;'
+                    = check_box_tag :method, 'credit_card', true, id: 'js-payment-method-credit-card', style: 'display: none;'
 
                     label#js-bank-slip-checkbox-label.btn.btn--sm.btn--yellow Boleto
                     = check_box_tag :method, 'bank_slip', false, id: 'js-payment-method-bank-slip', style: 'display: none;'

@@ -8,7 +8,9 @@ h3
 ul
   - @purchase.orders.each do |order|
     li COTA: #{order.offer.title} | QUANTIDADE: #{order.quantity} | TOTAL: #{number_to_currency order.offer_value*order.quantity}
-  li TOTAL DA COMPRA: #{number_to_currency @purchase.total}
+
+  li TAXA TRANSAÇÃO: #{number_to_currency @purchase.taxes}
+  li TOTAL DA COMPRA: #{number_to_currency @purchase.total_with_taxes}
 
 h3
   strong DADOS DA COLETA

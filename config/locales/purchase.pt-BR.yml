@@ -10,6 +10,7 @@ pt-BR:
         user: 'Usuário'
         token: 'Token'
         total: 'Total'
+        taxes: 'Taxas'
         status: 'Status'
 
   enumerations:

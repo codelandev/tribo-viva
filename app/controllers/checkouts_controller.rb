@@ -11,7 +11,14 @@ class CheckoutsController < ApplicationController
 
     # get payment method, if blank, it's credit card, if not, it's bank_slip
     param          = params[:token].empty? ? :method : :token
-    payment_method = params[:method] == '' ? 'credit_card' : 'bank_slip'
+    payment_method = params[:method]
+    taxes          = if payment_method == 'credit_card'
+                       cart_session.total_card_fee
+                     elsif payment_method == 'bank_slip'
+                       cart_session.total_bank_slip_fee
+                     elsif payment_method == 'transfer'
+                       0
+                     end
 
     # initialize the purchase object
     purchase = current_user.purchases.create
@@ -28,6 +35,7 @@ class CheckoutsController < ApplicationController
       # here is where the method is determined, :token for CC or :method bank_slip
       param => params[param],
       email: current_user.email,
+      tax_cents: (taxes*100).to_i,
       payer: {
         cpf_cnpj: current_user.cpf,
         name: current_user.name,
@@ -45,7 +53,8 @@ class CheckoutsController < ApplicationController
     })
 
     if charge and charge.success
-      purchase.update_attributes(invoice_id: charge.invoice_id,
+      purchase.update_attributes(taxes: taxes,
+                                 invoice_id: charge.invoice_id,
                                  invoice_url: charge.url,
                                  invoice_pdf: charge.pdf,
                                  payment_method: payment_method)

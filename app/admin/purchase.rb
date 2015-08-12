@@ -1,13 +1,16 @@
 ActiveAdmin.register Purchase do
-  permit_params :status, :total
+  permit_params :status, :total, :taxes
 
   show do
     attributes_table do
       row :user
       row :token
       row :status
+      row :taxes do |purchase|
+        number_to_currency purchase.taxes
+      end
       row :total do |purchase|
-        number_to_currency purchase.total
+        number_to_currency purchase.total_with_taxes
       end
     end
 

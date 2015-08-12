@@ -34,7 +34,7 @@ section.cart
               .col-sm-6
                 .pull-left = link_to 'Limpar meu carrinho', clean_cart_path, method: :delete, data: { confirm: 'Tem certeza que deseja fazer isso?' }, title: 'Limpar meu carrinho'
               .col-sm-6
-                h2.pull-right.no-Margin title="Valor Total: #{number_to_currency cart_session.total_value}" = "Valor Total: #{number_to_currency cart_session.total_value}"
+                h2.pull-right.no-Margin title="Valor Total: #{number_to_currency cart_session.sub_total}" = "Valor Total: #{number_to_currency cart_session.sub_total}"
             .row
               .col-sm-6.col-sm-offset-6
                 br

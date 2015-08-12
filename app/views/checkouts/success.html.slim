@@ -3,14 +3,14 @@ section.checkout
     .row
       .col-sm-12.col-md-10.col-centered
         .form.brown-dark
-          h1.title--up.text--yellow.text-center Pague a sua compra!
-          h3.text-center Você tem até as 23h59min de hoje (#{@purchase.created_at.strftime('%d/%m')}) para pagar.
-
           - if @purchase.payment_method == 'credit_card'
+            h1.title--up.text--yellow.text-center Compra realizada com sucesso!
             iframe src="#{@purchase.invoice_url}" width="100%" height="500"
             p Não consegue visualizar a sua nota? #{link_to 'Clique aqui', @purchase.invoice_url, target: 'blank'}
 
           - elsif @purchase.payment_method == 'bank_slip'
+            h1.title--up.text--yellow.text-center Pague a sua compra!
+            h3.text-center Você tem até as 23h59min de hoje (#{@purchase.created_at.strftime('%d/%m')}) para pagar.
             iframe src="#{@purchase.invoice_url}" width="100%" height="500"
             br
             br

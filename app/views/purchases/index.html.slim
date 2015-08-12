@@ -7,7 +7,7 @@ h1 Minhas compras
         th = purchase.invoice_id
         th = purchase.created_at
         th = PurchaseStatus.t purchase.status
-        th = purchase.total
+        th = purchase.total_with_taxes
       - purchase.orders.each do |order|
         tr
           td = order.offer.title
