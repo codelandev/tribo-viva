@@ -38,9 +38,9 @@ section.offers
 
                   .card__action
                     - if offer.is_valid_offer?
-                      = link_to 'OFERTA FINALIZADA', offer_path(offer), class: 'btn btn--md btn--block btn--disable'
-                    - else
                       = link_to 'DETALHES', offer_path(offer), class: 'btn btn--md btn--block btn--yellow'
+                    - else
+                      = link_to 'OFERTA FINALIZADA', offer_path(offer), class: 'btn btn--md btn--block btn--disable'
                   .card__progress
                     .pull-left.text-left
                       .span
@@ -113,16 +113,15 @@ section.about
             .input-group
               /! Begin MailChimp Signup Form
               #mc_embed_signup
-                form#mc-embedded-subscribe-form.validate action="//triboviva.us10.list-manage.com/subscribe/post?u=1f1e4e1052601b742b6863a53&amp;id=2dbbea5be5" method="post" name="mc-embedded-subscribe-form" novalidate="" target="_blank" 
+                form#mc-embedded-subscribe-form.validate action="//triboviva.us10.list-manage.com/subscribe/post?u=1f1e4e1052601b742b6863a53&amp;id=2dbbea5be5" method="post" name="mc-embedded-subscribe-form" novalidate="" target="_blank"
                   #mc_embed_signup_scroll
                     .mc-field-group.input-group
                       input#mce-EMAIL.required.email.form-control name="EMAIL" type="email" value="" placeholder="exemplo@email.com"
                       #mce-responses.clear
-                        #mce-error-response.response style="display:none" 
-                        #mce-success-response.response style="display:none" 
-                      div style=("position: absolute; left: -5000px;") 
+                        #mce-error-response.response style="display:none"
+                        #mce-success-response.response style="display:none"
+                      div style=("position: absolute; left: -5000px;")
                         input name="b_1f1e4e1052601b742b6863a53_2dbbea5be5" tabindex="-1" type="text" value=""
                       .input-group-btn
-                        input#mc-embedded-subscribe.btn.btn--md.btn--brown name="subscribe" type="submit" value="OK" 
+                        input#mc-embedded-subscribe.btn.btn--md.btn--brown name="subscribe" type="submit" value="OK"
               /! End mc_embed_signup
-              

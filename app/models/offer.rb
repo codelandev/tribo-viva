@@ -12,7 +12,7 @@ class Offer < ActiveRecord::Base
 
   mount_uploader :image, OfferUploader
 
-  scope :valid_offers, -> { where('offer_ends_at > ? AND stock > 0', DateTime.now) }
+  scope :valid_offers, -> { where('? < offer_ends_at AND 0 < stock', DateTime.now) }
   scope :finished_offers, -> { where('offer_ends_at < ? OR stock <= 0', DateTime.now) }
 
   def total
@@ -27,10 +27,10 @@ class Offer < ActiveRecord::Base
     stock - Purchase.joins(:orders)
                     .where(status: PurchaseStatus::PAID,
                            orders:{offer_id: self.id})
-                    .sum(:quantity) - 1
+                    .sum(:quantity)
   end
 
   def is_valid_offer?
-    0 >= remaining && DateTime.now < offer_ends_at
+    0 < remaining && DateTime.now < offer_ends_at
   end
 end

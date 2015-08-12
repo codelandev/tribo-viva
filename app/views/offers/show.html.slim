@@ -20,13 +20,13 @@ section.offer-header
               span = distance_of_time_in_words(@offer.offer_ends_at, Time.now)
               .small restantes
             .offer__header__price
-              span = number_to_currency @offer.coordinator_tax + @offer.operational_tax + @offer.value
+              span = number_to_currency @offer.total
               .small valor de 1 cota
             .offer__header__action
               - if @offer.is_valid_offer?
-                = link_to 'OFERTA FINALIZADA', '', class: 'btn btn--md btn--block btn--disable'
-              - else
                 = link_to 'COMPRAR', add_to_cart_offer_path(@offer), method: :post, class: 'btn btn--md btn--block btn--yellow'
+              - else
+                = link_to 'OFERTA FINALIZADA', '#', class: 'btn btn--md btn--block btn--disable'
 
 section.offer-info
   .container
