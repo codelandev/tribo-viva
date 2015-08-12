@@ -28,8 +28,7 @@ section.cart
                       td title="Valor total: #{number_to_currency item.total_price}"
                         = number_to_currency item.total_price
                       td.small title="Remover item do carrinho"
-                        /TODO add remove item from cart link
-                        = link_to '#' do 
+                        = link_to remove_from_cart_offer_path(item.offer, quantity: 3), method: :delete, data: { confirm: 'Tem certeza?' } do 
                           .fa.fa-trash-o
             .row
               .col-sm-6
