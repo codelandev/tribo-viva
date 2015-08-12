@@ -58,17 +58,15 @@ ActiveAdmin.register Offer do
 
     panel 'Compras para esta oferta' do
       table_for offer.purchases.order(status: :desc) do
-        column :transaction_id do |purchase|
-          link_to purchase.transaction_id, admin_purchase_path(purchase)
+        column :invoice_id do |purchase|
+          link_to purchase.invoice_id, admin_purchase_path(purchase)
         end
         column :status do |purchase|
-          OldPurchaseStatus.t purchase.status
+          PurchaseStatus.t purchase.status
         end
         column :user
-        column :offer
-        column :amount
         column :total do |purchase|
-          number_to_currency (purchase.amount * (purchase.offer.value + purchase.offer.operational_tax + purchase.offer.coordinator_tax))
+          number_to_currency purchase.total
         end
       end
     end

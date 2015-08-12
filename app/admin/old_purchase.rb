@@ -8,28 +8,28 @@ ActiveAdmin.register OldPurchase do
   menu priority: 8
 
   member_action :confirm do
-    purchase = Purchase.find_by(transaction_id: params[:id])
+    purchase = OldPurchase.find_by(transaction_id: params[:id])
     purchase.confirm!
-    redirect_to admin_purchase_path(purchase), notice: "Compra confirmada com sucesso!"
+    redirect_to admin_old_purchase_path(purchase), notice: "Compra confirmada com sucesso!"
   end
 
   member_action :cancel do
-    purchase = Purchase.find_by(transaction_id: params[:id])
+    purchase = OldPurchase.find_by(transaction_id: params[:id])
     purchase.cancel!
-    redirect_to admin_purchase_path(purchase), notice: "Compra cancelada com sucesso!"
+    redirect_to admin_old_purchase_path(purchase), notice: "Compra cancelada com sucesso!"
   end
 
   action_item only: :show do
-    purchase = Purchase.find_by(transaction_id: params[:id])
+    purchase = OldPurchase.find_by(transaction_id: params[:id])
     unless purchase.confirmed?
-      link_to 'Confirmar', confirm_admin_purchase_path
+      link_to 'Confirmar', confirm_admin_old_purchase_path
     end
   end
 
   action_item only: :show do
-    purchase = Purchase.find_by(transaction_id: params[:id])
+    purchase = OldPurchase.find_by(transaction_id: params[:id])
     unless purchase.canceled?
-      link_to 'Cancelar', cancel_admin_purchase_path
+      link_to 'Cancelar', cancel_admin_old_purchase_path
     end
   end
 
@@ -58,7 +58,7 @@ ActiveAdmin.register OldPurchase do
       end
       row :amount
       row 'Valor total' do |purchase|
-        number_to_currency purchase.total
+        number_to_currency (purchase.amount * (purchase.offer.value + purchase.offer.operational_tax + purchase.offer.coordinator_tax))
       end
       row :user
       row :offer
