@@ -15,6 +15,10 @@ class Offer < ActiveRecord::Base
   scope :valid_offers, -> { where('offer_ends_at > ? AND stock > 0', DateTime.now) }
   scope :finished_offers, -> { where('offer_ends_at < ? OR stock <= 0', DateTime.now) }
 
+  def total
+    coordinator_tax + operational_tax + value
+  end
+
   def delivery_time_range
     "#{I18n.l(collect_starts_at, format: :long)} até #{collect_ends_at.strftime('%H:%M')}"
   end

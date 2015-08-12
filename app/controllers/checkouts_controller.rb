@@ -20,7 +20,7 @@ class CheckoutsController < ApplicationController
       offer = Offer.find(item['id'])
       Order.create(offer: offer,
                    purchase: purchase,
-                   offer_value: offer.value,
+                   offer_value: offer.total,
                    quantity: item['quantity'])
     end
 
@@ -56,7 +56,7 @@ class CheckoutsController < ApplicationController
       PurchaseMailer.pending_payment(purchase).deliver_now
       path = checkout_success_path(purchase.invoice_id)
     else
-      purchase.destroy        # remove the purchase if fail
+      purchase.destroy # remove the purchase if fail
       if payment_method == 'credit_card' && charge.errors.blank?
         flash[:charge_messages] = charge.message
       else
