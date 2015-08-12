@@ -51,6 +51,8 @@ gem 'nprogress-rails'
 gem 'rack-zippy', '~> 3.0.0'
 # Payment gateway
 gem 'iugu', '~> 1.0.8'
+# Format/Parse decimal numbers
+gem 'accountingjs-rails'
 
 group :development do
   gem 'letter_opener'

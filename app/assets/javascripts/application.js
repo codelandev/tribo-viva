@@ -21,3 +21,4 @@
 //= require init.js
 //= require_tree ./tribo_viva
 //= require maskedinput
+//= require accountingjs

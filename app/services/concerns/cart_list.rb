@@ -12,8 +12,20 @@ module CartList
     end
   end
 
-  def total_value
+  def sub_total
     cart_list.map(&:total_price).sum
+  end
+
+  def total_card_fee
+    (cart_list.map(&:total_price).sum * 0.04715)+0.3
+  end
+
+  def total_bank_slip_fee
+    2.5
+  end
+
+  def total_value
+    sub_total + total_card_fee
   end
 
   private

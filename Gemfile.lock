@@ -29,6 +29,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.1)
+    accountingjs-rails (0.0.4)
     actionmailer (4.2.2)
       actionpack (= 4.2.2)
       actionview (= 4.2.2)
@@ -451,6 +452,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  accountingjs-rails
   active_admin_editor!
   activeadmin!
   autoprefixer-rails
@@ -501,4 +503,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.5
+   1.10.6

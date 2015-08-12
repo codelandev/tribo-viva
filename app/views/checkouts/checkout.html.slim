@@ -18,9 +18,9 @@ section.checkout
 
                     label#js-bank-slip-checkbox-label.btn.btn--sm.btn--yellow Boleto
                     = check_box_tag :method, 'bank_slip', false, id: 'js-payment-method-bank-slip', style: 'display: none;'
-                    
+
                     label#js-transfer-checkbox-label.btn.btn--sm.btn--yellow Transferência/Depósito
-                    = check_box_tag :method, 'bank_slip', false, id: 'js-payment-method-transfer', style: 'display: none;'
+                    = check_box_tag :method, 'transfer', false, id: 'js-payment-method-transfer', style: 'display: none;'
 
                   #js-creditcard-form
                     h3.title--up Preencha as Informações
@@ -45,8 +45,8 @@ section.checkout
                   .form-acceptance
                     = check_box_tag :terms, '1', false, class: 'js-terms', style: "margin-right: 10px;", title: 'Eu aceito os termos de compra'
                     = label_tag :terms, class: 'text--white' do
-                      | Eu aceito os 
-                      = link_to 'termos de compras', terms_path, target: '_blank', title: 'Veja nossos Termos de Compras'
+                      | Eu aceito os
+                      = link_to ' termos de compras', terms_path, target: '_blank', title: 'Veja nossos Termos de Compras'
 
                   h3.title--up Finalize a compra!
                   = submit_tag 'Pagar', class: 'js-submit-payment btn btn--md btn--yellow btn--block', disabled: true
@@ -80,12 +80,11 @@ section.checkout
                       strong Total:&nbsp;
                       strong = number_to_currency (offer.value+offer.coordinator_tax+offer.operational_tax)*item['quantity']
                   br
-                h4.text--yellow.no-Margin = "Subtotal: #{number_to_currency cart_session.total_value}"
-                /TODO add transaction fee
-                h4.text--yellow.no-Margin = "Custo da Transação: 20,00"
+                div#fees data-card-fee="#{cart_session.total_card_fee}" data-bank-slip-fee="#{cart_session.total_bank_slip_fee}" data-total="#{cart_session.sub_total}"
+                h4.text--yellow.no-Margin = "Subtotal: #{number_to_currency cart_session.sub_total}"
+                h4.text--yellow.no-Margin.js-text-total-fee = "Custo da Transação: #{number_to_currency cart_session.total_card_fee}"
                 br
-                /TODO add total(subtotal + transaction fee)
-                h3.text--yellow.no-Margin = "Total a Pagar: #{number_to_currency cart_session.total_value}"
+                h3.text--yellow.no-Margin.js-text-total = "Total a Pagar: #{number_to_currency cart_session.total_value}"
 
   - else
     .container

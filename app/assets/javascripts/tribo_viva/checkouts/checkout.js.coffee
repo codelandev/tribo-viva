@@ -12,11 +12,14 @@ TriboViva.Checkouts.Checkout =
     $(".js-credit-card-card-expiration").mask("99/99")
 
     # To hide or show credit card form
+    divFees                 = $('#fees')
     creditCardForm          = $('#js-creditcard-form')
     creditCardTerms         = $('.js-terms')
+    transferCheckBox        = $('#js-payment-method-transfer')
     bankSlipCheckBox        = $('#js-payment-method-bank-slip')
     creditCardCheckBox      = $('#js-payment-method-credit-card')
     bankSlipCheckBoxLabel   = $('#js-bank-slip-checkbox-label')
+    transferCheckBoxLabel   = $('#js-transfer-checkbox-label')
     creditCardCheckBoxLabel = $('#js-credit-card-checkbox-label')
 
     creditCardCheckBoxLabel.on 'click', ->
@@ -25,8 +28,17 @@ TriboViva.Checkouts.Checkout =
 
       bankSlipCheckBoxLabel.removeClass('active')
       bankSlipCheckBox.prop('checked', false).attr('checked', false)
+      transferCheckBoxLabel.removeClass('active')
+      transferCheckBox.prop('checked', false).attr('checked', false)
 
       creditCardForm.show()
+
+      fee       = divFees.data('card-fee')
+      sub_total = divFees.data('total')
+      total     = accounting.formatMoney(sub_total+fee, "R$ ", 2, ".", ",")
+      fee_string = accounting.formatMoney(fee, "R$ ", 2, ".", ",")
+      $('.js-text-total-fee').text('Custo da Transação: ' + fee_string)
+      $('.js-text-total').text('Total a Pagar: ' + total)
 
     bankSlipCheckBoxLabel.on 'click', ->
       bankSlipCheckBoxLabel.addClass('active')
@@ -34,8 +46,35 @@ TriboViva.Checkouts.Checkout =
 
       creditCardCheckBoxLabel.removeClass('active')
       creditCardCheckBox.prop('checked', false).attr('checked', false)
+      transferCheckBoxLabel.removeClass('active')
+      transferCheckBox.prop('checked', false).attr('checked', false)
 
       creditCardForm.hide()
+
+      fee       = divFees.data('bank-slip-fee')
+      sub_total = divFees.data('total')
+      total     = accounting.formatMoney(sub_total+fee, "R$ ", 2, ".", ",")
+      fee_string = accounting.formatMoney(fee, "R$ ", 2, ".", ",")
+      $('.js-text-total-fee').text('Custo da Transação: ' + fee_string)
+      $('.js-text-total').text('Total a Pagar: ' + total)
+
+    transferCheckBoxLabel.on 'click', ->
+      transferCheckBoxLabel.addClass('active')
+      transferCheckBox.prop('checked', true).attr('checked', true)
+
+      creditCardCheckBoxLabel.removeClass('active')
+      creditCardCheckBox.prop('checked', false).attr('checked', false)
+      bankSlipCheckBoxLabel.removeClass('active')
+      bankSlipCheckBox.prop('checked', false).attr('checked', false)
+
+      creditCardForm.hide()
+
+      fee        = 0
+      sub_total  = divFees.data('total')
+      total      = accounting.formatMoney(sub_total+fee, "R$ ", 2, ".", ",")
+      fee_string = accounting.formatMoney(fee, "R$ ", 2, ".", ",")
+      $('.js-text-total-fee').text('Custo da Transação: ' + fee_string)
+      $('.js-text-total').text('Total a Pagar: ' + total)
 
     creditCardTerms.on 'change', ->
       if $(this).is(':checked')
