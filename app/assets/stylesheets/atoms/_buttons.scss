@@ -19,9 +19,9 @@
 
 .btn--brown {
   background-color: $brown-dark;
-  color: $yellow-medium;
+  color: $yellow-medium !important;
   &:hover {
-    color: $brown-dark;
+    color: $brown-dark !important;
     background-color: $yellow-medium;
   }
 }
