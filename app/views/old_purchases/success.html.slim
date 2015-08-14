@@ -5,41 +5,82 @@ section.purchase
         .success
           h1.title--up.text--green SUCESSO!
           p Sua compra foi realizada com sucesso. Veja abaixo os detalhes da compra e da coleta:
-          p
-            | QTD. DE COTA(S): #{@purchase.amount} cota(s)
-            br
-            | TOTAL DA COMPRA: #{number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))}
-            br
-            span.small ID da compra: #{@purchase.transaction_id}
+          - if @purchase.is_a?(OldPurchase)
+            p
+              | QTD. DE COTA(S): #{@purchase.amount} cota(s)
+              br
+              | TOTAL DA COMPRA: #{number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))}
+              br
+              span.small ID da compra: #{@purchase.transaction_id}
+          - elsif @purchase.is_a?(Purchase)
+            - @purchase.orders.each do |order|
+              p
+                | QUANTIDADE: #{order.quantity} cota(s)
+                br
+                | VALOR: #{number_to_currency order.offer_value}
+                br
+                span.small ID da compra: #{@purchase.invoice_id}
 
           h2.title--up.text--brown Detalhes da sua Compra:
-          h3.title--up.text--green
-            = @purchase.offer.title
-          .purchase-info__producer
-            span.glyphicon.glyphicon-grain
-            = @purchase.offer.producer.name
-          .offer-info__products
-            p = simple_format @purchase.offer.products_description
+          - if @purchase.is_a?(OldPurchase)
+            h3.title--up.text--green
+              = @purchase.offer.title
+            .purchase-info__producer
+              span.glyphicon.glyphicon-grain
+              = @purchase.offer.producer.name
+            .offer-info__products
+              p = simple_format @purchase.offer.products_description
+          - elsif @purchase.is_a?(Purchase)
+            - @purchase.orders.each do |order|
+              h3.title--up.text--green = order.offer.title
+              .purchase-info__producer
+                span.glyphicon.glyphicon-grain
+                = order.offer.producer.name
+              .offer-info__products
+                p = simple_format order.offer.products_description
 
 
           h2.title--up.text--brown Detalhes da coleta:
-          .offer-info__collect
-            .offer-info__coordinator
-              span.offer-info__coordinator__avatar style="background-image: url(#{@purchase.offer.deliver_coordinator.avatar});"
-              span.offer-info__coordinator__name
-                p = @purchase.offer.deliver_coordinator.name
-                .small Coordenador de Entrega
-            p As compras devem ser retiradas na data e local abaixo:
-            ul
-              li
-                span.glyphicon.glyphicon-calendar
-                span = @purchase.offer.delivery_time_range
-              li
-                span.glyphicon.glyphicon-map-marker
-                span = @purchase.offer.deliver_coordinator.address
-              li
-                span.glyphicon.glyphicon-phone
-                span = @purchase.offer.deliver_coordinator.phone
-              li
-                span.glyphicon.glyphicon-envelope
-                span = @purchase.offer.deliver_coordinator.email
+          - if @purchase.is_a?(OldPurchase)
+            .offer-info__collect
+              .offer-info__coordinator
+                span.offer-info__coordinator__avatar style="background-image: url(#{@purchase.offer.deliver_coordinator.avatar});"
+                span.offer-info__coordinator__name
+                  p = @purchase.offer.deliver_coordinator.name
+                  .small Coordenador de Entrega
+              p As compras devem ser retiradas na data e local abaixo:
+              ul
+                li
+                  span.glyphicon.glyphicon-calendar
+                  span = @purchase.offer.delivery_time_range
+                li
+                  span.glyphicon.glyphicon-map-marker
+                  span = @purchase.offer.deliver_coordinator.address
+                li
+                  span.glyphicon.glyphicon-phone
+                  span = @purchase.offer.deliver_coordinator.phone
+                li
+                  span.glyphicon.glyphicon-envelope
+                  span = @purchase.offer.deliver_coordinator.email
+          - elsif @purchase.is_a?(Purchase)
+            - @purchase.orders.each do |order|
+              .offer-info__collect
+                .offer-info__coordinator
+                  span.offer-info__coordinator__avatar style="background-image: url(#{order.offer.deliver_coordinator.avatar});"
+                  span.offer-info__coordinator__name
+                    p = order.offer.deliver_coordinator.name
+                    .small Coordenador de Entrega
+                p As compras devem ser retiradas na data e local abaixo:
+                ul
+                  li
+                    span.glyphicon.glyphicon-calendar
+                    span = order.offer.delivery_time_range
+                  li
+                    span.glyphicon.glyphicon-map-marker
+                    span = order.offer.deliver_coordinator.address
+                  li
+                    span.glyphicon.glyphicon-phone
+                    span = order.offer.deliver_coordinator.phone
+                  li
+                    span.glyphicon.glyphicon-envelope
+                    span = order.offer.deliver_coordinator.email

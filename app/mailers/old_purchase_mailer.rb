@@ -5,6 +5,7 @@ class OldPurchaseMailer < ActionMailer::Base
   def pending_payment(purchase_id)
     @purchase = Purchase.find_by(invoice_id: purchase_id)
     @purchase ||= OldPurchase.find_by(transaction_id: purchase_id)
+    @bank_account = @purchase.is_a?(OldPurchase) ? @purchase.offer.bank_account : BankAccount.first
     mail to: @purchase.user.email, subject: 'Pague sua compra e envie o comprovante'
   end
 

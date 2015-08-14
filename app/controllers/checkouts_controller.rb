@@ -40,9 +40,10 @@ class CheckoutsController < ApplicationController
     if payment_method == 'transfer'
       purchase.invoice_id = SecureRandom.hex(32)
       OldPurchase.create(status: OldPurchaseStatus::PENDING, transaction_id: purchase.invoice_id, user: current_user)
-      OldPurchaseMailer.pending_payment(params[:id]).deliver_now
-      flash[:notice] = 'Aguardando confirmação'
       purchase.save
+      OldPurchaseMailer.pending_payment(purchase.invoice_id).deliver_now
+      session[:shopping_cart] = []
+      flash[:notice] = 'Aguardando confirmação'
       path = old_purchase_path(purchase.invoice_id)
     else
       charge = Iugu::Charge.create({
@@ -92,7 +93,7 @@ class CheckoutsController < ApplicationController
   end
 
   def success
-    @purchase = Purchase.find_by!(invoice_id: params[:invoice_id])
+    @purchase = Purchase.find_by(invoice_id: (params[:invoice_id] || params[:id])) || OldPurchase.find_by!(transaction_id: (params[:invoice_id] || params[:id]))
   end
 
   protected
