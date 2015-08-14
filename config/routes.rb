@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :old_purchases, only: [:show, :update] do
+  resources :old_purchases, only: [:show, :update], path: 'deposit' do
     member do
       get '/success', to: 'old_purchases#success', as: :success
     end

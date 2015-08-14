@@ -6,10 +6,7 @@ TriboViva.Checkouts.Checkout =
     Iugu.setAccountID(widget.data('account'))
     if widget.data('environment') != 'production'
       Iugu.setTestMode(true)
-
-    # Set mask for card expiration date
-    $(".js-credit-card-number").mask("9999 9999 9999 9999")
-    $(".js-credit-card-card-expiration").mask("99/99")
+    Iugu.setup()
 
     # To hide or show credit card form
     divFees                 = $('#fees')
@@ -33,8 +30,8 @@ TriboViva.Checkouts.Checkout =
 
       creditCardForm.show()
 
-      fee       = divFees.data('card-fee')
-      sub_total = divFees.data('total')
+      fee       = parseFloat(divFees.data('card-fee'))
+      sub_total = parseFloat(divFees.data('total'))
       total     = accounting.formatMoney(sub_total+fee, "R$ ", 2, ".", ",")
       fee_string = accounting.formatMoney(fee, "R$ ", 2, ".", ",")
       $('.js-text-total-fee').text('Custo da Transação: ' + fee_string)
@@ -51,8 +48,8 @@ TriboViva.Checkouts.Checkout =
 
       creditCardForm.hide()
 
-      fee       = divFees.data('bank-slip-fee')
-      sub_total = divFees.data('total')
+      fee       = parseFloat(divFees.data('bank-slip-fee'))
+      sub_total = parseFloat(divFees.data('total'))
       total     = accounting.formatMoney(sub_total+fee, "R$ ", 2, ".", ",")
       fee_string = accounting.formatMoney(fee, "R$ ", 2, ".", ",")
       $('.js-text-total-fee').text('Custo da Transação: ' + fee_string)
@@ -70,7 +67,7 @@ TriboViva.Checkouts.Checkout =
       creditCardForm.hide()
 
       fee        = 0
-      sub_total  = divFees.data('total')
+      sub_total  = parseFloat(divFees.data('total'))
       total      = accounting.formatMoney(sub_total+fee, "R$ ", 2, ".", ",")
       fee_string = accounting.formatMoney(fee, "R$ ", 2, ".", ",")
       $('.js-text-total-fee').text('Custo da Transação: ' + fee_string)

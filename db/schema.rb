@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(version: 20150812020217) do
     t.datetime "offer_ends_at"
     t.datetime "created_at",                                                    null: false
     t.datetime "updated_at",                                                    null: false
-    t.integer  "remaining",                                       default: 0,   null: false
   end
 
   add_index "offers", ["bank_account_id"], name: "index_offers_on_bank_account_id", using: :btree

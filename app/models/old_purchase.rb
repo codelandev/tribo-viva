@@ -7,9 +7,8 @@ class OldPurchase < ActiveRecord::Base
   belongs_to :user
   belongs_to :offer
 
-  validates :user, :offer, :amount, :status, presence: true
+  validates :user, :amount, :status, presence: true
   validates :receipt, presence: true, on: :update
-  validates :amount, numericality: { only_integer: true, greater_than: 0, less_than: 4 }
 
   scope :pending, -> { where(status: OldPurchaseStatus::PENDING) }
   scope :canceled, -> { where(status: OldPurchaseStatus::CANCELED) }
@@ -38,6 +37,6 @@ class OldPurchase < ActiveRecord::Base
   protected
 
   def generate_transaction_id
-    self.transaction_id = SecureRandom.hex
+    self.transaction_id ||= SecureRandom.hex
   end
 end

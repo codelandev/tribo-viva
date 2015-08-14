@@ -27,7 +27,7 @@ class CheckoutsController < ApplicationController
                      end
 
     # initialize the purchase object
-    purchase = current_user.purchases.create
+    purchase = current_user.purchases.create(payment_method: payment_method)
     # Add all current items from cart to orders and purchase
     session[:shopping_cart].each do |item|
       offer = Offer.find(item['id'])
@@ -37,47 +37,55 @@ class CheckoutsController < ApplicationController
                    quantity: item['quantity'])
     end
 
-    charge = Iugu::Charge.create({
-      # here is where the method is determined, :token for CC or :method bank_slip
-      param => params[param],
-      email: current_user.email,
-      tax_cents: (taxes*100).to_i,
-      payer: {
-        cpf_cnpj: current_user.cpf,
-        name: current_user.name,
-        email: current_user.email,
-        phone_prefix: current_user.phone.first(2),
-        phone: current_user.phone.last(8),
-      },
-      items: purchase.orders.map do |order|
-        {
-          description: order.offer.title,
-          quantity: order.quantity,
-          price_cents: (order.offer_value*100).to_i
-        }
-      end
-    })
-
-    if charge and charge.success
-      purchase.update_attributes(taxes: taxes,
-                                 invoice_id: charge.invoice_id,
-                                 invoice_url: charge.url,
-                                 invoice_pdf: charge.pdf,
-                                 payment_method: payment_method)
-
-      flash[:notice]          = "Compra realizada com sucesso!"
-      flash[:charge_messages] = charge.message if payment_method == 'credit_card'
-      session[:shopping_cart] = Array.new
-      PurchaseMailer.pending_payment(purchase).deliver_now
-      path = checkout_success_path(purchase.invoice_id)
+    if payment_method == 'transfer'
+      purchase.invoice_id = SecureRandom.hex(32)
+      OldPurchase.create(status: OldPurchaseStatus::PENDING, transaction_id: purchase.invoice_id, user: current_user)
+      OldPurchaseMailer.pending_payment(params[:id]).deliver_now
+      flash[:notice] = 'Aguardando confirmação'
+      purchase.save
+      path = old_purchase_path(purchase.invoice_id)
     else
-      purchase.destroy # remove the purchase if fail
-      if payment_method == 'credit_card' && charge.errors.blank?
-        flash[:charge_messages] = charge.message
+      charge = Iugu::Charge.create({
+        # here is where the method is determined, :token for CC or :method bank_slip
+        param => params[param],
+        email: current_user.email,
+        tax_cents: (taxes*100).to_i,
+        payer: {
+          cpf_cnpj: current_user.cpf,
+          name: current_user.name,
+          email: current_user.email,
+          phone_prefix: current_user.phone.first(2),
+          phone: current_user.phone.last(8),
+        },
+        items: purchase.orders.map do |order|
+          {
+            description: order.offer.title,
+            quantity: order.quantity,
+            price_cents: (order.offer_value*100).to_i
+          }
+        end
+      })
+
+      if charge and charge.success
+        purchase.update_attributes(taxes: taxes,
+                                   invoice_id: charge.invoice_id,
+                                   invoice_url: charge.url,
+                                   invoice_pdf: charge.pdf)
+
+        flash[:notice]          = "Compra realizada com sucesso!"
+        flash[:charge_messages] = charge.message if payment_method == 'credit_card'
+        session[:shopping_cart] = Array.new
+        PurchaseMailer.pending_payment(purchase).deliver_now
+        path = checkout_success_path(purchase.invoice_id)
       else
-        flash[:alert] = "Foram imputados dados errados do cartão"
+        purchase.destroy # remove the purchase if fail
+        if payment_method == 'credit_card' && charge.errors.blank?
+          flash[:charge_messages] = charge.message
+        else
+          flash[:alert] = "Foram imputados dados errados do cartão"
+        end
+        path = checkout_path
       end
-      path = checkout_path
     end
 
     redirect_to path

@@ -29,22 +29,22 @@ section.purchase
               tbody
                 tr
                   th.title--up.small Banco
-                  td #{@purchase.offer.bank_account.bank}
+                  td #{@bank_account.bank}
                 tr
                   th.title--up.small Agência
-                  td #{@purchase.offer.bank_account.agency}
+                  td #{@bank_account.agency}
                 tr
                   th.title--up.small Conta Corrente
-                  td #{@purchase.offer.bank_account.cc}
+                  td #{@bank_account.cc}
                 tr
                   th.title--up.small Operação
-                  td #{@purchase.offer.bank_account.operation_code}
+                  td #{@bank_account.operation_code}
                 tr
                   th.title--up.small CNPJ
-                  td #{@purchase.offer.bank_account.cnpj_cpf}
+                  td #{@bank_account.cnpj_cpf}
                 tr
                   th.title--up.small Razão Social
-                  td #{@purchase.offer.bank_account.owner_name}
+                  td #{@bank_account.owner_name}
 
           h3.title--up.text--yellow Resumo da Compra
           .table-responsive
@@ -54,14 +54,20 @@ section.purchase
                   th.title--up.small Oferta
                   th.title--up.small Quantidade
                   th.title--up.small Valor Total
-                tr
-                  td #{@purchase.offer.title}
-                  td #{@purchase.amount}
-                  td #{number_to_currency (@purchase.amount * (@purchase.offer.value + @purchase.offer.coordinator_tax + @purchase.offer.operational_tax))}
+                - if @purchase.nil?
+                  tr
+                    td = @purchase.offer.title
+                    td = @purchase.amount
+                    td #{number_to_currency (@purchase.amount * (@purchase.offer.value + @purchase.offer.coordinator_tax + @purchase.offer.operational_tax))}
+                - else
+                  - @purchase.orders.each do |order|
+                    td = order.offer.title
+                    td = order.quantity
+                    td = number_to_currency order.offer_value
 
           h3.title--up.text--yellow Anexe o Comprovante de Pagamento
-          - if @purchase.receipt.blank?
-            = simple_form_for @purchase, url: purchase_path, method: :patch do |f|
+          - if @old_purchase.receipt.blank?
+            = simple_form_for @old_purchase, url: old_purchase_path(@old_purchase) do |f|
               = f.input :receipt, label: false
               = f.submit 'Finalizar Compra', class: 'btn btn--md btn--block btn--yellow'
           - else

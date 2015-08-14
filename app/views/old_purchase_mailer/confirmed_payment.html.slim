@@ -4,22 +4,42 @@ p Sua compra na Rede de Consumo Colaborativo Tribo Viva está confirmada! Compar
 
 h3
   strong DADOS DA COMPRA
-p
-  | QTD. DE COTA(S): #{@purchase.amount} cota(s)
-  br
-  | VALOR TOTAL DA COMPRA: #{number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))}
-h3
-  strong DADOS DA COLETA
-p
-  | DATA E HORÁRIO: #{@purchase.offer.delivery_time_range}
-  br
-  | LOCAL: #{@purchase.offer.deliver_coordinator.address}
-  br
-  | COORDENADOR DE ENTREGA: #{@purchase.offer.deliver_coordinator.name}
-  br
-  | TELEFONE: #{@purchase.offer.deliver_coordinator.phone}
-  br
-  | EMAIL: #{@purchase.offer.deliver_coordinator.email}
+- if @purchase.is_a?(OldPurchase)
+  p
+    | QTD. DE COTA(S): #{@purchase.amount} cota(s)
+    br
+    | VALOR TOTAL DA COMPRA: #{number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))}
+  h3
+    strong DADOS DA COLETA
+  p
+    | DATA E HORÁRIO: #{@purchase.offer.delivery_time_range}
+    br
+    | LOCAL: #{@purchase.offer.deliver_coordinator.address}
+    br
+    | COORDENADOR DE ENTREGA: #{@purchase.offer.deliver_coordinator.name}
+    br
+    | TELEFONE: #{@purchase.offer.deliver_coordinator.phone}
+    br
+    | EMAIL: #{@purchase.offer.deliver_coordinator.email}
+- else
+  div
+    - @purchase.orders.each do |order|
+      - offer = order.offer
+      p offer.title
+      p QUANTIDADE: #{order.quantity} VALOR: #{number_to_currency order.offer_value}
+      h3
+        strong DADOS DA COLETA
+      p
+        | DATA E HORÁRIO: #{offer.delivery_time_range}
+        br
+        | LOCAL: #{offer.deliver_coordinator.address}
+        br
+        | COORDENADOR DE ENTREGA: #{offer.deliver_coordinator.name}
+        br
+        | TELEFONE: #{offer.deliver_coordinator.phone}
+        br
+        | EMAIL: #{offer.deliver_coordinator.email}
+      hr
 
 p * Você tem até 24h antes do horário da coleta para indicar uma pessoa para buscar sua cota em seu lugar. Essa pessoa deverá portar documento de identificação com foto.
 hr

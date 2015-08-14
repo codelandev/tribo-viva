@@ -20,8 +20,8 @@ section.checkout
                       label#js-bank-slip-checkbox-label.btn.btn--sm.btn--yellow Boleto
                       = check_box_tag :method, 'bank_slip', false, id: 'js-payment-method-bank-slip', style: 'display: none;'
 
-                    / label#js-transfer-checkbox-label.btn.btn--sm.btn--yellow Transferência/Depósito
-                    / = check_box_tag :method, 'transfer', false, id: 'js-payment-method-transfer', style: 'display: none;'
+                    label#js-transfer-checkbox-label.btn.btn--sm.btn--yellow Transferência/Depósito
+                    = check_box_tag :method, 'transfer', false, id: 'js-payment-method-transfer', style: 'display: none;'
 
                   #js-creditcard-form
                     h3.title--up Preencha as Informações

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require formatter
 //= require nprogress
 //= require nprogress-turbolinks
 //= require bootstrap
