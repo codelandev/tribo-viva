@@ -33,4 +33,9 @@ class Offer < ActiveRecord::Base
   def is_valid_offer?
     0 < remaining && DateTime.now < offer_ends_at
   end
+
+  def can_pay_with_bank_slip?
+    # Now must be BEFORE the last valid business day of the ogger
+    DateTime.now < 2.business_days.before(offer_ends_at)
+  end
 end

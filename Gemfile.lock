@@ -83,6 +83,9 @@ GEM
       sass (~> 3.4)
       thor
     builder (3.2.2)
+    business_time (0.7.4)
+      activesupport (>= 3.1.0)
+      tzinfo
     byebug (5.0.0)
       columnize (= 0.9.0)
     capybara (2.4.4)
@@ -458,6 +461,7 @@ DEPENDENCIES
   autoprefixer-rails
   awesome_print (~> 1.6.1)
   bootstrap-sass (~> 3.3.3)
+  business_time
   byebug
   capybara
   carrierwave

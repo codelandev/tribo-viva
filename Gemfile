@@ -53,6 +53,8 @@ gem 'rack-zippy', '~> 3.0.0'
 gem 'iugu', '~> 1.0.8'
 # Format/Parse decimal numbers
 gem 'accountingjs-rails'
+# Calculate business days of the offers
+gem 'business_time'
 
 group :development do
   gem 'letter_opener'

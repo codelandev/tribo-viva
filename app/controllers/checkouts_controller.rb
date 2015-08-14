@@ -4,6 +4,12 @@ class CheckoutsController < ApplicationController
 
   def checkout
     authorize :checkout
+    if session[:shopping_cart].any?
+      session[:shopping_cart].each do |item|
+        can_pay = Offer.find(item['id']).can_pay_with_bank_slip?
+        @block_bank_slip = !can_pay
+      end
+    end
   end
 
   def process_payment
