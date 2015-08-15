@@ -13,10 +13,6 @@ class Purchase < ActiveRecord::Base
     total + taxes
   end
 
-  def to_param
-    invoice_id
-  end
-
   def confirm!
     update_attributes(status: PurchaseStatus::PAID)
   end

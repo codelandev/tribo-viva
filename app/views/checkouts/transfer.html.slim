@@ -58,7 +58,7 @@ section.purchase
                   tr
                     td = @purchase.offer.title
                     td = @purchase.amount
-                    td #{number_to_currency (@purchase.amount * (@purchase.offer.value + @purchase.offer.coordinator_tax + @purchase.offer.operational_tax))}
+                    td #{number_to_currency (@purchase.amount * @purchase.offer.total)}
                 - else
                   - @purchase.orders.each do |order|
                     tr
@@ -81,7 +81,7 @@ section.purchase
 
           h3.title--up.text--yellow Anexe o Comprovante de Pagamento
           - if @purchase.receipt.blank?
-            = simple_form_for @purchase, url: checkout_update_path(@purchase) do |f|
+            = simple_form_for @purchase, url: checkout_update_path(@purchase.invoice_id) do |f|
               = f.input :receipt, label: false
               = f.submit 'Finalizar Compra', class: 'btn btn--md btn--block btn--yellow'
           - else

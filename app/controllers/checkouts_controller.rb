@@ -36,15 +36,14 @@ class CheckoutsController < ApplicationController
     authorize :checkout
 
     # get payment method, if blank, it's credit card, if not, it's bank_slip
-    param          = params[:token].empty? ? :method : :token
     payment_method = params[:method]
-    taxes          = if payment_method == 'credit_card'
-                       cart_session.total_card_fee
-                     elsif payment_method == 'bank_slip'
-                       cart_session.total_bank_slip_fee
-                     elsif payment_method == 'transfer'
-                       0
-                     end
+    taxes = if payment_method == 'credit_card'
+            cart_session.total_card_fee
+          elsif payment_method == 'bank_slip'
+            cart_session.total_bank_slip_fee
+          elsif payment_method == 'transfer'
+            0
+          end
 
     # initialize the purchase object
     purchase = current_user.purchases.create(payment_method: payment_method)
@@ -64,6 +63,9 @@ class CheckoutsController < ApplicationController
       flash[:notice] = 'Aguardando confirmação'
       path = checkout_transfer_path(purchase.invoice_id)
     else
+      # Check the payment method used (Iugu only accepts token & method)
+      # If credit card, so use token param, if not, use
+      param  = params[:method] == 'credit_card' ? :token : :method
       charge = Iugu::Charge.create({
         # here is where the method is determined, :token for CC or :method bank_slip
         param => params[param],
