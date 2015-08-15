@@ -1,17 +1,23 @@
 section.purchase
   .container
     .row
-      .col-sm-10.col-centered
+      .col-md-10.col-centered
         .success
           h1.title--up.text--green SUCESSO!
           p Sua compra foi realizada com sucesso. Veja abaixo os detalhes da compra e da coleta:
           - @purchase.orders.each do |order|
-            p
-              | QUANTIDADE: #{order.quantity} cota(s)
-              br
-              | VALOR: #{number_to_currency order.total}
-              br
-              span.small ID da compra: #{@purchase.invoice_id}
+            ul
+              li
+                | QUANTIDADE: #{order.quantity} cota(s)
+                | |
+                | TOTAL DA COTA: #{number_to_currency order.total}
+
+          p
+            | VALOR DA TRANSAÇÃO: #{number_to_currency @purchase.taxes}
+            br
+            | TOTAL DA COMPRA: #{number_to_currency @purchase.total_with_taxes}
+            br
+          span.small ID da compra: #{@purchase.invoice_id}
 
           h2.title--up.text--brown Detalhes da sua Compra:
           - @purchase.orders.each do |order|

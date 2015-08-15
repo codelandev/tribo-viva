@@ -4,7 +4,7 @@ ActiveAdmin.register Purchase do
   show do
     attributes_table do
       row :user
-      row :token
+      row :invoice_id
       row :status
       row :taxes do |purchase|
         number_to_currency purchase.taxes
@@ -20,6 +20,9 @@ ActiveAdmin.register Purchase do
         column :quantity
         column :offer_value do |order|
           number_to_currency order.offer_value
+        end
+        column 'Valor total da cota' do |order|
+          number_to_currency order.offer_value*order.quantity
         end
       end
     end
