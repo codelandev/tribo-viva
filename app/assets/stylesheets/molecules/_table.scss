@@ -2,6 +2,9 @@
 	&.table {
 		background-color: transparent;
 	}
+  &.table-brown-light {
+    background-color: $brown-light;
+  }
 }
 
 td.small {

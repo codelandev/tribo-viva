@@ -13,15 +13,15 @@ section.checkout
 
                   h3.title--up Selecione a opção de pagamento
                   .btn-group.payment-method-btn-group data-toggle="buttons"
-                    label#js-credit-card-checkbox-label.btn.btn--sm.btn--yellow.active Cartão de crédito
-                    = check_box_tag :method, 'credit_card', true, id: 'js-payment-method-credit-card', style: 'display: none;'
+                    label#js-transfer-checkbox-label.btn.btn--sm.btn--yellow.u-marginRgt5.active Transferência/Depósito
+                    = check_box_tag :method, 'transfer', true, id: 'js-payment-method-transfer', style: 'display: none;'
+                    
+                    label#js-credit-card-checkbox-label.btn.u-marginRgt5.btn--sm.btn--yellow Cartão de crédito
+                    = check_box_tag :method, 'credit_card', false, id: 'js-payment-method-credit-card', style: 'display: none;'
 
                     - if !@block_bank_slip
                       label#js-bank-slip-checkbox-label.btn.btn--sm.btn--yellow Boleto
                       = check_box_tag :method, 'bank_slip', false, id: 'js-payment-method-bank-slip', style: 'display: none;'
-
-                    label#js-transfer-checkbox-label.btn.btn--sm.btn--yellow Transferência/Depósito
-                    = check_box_tag :method, 'transfer', false, id: 'js-payment-method-transfer', style: 'display: none;'
 
                   #js-creditcard-form
                     h3.title--up Preencha as Informações
@@ -50,7 +50,7 @@ section.checkout
                       = link_to ' termos de compras', terms_path, target: '_blank', title: 'Veja nossos Termos de Compras'
 
                   h3.title--up Finalize a compra!
-                  = submit_tag 'Pagar', class: 'js-submit-payment btn btn--md btn--yellow btn--block', disabled: true
+                  = submit_tag 'Pagar', class: 'js-submit-payment btn btn--md btn--yellow btn--block', disabled: true, title: 'Aceite os termos de compra para pagar'
                   br
                   br
                   br

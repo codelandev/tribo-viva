@@ -9,59 +9,15 @@ hr
 h3
   strong RESUMO DA COMPRA
 - if @purchase.is_a?(OldPurchase)
-  ul
-    li QTD. DE COTA(S) ADQUIRIDAS: #{@purchase.amount} cota(s)
-    li VALOR TOTAL DA COMPRA: #{number_to_currency (@purchase.amount * (@purchase.offer.coordinator_tax + @purchase.offer.operational_tax + @purchase.offer.value))}
-    li A OFERTA EXPIRA EM: #{distance_of_time_in_words(@purchase.offer.offer_ends_at, Time.now)} (ou quando todas as cotas tiverem sido adquiridas).
-  hr
 - else
   - @purchase.orders.each do |order|
     ul
       li OFERTA: #{order.offer.title}
       li QUANTIDADE: #{order.quantity} cota(s)
-      li VALOR TOTAL DA COMPRA: #{number_to_currency order.offer_value}
+      li TOTAL: #{number_to_currency order.offer_value*order.quantity}
       li A OFERTA EXPIRA EM: #{distance_of_time_in_words(order.offer.offer_ends_at, Time.now)} (ou quando todas as cotas tiverem sido adquiridas).
-    hr
-
-h3
-  strong DADOS DA COLETA
-- if @purchase.is_a?(OldPurchase)
-  p
-    | DATA E HORÁRIO: #{@purchase.offer.delivery_time_range}
-    br
-    | LOCAL: #{@purchase.offer.deliver_coordinator.partial_address}
-    p Por motivos de segurança, o número do endereço só será fornecido para os participantes da oferta.
-- else
-  - @purchase.orders.each do |order|
-    p
-      | DATA E HORÁRIO: #{order.offer.delivery_time_range}
-      br
-      | LOCAL: #{order.offer.deliver_coordinator.partial_address}
-      p Por motivos de segurança, o número do endereço só será fornecido para os participantes da oferta.
-
-hr
-
-h3
-  strong CONTA PARA DEPÓSITO OU TRANSFERÊNCIA BANCÁRIA
-h4
-  strong Transferência ou depósito ONLINE:
-ul
-  li Salve o comprovante no seu computador
-  li = link_to 'Clique no aqui para entrar no nosso site e enviar o seu comprovante', old_purchase_url(id: (@purchase.try(:transaction_id) || @purchase.try(:invoice_id)))
-  li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
-  li Selecione a imagem do comprovante
-  li Clique no botão "Finalizar Compra" para enviá-lo
-br
-h4
-  strong Transferência ou depósito em uma AGÊNCIA BANCÁRIA:
-ul
-  li Imprima o comprovante
-  li Tire uma foto do mesmo com seu celular
-  li = link_to 'Clique no aqui para entrar no nosso site e enviar o seu comprovante', old_purchase_url(id: (@purchase.try(:transaction_id) || @purchase.try(:invoice_id)))
-  li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
-  li Selecione a foto do comprovante
-  li Clique no botão "Finalizar Compra" para enviá-lo
-
+  h2 TOTAL A PAGAR: #{number_to_currency @purchase.total}.
+  hr
 h3
   strong DADOS DA CONTA
 p
@@ -79,7 +35,26 @@ p
   br
   | RAZÃO SOCIAL: #{@bank_account.owner_name}
 hr
-
+h3
+  strong COMO FAZER O PAGAMENTO
+h4
+  strong Transferência ou depósito ONLINE:
+ul
+  li Salve o comprovante no seu computador
+  li = link_to 'Clique no aqui para entrar no nosso site e enviar o seu comprovante', old_purchase_url(id: (@purchase.try(:transaction_id) || @purchase.try(:invoice_id)))
+  li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
+  li Selecione a imagem do comprovante
+  li Clique no botão "Finalizar Compra" para enviá-lo
+h4
+  strong Transferência ou depósito em uma AGÊNCIA BANCÁRIA:
+ul
+  li Imprima o comprovante
+  li Tire uma foto do mesmo com seu celular
+  li = link_to 'Clique no aqui para entrar no nosso site e enviar o seu comprovante', old_purchase_url(id: (@purchase.try(:transaction_id) || @purchase.try(:invoice_id)))
+  li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
+  li Selecione a foto do comprovante
+  li Clique no botão "Finalizar Compra" para enviá-lo
+hr
 h3
   strong  SUGESTÕES OU DÚVIDAS?
 p Envie email para #{mail_to 'tribo@triboviva.com.br'}

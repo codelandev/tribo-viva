@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   get 'purchases', to: 'purchases#index', as: :purchases
   # checkout/update is used by Iugu to trigger payment update callbacks
-  post 'purchases/#{Rails.application.secrets.iugu_auth_code}/update', to: 'purchases#update', as: :purchase_update
+  post "purchases/#{Rails.application.secrets.iugu_auth_code}/update", to: 'purchases#update', as: :purchase_update
 
   get 'checkout', to: 'checkouts#checkout', as: :checkout
   get 'checkout/success/:invoice_id', to: 'checkouts#success', as: :checkout_success
