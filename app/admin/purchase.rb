@@ -1,5 +1,5 @@
 ActiveAdmin.register Purchase do
-  permit_params :status, :total, :taxes
+  permit_params :status, :total, :taxes, :receipt
 
   show do
     attributes_table do

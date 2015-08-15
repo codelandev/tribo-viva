@@ -20,19 +20,21 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :old_purchases, only: [:show, :update], path: 'deposit' do
-    member do
-      get '/success', to: 'old_purchases#success', as: :success
-    end
-  end
+  # resources :old_purchases, only: [:show, :update], path: 'deposit' do
+  #   member do
+  #     get '/success', to: 'old_purchases#success', as: :success
+  #   end
+  # end
 
   get 'purchases', to: 'purchases#index', as: :purchases
   # checkout/update is used by Iugu to trigger payment update callbacks
   post "purchases/#{Rails.application.secrets.iugu_auth_code}/update", to: 'purchases#update', as: :purchase_update
 
-  get 'checkout', to: 'checkouts#checkout', as: :checkout
-  get 'checkout/success/:invoice_id', to: 'checkouts#success', as: :checkout_success
-  post 'checkout/process_payment', to: 'checkouts#process_payment', as: :process_payment
+  get 'checkout',                      to: 'checkouts#checkout',        as: :checkout
+  get 'checkout/success/:invoice_id',  to: 'checkouts#success',         as: :checkout_success
+  get 'checkout/transfer/:invoice_id', to: 'checkouts#transfer',        as: :checkout_transfer
+  post 'checkout/process_payment',     to: 'checkouts#process_payment', as: :process_payment
+  patch 'checkout/:invoice_id',        to: 'checkouts#update',          as: :checkout_update
 
   get '/index', format: :php, to: redirect('/')
 

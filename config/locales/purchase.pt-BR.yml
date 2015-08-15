@@ -12,6 +12,7 @@ pt-BR:
         total: 'Total'
         taxes: 'Taxas'
         status: 'Status'
+        receipt: 'Recibo'
 
   enumerations:
     purchase_status:

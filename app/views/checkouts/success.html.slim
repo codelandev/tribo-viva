@@ -1,17 +1,47 @@
-section.checkout
+section.purchase
   .container
     .row
-      .col-sm-12.col-md-10.col-centered
-        .form.brown-dark
-          - if @purchase.payment_method == 'credit_card'
-            h1.title--up.text--yellow.text-center Compra realizada com sucesso!
-            iframe src="#{@purchase.invoice_url}" width="100%" height="500"
-            p Não consegue visualizar a sua nota? #{link_to 'Clique aqui', @purchase.invoice_url, target: 'blank'}
+      .col-sm-10.col-centered
+        .success
+          h1.title--up.text--green SUCESSO!
+          p Sua compra foi realizada com sucesso. Veja abaixo os detalhes da compra e da coleta:
+          - @purchase.orders.each do |order|
+            p
+              | QUANTIDADE: #{order.quantity} cota(s)
+              br
+              | VALOR: #{number_to_currency order.total}
+              br
+              span.small ID da compra: #{@purchase.invoice_id}
 
-          - elsif @purchase.payment_method == 'bank_slip'
-            h1.title--up.text--yellow.text-center Pague a sua compra!
-            h3.text-center Você tem até as 23h59min de hoje (#{@purchase.created_at.strftime('%d/%m')}) para pagar.
-            iframe src="#{@purchase.invoice_url}" width="100%" height="500"
-            br
-            br
-            p Não consegue visualizar o boleto? #{link_to 'Clique aqui', @purchase.invoice_url, target: 'blank'}
+          h2.title--up.text--brown Detalhes da sua Compra:
+          - @purchase.orders.each do |order|
+            h3.title--up.text--green = order.offer.title
+            .purchase-info__producer
+              span.glyphicon.glyphicon-grain
+              = order.offer.producer.name
+            .offer-info__products
+              p = simple_format order.offer.products_description
+
+
+          h2.title--up.text--brown Detalhes da coleta:
+          - @purchase.orders.each do |order|
+            .offer-info__collect
+              .offer-info__coordinator
+                span.offer-info__coordinator__avatar style="background-image: url(#{order.offer.deliver_coordinator.avatar});"
+                span.offer-info__coordinator__name
+                  p = order.offer.deliver_coordinator.name
+                  .small Coordenador de Entrega
+              p As compras devem ser retiradas na data e local abaixo:
+              ul
+                li
+                  span.glyphicon.glyphicon-calendar
+                  span = order.offer.delivery_time_range
+                li
+                  span.glyphicon.glyphicon-map-marker
+                  span = order.offer.deliver_coordinator.address
+                li
+                  span.glyphicon.glyphicon-phone
+                  span = order.offer.deliver_coordinator.phone
+                li
+                  span.glyphicon.glyphicon-envelope
+                  span = order.offer.deliver_coordinator.email

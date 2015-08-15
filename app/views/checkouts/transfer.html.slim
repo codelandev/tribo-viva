@@ -1,7 +1,7 @@
 section.purchase
   .container
     .row
-      .col-sm-10.col-md-8.col-centered
+      .col-sm-10.col-centered
         .purchase-form__full
           h2.title--up.text--yellow Pague e confirme sua compra
           p Agora, falta pouco. Você só precisa fazer um depósito ou uma transferência bancária no valor total do pedido na nossa conta e anexar o comprovante no campo a seguir. Você pode fazer isto de 2 maneiras:
@@ -53,7 +53,7 @@ section.purchase
                 tr
                   th.title--up.small Oferta
                   th.title--up.small Quantidade
-                  th.title--up.small Total
+                  th.title--up.small Total por item
                 - if @purchase.nil?
                   tr
                     td = @purchase.offer.title
@@ -68,11 +68,20 @@ section.purchase
                 tr
                   td
                   td
-                  td.title--up.text--yellow #{number_to_currency @purchase.total}
+                  td
+
+                tr
+                  th
+                  th
+                  th.title--up.text--yellow Total
+                tr
+                  td
+                  td
+                  td #{number_to_currency @purchase.total}
 
           h3.title--up.text--yellow Anexe o Comprovante de Pagamento
-          - if @old_purchase.receipt.blank?
-            = simple_form_for @old_purchase, url: old_purchase_path(@old_purchase) do |f|
+          - if @purchase.receipt.blank?
+            = simple_form_for @purchase, url: checkout_update_path(@purchase) do |f|
               = f.input :receipt, label: false
               = f.submit 'Finalizar Compra', class: 'btn btn--md btn--block btn--yellow'
           - else

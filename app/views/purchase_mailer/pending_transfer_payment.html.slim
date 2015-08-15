@@ -3,7 +3,7 @@ p Para finalizar sua compra na Rede de Consumo Colaborativo Tribo Viva, basta vo
 p Se você já efetuou o pagamento e nos enviou o comprovante, por favor desconsidere este email.
 hr
 
-p = link_to 'CLIQUE AQUI PARA ENTRAR NO NOSSO SITE E ENVIAR O SEU COMPROVANTE', old_purchase_url(id: (@purchase.try(:transaction_id) || @purchase.try(:invoice_id)))
+p = link_to 'CLIQUE AQUI PARA ENTRAR NO NOSSO SITE E ENVIAR O SEU COMPROVANTE', checkout_transfer_url(@purchase.invoice_id)
 hr
 
 h3
@@ -41,7 +41,7 @@ h4
   strong Transferência ou depósito ONLINE:
 ul
   li Salve o comprovante no seu computador
-  li = link_to 'Clique no aqui para entrar no nosso site e enviar o seu comprovante', old_purchase_url(id: (@purchase.try(:transaction_id) || @purchase.try(:invoice_id)))
+  li = link_to 'Clique no aqui para entrar no nosso site e enviar o seu comprovante', checkout_transfer_url(@purchase.invoice_id)
   li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
   li Selecione a imagem do comprovante
   li Clique no botão "Finalizar Compra" para enviá-lo
@@ -50,7 +50,7 @@ h4
 ul
   li Imprima o comprovante
   li Tire uma foto do mesmo com seu celular
-  li = link_to 'Clique no aqui para entrar no nosso site e enviar o seu comprovante', old_purchase_url(id: (@purchase.try(:transaction_id) || @purchase.try(:invoice_id)))
+  li = link_to 'Clique no aqui para entrar no nosso site e enviar o seu comprovante', checkout_transfer_url(@purchase.invoice_id)
   li Em "Anexe o Comprovante de Pagamento" Clique no botão "Selecionar arquivo"
   li Selecione a foto do comprovante
   li Clique no botão "Finalizar Compra" para enviá-lo

@@ -16,7 +16,7 @@ class OldPurchase < ActiveRecord::Base
 
   has_enumeration_for :status, with: OldPurchaseStatus, create_helpers: true
 
-  mount_uploader :receipt, OldPurchaseUploader
+  mount_uploader :receipt, PurchaseUploader
 
   def to_param
     transaction_id

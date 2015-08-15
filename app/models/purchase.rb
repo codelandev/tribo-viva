@@ -7,7 +7,21 @@ class Purchase < ActiveRecord::Base
   # Check PurchaseStatus class to all statuses availables
   scope :by_status, -> (status) { where(status: status) }
 
+  mount_uploader :receipt, PurchaseUploader
+
   def total_with_taxes
     total + taxes
+  end
+
+  def to_param
+    invoice_id
+  end
+
+  def confirm!
+    update_attributes(status: PurchaseStatus::PAID)
+  end
+
+  def cancel!
+    update_attributes(status: PurchaseStatus::CANCELED)
   end
 end

@@ -1,7 +1,27 @@
 class CheckoutsController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  before_action :store_location, only: :checkout
+  before_action :store_location, only: [:transfer, :checkout]
 
+  # Used to show the page to upload the transfer receipt
+  def transfer
+    @purchase = Purchase.find_by(invoice_id: params[:invoice_id])
+    @bank_account = BankAccount.first
+  end
+
+  # Used to upload the transfer receipt
+  def update
+    purchase = Purchase.find_by(invoice_id: params[:invoice_id])
+    if params[:purchase].present? && purchase.update_attributes(purchase_params)
+      purchase.confirm!
+      PurchaseMailer.confirmed_payment(purchase).deliver_now
+      redirect_to checkout_success_path(purchase.invoice_id)
+    else
+      flash[:alert] = 'Você deve fazer o upload do recibo de pagamento!'
+      redirect_to checkout_transfer_path(purchase.invoice_id)
+    end
+  end
+
+  #
   def checkout
     authorize :checkout
     if session[:shopping_cart].any?
@@ -38,13 +58,11 @@ class CheckoutsController < ApplicationController
     end
 
     if payment_method == 'transfer'
-      purchase.invoice_id = SecureRandom.hex(32)
-      OldPurchase.create(status: OldPurchaseStatus::PENDING, transaction_id: purchase.invoice_id, user: current_user)
-      purchase.save
-      OldPurchaseMailer.pending_payment(purchase.invoice_id).deliver_now
+      purchase.update_attributes(invoice_id: SecureRandom.hex(32))
+      PurchaseMailer.pending_transfer_payment(purchase).deliver_now
       session[:shopping_cart] = []
       flash[:notice] = 'Aguardando confirmação'
-      path = old_purchase_path(purchase.invoice_id)
+      path = checkout_transfer_path(purchase.invoice_id)
     else
       charge = Iugu::Charge.create({
         # here is where the method is determined, :token for CC or :method bank_slip
@@ -93,7 +111,7 @@ class CheckoutsController < ApplicationController
   end
 
   def success
-    @purchase = Purchase.find_by(invoice_id: (params[:invoice_id] || params[:id])) || OldPurchase.find_by!(transaction_id: (params[:invoice_id] || params[:id]))
+    @purchase = Purchase.find_by(invoice_id: (params[:invoice_id]))
   end
 
   protected
@@ -110,5 +128,9 @@ class CheckoutsController < ApplicationController
       flash[:alert] = "Faça login para acessar esta página"
       redirect_to new_user_session_path
     end
+  end
+
+  def purchase_params
+    params.require(:purchase).permit(:receipt)
   end
 end

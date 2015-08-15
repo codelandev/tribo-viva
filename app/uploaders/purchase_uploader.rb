@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class OldPurchaseUploader < CarrierWave::Uploader::Base
+class PurchaseUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
