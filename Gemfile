@@ -25,7 +25,7 @@ gem 'turbolinks'
 gem 'active_admin_editor', github: 'boontdustie/active_admin_editor'
 # For image uploader
 gem 'carrierwave'
-gem 'fog'
+gem 'fog', require: 'fog/aws/storage'
 # For dynamic meta tags
 gem 'metamagic'
 # For better enumerations
@@ -55,6 +55,8 @@ gem 'iugu', '~> 1.0.8'
 gem 'accountingjs-rails'
 # Calculate business days of the offers
 gem 'business_time'
+# Send assets to S3 instead of serving through Heroku
+gem 'asset_sync', github: 'rumblelabs/asset_sync'
 
 group :development do
   gem 'letter_opener'
