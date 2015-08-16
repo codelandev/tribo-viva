@@ -1,5 +1,4 @@
-- meta og: { title: "Tribo Viva", description: "A Tribo Viva é um novo sistema de consumo, formado por cidadãos e produtores locais de alimentos orgânicos. Nossa rede exclui atravessadores, viabilizando o acesso contínuo e sustentável a uma alimentação com mais saúde, inclusão social e melhor custo-benefício para todos os envolvidos.",
-             url: request.url, image: "#{asset_url('og-triboviva.png')}" }
+- meta og: { title: "Tribo Viva", description: "A Tribo Viva é um novo sistema de consumo, formado por cidadãos e produtores locais de alimentos orgânicos. Nossa rede exclui atravessadores, viabilizando o acesso contínuo e sustentável a uma alimentação com mais saúde, inclusão social e melhor custo-benefício para todos os envolvidos.", url: request.url, image: "#{asset_url('logo.png')}" }
 
 section.hero
  .hero__slogan.text-center.text--white
@@ -13,46 +12,49 @@ section.offers
   .container
     .row
       .col-sm-12.col-md-10.col-centered
-        - if @valid_offers.present?
-          h2.text--green
-            span.title--up Ofertas da Semana
-            span.small Porto Alegre
+        h2.text--green
+          span.title--up Ofertas da Semana
+          span.small Porto Alegre
         .row
-          - @valid_offers.each do |offer|
-            .col-sm-6.col-md-4
-              = link_to offer do
-                article.card
-                  .card__image style="background-image: url(#{offer.image.url});"
-                  .card__info
-                    span.card__info__price title="Preço total da cota"
-                      = number_to_currency offer.coordinator_tax + offer.operational_tax + offer.value
-                      span.small
-                        |  / 1 cota
-                      span.pull-right title="Data da Coleta"
-                        span.glyphicon.glyphicon-calendar
-                        = offer.collect_starts_at.strftime('%d/%m')
-                    h1.card__info__title.title--up = link_to offer.title, offer_path(offer)
-                    span.card__info__place title="Nome do Produtor"
-                      span.glyphicon.glyphicon-grain
-                      = offer.producer.name
+          - if @valid_offers.present?
+            - @valid_offers.each do |offer|
+              .col-sm-6.col-md-4
+                = link_to offer do
+                  article.card
+                    .card__image style="background-image: url(#{offer.image.url});"
+                    .card__info
+                      span.card__info__price title="Preço total da cota"
+                        = number_to_currency offer.coordinator_tax + offer.operational_tax + offer.value
+                        span.small
+                          |  / 1 cota
+                        span.pull-right title="Data da Coleta"
+                          span.glyphicon.glyphicon-calendar
+                          = offer.collect_starts_at.strftime('%d/%m')
+                      h1.card__info__title.title--up = link_to offer.title, offer_path(offer)
+                      span.card__info__place title="Nome do Produtor"
+                        span.glyphicon.glyphicon-grain
+                        = offer.producer.name
 
-                  .card__action
-                    - if offer.is_valid_offer?
-                      = link_to 'DETALHES', offer_path(offer), class: 'btn btn--md btn--block btn--yellow'
-                    - else
-                      = link_to 'OFERTA FINALIZADA', offer_path(offer), class: 'btn btn--md btn--block btn--disable'
-                  .card__progress
-                    .pull-left.text-left
-                      .span
-                        = offer.remaining
-                        |   cotas
-                      .small restantes
-                    .pull-right.text-right
-                      .span
-                        = distance_of_time_in_words(offer.offer_ends_at, Time.now)
-                      .small restantes
-                    .progress[title="Cotas adquiridas"]
-                      .progress-bar.progress-bar-yellow[role="progressbar" aria-valuenow="#{progress_bar_percentage(offer)}" aria-valuemin="0" aria-valuemax="100" style="width: #{progress_bar_percentage(offer)}%"]
+                    .card__action
+                      - if offer.is_valid_offer?
+                        = link_to 'DETALHES', offer_path(offer), class: 'btn btn--md btn--block btn--yellow'
+                      - else
+                        = link_to 'OFERTA FINALIZADA', offer_path(offer), class: 'btn btn--md btn--block btn--disable'
+                    .card__progress
+                      .pull-left.text-left
+                        .span
+                          = offer.remaining
+                          |   cotas
+                        .small restantes
+                      .pull-right.text-right
+                        .span
+                          = distance_of_time_in_words(offer.offer_ends_at, Time.now)
+                        .small restantes
+                      .progress[title="Cotas adquiridas"]
+                        .progress-bar.progress-bar-yellow[role="progressbar" aria-valuenow="#{progress_bar_percentage(offer)}" aria-valuemin="0" aria-valuemax="100" style="width: #{progress_bar_percentage(offer)}%"]
+          - else
+            .col-xs-12
+              h2 Não há novas ofertas para esta semana.
 
 section.old-offers
   .container
@@ -111,7 +113,6 @@ section.about
                 span.fa.fa-instagram
             h3.text--brown Inscreva-se na nossa newsletter:
             .input-group
-              /! Begin MailChimp Signup Form
               #mc_embed_signup
                 form#mc-embedded-subscribe-form.validate action="//triboviva.us10.list-manage.com/subscribe/post?u=1f1e4e1052601b742b6863a53&amp;id=2dbbea5be5" method="post" name="mc-embedded-subscribe-form" novalidate="" target="_blank"
                   #mc_embed_signup_scroll
@@ -124,4 +125,3 @@ section.about
                         input name="b_1f1e4e1052601b742b6863a53_2dbbea5be5" tabindex="-1" type="text" value=""
                       .input-group-btn
                         input#mc-embedded-subscribe.btn.btn--md.btn--brown name="subscribe" type="submit" value="OK"
-              /! End mc_embed_signup
