@@ -4,7 +4,7 @@
 # overhead.  For more information, visit www.newrelic.com.
 #
 # Generated July 27, 2015
-# 
+#
 # This configuration file is custom generated for app36889582@heroku.com
 #
 # For full documentation of agent configuration options, please refer to
@@ -16,7 +16,7 @@ common: &default_settings
 
   # Your application name. Renaming here affects where data displays in New
   # Relic.  For more details, see https://docs.newrelic.com/docs/apm/new-relic-apm/maintenance/renaming-applications
-  app_name: My Application
+  app_name: Tribo Viva
 
   # To disable the agent regardless of other settings, uncomment the following:
   # agent_enabled: false
@@ -24,13 +24,12 @@ common: &default_settings
   # Logging level for log/newrelic_agent.log
   log_level: info
 
-
 # Environment-specific settings are in this section.
 # RAILS_ENV or RACK_ENV (as appropriate) is used to determine the environment.
 # If your application has other named environments, configure them here.
 development:
   <<: *default_settings
-  app_name: My Application (Development)
+  app_name: Tribo Viva (Development)
 
   # NOTE: There is substantial overhead when running in developer mode.
   # Do not use for production or load testing.
@@ -43,7 +42,8 @@ test:
 
 staging:
   <<: *default_settings
-  app_name: My Application (Staging)
+  license_key: 58699ce6b931a2a4de9934461a8ad5dc43cf0f08
+  app_name: Tribo Viva (Staging)
 
 production:
   <<: *default_settings
