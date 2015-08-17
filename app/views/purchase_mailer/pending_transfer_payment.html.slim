@@ -14,7 +14,14 @@ h3
     ul
       li OFERTA: #{order.offer.title}
       li QUANTIDADE: #{order.quantity} cota(s)
-      li TOTAL: #{number_to_currency order.offer_value*order.quantity}
+      li VALOR UNITÁRIO (repassados ao produtor): #{number_to_currency order.offer.value}
+      li 
+        | #{t('activerecord.attributes.offer.operational_tax')}:
+        |  #{number_to_currency order.offer.operational_tax}
+      li 
+        | #{t('activerecord.attributes.offer.coordinator_tax')}: 
+        |  #{number_to_currency order.offer.coordinator_tax}
+      li TOTAL DA OFERTA: #{number_to_currency order.total}
       li A OFERTA EXPIRA EM: #{distance_of_time_in_words(order.offer.offer_ends_at, Time.now)} (ou quando todas as cotas tiverem sido adquiridas).
   h2 TOTAL A PAGAR: #{number_to_currency @purchase.total}.
   hr
@@ -36,7 +43,7 @@ p
   | RAZÃO SOCIAL: #{@bank_account.owner_name}
 hr
 h3
-  strong COMO FAZER O PAGAMENTO
+  strong COMO FAZER O PAGAMENTO?
 h4
   strong Transferência ou depósito ONLINE:
 ul

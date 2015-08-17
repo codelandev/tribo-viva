@@ -1,53 +1,93 @@
 section.purchase
   .container
     .row
-      .col-md-10.col-centered
+      .col-md-8.col-centered
         .success
-          h1.title--up.text--green SUCESSO!
-          p Sua compra foi realizada com sucesso. Veja abaixo os detalhes da compra e da coleta:
-          - @purchase.orders.each do |order|
-            ul
-              li
-                | QUANTIDADE: #{order.quantity} cota(s)
-                | |
-                | TOTAL DA COTA: #{number_to_currency order.total}
+          - if @purchase.payment_method == 'credit_card' || @purchase.payment_method == 'transfer'
+            h1.title--up.text--green SUCESSO!
+            p Sua compra foi realizada com sucesso.
+            hr
+            h2.title--up.text--brown Resumo da Compra:
+            - @purchase.orders.each do |order|
+              h3.title--up.text--green = order.offer.title
+              .offer-info__products  
+                ul 
+                  li QUANTIDADE: #{order.quantity} cota(s)
+                  li VALOR UNITÁRIO (repassados ao produtor): #{number_to_currency order.offer.value}
+                  li 
+                    | #{t('activerecord.attributes.offer.operational_tax')}:
+                    |  #{number_to_currency order.offer.operational_tax}
+                  li 
+                    | #{t('activerecord.attributes.offer.coordinator_tax')}: 
+                    |  #{number_to_currency order.offer.coordinator_tax}
+                  li TOTAL DA OFERTA: #{number_to_currency order.total}
+                p = simple_format order.offer.products_description                
+              .offer-info__collect
+                .offer-info__coordinator
+                  span.offer-info__coordinator__avatar style="background-image: url(#{order.offer.deliver_coordinator.avatar});"
+                  span.offer-info__coordinator__name
+                    p = order.offer.deliver_coordinator.name
+                    .small Coordenador de Entrega
+                p As compras devem ser retiradas na data e local abaixo:
+                ul
+                  li
+                    span.glyphicon.glyphicon-calendar
+                    span = order.offer.delivery_time_range
+                  li
+                    span.glyphicon.glyphicon-map-marker
+                    span = order.offer.deliver_coordinator.address
+                  li
+                    span.glyphicon.glyphicon-earphone
+                    span = order.offer.deliver_coordinator.phone
+                  li
+                    span.glyphicon.glyphicon-envelope
+                    span = order.offer.deliver_coordinator.email
+            hr
+            - if @purchase.payment_method == 'credit_card'
+              span.text--green VALOR DA TRANSAÇÃO: #{number_to_currency @purchase.taxes}
+            h2.title--up.text--green.u-marginTop5 TOTAL PAGO: #{number_to_currency @purchase.total_with_taxes}.
 
-          p
-            | VALOR DA TRANSAÇÃO: #{number_to_currency @purchase.taxes}
-            br
-            | TOTAL DA COMPRA: #{number_to_currency @purchase.total_with_taxes}
-            br
-          span.small ID da compra: #{@purchase.invoice_id}
-
-          h2.title--up.text--brown Detalhes da sua Compra:
-          - @purchase.orders.each do |order|
-            h3.title--up.text--green = order.offer.title
-            .purchase-info__producer
-              span.glyphicon.glyphicon-grain
-              = order.offer.producer.name
-            .offer-info__products
-              p = simple_format order.offer.products_description
-
-
-          h2.title--up.text--brown Detalhes da coleta:
-          - @purchase.orders.each do |order|
-            .offer-info__collect
-              .offer-info__coordinator
-                span.offer-info__coordinator__avatar style="background-image: url(#{order.offer.deliver_coordinator.avatar});"
-                span.offer-info__coordinator__name
-                  p = order.offer.deliver_coordinator.name
-                  .small Coordenador de Entrega
-              p As compras devem ser retiradas na data e local abaixo:
-              ul
-                li
-                  span.glyphicon.glyphicon-calendar
-                  span = order.offer.delivery_time_range
-                li
-                  span.glyphicon.glyphicon-map-marker
-                  span = order.offer.deliver_coordinator.address
-                li
-                  span.glyphicon.glyphicon-phone
-                  span = order.offer.deliver_coordinator.phone
-                li
-                  span.glyphicon.glyphicon-envelope
-                  span = order.offer.deliver_coordinator.email
+          - elsif @purchase.payment_method == 'bank_slip'
+            h1.title--up.text--green PAGUE SUA COMPRA
+            p
+              | Você tem até as 23h59min de hoje (#{@purchase.created_at.strftime('%d/%m')}) para pagar.
+              br
+            = link_to 'Gerar boleto', @purchase.invoice_url, class: 'btn btn--sm btn--brown', target: '_blank'
+            hr
+            h2.title--up.text--brown Resumo da Compra:
+            - @purchase.orders.each do |order|
+              h3.title--up.text--green = order.offer.title
+              .offer-info__products  
+                ul 
+                  li QUANTIDADE: #{order.quantity} cota(s)
+                  li VALOR UNITÁRIO (repassados ao produtor): #{number_to_currency order.offer.value}
+                  li 
+                    | #{t('activerecord.attributes.offer.operational_tax')}:
+                    |  #{number_to_currency order.offer.operational_tax}
+                  li 
+                    | #{t('activerecord.attributes.offer.coordinator_tax')}: 
+                    |  #{number_to_currency order.offer.coordinator_tax}
+                  li TOTAL DA OFERTA: #{number_to_currency order.total}
+                p = simple_format order.offer.products_description                
+              / .offer-info__collect
+              /   .offer-info__coordinator
+              /     span.offer-info__coordinator__avatar style="background-image: url(#{order.offer.deliver_coordinator.avatar});"
+              /     span.offer-info__coordinator__name
+              /       p = order.offer.deliver_coordinator.name
+              /       .small Coordenador de Entrega
+              /   p As compras devem ser retiradas na data e local abaixo:
+              /   ul
+              /     li
+              /       span.glyphicon.glyphicon-calendar
+              /       span = order.offer.delivery_time_range
+              /     li
+              /       span.glyphicon.glyphicon-map-marker
+              /       span = order.offer.deliver_coordinator.partial_address
+              /   p.hint.text--brown__medium Por motivos de segurança, o número do endereço só será fornecido para os participantes da oferta.
+            hr
+            span.text--green VALOR DA TRANSAÇÃO: #{number_to_currency @purchase.taxes}
+            h2.title--up.text--green.u-marginTop5 TOTAL A PAGAR: #{number_to_currency @purchase.total_with_taxes}.
+            p
+              | Você tem até as 23h59min de hoje (#{@purchase.created_at.strftime('%d/%m')}) para pagar.
+              br
+            = link_to 'Gerar boleto', @purchase.invoice_url, class: 'btn btn--sm btn--brown', target: '_blank'

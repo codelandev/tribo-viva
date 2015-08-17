@@ -53,7 +53,7 @@ section.purchase
                 tr
                   th.title--up.small Oferta
                   th.title--up.small Quantidade
-                  th.title--up.small Total por item
+                  th.title--up.small Total por oferta
                 - if @purchase.nil?
                   tr
                     td = @purchase.offer.title
@@ -67,17 +67,8 @@ section.purchase
                       td = number_to_currency order.offer_value*order.quantity
                 tr
                   td
-                  td
-                  td
-
-                tr
-                  th
-                  th
-                  th.title--up.text--yellow Total
-                tr
-                  td
-                  td
-                  td #{number_to_currency @purchase.total}
+                  td.text--yellow TOTAL A PAGAR: 
+                  td.title--up.text--yellow #{number_to_currency @purchase.total}
 
           h3.title--up.text--yellow Anexe o Comprovante de Pagamento
           - if @purchase.receipt.blank?

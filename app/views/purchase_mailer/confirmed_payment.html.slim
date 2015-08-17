@@ -3,31 +3,36 @@ h1 Oi, #{@purchase.user.name}!
 p Sua compra foi confirmada com sucesso!
 
 h3
-  strong DADOS DA COMPRA
+  strong DADOS DA COMPRA:
 
 ul
   - @purchase.orders.each do |order|
-    li COTA: #{order.offer.title} | QUANTIDADE: #{order.quantity} | TOTAL: #{number_to_currency order.total}
-
-  li TAXA TRANSAÇÃO: #{number_to_currency @purchase.taxes}
-  li TOTAL DA COMPRA: #{number_to_currency @purchase.total_with_taxes}
-
-h3
-  strong DADOS DA COLETA
-
-- @purchase.orders.each do |order|
-  ul
-    li OEFRTA #{order.offer.title}
+    li OFERTA: #{order.offer.title}
+    li QUANTIDADE: #{order.quantity} cota(s)
+    li VALOR UNITÁRIO (repassados ao produtor): #{number_to_currency order.offer.value}
+    li 
+      | #{t('activerecord.attributes.offer.operational_tax')}:
+      |  #{number_to_currency order.offer.operational_tax}
+    li 
+      | #{t('activerecord.attributes.offer.coordinator_tax')}: 
+      |  #{number_to_currency order.offer.coordinator_tax}
+    li TOTAL DA OFERTA: #{number_to_currency order.total}
+    br
+    li COORDENADOR DE ENTREGA: #{order.offer.deliver_coordinator.name}
     li DATA E HORÁRIO: #{order.offer.delivery_time_range}
     li LOCAL: #{order.offer.deliver_coordinator.address}
-    li COORDENADOR DE ENTREGA: #{order.offer.deliver_coordinator.name}
     li TELEFONE: #{order.offer.deliver_coordinator.phone}
     li EMAIL: #{order.offer.deliver_coordinator.email}
-  hr
+    br
+    br
 
+- if @purchase.payment_method == 'bank_slip' || @purchase.payment_method == 'credit_card'
+  strong VALOR DA TRANSAÇÃO: #{number_to_currency @purchase.taxes}.
+  br
+h2 TOTAL PAGO: #{number_to_currency @purchase.total_with_taxes}.
+hr
 p * Você tem até 24h antes do horário da coleta para indicar uma pessoa para buscar sua cota em seu lugar. Essa pessoa deverá portar documento de identificação com foto.
 hr
-
 h3
   strong  SUGESTÕES OU DÚVIDAS?
 

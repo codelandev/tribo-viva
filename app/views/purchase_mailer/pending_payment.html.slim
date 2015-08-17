@@ -17,13 +17,22 @@ ul
   - @purchase.orders.each do |order|
     li OFERTA: #{order.offer.title}
     li QUANTIDADE: #{order.quantity} cota(s)
-    li TOTAL: #{number_to_currency order.offer_value*order.quantity}
+    li VALOR UNITÁRIO (repassados ao produtor): #{number_to_currency order.offer.value}
+    li 
+      | #{t('activerecord.attributes.offer.operational_tax')}:
+      |  #{number_to_currency order.offer.operational_tax}
+    li 
+      | #{t('activerecord.attributes.offer.coordinator_tax')}: 
+      |  #{number_to_currency order.offer.coordinator_tax}
+    li TOTAL DA OFERTA: #{number_to_currency order.total}
     br
 - if @purchase.payment_method == 'credit_card'
-  h2 VALOR DA TRANSAÇÃO: #{number_to_currency @purchase.taxes}.
+  strong VALOR DA TRANSAÇÃO: #{number_to_currency @purchase.taxes}.
+  br
   h2 TOTAL PAGO: #{number_to_currency @purchase.total_with_taxes}.
 - elsif @purchase.payment_method == 'bank_slip'
-  h2 VALOR DA TRANSAÇÃOGAR: #{number_to_currency @purchase.taxes}.
+  strong VALOR DA TRANSAÇÃO: #{number_to_currency @purchase.taxes}.
+  br
   h2 TOTAL A PAGAR: #{number_to_currency @purchase.total_with_taxes}.
   p
     | Você tem até as 23h59min de hoje (#{@purchase.created_at.strftime('%d/%m')}) para pagar.
