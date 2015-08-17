@@ -101,7 +101,6 @@ class CheckoutsController < ApplicationController
                                    invoice_pdf: charge.pdf)
 
         flash[:notice]          = "Compra realizada com sucesso!"
-        flash[:charge_messages] = charge.message if payment_method == 'credit_card'
         session[:shopping_cart] = Array.new
         PurchaseMailer.pending_payment(purchase).deliver_now
         path = checkout_success_path(purchase.invoice_id)
