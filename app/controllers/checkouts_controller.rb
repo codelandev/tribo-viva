@@ -66,6 +66,19 @@ class CheckoutsController < ApplicationController
       # Check the payment method used (Iugu only accepts token & method)
       # If credit card, so use token param, if not, use
       param  = params[:method] == 'credit_card' ? :token : :method
+      items = purchase.orders.map do |order|
+                {
+                  description: order.offer.title,
+                  quantity: order.quantity,
+                  price_cents: (order.offer_value*100).to_i
+                }
+              end
+      items << {
+                 description: 'Taxa da transação',
+                 quantity: 1,
+                 price_cents: (taxes*100).to_i
+               }
+
       charge = Iugu::Charge.create({
         # here is where the method is determined, :token for CC or :method bank_slip
         param => params[param],
@@ -78,13 +91,7 @@ class CheckoutsController < ApplicationController
           phone_prefix: current_user.phone.first(2),
           phone: current_user.phone.last(8),
         },
-        items: purchase.orders.map do |order|
-          {
-            description: order.offer.title,
-            quantity: order.quantity,
-            price_cents: (order.offer_value*100).to_i
-          }
-        end
+        items: items
       })
 
       if charge and charge.success
