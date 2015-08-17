@@ -1,11 +1,14 @@
 namespace :payment_migration do
   desc "Remove all duplicated users from platform"
   task remove_duplicated_users: :environment do
-    normal_ids     = User.select("MIN(id) as id").group(:email, :id).order(id: :asc).collect(&:id)
-    duplicated_ids = User.where.not(id: normal_ids)
-    printf "\n\n === Found #{duplicated_ids.count} duplicated users ... \n\n"
-    duplicated_ids.destroy_all
-    printf "... and now all gone ... \n\n"
+    duplicated = User.select(:email).group(:email).having('COUNT(email) > 1')
+    printf "\n\n === Found #{duplicated.count} duplicated users ... \n\n"
+    duplicated.collect(&:email).each do |email|
+      original_id = User.where(email: email).pluck(:id).first
+      printf "=== Removing #{email} ... \n"
+      User.where(email: email).where.not(id: original_id).destroy_all
+    end
+    printf "\n\n... and now all gone ... \n\n"
   end
 
   desc "Changes all password and send password recovery to users"
