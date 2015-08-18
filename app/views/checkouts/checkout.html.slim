@@ -50,7 +50,7 @@ section.checkout
                       = link_to ' termos de compras', terms_path, target: '_blank', title: 'Veja nossos Termos de Compras'
 
                   h3.title--up Finalize a compra!
-                  = submit_tag 'Pagar', class: 'js-submit-payment btn btn--md btn--yellow btn--block', disabled: true, title: 'Aceite os termos de compra para pagar'
+                  = submit_tag 'Pagar', class: 'js-submit-payment btn btn--md btn--yellow btn--block', disabled: true, title: 'Aceite os termos de compra para pagar', data: { disable_with: "Enviando..." }
                   br
                   br
                   br

@@ -90,6 +90,7 @@ TriboViva.Checkouts.Checkout =
 
     # start form validation and submit
     $('#js-payment-form').submit (e) ->
+      e.preventDefault()
       form            = $(this)
       cc              = $('.js-credit-card-number').val()
       cvv             = $('.js-credit-card-cvv').val()
@@ -98,26 +99,30 @@ TriboViva.Checkouts.Checkout =
       cardExpiration  = $('.js-credit-card-card-expiration').val()
 
       if creditCardCheckBox.attr('checked')
+        unblockSubmit = ->
+          setTimeout (->
+            $.rails.enableFormElement( $('.js-submit-payment') )
+          ), 1000
+
         # first of all, handle errors on credit card form
         if !Iugu.utils.validateCreditCardNumber(cc, brand)
           $('.js-errors').text("Número do cartão incorreto")
-          e.preventDefault()
+          unblockSubmit()
 
         else if !Iugu.utils.validateCVV(cvv, brand)
           $('.js-errors').text("Código CVV incorreto")
-          e.preventDefault()
+          unblockSubmit()
 
         else if !Iugu.utils.validateExpirationString(cardExpiration)
           $('.js-errors').text("Validade incorreta")
-          e.preventDefault()
+          unblockSubmit()
 
         else if cardName == ''
           $('.js-errors').text("Preencha o nome do cartão")
-          e.preventDefault()
+          unblockSubmit()
 
         else if not creditCardTerms.is(':checked')
           $('.js-errors').text("Você deve aceitar os termos de compra")
-          e.preventDefault()
 
         else
           # if none, clean the message
@@ -128,13 +133,13 @@ TriboViva.Checkouts.Checkout =
             # unfortunatelly validation of name just occur when try to get token
             if data.errors && data.errors['last_name']
               $('.js-errors').text("Nome do cartão está incorreto")
-              e.preventDefault()
+              unblockSubmit()
             else
               $('#token').val(data.id)
               form.get(0).submit()
 
-        # call the token handler
-        Iugu.createPaymentToken this, tokenResponseHandler
+          # call the token handler
+          Iugu.createPaymentToken this, tokenResponseHandler
 
       else
         form.get(0).submit()
