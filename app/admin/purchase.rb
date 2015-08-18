@@ -34,6 +34,9 @@ ActiveAdmin.register Purchase do
       row :taxes do |purchase|
         number_to_currency purchase.taxes
       end
+      row :receipt do |purchase|
+        link_to(purchase.receipt.url, purchase.receipt.url, target: :blank) if purchase.receipt?
+      end
       row :total do |purchase|
         number_to_currency purchase.total_with_taxes
       end
