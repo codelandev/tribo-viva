@@ -7,7 +7,7 @@ ActiveAdmin.register Purchase do
     column :invoice_id
     column :created_at
     column :status do |purchase|
-      purchase.status_humanize
+      PurchaseStatus.t purchase.status
     end
     column :invoice_url
     column :payment_method do |purchase|
