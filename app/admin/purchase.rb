@@ -1,6 +1,31 @@
 ActiveAdmin.register Purchase do
   permit_params :status, :total, :taxes, :receipt
 
+  index do
+    selectable_column
+    id_column
+    column :invoice_id
+    column :created_at
+    column :status do |purchase|
+      purchase.status_humanize
+    end
+    column :invoice_url
+    column :payment_method do |purchase|
+      case purchase.payment_method
+      when 'credit_card'
+        'Cartão'
+      when 'bank_slip'
+        'Boleto'
+      when 'transfer'
+        'Transferência'
+      end
+    end
+    column :total do |purchase|
+      purchase.total_with_taxes
+    end
+    actions
+  end
+
   show do
     attributes_table do
       row :user
