@@ -13,7 +13,7 @@ module CartRemove
 
   def remove_item(offer, quantity)
     if offer_in_cart(offer)['quantity'] <= quantity.to_i
-      cart.delete_if{ |item| item['id'] == offer.id }
+      cart.delete_if{ |item| item['id'] == offer.try(:id) || item['id'] == offer }
     else
       cart.map{ |item| item['quantity'] -= quantity.to_i if item['id'] == offer.id }
     end

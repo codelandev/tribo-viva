@@ -24,6 +24,10 @@ class CartSession
   end
 
   def offer_in_cart(offer)
-    @offer_in_cart ||= cart.detect{ |item| item['id'].to_i == offer.id }
+    @offer_in_cart ||= cart.detect do |item|
+      id = offer.try(:id)
+      id ||= offer
+      item['id'].to_i == id
+    end
   end
 end

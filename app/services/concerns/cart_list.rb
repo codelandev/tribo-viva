@@ -6,10 +6,15 @@ module CartList
   def cart_list
     @cart_list ||= cart.map do |item|
       offer = offers.detect{ |_offer| _offer.id == item['id'] }
-      piece = offer.value + offer.coordinator_tax + offer.operational_tax
-      total = piece * item['quantity']
-      CartListItem.new(offer, total, piece, item['quantity'])
-    end
+      if offer.nil?
+        remove(item['id'], item['quantity'].to_i)
+        next
+      else
+        piece = offer.value + offer.coordinator_tax + offer.operational_tax
+        total = piece * item['quantity']
+        CartListItem.new(offer, total, piece, item['quantity'])
+      end
+    end.compact
   end
 
   def sub_total
