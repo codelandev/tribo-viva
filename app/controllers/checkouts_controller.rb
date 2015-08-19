@@ -79,25 +79,31 @@ class CheckoutsController < ApplicationController
                  price_cents: (taxes*100).to_i
                }
 
-      charge = Iugu::Charge.create({
-        # here is where the method is determined, :token for CC or :method bank_slip
-        param => params[param],
+      due_date = if payment_method == 'credit_card'
+                   { due_date: Date.tomorrow.in_time_zone.strftime('%d/%m/%Y') }
+                 else
+                   { due_date: Date.today.in_time_zone.strftime('%d/%m/%Y') }
+                 end
+      invoice = Iugu::Invoice.create(due_date.merge({
         email: current_user.email,
-        tax_cents: (taxes*100).to_i,
+        items: items
+      }))
+      charge = Iugu::Charge.create({
+        param => params[param],
+        invoice_id: invoice.id,
         payer: {
           cpf_cnpj: current_user.cpf,
           name: current_user.name,
           email: current_user.email,
           phone_prefix: current_user.phone.first(2),
           phone: current_user.phone.last(8),
-        },
-        items: items
+        }
       })
 
       if charge and charge.success
         purchase.update_attributes(taxes: taxes,
-                                   invoice_id: charge.invoice_id,
-                                   invoice_url: charge.url,
+                                   invoice_id: invoice.id,
+                                   invoice_url: invoice.secure_url,
                                    invoice_pdf: charge.pdf)
 
         flash[:notice]          = "Compra realizada com sucesso!"
@@ -106,6 +112,7 @@ class CheckoutsController < ApplicationController
         path = checkout_success_path(purchase.invoice_id)
       else
         purchase.destroy # remove the purchase if fail
+        invoice.cancel
         if payment_method == 'credit_card' && charge.errors.blank?
           flash[:charge_messages] = charge.message
         else
