@@ -17,7 +17,7 @@ COLETA
 
 Horário de coleta: entre <%= I18n.l @offer.collect_starts_at %> às <%= I18n.l @offer.collect_ends_at %>.
 Cotistas (<%= @offer.purchases.select(:user_id).count %> pessoas):
-<% @offer.purchases.each_with_index do |purchase, index| %>
+<% @offer.purchases.by_status(PurchaseStatus::PAID).each_with_index do |purchase, index| %>
 <%= index + 1 %>) <%= purchase.user.name %> - <%= purchase.user.phone %>
 <% end %>
 

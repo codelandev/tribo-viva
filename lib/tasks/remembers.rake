@@ -23,7 +23,7 @@ namespace :remember do
     offers = Offer.where(collect_starts_at: Date.today.beginning_of_day..Date.today.end_of_day)
     offers.find_each do |offer|
       if offer.remaining.zero?
-        offer.purchases.each do |purchase|
+        offer.purchases.by_status(PurchaseStatus::PAID).each do |purchase|
           Remembers.buyer(purchase.user, offer).deliver_now
         end
       end
