@@ -7,7 +7,7 @@ section.offer-header
       .col-sm-12.col-md-10.col-centered
         .row
           .col-sm-6.col-md-8
-            .offer__header__image style="background-image: url(#{@offer.image.url});"
+            .offer__header__image style="background-image: url(#{@offer.image.url(:show_cover)});"
           .col-sm-6.col-md-4
             h1.offer__header__title.title--up.text--yellow = @offer.title
             .offer__header__producer
@@ -40,7 +40,7 @@ section.offer-info
             .offer-info__collect
               h2.title--up.text--green Sobre a coleta
               .offer-info__coordinator
-                span.offer-info__coordinator__avatar style="background-image: url(#{@offer.deliver_coordinator.avatar});"
+                span.offer-info__coordinator__avatar style="background-image: url(#{@offer.deliver_coordinator.avatar.url(:mini_thumb)});"
                 span.offer-info__coordinator__name
                   p = @offer.deliver_coordinator.name
                   .small Coordenador de Entrega
@@ -80,6 +80,6 @@ section.offer-info
             .offer-info__widget
               .offer-info__widget__info
                 .widget__info__producer
-                  .widget__producer__logo style="background-image: url(#{@offer.producer.logo});"
+                  .widget__producer__logo style="background-image: url(#{@offer.producer.logo.url(:thumb)});"
                   h4.widget__producer__name.text--yellow = @offer.producer.name
                 p = simple_format @offer.producer.description

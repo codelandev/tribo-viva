@@ -1,7 +1,8 @@
 .offer-header {
   color: white;
   background-color: $brown-dark;
-  padding: 80px 0 70px 0;
+  @media screen and (max-width: 767px) { padding: 24px 0 70px 0; }
+  @media screen and (min-width: 768px) { padding: 80px 0 70px 0; }
 
   .offer__header__title { margin-bottom: 5px; }
 }
@@ -10,8 +11,19 @@
   background-color: $brown-dark;
   background-size: cover;
   background-position: center center;
-  height: 460px;
   width: 100%;
+
+  @media screen and (max-width: 374px) {
+    height: 240px;
+  }
+
+  @media screen and (min-width: 375px) and (max-width: 767px) {
+    height: 320px;
+  }
+
+  @media screen and (min-width: 768px) {
+    height: 460px;
+  }
 }
 
 .offer__header__producer { margin-bottom: 30px; }

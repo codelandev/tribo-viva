@@ -9,7 +9,7 @@
             - @finished_offers.each do |offer|
               .col-sm-6.col-md-4
                 article.card
-                  .card__image style="background-image: url(#{offer.image.url});"
+                  .card__image style="background-image: url(#{offer.image.url(:home_thumb)});"
                   .card__info
                     span.card__info__price title="Preço total da cota"
                       = number_to_currency offer.coordinator_tax + offer.operational_tax + offer.value
