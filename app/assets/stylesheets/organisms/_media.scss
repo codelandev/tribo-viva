@@ -1,4 +1,9 @@
 .media {
-  // background-color: $brown-light;
   padding: 0px 0 100px 0;
+
+  @media (max-width: 768px) {
+    .img-responsive {
+      margin-bottom: 20px;
+    }
+  }
 }
