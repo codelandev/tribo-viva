@@ -9,7 +9,7 @@ class Remembers < ApplicationMailer
     @offers = offers
     @producer = producer
     @day = Date.tomorrow
-    mail to: producer.email, subject: "Entregas tribo-viva"
+    mail to: producer.email, subject: "Entregas tribo-viva", bcc: 'tribo@triboviva.com.br'
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -21,7 +21,7 @@ class Remembers < ApplicationMailer
     @offer = offer
     @deliver_coordinator = offer.deliver_coordinator
     @day = Date.today
-    mail to: @deliver_coordinator.email, subject: "Lembrete de entregas tribo-viva"
+    mail to: @deliver_coordinator.email, subject: "Lembrete de entregas tribo-viva", bcc: 'tribo@triboviva.com.br'
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -33,6 +33,6 @@ class Remembers < ApplicationMailer
     @user = user
     @offer = offer
     @day = Date.today
-    mail to: user.email, subject: "Lembrete de coletas tribo-viva"
+    mail to: user.email, subject: "Lembrete de coletas tribo-viva", bcc: 'tribo@triboviva.com.br'
   end
 end
