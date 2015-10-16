@@ -67,15 +67,8 @@ group :development, :test do
   gem 'machinist', '~> 2.0'
   gem 'rspec-rails', '~> 3.3.2'
   gem 'awesome_print', '~> 1.6.1', require: false
-  gem 'spring-commands-rspec', '~> 1.0.4'
   gem 'thin', '~> 1.6.3'
   gem 'pry-rails'
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
   gem 'dotenv-rails'
 end
 
