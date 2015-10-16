@@ -15,8 +15,8 @@ Horário: <%= I18n.l offer.collect_starts_at - 2.hours, format: :short %> aproxi
 Produtos:
 <%= ActionController::Base.helpers.strip_tags offer.products_description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
 
-SUBTOTAL = <%= ActionController::Base.helpers.number_to_currency offer.value %> x <%= offer.stock %> = <%= ActionController::Base.helpers.number_to_currency offer.stock * offer.value %>
-<% items << offer.stock * offer.value %>
+SUBTOTAL = <%= ActionController::Base.helpers.number_to_currency offer.value %> x <%= offer.orders.sum(:quantity) %> = <%= ActionController::Base.helpers.number_to_currency offer.purchases.sum(:total) %>
+<% items << offer.purchases.sum(:total) %>
 
 <% end %>
 
