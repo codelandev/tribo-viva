@@ -92,15 +92,17 @@ section.media
     .row
       .col-sm-10.col-centered
         h2.text--green.title--up Na Mídia
-        .row
-          .col-sm-3.text-center
-            = link_to image_tag('logo-sul-21-bw.png'), 'http://www.sul21.com.br/jornal/rede-de-consumo-colaborativo-conecta-produtor-e-consumidor-de-alimentos-organicos/', title: 'Sul21 - Rede de consumo colaborativo conecta produtor e consumidor de alimentos orgânicos', class: 'img-responsive', target: '_blank'
-          .col-sm-3.text-center
-            = link_to image_tag('logo-record-bw.png'), 'http://www.rederecordrs.com.br/rio-grande-record/videos/a-feira-que-vai-ate-a-casa-do-consumidor-01102015', title: 'Record - A feira que vai até a casa do consumidor', class: 'img-responsive', target: '_blank'
-          .col-sm-3.text-center
-            = link_to image_tag('logo-zh-bw.png'), 'http://zh.clicrbs.com.br/rs/porto-alegre/pelas-ruas/noticia/2015/09/rede-transforma-apartamentos-na-capital-em-feirinha-de-organicos-4858600.html', title: 'ZH Online - Rede transforma apartamentos na Capital em feirinha de orgânicos', class: 'img-responsive', target: '_blank'
-          .col-sm-3.text-center
-            = link_to image_tag('logo-globotv-bw.png'), 'http://globotv.globo.com/rbs-rs/vida-e-saude/v/mudando-de-vida-jornalista-decide-por-rotina-mais-saudavel/4476230/', title: 'Globo.tv - Mudando de Vida: jornalista decide por rotina mais saudável', class: 'img-responsive', target: '_blank'
+        .mediaGrid
+          .mediaCol
+            = link_to image_tag('logo-sul-21-bw.png', class: 'img-responsive u-centered'), 'http://www.sul21.com.br/jornal/rede-de-consumo-colaborativo-conecta-produtor-e-consumidor-de-alimentos-organicos/', title: 'Sul21 - Rede de consumo colaborativo conecta produtor e consumidor de alimentos orgânicos', target: '_blank'
+          .mediaCol
+            = link_to image_tag('logo-record-bw.png', class: 'img-responsive u-centered'), 'http://www.rederecordrs.com.br/rio-grande-record/videos/a-feira-que-vai-ate-a-casa-do-consumidor-01102015', title: 'Record - A feira que vai até a casa do consumidor', target: '_blank'
+          .mediaCol
+            = link_to image_tag('logo-draft-bw.jpg', class: 'img-responsive u-centered'), 'http://projetodraft.com/como-a-tribo-viva-criou-um-sistema-de-compra-coletiva-e-distribuicao-afetiva-de-organicos-no-sul-do-pais/', title: 'DRAFT - Como a Tribo Viva criou um sistema de compra coletiva (e distribuição afetiva) de orgânicos no Sul do país', target: '_blank'
+          .mediaCol
+            = link_to image_tag('logo-zh-bw.png', class: 'img-responsive u-centered'), 'http://zh.clicrbs.com.br/rs/porto-alegre/pelas-ruas/noticia/2015/09/rede-transforma-apartamentos-na-capital-em-feirinha-de-organicos-4858600.html', title: 'ZH Online - Rede transforma apartamentos na Capital em feirinha de orgânicos', target: '_blank'
+          .mediaCol
+            = link_to image_tag('logo-globotv-bw.png', class: 'img-responsive u-centered'), 'http://globotv.globo.com/rbs-rs/vida-e-saude/v/mudando-de-vida-jornalista-decide-por-rotina-mais-saudavel/4476230/', title: 'Globo.tv - Mudando de Vida: jornalista decide por rotina mais saudável', target: '_blank'
 
 
 section.about

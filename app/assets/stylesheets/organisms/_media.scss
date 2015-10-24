@@ -1,9 +1,23 @@
 .media {
   padding: 0px 0 100px 0;
+}
 
-  @media (max-width: 768px) {
+.mediaCol {
+  width: 20%;
+  float: left;
+  padding: 0 20px;
+}
+
+// # Media query
+// # =================================================================
+@media(max-width: 768px) {
+  .media {
     .img-responsive {
       margin-bottom: 20px;
     }
+  }
+
+  .mediaCol {
+    width: 100%;
   }
 }
