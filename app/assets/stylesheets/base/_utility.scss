@@ -1,5 +1,172 @@
-.text-bold { font-weight: bold }
+// # =================================================================
+// # Utilities
+// # =================================================================
 
+// # Alignment
+// # =================================================================
+.u-alignBoth {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.u-verticalAlign {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+// # Generate classes from 5 to 100 with 5 step difference
+// # Example
+// # .u-marginLft5, .u-marginLft10, .u-marginLft15
+@for $value from 5 through ceil(100) {
+  .u-marginLft#{$value} {
+    margin-left: #{$value}px;
+  }
+
+  .u-marginRgt#{$value} {
+    margin-right: #{$value}px;
+  }
+
+  .u-marginBot#{$value} {
+    margin-bottom: #{$value}px;
+  }
+
+  .u-marginTop#{$value} {
+    margin-top: #{$value}px;
+  }
+
+  .u-paddingLft#{$value} {
+    padding-left: #{$value}px;
+  }
+
+  .u-paddingRgt#{$value} {
+    padding-right: #{$value}px;
+  }
+
+  .u-paddingBot#{$value} {
+    padding-bottom: #{$value}px;
+  }
+
+  .u-paddingTop#{$value} {
+    padding-top: #{$value}px;
+  }
+}
+
+// # Layout
+// # =================================================================
+.u-clearfix {
+  *zoom: 1; // Old IEs
+
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+
+  &:after {
+      clear: both;
+  }
+}
+
+.u-centered {
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
+}
+
+.u-floatLft {
+  float: left !important;
+}
+
+.u-floatRgt {
+  float: right !important;
+}
+
+.u-noMargin {
+  margin: 0;
+}
+
+.u-noPadding {
+  padding: 0;
+}
+
+// # Text alignment
+// # =================================================================
+.u-textRgt {
+  text-align: right !important;
+}
+
+.u-textLft {
+  text-align: left !important;
+}
+
+.u-textCenter {
+  text-align: center !important;
+}
+
+.u-textTruncate {
+  max-width: 100%;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  word-wrap: normal !important;
+}
+
+// # Text Transform
+// # =================================================================
+.u-textUp {
+  text-transform: uppercase;
+}
+
+.u-textLow {
+  text-transform: lowercase;
+}
+
+.u-textCap {
+  text-transform: capitalize;
+}
+
+.u-textNone {
+  text-transform: none;
+}
+
+.u-textLight {
+  font-weight: 100;
+}
+
+.u-textBold {
+  font-weight: 700;
+}
+
+// # Misc
+// # =================================================================
+.u-imageReplace {
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+}
+
+// # Print
+// # =================================================================
+.u-noPrint {
+  @media print {
+    display: none !important;
+  }
+}
+
+.u-onlyPrint {
+  @media screen {
+    display: none;
+  }
+
+  @media print {
+    display: block;
+  }
+}
+
+// TODO replace this classes
 .col-centered {
   float: none;
   margin-left: auto;
@@ -8,12 +175,4 @@
 
 .width-80 {
   width: 80%;
-}
-
-.u-marginRgt5 {
-  margin-right: 5px;
-}
-
-.u-marginTop5 {
-  margin-top: 5px;
 }
