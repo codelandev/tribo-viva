@@ -15,6 +15,9 @@ class PagesController < ApplicationController
   def terms
   end
 
+  def delivery
+  end
+
   def finished_offers
     @finished_offers = Offer.finished_offers.order(collect_starts_at: :desc)
   end

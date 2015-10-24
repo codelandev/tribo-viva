@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'carrinho',         to: 'pages#cart',            as: :cart
   get 'ofertas-passadas', to: 'pages#finished_offers', as: :finished_offers
   get 'termos-de-compra', to: 'pages#terms',           as: :terms
+  get 'entregas',          to: 'pages#delivery',        as: :delivery
   delete 'clean_cart',    to: 'offers#clean_cart',     as: :clean_cart
 
   resources :offers, only: :show, path: 'ofertas' do

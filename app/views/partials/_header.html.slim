@@ -14,6 +14,8 @@ header.header style="#{'display: none;' if params[:action] == 'new_purchase' || 
             = link_to 'Como Funciona', about_path, title: 'Como funciona a Tribo Viva'
           li
             = link_to 'Contato', 'mailto:tribo@triboviva.com.br?subject=Olá Tribo Viva!', title: 'Envie um email para a Tribo Viva'
+          li
+            = link_to 'Entregas', delivery_path, title: 'Entregas'
 
           - if user_signed_in?
             li = link_to 'Sair', destroy_user_session_path, method: :delete, title: 'Sair de sua conta'
@@ -28,4 +30,3 @@ header.header style="#{'display: none;' if params[:action] == 'new_purchase' || 
           - else
             li = link_to cart_path, title: 'Meu Carrinho' do
               span.fa.fa-shopping-cart
-
