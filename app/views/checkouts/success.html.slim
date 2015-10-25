@@ -6,8 +6,8 @@ section.purchase
           - if @purchase.payment_method == 'credit_card' || @purchase.payment_method == 'transfer'
             h1.title--up.text--green SUCESSO!
             p 
-              | Sua compra foi realizada com sucesso. Agende a entrega da sua compra atavés do nosso 
-              = link_to 'parceiro de entrega', delivery_path, class: 'text--green u-textBold'
+              | Sua compra foi realizada com sucesso. Agende a entrega da sua compra atavés dos nossos 
+              = link_to 'parceiros de entregas', delivery_path, class: 'text--green u-textBold', target: '_blank'
               | .
             hr
             h2.title--up.text--brown Resumo da Compra:
@@ -51,8 +51,8 @@ section.purchase
             h2.title--up.text--green.u-marginTop5 TOTAL PAGO: #{number_to_currency @purchase.total_with_taxes}.
             br
             p 
-              | Agende a entrega da sua compra atavés do nosso 
-              = link_to 'parceiro de entrega', delivery_path, class: 'text--green u-textBold'
+              | Agende a entrega da sua compra atavés dos nossos 
+              = link_to 'parceiros de entregas', delivery_path, class: 'text--green u-textBold', target: '_blank'
               | .
 
           - elsif @purchase.payment_method == 'bank_slip'
@@ -64,8 +64,8 @@ section.purchase
             br
             br
             p 
-              | Agende a entrega da sua compra atavés do nosso 
-              = link_to 'parceiro de entrega', delivery_path, class: 'text--green u-textBold'
+              | Agende a entrega da sua compra atavés dos nossos 
+              = link_to 'parceiros de entregas', delivery_path, class: 'text--green u-textBold', target: '_blank'
               | .
             hr
             h2.title--up.text--brown Resumo da Compra:
@@ -93,6 +93,6 @@ section.purchase
             br
             br
             p 
-              | Agende a entrega da sua compra atavés do nosso 
-              = link_to 'parceiro de entrega', delivery_path, class: 'text--green u-textBold'
+              | Agende a entrega da sua compra atavés dos nossos 
+              = link_to 'parceiros de entregas', delivery_path, class: 'text--green u-textBold', target: '_blank'
               | .
