@@ -83,6 +83,8 @@ GEM
       json
     awesome_print (1.6.1)
     bcrypt (3.1.10)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     bootstrap-sass (3.3.5)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
@@ -93,6 +95,7 @@ GEM
     business_time (0.7.4)
       activesupport (>= 3.1.0)
       tzinfo
+    byebug (6.0.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -118,6 +121,7 @@ GEM
     coffee-script-source (1.9.1.1)
     daemons (1.2.2)
     database_cleaner (1.4.1)
+    debug_inspector (0.0.2)
     devise (3.5.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -414,6 +418,9 @@ GEM
       railties (>= 3.1, < 5.0)
       slim (~> 3.0)
     slop (3.6.0)
+    spring (1.4.0)
+    spring-commands-rspec (1.0.4)
+      spring (>= 0.9.1)
     sprockets (3.2.0)
       rack (~> 1.0)
     sprockets-rails (2.3.2)
@@ -440,6 +447,11 @@ GEM
     unf_ext (0.0.7.1)
     warden (1.2.3)
       rack (>= 1.0)
+    web-console (2.2.1)
+      activemodel (>= 4.0)
+      binding_of_caller (>= 0.7.2)
+      railties (>= 4.0)
+      sprockets-rails (>= 2.0, < 4.0)
     websocket (1.2.2)
     xpath (2.0.0)
       nokogiri (~> 1.3)
@@ -456,6 +468,7 @@ DEPENDENCIES
   awesome_print (~> 1.6.1)
   bootstrap-sass (~> 3.3.3)
   business_time
+  byebug
   capybara
   carrierwave
   codeclimate-test-reporter
@@ -492,9 +505,12 @@ DEPENDENCIES
   simple_form (~> 3.1.0)
   simplecov (~> 0.10.0)
   slim-rails (~> 3.0.1)
+  spring
+  spring-commands-rspec (~> 1.0.4)
   thin (~> 1.6.3)
   turbolinks
   uglifier (>= 1.3.0)
+  web-console (~> 2.0)
 
 BUNDLED WITH
    1.10.6
