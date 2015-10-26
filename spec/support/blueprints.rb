@@ -89,7 +89,7 @@ end
 
 Purchase.blueprint do
   user
-  token { 'h43u24h3u2h4u32hu' }
+  invoice_id { 'h43u24h3u2h4u32hu' }
   status { 'confirmed' }
   total { 1_000_00 }
 end

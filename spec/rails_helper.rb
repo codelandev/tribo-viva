@@ -8,13 +8,22 @@ SimpleCov.start do
   add_filter 'app/admin'
   add_filter 'config/initializers/rack_zippy.rb'
   add_filter 'config/initializers/carrierwave.rb'
+  add_filter 'config/initializers/asset_sync.rb'
 end
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'webmock/rspec'
 require 'shoulda-matchers'
 require Rails.root.join('spec', 'support', 'blueprints.rb')
+require Rails.root.join('spec', 'support', 'controller_macros.rb')
+
+if ENV['CI']
+  WebMock.disable_net_connect!(:allow => 'codeclimate.com')
+else
+  WebMock.disable_net_connect!
+end
 
 Capybara.javascript_driver = :selenium
 Capybara.server_port = 52662
@@ -42,6 +51,8 @@ Capybara.exact = true
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.include Devise::TestHelpers, type: :controller
+  config.include ControllerMacros, type: :controller
   config.raise_errors_for_deprecations!
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

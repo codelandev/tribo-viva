@@ -17,6 +17,10 @@ class CartSession
     cart.length
   end
 
+  def policy_class
+    CheckoutPolicy
+  end
+
   private
 
   def have_offer_in_cart?(offer)

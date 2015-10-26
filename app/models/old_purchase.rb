@@ -37,6 +37,6 @@ class OldPurchase < ActiveRecord::Base
   protected
 
   def generate_transaction_id
-    self.transaction_id ||= SecureRandom.hex
+    self.transaction_id = SecureRandom.hex if transaction_id.blank?
   end
 end

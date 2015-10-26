@@ -49,10 +49,14 @@ RSpec.describe Offer, type: :model do
         stock_before = offer.stock
 
         3.times do
-          OldPurchase.make!(:confirmed, offer: offer)
+          Order.make!(offer: offer, purchase: Purchase.make!(status: PurchaseStatus::PAID))
+          Order.make!(offer: offer, purchase: Purchase.make!(status: PurchaseStatus::PENDING))
+          Order.make!(offer: offer, purchase: Purchase.make!(status: PurchaseStatus::CANCELED))
+          Order.make!(offer: offer, purchase: Purchase.make!(status: PurchaseStatus::EXPIRED))
+          Order.make!(offer: offer, purchase: Purchase.make!(status: PurchaseStatus::REFUNDED))
         end
 
-        expect(offer.remaining).to eql(stock_before - 6)
+        expect(offer.remaining).to eql(stock_before - 3)
       end
     end
   end

@@ -1,0 +1,16 @@
+languages:
+  Ruby: true
+  JavaScript: true
+engines:
+  rubocop:
+    enabled: true
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+  scss-lint:
+    enabled: true
+exclude_paths:
+- config/application.rb
+- spec/**/*
+- vendor/**/*

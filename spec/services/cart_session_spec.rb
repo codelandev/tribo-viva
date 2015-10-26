@@ -372,9 +372,10 @@ RSpec.describe CartSession do
         ActionController::TestSession.new(shopping_cart: [ { 'id' => offer.id, 'quantity' => 2 } ])
       end
 
-      it 'returns sum of quantity * (value+coordinator_tax+operational_tax)' do
+      it 'returns sum of quantity * (value+coordinator_tax+operational_tax) + card_fees' do
         expected = offer.value + offer.coordinator_tax + offer.operational_tax
         expected *= 2
+        expected = ((expected * 0.04715) + 0.30).round(2) + expected
         expect(subject.total_value).to eq(expected)
       end
     end
