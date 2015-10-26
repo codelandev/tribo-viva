@@ -19,6 +19,8 @@ class PagesController < ApplicationController
   end
 
   def finished_offers
-    @finished_offers = Offer.finished_offers.order(collect_starts_at: :desc)
+    @finished_offers = Offer.finished_offers
+                            .includes(:producer, :deliver_coordinator)
+                            .order(collect_starts_at: :desc)
   end
 end
