@@ -20,6 +20,7 @@ class Remembers < ApplicationMailer
   def deliver_coordinator(offer)
     @offer = offer
     @deliver_coordinator = offer.deliver_coordinator
+    @purchases = @offer.purchases.by_status(PurchaseStatus::PAID).includes(:orders)
     @day = Date.today
     mail to: @deliver_coordinator.email, subject: "Lembrete de entregas tribo-viva", bcc: 'tribo@triboviva.com.br'
   end
