@@ -1,9 +1,9 @@
-namespace :remember do
+  namespace :remember do
   desc 'Remember producers of tommorows delivers'
   task producers: :environment do
     offers = Offer.where(collect_starts_at: Date.tomorrow.beginning_of_day..Date.tomorrow.end_of_day)
     offers.group_by(&:producer).each do |producer, _offers|
-      valid_offers = _offers.select{ |offer| offer.remaining.zero? }
+      valid_offers = _offers.select{ |offer| offer.remaining <= 0 }
       Remembers.producer(producer, valid_offers).deliver_now if valid_offers.size > 0
     end
   end
@@ -12,7 +12,7 @@ namespace :remember do
   task coordinators: :environment do
     offers = Offer.where(collect_starts_at: Date.today.beginning_of_day..Date.today.end_of_day)
     offers.find_each do |offer|
-      Remembers.deliver_coordinator(offer).deliver_now if offer.remaining.zero?
+      Remembers.deliver_coordinator(offer).deliver_now if offer.remaining <= 0
     end
   end
 
@@ -20,7 +20,7 @@ namespace :remember do
   task buyers: :environment do
     offers = Offer.where(collect_starts_at: Date.today.beginning_of_day..Date.today.end_of_day)
     offers.find_each do |offer|
-      if offer.remaining.zero?
+      if offer.remaining <= 0
         offer.purchases.by_status(PurchaseStatus::PAID).each do |purchase|
           Remembers.buyer(purchase.user, offer).deliver_now
         end
