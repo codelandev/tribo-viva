@@ -18,6 +18,8 @@ class PurchasesController < ApplicationController
       elsif event == 'invoice.payment_failed'
         purchase.update_attributes(status: PurchaseStatus::CANCELED)
         render nothing: true, status: :ok, content_type: "text/html"
+      else
+        render nothing: true, status: :ok, content_type: "text/html"
       end
     else
       render nothing: true, status: :not_found, content_type: "text/html"
