@@ -47,7 +47,7 @@ module IuguBase
 
   def payer
     {
-      cpf_cnpj: user.cpf,
+      cpf_cnpj: user.cpf.gsub(/[\.-]/, ''),
       name: user.name,
       email: user.email,
       phone_prefix: user.phone.first(2),
