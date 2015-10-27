@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :purchases, dependent: :destroy
+  has_many :purchases, dependent: :destroy, as: :user
   has_many :old_purchases, dependent: :destroy
 
   validates :cpf, :name, :email, :phone, :address, presence: true
