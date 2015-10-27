@@ -56,4 +56,40 @@ RSpec.describe Offer, type: :model do
       end
     end
   end
+
+  describe 'create_coordinator_reserv' do
+    it 'creates a new Purchase' do
+      expect{ Offer.make! }.to change(Purchase, :count).by(1)
+    end
+
+    it 'creates a new Order' do
+      expect{ Offer.make! }.to change(Order, :count).by(1)
+    end
+
+    it 'creates a new Purchase of coordinator' do
+      offer = Offer.make!
+      expect(Purchase.last.user).to eq(offer.deliver_coordinator)
+    end
+
+    it 'creates a new Purchase with R$0.00 total' do
+      Offer.make!
+      expect(Purchase.last.total).to be_zero
+    end
+
+    it 'creates a new Order with R$0.00 value' do
+      Offer.make!
+      expect(Order.last.offer_value).to be_zero
+    end
+
+    it 'creates a new Order with 1 quantity' do
+      Offer.make!
+      expect(Order.last.quantity).to eq(1)
+    end
+
+    it 'creates a new Order of purchase' do
+      offer = Offer.make!
+      expect(Order.last.purchase).to eq(Purchase.last)
+      expect(Order.last.offer).to eq(offer)
+    end
+  end
 end

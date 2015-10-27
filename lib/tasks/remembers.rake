@@ -33,8 +33,10 @@
     offers.find_each do |offer|
       if offer.remaining <= 0
         offer.purchases.by_status(PurchaseStatus::PAID).each do |purchase|
-          puts "=== Enviando email usuário #{purchase.user.email} ===\n"
-          Remembers.buyer(purchase.user, offer).deliver_now
+          if purchase.user != offer.deliver_coordinator
+            puts "=== Enviando email usuário #{purchase.user.email} ===\n"
+            Remembers.buyer(purchase.user, offer).deliver_now
+          end
         end
       end
     end

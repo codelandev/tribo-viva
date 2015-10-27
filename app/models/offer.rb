@@ -1,4 +1,6 @@
 class Offer < ActiveRecord::Base
+  after_create :create_coordinator_reservation
+
   belongs_to :producer
   belongs_to :bank_account
   belongs_to :deliver_coordinator
@@ -37,5 +39,13 @@ class Offer < ActiveRecord::Base
   def can_pay_with_bank_slip?
     # Now must be BEFORE the last valid business day of the ogger
     DateTime.now < 2.business_days.before(offer_ends_at)
+  end
+
+  private
+
+  def create_coordinator_reservation
+    purchase = Purchase.new(status: PurchaseStatus::PAID, user: deliver_coordinator)
+    purchase.orders.build(offer: self, quantity: 1, offer_value: 0)
+    purchase.save
   end
 end

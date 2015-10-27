@@ -75,9 +75,9 @@ ActiveAdmin.register Offer do
   form do |f|
     f.inputs do
       image_tag offer.image.url, size: '150x150'
-      f.input :producer
+      f.input :producer, collection: Producer.order(name: :asc)
       f.input :bank_account, collection: BankAccount.all.map{|w| [w.bank, w.id]}, include_blank: false
-      f.input :deliver_coordinator
+      f.input :deliver_coordinator, collection: DeliverCoordinator.order(name: :asc)
       f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image.url, size: '200x200') : content_tag(:span, "Nenhuma imagem presente.")
       f.input :title
       f.input :value, label: 'Valor da Cota'
