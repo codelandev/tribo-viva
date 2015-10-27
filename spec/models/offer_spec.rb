@@ -56,7 +56,7 @@ RSpec.describe Offer, type: :model do
           Order.make!(offer: offer, purchase: Purchase.make!(status: PurchaseStatus::REFUNDED))
         end
 
-        expect(offer.remaining).to eql(stock_before - 3)
+        expect(offer.remaining).to eql(stock_before - 3 - 1) # -1 because of reserved purchase of deliver coordinator
       end
     end
   end
