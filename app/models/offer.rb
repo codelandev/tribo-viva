@@ -44,7 +44,9 @@ class Offer < ActiveRecord::Base
   private
 
   def create_coordinator_reservation
-    purchase = Purchase.new(status: PurchaseStatus::PAID, user: deliver_coordinator)
+    purchase = Purchase.new(status: PurchaseStatus::PAID,
+                            user: deliver_coordinator,
+                            invoice_id: SecureRandom.hex(32))
     purchase.orders.build(offer: self, quantity: 1, offer_value: 0)
     purchase.save
   end
