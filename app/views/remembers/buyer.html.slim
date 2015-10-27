@@ -1,0 +1,31 @@
+h1 Bom dia, #{@user.name}!
+
+p
+  | Estamos entrando em contato para lembrar que hoje (<b>#{I18n.l @day, format: :long}</b>)
+  |  tem coleta da Rede de Consumo Colaborativo Tribo Viva. Por favor,
+  |  compareça no local e horário indicados e leve sacolas reutilizáveis e/ou um carrinho para transportar os alimentos.
+
+h2 ITENS DA COLETA
+
+p
+  | Os ALIMENTOS a serem coletados por você são:
+  br
+  br
+  = ActionController::Base.helpers.strip_tags @offer.products_description.gsub(/<\/(p|li|ul|br)>/, "\n")
+
+h2 LOCAL, HORÁRIO, COORDENADOR
+p ENDEREÇO: #{@offer.deliver_coordinator.address}
+p HORÁRIO: #{@offer.delivery_time_range}.
+p COORDENADOR(A) DE ENTREGA: #{@offer.deliver_coordinator.name} - #{@offer.deliver_coordinator.phone}
+iframe src="#{'https://maps.google.com/?q='+URI.encode(@offer.deliver_coordinator.address)+'&output=embed'}" width="600" height="450" frameborder="0" style="border:0"
+
+h2 PARCEIRO DE ENTREGAS
+
+p
+  | A Tribo Viva conta com um parceiro de entregas, caso você necessite de um.
+  br
+  | Para mais informações, clique #{link_to 'aqui', delivery_url}.
+  
+p 
+  | Atenciosamente,
+  |  Tribo Viva - (51) 9205.6715

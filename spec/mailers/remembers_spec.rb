@@ -10,7 +10,7 @@ RSpec.describe Remembers, type: :mailer do
     let!(:mail) { Remembers.producer(producer, Offer.all) }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("Entregas tribo-viva")
+      expect(mail.subject).to eq('Entregas Tribo Viva')
       expect(mail.to).to eq([producer.email])
       expect(mail.from).to eq(["no-reply@triboviva.com.br"])
     end
@@ -24,7 +24,7 @@ RSpec.describe Remembers, type: :mailer do
     let(:mail) { Remembers.deliver_coordinator(offer) }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("Lembrete de entregas tribo-viva")
+      expect(mail.subject).to eq('Lembrete de entrega Tribo Viva')
       expect(mail.to).to eq([offer.deliver_coordinator.email])
       expect(mail.from).to eq(["no-reply@triboviva.com.br"])
     end
@@ -38,7 +38,7 @@ RSpec.describe Remembers, type: :mailer do
     let(:mail) { Remembers.buyer(user, offer) }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("Lembrete de coletas tribo-viva")
+      expect(mail.subject).to eq('Lembrete de coleta Tribo Viva')
       expect(mail.to).to eq([user.email])
       expect(mail.from).to eq(["no-reply@triboviva.com.br"])
     end
