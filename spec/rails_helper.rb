@@ -6,7 +6,6 @@ require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
 SimpleCov.start do
   add_filter 'app/admin'
-  add_filter 'config/initializers/rack_zippy.rb'
   add_filter 'config/initializers/carrierwave.rb'
   add_filter 'config/initializers/asset_sync.rb'
 end

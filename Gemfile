@@ -49,7 +49,6 @@ gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'font-awesome-rails'
 gem 'nprogress-rails'
-gem 'rack-zippy', '~> 3.0.0'
 # Payment gateway
 gem 'iugu', '~> 1.0.8'
 # Format/Parse decimal numbers
