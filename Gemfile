@@ -42,7 +42,7 @@ gem 'devise-i18n'
 # For administrative interface
 gem 'activeadmin', github: 'gregbell/active_admin'
 # Well...simple forms
-gem 'simple_form', '~> 3.1.0'
+gem 'simple_form', '~> 3.2.0'
 # Handle authorizations
 gem 'pundit', '~> 1.0.0'
 gem 'autoprefixer-rails'
@@ -76,14 +76,14 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'webmock', '~> 1.21.0'
+  gem 'webmock', '~> 1.22.1'
 end
 
 group :test do
   gem 'simplecov', '~> 0.10.0', require: false
   gem 'codeclimate-test-reporter', require: false
-  gem 'database_cleaner', '~> 1.4.1'
-  gem 'shoulda-matchers', '~> 2.8.0', require: false
+  gem 'database_cleaner', '~> 1.5.1'
+  gem 'shoulda-matchers', '~> 3.0.1'
   gem 'capybara'
   gem 'selenium-webdriver'
 end
