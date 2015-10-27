@@ -2,6 +2,10 @@ module Payment
   class BankSlip < Base
     include IuguBase
 
+    def self.taxes
+      2.50
+    end
+
     private
 
     def payment_method
@@ -9,7 +13,7 @@ module Payment
     end
 
     def taxes
-      2.50
+      self.class.taxes
     end
 
     def due_date

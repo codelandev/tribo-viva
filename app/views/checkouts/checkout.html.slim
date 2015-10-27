@@ -15,7 +15,7 @@ section.checkout
                   .btn-group.payment-method-btn-group data-toggle="buttons"
                     label#js-transfer-checkbox-label.btn.btn--sm.btn--yellow.u-marginRgt5.active Transferência/Depósito
                     = check_box_tag :method, 'transfer', true, id: 'js-payment-method-transfer', style: 'display: none;'
-                    
+
                     label#js-credit-card-checkbox-label.btn.u-marginRgt5.btn--sm.btn--yellow Cartão de crédito
                     = check_box_tag :method, 'credit_card', false, id: 'js-payment-method-credit-card', style: 'display: none;'
 
@@ -81,7 +81,7 @@ section.checkout
                       strong Total:&nbsp;
                       strong = number_to_currency (offer.value+offer.coordinator_tax+offer.operational_tax)*item['quantity']
                   br
-                div#fees data-card-fee="#{cart_session.total_card_fee}" data-bank-slip-fee="#{cart_session.total_bank_slip_fee}" data-total="#{cart_session.sub_total}"
+                div#fees data-card-fee="#{cart_session.total_card_fee}" data-bank-slip-fee="#{Payment::BankSlip.taxes}" data-total="#{cart_session.sub_total}"
                 h4.text--yellow.no-Margin = "Subtotal: #{number_to_currency cart_session.sub_total}"
                 h4.text--yellow.no-Margin.js-text-total-fee = "Custo da Transação: #{number_to_currency cart_session.total_card_fee}"
                 br
