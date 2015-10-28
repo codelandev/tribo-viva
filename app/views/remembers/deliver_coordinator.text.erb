@@ -9,7 +9,7 @@ Entregador: <%= @offer.producer.contact_name %> (Telefone: <%= @offer.producer.p
 Horário de entrega: <%= I18n.l @offer.collect_starts_at - 2.hours, format: :short %> (aproximadamente).
 
 Produtos:
-<%= ActionController::Base.helpers.strip_tags @offer.products_description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
+<%= ActionController::Base.helpers.strip_tags @offer.description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
 
 COLETA
 

@@ -8,7 +8,7 @@ ITENS DA COLETA
 
 Os ALIMENTOS a serem coletados por você são:
 
-<%= ActionController::Base.helpers.strip_tags @offer.products_description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
+<%= ActionController::Base.helpers.strip_tags @offer.description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
 
 LOCAL, HORÁRIO, COORDENADOR
 ENDEREÇO: <%= @offer.deliver_coordinator.address %>

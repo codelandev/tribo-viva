@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151027003206) do
+ActiveRecord::Schema.define(version: 20151028223047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,11 +73,23 @@ ActiveRecord::Schema.define(version: 20151027003206) do
     t.string   "partial_address", default: "",  null: false
   end
 
+  create_table "offer_items", force: :cascade do |t|
+    t.integer  "offer_id"
+    t.string   "name",                                default: ""
+    t.string   "unit",                                default: "1", null: false
+    t.integer  "quantity",                            default: 1,   null: false
+    t.decimal  "unit_price", precision: 10, scale: 2, default: 0.0, null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+  end
+
+  add_index "offer_items", ["offer_id"], name: "index_offer_items_on_offer_id", using: :btree
+
   create_table "offers", force: :cascade do |t|
     t.integer  "deliver_coordinator_id"
     t.integer  "bank_account_id"
     t.integer  "producer_id"
-    t.text     "products_description",                            default: "",  null: false
+    t.text     "description",                                     default: "",  null: false
     t.string   "title",                                           default: "",  null: false
     t.string   "image",                                           default: "",  null: false
     t.decimal  "value",                  precision: 10, scale: 2, default: 0.0, null: false
@@ -173,6 +185,7 @@ ActiveRecord::Schema.define(version: 20151027003206) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "offer_items", "offers"
   add_foreign_key "offers", "bank_accounts"
   add_foreign_key "offers", "deliver_coordinators"
   add_foreign_key "offers", "producers"

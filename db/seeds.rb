@@ -53,13 +53,23 @@ if Rails.env.development? || Rails.env.staging?
                  image: File.open('spec/support/example.jpg'),
                  value: 49.90,
                  stock: 10,
-                 products_description: "Lorem ipsum Velit minim laboris sint pariatur reprehenderit veniam do quis qui anim ad irure laborum in sint ad est ex id ad ex commodo Duis aliquip aliqua et reprehenderit sed ut culpa laboris culpa ex do ex labore nulla cillum.",
+                 description: "Lorem ipsum Velit minim laboris sint pariatur reprehenderit veniam do quis qui anim ad irure laborum in sint ad est ex id ad ex commodo Duis aliquip aliqua et reprehenderit sed ut culpa laboris culpa ex do ex labore nulla cillum.",
                  operational_tax: 4.99,
                  coordinator_tax: 4.99,
                  offer_starts_at: 1.day.from_now,
                  offer_ends_at: 9.day.from_now,
                  collect_starts_at: 10.day.from_now,
                  collect_ends_at: 20.days.from_now)
+
+    10.times do |item|
+      OfferItem.create!(
+      name: "Item de nome #{item}",
+      unit: OfferItemUnit.to_a.sample,
+      offer: Offer.last,
+      quantity: item,
+      unit_price: 5+item
+      )
+    end
 
     5.times do |index2|
       user  = User.find(index2+1)
