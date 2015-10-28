@@ -11,7 +11,7 @@ p
   | Os ALIMENTOS a serem coletados por você são:
   br
   br
-  = ActionController::Base.helpers.strip_tags @offer.products_description.gsub(/<\/(p|li|ul|br)>/, "\n")
+== simple_format @offer.products_description
 
 h2 LOCAL, HORÁRIO, COORDENADOR
 p ENDEREÇO: #{@offer.deliver_coordinator.address}
@@ -25,7 +25,7 @@ p
   | A Tribo Viva conta com um parceiro de entregas, caso você necessite de um.
   br
   | Para mais informações, clique #{link_to 'aqui', delivery_url}.
-  
-p 
+
+p
   | Atenciosamente,
   |  Tribo Viva - (51) 9205.6715

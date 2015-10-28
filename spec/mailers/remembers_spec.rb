@@ -16,7 +16,7 @@ RSpec.describe Remembers, type: :mailer do
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match("Olá #{producer.name}.")
+      expect(mail.body.encoded).to match("Ol=C3=A1 #{producer.name}.")
     end
   end
 
