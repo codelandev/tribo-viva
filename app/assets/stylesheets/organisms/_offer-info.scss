@@ -1,7 +1,12 @@
+// # =================================================================
+// # Offer Info
+// # =================================================================
 .offer-info {
   padding: 80px 0;
 }
 
+// # Widget
+// # =================================================================
 .offer-info__widget {
   background-color: $brown-dark;
   color: white;
@@ -13,6 +18,8 @@
   }
 }
 
+// # Products
+// # =================================================================
 .offer-info__products {
   ul {
     list-style: none;
@@ -37,6 +44,8 @@
   }
 }
 
+// # Collect
+// # =================================================================
 .offer-info__collect {
   ul {
     padding: 0;
@@ -49,6 +58,8 @@
   }
 }
 
+// # Coordinator
+// # =================================================================
 .offer-info__coordinator {
   margin-bottom: 10px;
 }
@@ -75,6 +86,8 @@
   }
 }
 
+// # Tax
+// # =================================================================
 .offer-info__tax,
 .offer-info__collect,
 .offer-info__products { margin-bottom: 60px; }
@@ -93,6 +106,8 @@
   }
 }
 
+// # Producer
+// # =================================================================
 .widget__producer__logo {
   background-repeat: no-repeat;
   background-size: cover;
@@ -104,4 +119,18 @@
 
 .widget__producer__name {
   padding: 0 30px;
+}
+
+// # Delivery
+// # =================================================================
+.widget__delivery__icon {
+  padding: 30px 30px 30px;
+  margin-bottom: 30px;
+  background-color: $brown-medium;
+
+  .fa {
+    font-size: 120px;
+    display: block;
+    color: $brown-dark;
+  }
 }

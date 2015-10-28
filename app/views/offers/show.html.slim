@@ -83,3 +83,41 @@ section.offer-info
                   .widget__producer__logo style="background-image: url(#{@offer.producer.logo.url(:thumb)});"
                   h4.widget__producer__name.text--yellow = @offer.producer.name
                 p = simple_format @offer.producer.description
+            br
+            h2.title--up.text--green Entregas
+            .offer-info__widget
+              .offer-info__widget__info
+                .widget__info__producer
+                  .widget__delivery__icon
+                    .fa.fa-bicycle.u-textCenter
+                  h4.widget__producer__name.text--yellow TELEBIKE
+                  p  
+                    span.fa.fa-user.u-textBrownMedium
+                    |  JOÃO RUIZ
+                    br
+                    span.fa.fa-phone.u-textBrownMedium
+                    |  (51) 9136-0348 
+                    br
+                    span.fa.fa-clock-o.u-textBrownMedium
+                    |  SEG a SÁB 
+                    br
+                    span.fa.fa-map-marker.u-textBrownMedium
+                    |  não cobre a Zona Sul de POA
+                    br 
+                    = link_to 'Confira a Fãn Page', 'https://www.facebook.com/TeleBikeEntregas', target: '_blank', class: 'text--yellow'
+                  hr.u-borderBrownMedium
+                  h4.widget__producer__name.text--yellow  EcoBike Courier
+                  p.text--white
+                    span.fa.fa-user.u-textBrownMedium
+                    |  VICTÓRIA MELGAREJO 
+                    br
+                    span.fa.fa-phone.u-textBrownMedium
+                    |  (51) 3016-8770 
+                    br
+                    span.fa.fa-clock-o.u-textBrownMedium
+                    |  SEG a SEX
+                    br
+                    span.fa.fa-map-marker.u-textBrownMedium
+                    |  cobre todas as regiões de POA
+                    br
+                    = link_to 'Confira o Site', 'http://www.ecobikecourier.com.br/', target: '_blank', class: 'text--yellow'
