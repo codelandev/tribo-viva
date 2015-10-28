@@ -1,4 +1,5 @@
 class Remembers < ApplicationMailer
+  default bcc: 'tribo@triboviva.com.br'
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -9,7 +10,7 @@ class Remembers < ApplicationMailer
     @offers = offers
     @producer = producer
     @day = Date.tomorrow
-    mail to: producer.email, subject: "Entregas tribo-viva", bcc: 'tribo@triboviva.com.br'
+    mail to: producer.email, subject: "Entregas tribo-viva"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -22,7 +23,7 @@ class Remembers < ApplicationMailer
     @deliver_coordinator = offer.deliver_coordinator
     @purchases = @offer.purchases.by_status(PurchaseStatus::PAID).includes(:orders)
     @day = Date.today
-    mail to: @deliver_coordinator.email, subject: "Lembrete de entregas tribo-viva", bcc: 'tribo@triboviva.com.br'
+    mail to: @deliver_coordinator.email, subject: "Lembrete de entregas tribo-viva"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -34,6 +35,6 @@ class Remembers < ApplicationMailer
     @user = user
     @offer = offer
     @day = Date.today
-    mail to: user.email, subject: "Lembrete de coletas tribo-viva", bcc: 'tribo@triboviva.com.br'
+    mail to: user.email, subject: "Lembrete de coletas tribo-viva"
   end
 end

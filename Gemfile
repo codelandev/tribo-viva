@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.2.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.2'
+gem 'rails', '4.2.4'
 gem 'rails-i18n', '~> 4.0.4'
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -42,14 +42,13 @@ gem 'devise-i18n'
 # For administrative interface
 gem 'activeadmin', github: 'gregbell/active_admin'
 # Well...simple forms
-gem 'simple_form', '~> 3.1.0'
+gem 'simple_form', '~> 3.2.0'
 # Handle authorizations
 gem 'pundit', '~> 1.0.0'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'font-awesome-rails'
 gem 'nprogress-rails'
-gem 'rack-zippy', '~> 3.0.0'
 # Payment gateway
 gem 'iugu', '~> 1.0.8'
 # Format/Parse decimal numbers
@@ -77,13 +76,14 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'webmock', '~> 1.22.1'
 end
 
 group :test do
   gem 'simplecov', '~> 0.10.0', require: false
   gem 'codeclimate-test-reporter', require: false
-  gem 'database_cleaner', '~> 1.4.1'
-  gem 'shoulda-matchers', '~> 2.8.0', require: false
+  gem 'database_cleaner', '~> 1.5.1'
+  gem 'shoulda-matchers', '~> 3.0.1'
   gem 'capybara'
   gem 'selenium-webdriver'
 end

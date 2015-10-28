@@ -5,7 +5,7 @@
 [![Test Coverage](https://codeclimate.com/github/codelandev/tribo-viva/badges/coverage.svg)](https://codeclimate.com/github/codelandev/tribo-viva/coverage)
 
 
-- Ruby 2.2.2
+- Ruby 2.2.3
 - See [config/secrets.yml](https://github.com/codelandev/tribo-viva/blob/master/config/secrets.yml)
 - Using Sendgrid in [config/environment.rb](https://github.com/codelandev/tribo-viva/blob/master/config/environment.rb)
 - PostgreSQL

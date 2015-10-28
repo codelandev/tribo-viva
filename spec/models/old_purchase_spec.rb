@@ -3,11 +3,9 @@ require 'rails_helper'
 RSpec.describe OldPurchase, type: :model do
   describe "validations" do
     it { should validate_presence_of :user }
-    it { should validate_presence_of :offer }
     it { should validate_presence_of :status }
     it { should validate_presence_of :amount }
     it { should validate_presence_of(:receipt).on(:update) }
-    it { should validate_numericality_of(:amount).is_greater_than(0).is_less_than(4).only_integer }
   end
 
   describe "relations" do
@@ -16,7 +14,7 @@ RSpec.describe OldPurchase, type: :model do
   end
 
   describe "callbacks" do
-    describe "before_save" do
+    describe "before_validation" do
       it "#generate_transaction_id" do
         purchase = OldPurchase.make!(:pending)
         expect(purchase.transaction_id).to be_present
