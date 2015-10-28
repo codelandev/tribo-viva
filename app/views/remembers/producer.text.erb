@@ -1,37 +1,27 @@
 Olá <%= @producer.name %>!
 
 Seguem as informações sobre as <%= @offers.count %> entregas de amanhã, <%= I18n.l @day, format: :long %>
+
 <% items = [] %>
-
 <% @offers.each_with_index do |offer, index| %>
-------------------------------------------------------------------------------------
+====================================
 
-ENTREGA <%= index + 1%>
+ENTREGA <%= index + 1 %>
 
+INFORMAÇÕES
 Endereço: <%= offer.deliver_coordinator.address %>
 Coordenador de entrega: <%= offer.deliver_coordinator.name %> - <%= offer.deliver_coordinator.phone %>
-Horário: <%= I18n.l offer.collect_starts_at - 2.hours, format: :short %> aproximadamente.
+Horário: <%= I18n.l offer.collect_starts_at - 2.hours, format: :short %> (aproximadamente).
 
 Produtos:
 <%= ActionController::Base.helpers.strip_tags offer.products_description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
+SUBTOTAL: <%= ActionController::Base.helpers.number_to_currency offer.value %> x <%= offer.orders.sum(:quantity) %> = <%= ActionController::Base.helpers.number_to_currency offer.purchases.sum(:total) %>
 
-SUBTOTAL = <%= ActionController::Base.helpers.number_to_currency offer.value %> x <%= offer.orders.sum(:quantity) %> = <%= ActionController::Base.helpers.number_to_currency offer.purchases.sum(:total) %>
 <% items << offer.purchases.sum(:total) %>
-
 <% end %>
 
-------------------------------------------------------------------------------------
+==================
 
 TOTAL: <%= items.map{|item| ActionController::Base.helpers.number_to_currency item }.join(' + ') %> = <%= ActionController::Base.helpers.number_to_currency items.sum %>
 
-------------------------------------------------------------------------------------
-
-Qualquer problema me liguem.
-
-Abraço e muito obrigado.
-
---
-Marcos Delgado
-::  www.triboviva.com.br
-::  marcos@triboviva.com.br
-::  (51) 9205.6715
+Tribo Viva - (51) 9205.6715

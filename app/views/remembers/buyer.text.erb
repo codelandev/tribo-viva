@@ -1,20 +1,24 @@
 Bom dia, <%= @user.name %>!
 
-Estamos entrando em contato para lembrar que hoje (<%= I18n.l @day, format: :long %>) tem coleta da Rede de Consumo Colaborativo Tribo Viva. Por favor, compareça no local e horário indicados e leve sacolas reutilizáveis e/ou um carrinho para transportar os alimentos.
+Estamos entrando em contato para lembrar que hoje (<%= I18n.l @day, format: :long %>) tem coleta da Rede de Consumo Colaborativo Tribo Viva.
+Por favor, compareça no local e horário indicados e leve sacolas reutilizáveis e/ou um carrinho para transportar os alimentos.
+
+
+ITENS DA COLETA
 
 Os ALIMENTOS a serem coletados por você são:
 
 <%= ActionController::Base.helpers.strip_tags @offer.products_description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
 
-O LOCAL, o HORÁRIO e o COORDENADOR DE ENTREGA são:
+LOCAL, HORÁRIO, COORDENADOR
 ENDEREÇO: <%= @offer.deliver_coordinator.address %>
-MAPA: <%= "https://www.google.com.br/maps?source=tldsi&hl=pt-BR&q=#{URI.encode @offer.deliver_coordinator.address}" %>
 HORÁRIO: <%= @offer.delivery_time_range %>.
 COORDENADOR(A) DE ENTREGA: <%= @offer.deliver_coordinator.name %> - <%= @offer.deliver_coordinator.phone %>
 
-Qualquer problema, entre em contato com a coordenadora ou conosco via email. Caso seja necessário, temos um parceiro nesta oferta que faz entregas à domicílio (João Ruiz  Telebike: 9136-0348).
+PARCEIRO DE ENTREGAS
 
-Muito obrigado.
+A Tribo Viva conta com um parceiro de entregas, caso você necessite de um.
+Para mais informações, visite <%= delivery_url %>
 
-Marcos Delgado
+Atenciosamente,
 Tribo Viva - (51) 9205.6715

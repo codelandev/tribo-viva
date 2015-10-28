@@ -1,29 +1,30 @@
 Bom dia, <%= @deliver_coordinator.name %>.
-
-Seguem as informações sobre a entrega e coletas dessa <%= I18n.l @day, format: :long %>. Por favor, confira as quantidades e a qualidade dos alimentos com calma para não faltar nada. São vários ítens então é normal alguma coisa escapar.
-
-------------------------------------------------------------------------------------
+Seguem as informações sobre a entrega e coletas do dia <%= I18n.l @day, format: :long %>.
+Por favor, confira as quantidades e a qualidade dos alimentos com calma para não faltar nada. São vários ítens então é normal alguma coisa escapar.
 
 ENTREGA
 
-Entregador: <%= @offer.producer.contact_name %> (<%= @offer.producer.phone %>)
-Horário de entrega: entre <%= I18n.l @offer.collect_starts_at - 2.hours, format: :short %> aproximadamente.
+Entregador: <%= @offer.producer.contact_name %> (Telefone: <%= @offer.producer.phone %>)
+
+Horário de entrega: <%= I18n.l @offer.collect_starts_at - 2.hours, format: :short %> (aproximadamente).
+
 Produtos:
 <%= ActionController::Base.helpers.strip_tags @offer.products_description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
 
-------------------------------------------------------------------------------------
-
 COLETA
 
-Horário de coleta: entre <%= I18n.l @offer.collect_starts_at %> às <%= I18n.l @offer.collect_ends_at %>.
+Horário de coleta: dia <%= @offer.collect_starts_at.strftime("%d/%m") %>, das <%= @offer.collect_starts_at.strftime("%H:%M") %> às <%= @offer.collect_ends_at.strftime("%H:%M") %>.
 Cotistas (<%= @purchases.select(:user_id).count %> pessoas):
+
 <% @purchases.each_with_index do |purchase, index| %>
-  <% quantity = purchase.orders.where(offer_id: @offer.id).sum(:quantity) %>
-  <%= index + 1 %>) <%= purchase.user.name %> (<%= quantity %> cotas)- <%= purchase.user.phone %>
+<%= index + 1 %>) <%= purchase.user.name %> (<%= purchase.orders.where(offer_id: @offer.id).sum(:quantity) %> cotas) - Telefone: <%= purchase.user.phone %>
+
 <% end %>
 
-------------------------------------------------------------------------------------
+PARCEIRO DE ENTREGAS
 
-Qualquer problema ou dúvida liga para mim ou para o entregador. Por favor, mande-nos uma mensagem dizendo como foi tudo, depois que acabar a coleta. Agora temos um parceiro entregador, o João Ruiz, e ele pode passar aí para pegar algumas cotas.
+A Tribo Viva conta com um parceiro de entregas, caso você necessite de um.
+Para mais informações, visite <%= delivery_url %>.
 
-Abraço e muito obrigado.
+Atenciosamente,
+Tribo Viva - (51) 9205.6715

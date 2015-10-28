@@ -1,0 +1,40 @@
+h1 Bom dia, #{@deliver_coordinator.name}.
+p
+  | Seguem as informações sobre a entrega e coletas do dia <b>#{I18n.l @day, format: :long}</b>.
+  br
+  | Por favor, confira as quantidades e a qualidade dos alimentos com calma para não faltar nada. São vários ítens então é normal alguma coisa escapar.
+
+hr
+
+h2 ENTREGA
+
+p Entregador: #{@offer.producer.contact_name} (Telefone: #{@offer.producer.phone})
+
+p Horário de entrega: #{I18n.l @offer.collect_starts_at - 2.hours, format: :short} (aproximadamente).
+
+p
+  | Produtos:
+  br
+== simple_format @offer.products_description
+
+hr
+
+h2 COLETA
+
+p
+  | Horário de coleta: dia #{@offer.collect_starts_at.strftime("%d/%m")}, das #{@offer.collect_starts_at.strftime("%H:%M")} às #{@offer.collect_ends_at.strftime("%H:%M")}.
+  | Cotistas (#{@purchases.select(:user_id).count} pessoas):
+
+  - @purchases.each_with_index do |purchase, index|
+    br
+    - quantity = purchase.orders.where(offer_id: @offer.id).sum(:quantity)
+    span #{index + 1}) #{purchase.user.name} (#{quantity} cotas) - Telefone: #{purchase.user.phone}
+
+hr
+
+h2 PARCEIRO DE ENTREGAS
+
+p
+  | A Tribo Viva conta com um parceiro de entregas, caso você necessite de um.
+  br
+  | Para mais informações, clique #{link_to 'aqui', delivery_url}.
