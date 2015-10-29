@@ -11,9 +11,10 @@ Horário de entrega: <%= I18n.l @offer.collect_starts_at - 2.hours, format: :sho
 Produtos de CADA UMA das cotas:
 <%= ActionController::Base.helpers.strip_tags @offer.description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
 
+- quotes_quantity = @purchases.includes(:orders).where(orders: {offer: @offer}).sum('orders.quantity')
 <% if @offer.offer_items.any? %>
   <% @offer.offer_items.each do |item| %>
-    <%= item.name %>, <%= item.quantity %>, <%= OfferItemUnit.t(item.unit) %>, <%= number_to_currency(item.unit_price) %>, <%= number_to_currency(item.total) %>
+    Nome: <%= item.name %>, Quantidade: <%= item.quantity*quotes_quantity %>
   <% end %>
 <% end %>
 
@@ -32,5 +33,6 @@ PARCEIRO DE ENTREGAS
 A Tribo Viva conta com um parceiro de entregas, caso você necessite de um.
 Para mais informações, visite <%= delivery_url %>.
 
-Atenciosamente,
-Tribo Viva - (51) 9205.6715
+DÚVIDAS?
+
+Qualquer dúvida ... ligue para gente: Pietro Rocha (51) 9856 1431 ou Marcos Delgado (51) 92056715
