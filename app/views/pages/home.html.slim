@@ -22,22 +22,30 @@ section.offers
                 = link_to offer do
                   article.card
                     .card__image style="background-image: url(#{offer.image.url(:home_thumb)});"
+                      .cardCoordinator
+                        .cardCoordinator-name
+                          p = offer.deliver_coordinator.name
+                          .small coordenador(a) de entrega
+                        .cardCoordinator-avatar style="background-image: url(#{offer.deliver_coordinator.avatar.url(:mini_thumb)});"
+                    .cardNeighborhood.u-textCenter.small
+                      span.fa.fa-map-marker.u-textYellow
+                      / TODO neighborhood
+                      span.u-textBold.u-textUp Bairro Farroupilha
                     .card__info
                       span.card__info__price title="Preço total da cota"
-                        = number_to_currency offer.coordinator_tax + offer.operational_tax + offer.value
-                        span.small
-                          |  / 1 cota
+                        span.u-textBigger = number_to_currency offer.coordinator_tax + offer.operational_tax + offer.value
                         span.pull-right title="Data da Coleta"
                           span.glyphicon.glyphicon-calendar
-                          = offer.collect_starts_at.strftime('%d/%m')
-                      h1.card__info__title.title--up = link_to offer.title, offer_path(offer)
+                          span = offer.collect_starts_at.strftime('%d/%m')
+                          span.u-textUp.u-marginLft5.u-textBrownMedium = l(offer.collect_starts_at, format: '%a')
+                      h1.card__info__title.title--up.u-marginBot5.u-marginTop5 = link_to offer.title, offer_path(offer)
                       span.card__info__place title="Nome do Produtor"
                         span.glyphicon.glyphicon-grain
                         = offer.producer.name
 
                     .card__action
                       - if offer.is_valid_offer?
-                        = link_to 'DETALHES', offer_path(offer), class: 'btn btn--md btn--block btn--yellow'
+                        = link_to 'VER DETALHES', offer_path(offer), class: 'btn btn--md btn--block btn--yellow'
                       - else
                         = link_to 'OFERTA FINALIZADA', offer_path(offer), class: 'btn btn--md btn--block btn--disable'
                     .card__progress
@@ -50,7 +58,7 @@ section.offers
                         .span
                           = distance_of_time_in_words(offer.offer_ends_at, Time.now)
                         .small restantes
-                      .progress[title="Cotas adquiridas"]
+                      .progress.u-marginTop5[title="Cotas adquiridas"]
                         .progress-bar.progress-bar-yellow[role="progressbar" aria-valuenow="#{progress_bar_percentage(offer)}" aria-valuemin="0" aria-valuemax="100" style="width: #{progress_bar_percentage(offer)}%"]
           - else
             .col-xs-12
