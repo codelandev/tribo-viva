@@ -6,7 +6,7 @@ class Offer < ActiveRecord::Base
   belongs_to :deliver_coordinator
   has_many :old_purchases
   has_many :orders
-  has_many :purchases, through: :orders
+  has_many :purchases, -> { by_status(PurchaseStatus::PAID) }, through: :orders
   has_many :offer_items, dependent: :destroy
 
   accepts_nested_attributes_for :offer_items, allow_destroy: true, reject_if: :all_blank

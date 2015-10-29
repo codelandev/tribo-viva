@@ -14,22 +14,15 @@ p Seguem as informações sobre as #{@offers.count} entregas de amanhã, #{I18n.
   p Horário: #{I18n.l offer.collect_starts_at - 2.hours, format: :short} (aproximadamente).
 
   h3 Produtos:
-  
   - if offer.offer_items.any?
     table.table.table-striped
       tr
-        th Nome
-        th Quantidade
-        th Unidade
-        th Preço Unitário
-        th Preço Total
+        th Nome do item
+        th Quantidade de itens
       - offer.offer_items.each do |item|
         tr
           td = item.name
-          td = item.quantity
-          td = OfferItemUnit.t item.unit
-          td = number_to_currency item.unit_price
-          td = number_to_currency item.total
+          td = item.quantity*offer.orders.sum(:quantity)
 
   == simple_format offer.description
   p SUBTOTAL = "#{ActionController::Base.helpers.number_to_currency offer.value} x #{offer.orders.sum(:quantity)} = #{ActionController::Base.helpers.number_to_currency offer.purchases.sum(:total)}"
