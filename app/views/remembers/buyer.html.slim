@@ -8,7 +8,7 @@ p
 h2 ITENS DA COLETA
 
 p
-  | Os ALIMENTOS a serem coletados por você são (<b>para cada cota comprada</b>):
+  | Os ALIMENTOS a serem coletados por você são:
   br
   br
 
@@ -18,15 +18,11 @@ p
       th Nome
       th Quantidade
       th Unidade
-      th Preço Unitário
-      th Preço Total
     - @offer.offer_items.each do |item|
       tr
         td = item.name
-        td = item.quantity
+        td = item.quantity*@purchase.orders.sum(:quantity)
         td = OfferItemUnit.t item.unit
-        td = number_to_currency item.unit_price
-        td = number_to_currency item.total
 
 == simple_format @offer.description
 

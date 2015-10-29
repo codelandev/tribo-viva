@@ -12,7 +12,7 @@ Os ALIMENTOS a serem coletados por você são:
 
 <% if @offer.offer_items.any? %>
   <% @offer.offer_items.each do |item| %>
-    <%= item.name %>, <%= item.quantity %>, <%= OfferItemUnit.t(item.unit) %>, <%= number_to_currency(item.unit_price) %>, <%= number_to_currency(item.total) %>
+    Nome: <%= item.name %>, Quantidade: <%= item.quantity*@purchase.orders.sum(:quantity) %>
   <% end %>
 <% end %>
 

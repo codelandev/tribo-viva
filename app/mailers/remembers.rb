@@ -34,6 +34,7 @@ class Remembers < ApplicationMailer
   def buyer(user, offer)
     @user = user
     @offer = offer
+    @purchase = offer.purchases.includes(:orders).find_by(user: @user)
     @day = Date.today
     mail to: user.email, subject: "Lembrete de coleta Tribo Viva"
   end
