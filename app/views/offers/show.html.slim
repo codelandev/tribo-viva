@@ -36,25 +36,23 @@ section.offer-info
           .col-sm-6.col-md-8
             .offer-info__products
               h2.title--up.text--green O que vem na oferta
-              .row
-                - if @offer.offer_items.any?
-                  table.table.table-striped
+              - if @offer.offer_items.any?
+                table.table.table-brown-light
+                  .table-responsive
                     tr
-                      th Nome
-                      th Quantidade
-                      th Unidade
-                      th Preço Unitário
-                      th Preço Total
+                      th.text--green Nome
+                      th.text--green Quantidade
+                      th.text--green Preço Un.
+                      th.text--green Total
                     - @offer.offer_items.each do |item|
                       tr
                         td = item.name
-                        td = item.quantity
-                        td = OfferItemUnit.t item.unit
+                        td 
+                          span 
+                            | #{item.quantity} #{OfferItemUnit.t item.unit}
                         td = number_to_currency item.unit_price
                         td = number_to_currency item.total
-              
-              .row
-                p = simple_format @offer.description
+              p = simple_format @offer.description
             
             .offer-info__collect
               h2.title--up.text--green Sobre a coleta
@@ -99,6 +97,6 @@ section.offer-info
             .offer-info__widget
               .offer-info__widget__info
                 .widget__info__producer
-                  .widget__producer__logo style="background-image: url(#{@offer.producer.logo.url(:thumb)});"
+                  .widget__producer__logo.img-responsive style="background-image: url(#{@offer.producer.logo.url(:thumb)});"
                   h4.widget__producer__name.text--yellow = @offer.producer.name
                 p = simple_format @offer.producer.description
