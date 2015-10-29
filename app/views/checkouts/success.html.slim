@@ -24,7 +24,26 @@ section.purchase
                     | #{t('activerecord.attributes.offer.coordinator_tax')}: 
                     |  #{number_to_currency order.offer.coordinator_tax}
                   li TOTAL DA OFERTA: #{number_to_currency order.total}
-                p = simple_format order.offer.description                
+                .row
+                  - if order.offer.offer_items.any?
+                    table.table.table-striped
+                      tr
+                        th Nome
+                        th Quantidade
+                        th Unidade
+                        th Preço Unitário
+                        th Preço Total
+                      - order.offer.offer_items.each do |item|
+                        tr
+                          td = item.name
+                          td = item.quantity
+                          td = OfferItemUnit.t item.unit
+                          td = number_to_currency item.unit_price
+                          td = number_to_currency item.total
+                
+                .row
+                  p = simple_format order.offer.description
+
               .offer-info__collect
                 .offer-info__coordinator
                   span.offer-info__coordinator__avatar style="background-image: url(#{order.offer.deliver_coordinator.avatar});"
@@ -82,7 +101,25 @@ section.purchase
                     | #{t('activerecord.attributes.offer.coordinator_tax')}: 
                     |  #{number_to_currency order.offer.coordinator_tax}
                   li TOTAL DA OFERTA: #{number_to_currency order.total}
-                p = simple_format order.offer.description                
+                .row
+                  - if order.offer.offer_items.any?
+                    table.table.table-striped
+                      tr
+                        th Nome
+                        th Quantidade
+                        th Unidade
+                        th Preço Unitário
+                        th Preço Total
+                      - order.offer.offer_items.each do |item|
+                        tr
+                          td = item.name
+                          td = item.quantity
+                          td = OfferItemUnit.t item.unit
+                          td = number_to_currency item.unit_price
+                          td = number_to_currency item.total
+                
+                .row
+                  p = simple_format order.offer.description                
               
             span.text--green VALOR DA TRANSAÇÃO: #{number_to_currency @purchase.taxes}
             h2.title--up.text--green.u-marginTop5 TOTAL A PAGAR: #{number_to_currency @purchase.total_with_taxes}.

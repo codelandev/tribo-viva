@@ -8,8 +8,14 @@ Entregador: <%= @offer.producer.contact_name %> (Telefone: <%= @offer.producer.p
 
 Horário de entrega: <%= I18n.l @offer.collect_starts_at - 2.hours, format: :short %> (aproximadamente).
 
-Produtos:
+Produtos de CADA UMA das cotas:
 <%= ActionController::Base.helpers.strip_tags @offer.description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
+
+<% if @offer.offer_items.any? %>
+  <% @offer.offer_items.each do |item| %>
+    <%= item.name %>, <%= item.quantity %>, <%= OfferItemUnit.t(item.unit) %>, <%= number_to_currency(item.unit_price) %>, <%= number_to_currency(item.total) %>
+  <% end %>
+<% end %>
 
 COLETA
 

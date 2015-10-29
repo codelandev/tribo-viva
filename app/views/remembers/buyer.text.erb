@@ -10,6 +10,12 @@ Os ALIMENTOS a serem coletados por você são:
 
 <%= ActionController::Base.helpers.strip_tags @offer.description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
 
+<% if @offer.offer_items.any? %>
+  <% @offer.offer_items.each do |item| %>
+    <%= item.name %>, <%= item.quantity %>, <%= OfferItemUnit.t(item.unit) %>, <%= number_to_currency(item.unit_price) %>, <%= number_to_currency(item.total) %>
+  <% end %>
+<% end %>
+
 LOCAL, HORÁRIO, COORDENADOR
 ENDEREÇO: <%= @offer.deliver_coordinator.address %>
 HORÁRIO: <%= @offer.delivery_time_range %>.

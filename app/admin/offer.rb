@@ -1,7 +1,8 @@
 ActiveAdmin.register Offer do
   permit_params :deliver_coordinator_id, :bank_account_id, :producer_id, :title, :image, :value, :stock,
                 :description, :offer_ends_at, :operational_tax, :coordinator_tax,
-                :collect_ends_at, :offer_starts_at, :collect_starts_at
+                :collect_ends_at, :offer_starts_at, :collect_starts_at,
+                offer_items_attributes:[:id, :name, :unit, :quantity, :unit_price, :_destroy]
 
   menu priority: 7
 
@@ -56,6 +57,26 @@ ActiveAdmin.register Offer do
       row :collect_ends_at
     end
 
+    panel 'Items da oferta' do
+      table_for offer.offer_items.order(name: :asc) do
+        column :name do |item|
+          item.name
+        end
+        column :unit do |item|
+          OfferItemUnit.t item.unit
+        end
+        column :quantity do |item|
+          item.quantity
+        end
+        column :unit_price do |item|
+          number_to_currency item.unit_price
+        end
+        column :total do |item|
+          number_to_currency item.total
+        end
+      end
+    end
+
     panel 'Compras para esta oferta' do
       table_for offer.purchases.order(status: :desc) do
         column :invoice_id do |purchase|
@@ -89,6 +110,14 @@ ActiveAdmin.register Offer do
       f.input :offer_ends_at
       f.input :collect_starts_at
       f.input :collect_ends_at
+
+      f.has_many :offer_items do |a|
+        a.input :name
+        a.input :unit, as: :select, collection: OfferItemUnit.to_a
+        a.input :quantity
+        a.input :unit_price
+        a.input :_destroy, as: :boolean, label: 'Remover?'
+      end
     end
 
     f.actions

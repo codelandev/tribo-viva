@@ -15,6 +15,13 @@ Horário: <%= I18n.l offer.collect_starts_at - 2.hours, format: :short %> (aprox
 
 Produtos:
 <%= ActionController::Base.helpers.strip_tags offer.description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
+
+<% if offer.offer_items.any? %>
+  <% offer.offer_items.each do |item| %>
+    <%= item.name %>, <%= item.quantity %>, <%= OfferItemUnit.t(item.unit) %>, <%= number_to_currency(item.unit_price) %>, <%= number_to_currency(item.total) %>
+  <% end %>
+<% end %>
+
 SUBTOTAL: <%= ActionController::Base.helpers.number_to_currency offer.value %> x <%= offer.orders.sum(:quantity) %> = <%= ActionController::Base.helpers.number_to_currency offer.purchases.sum(:total) %>
 
 <% items << offer.purchases.sum(:total) %>
