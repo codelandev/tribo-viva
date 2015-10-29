@@ -55,7 +55,7 @@ Offer.blueprint do
   image { File.open('spec/support/example.jpg') }
   value { 49.90 }
   stock { 10 }
-  products_description { "Lorem ipsum." }
+  description { "Lorem ipsum." }
   operational_tax { 4.99 }
   coordinator_tax { 4.99 }
   offer_starts_at { 1.day.from_now }
