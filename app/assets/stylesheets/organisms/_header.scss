@@ -4,6 +4,17 @@
   background-color: $brown-tribo;
 }
 
+.header__centered {
+  height: 100px;
+    width: 100%;
+    background-color: $brown-medium;
+    text-align: center;
+    padding-top: 40px;
+  img {
+    padding-top: 9px;
+  }
+}
+
 .header__logo {
   img {
     padding-top: 9px;
