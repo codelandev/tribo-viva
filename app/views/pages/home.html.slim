@@ -27,10 +27,10 @@ section.offers
                           p = offer.deliver_coordinator.name
                           .small coordenador(a) de entrega
                         .cardCoordinator-avatar style="background-image: url(#{offer.deliver_coordinator.avatar.url(:mini_thumb)});"
-                    .cardNeighborhood.u-textCenter.small
-                      span.fa.fa-map-marker.u-textYellow
-                      / TODO neighborhood
-                      span.u-textBold.u-textUp Bairro Farroupilha
+                    - if offer.deliver_coordinator.neighborhood.present?
+                      .cardNeighborhood.u-textCenter.small
+                        span.fa.fa-map-marker.u-textYellow
+                        span.u-textBold.u-textUp = "Bairro #{offer.deliver_coordinator.neighborhood}"
                     .card__info
                       span.card__info__price title="Preço total da cota"
                         span.u-textBigger = number_to_currency offer.coordinator_tax + offer.operational_tax + offer.value

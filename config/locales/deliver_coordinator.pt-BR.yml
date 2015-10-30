@@ -13,4 +13,5 @@ pt-BR:
         email: 'Email'
         avatar: 'Avatar'
         address: 'Endereço'
+        neighborhood: 'Bairro'
         partial_address: 'Endereço Parcial'

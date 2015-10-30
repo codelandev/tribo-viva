@@ -8,6 +8,7 @@ RSpec.describe DeliverCoordinator, type: :model do
     it { should validate_presence_of :email }
     it { should validate_presence_of :avatar }
     it { should validate_presence_of :address }
+    it { should validate_presence_of :neighborhood }
     it { should validate_presence_of :partial_address }
   end
 

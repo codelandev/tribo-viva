@@ -1,5 +1,6 @@
 ActiveAdmin.register DeliverCoordinator do
-  permit_params :cpf, :name, :phone, :email, :avatar, :address, :partial_address
+  permit_params :cpf, :name, :phone, :email, :avatar, :address, :partial_address,
+                :neighborhood
 
   menu priority: 5
 
@@ -13,6 +14,7 @@ ActiveAdmin.register DeliverCoordinator do
     column :cpf
     column :phone
     column :address
+    column :neighborhood
     column :partial_address
     actions
   end
@@ -26,6 +28,7 @@ ActiveAdmin.register DeliverCoordinator do
       row :phone
       row :email
       row :address
+      row :neighborhood
       row :partial_address
       row :cpf
     end
@@ -38,6 +41,7 @@ ActiveAdmin.register DeliverCoordinator do
       f.input :phone
       f.input :email
       f.input :address
+      f.input :neighborhood
       f.input :partial_address
       f.input :cpf
     end

@@ -32,6 +32,7 @@ if Rails.env.development? || Rails.env.staging?
                               email: "email_do_coordenador_#{index}@test.com",
                               address: "Rua do coordenador #{index}",
                               partial_address: "Rua do coordenador",
+                              neighborhood: "Floresta #{index}",
                               cpf: "00914969000",
                               avatar: File.open('spec/support/example.jpg'))
   end
