@@ -29,10 +29,11 @@ class Offer < ActiveRecord::Base
   end
 
   def remaining
-    stock - Purchase.joins(:orders)
-                    .where(status: PurchaseStatus::PAID,
-                           orders:{offer_id: self.id})
-                    .sum(:quantity)
+    quantity = stock - Purchase.joins(:orders)
+                               .where(status: PurchaseStatus::PAID,
+                                      orders:{offer_id: self.id})
+                               .sum(:quantity)
+    [0, quantity].max
   end
 
   def is_valid_offer?
