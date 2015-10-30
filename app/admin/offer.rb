@@ -111,12 +111,14 @@ ActiveAdmin.register Offer do
       f.input :collect_starts_at
       f.input :collect_ends_at
 
-      f.has_many :offer_items do |a|
-        a.input :name
-        a.input :unit, as: :select, collection: OfferItemUnit.to_a
-        a.input :quantity
-        a.input :unit_price
-        a.input :_destroy, as: :boolean, label: 'Remover?'
+      panel '' do
+        f.has_many :offer_items do |a|
+          a.input :name
+          a.input :unit, as: :select, collection: OfferItemUnit.to_a
+          a.input :quantity
+          a.input :unit_price
+          a.input :_destroy, as: :boolean, label: 'Remover?'
+        end
       end
     end
 
