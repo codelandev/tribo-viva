@@ -36,8 +36,8 @@ section.offers
                         span.u-textBigger = number_to_currency offer.coordinator_tax + offer.operational_tax + offer.value
                         span.pull-right title="Data da Coleta"
                           span.glyphicon.glyphicon-calendar
-                          span = offer.collect_starts_at.strftime('%d/%m')
-                          span.u-textUp.u-marginLft5.u-textBrownMedium = l(offer.collect_starts_at, format: '%a')
+                          span.u-textUp = l(offer.collect_starts_at, format: '%a')
+                          span.u-marginLft5.u-textBrownMedium = offer.collect_starts_at.strftime('%d/%m')
                       h1.card__info__title.title--up.u-marginBot5.u-marginTop5 = link_to offer.title, offer_path(offer)
                       span.card__info__place title="Nome do Produtor"
                         span.glyphicon.glyphicon-grain
