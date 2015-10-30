@@ -12,6 +12,7 @@ pt-BR:
         title: 'Nome da oferta'
         image: 'Imagem da oferta'
         producer: 'Produtor'
+        description: 'Descrição'
         bank_account: 'Conta bancária'
         offer_ends_at: 'Oferta encerra em'
         operational_tax: 'TAXA OPERACIONAL (sustentabilidade da Rede)'
@@ -20,4 +21,3 @@ pt-BR:
         collect_ends_at: 'Coleta termina em'
         collect_starts_at: 'Coleta inicia em'
         deliver_coordinator: 'Coordenador de entrega'
-        products_description: 'Descrição dos produtos'

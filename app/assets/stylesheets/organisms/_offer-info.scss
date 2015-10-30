@@ -79,13 +79,15 @@
 .offer-info__collect,
 .offer-info__products { margin-bottom: 60px; }
 
-.offer-info__tax {
+.offer-info__tax,
+.offer-info__products {
   table {
     background-color: $brown-light;
     tr {
       border-bottom: 1px solid $brown-medium;
       &:last-child { border-bottom: 0px; }
-      td {
+      td,
+      th {
         padding: 15px 20px;
         border-top: 0px;
       }

@@ -6,10 +6,13 @@ class Offer < ActiveRecord::Base
   belongs_to :deliver_coordinator
   has_many :old_purchases
   has_many :orders
-  has_many :purchases, through: :orders
+  has_many :purchases, -> { by_status(PurchaseStatus::PAID) }, through: :orders
+  has_many :offer_items, dependent: :destroy
+
+  accepts_nested_attributes_for :offer_items, allow_destroy: true, reject_if: :all_blank
 
   validates :deliver_coordinator, :bank_account, :producer, :title, :image, :value, :stock,
-            :products_description, :offer_ends_at, :operational_tax, :coordinator_tax,
+            :description, :offer_ends_at, :operational_tax, :coordinator_tax,
             :collect_ends_at, :offer_starts_at, :collect_starts_at, presence: true
 
   mount_uploader :image, OfferUploader

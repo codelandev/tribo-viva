@@ -1,0 +1,22 @@
+pt-BR:
+  activerecord:
+    models:
+      offer_item:
+        one: 'Item'
+        other: 'Items'
+
+    attributes:
+      offer_item:
+        name: 'Nome'
+        unit: 'Unidade'
+        offer: 'Oferta'
+        quantity: 'Quantidade'
+        unit_price: 'Preço unitário'
+
+  enumerations:
+    offer_item_unit:
+      kg: 'Kg'
+      bottle: 'Garrafa'
+      pack: 'Maço'
+      stem: 'Pé'
+      head: 'Cabeça'

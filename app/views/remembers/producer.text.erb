@@ -4,20 +4,27 @@ Seguem as informações sobre as <%= @offers.count %> entregas de amanhã, <%= I
 
 <% items = [] %>
 <% @offers.each_with_index do |offer, index| %>
-====================================
+  ====================================
 
-ENTREGA <%= index + 1 %>
+  ENTREGA <%= index + 1 %>
 
-INFORMAÇÕES
-Endereço: <%= offer.deliver_coordinator.address %>
-Coordenador de entrega: <%= offer.deliver_coordinator.name %> - <%= offer.deliver_coordinator.phone %>
-Horário: <%= I18n.l offer.collect_starts_at - 2.hours, format: :short %> (aproximadamente).
+  INFORMAÇÕES
+  Endereço: <%= offer.deliver_coordinator.address %>
+  Coordenador de entrega: <%= offer.deliver_coordinator.name %> - <%= offer.deliver_coordinator.phone %>
+  Horário: <%= I18n.l offer.collect_starts_at - 2.hours, format: :short %> (aproximadamente).
 
-Produtos:
-<%= ActionController::Base.helpers.strip_tags offer.products_description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
-SUBTOTAL: <%= ActionController::Base.helpers.number_to_currency offer.value %> x <%= offer.orders.sum(:quantity) %> = <%= ActionController::Base.helpers.number_to_currency offer.purchases.sum(:total) %>
+  Produtos:
+  <% if offer.offer_items.any? %>
+    <% offer.offer_items.each do |item| %>
+      Nome: <%= item.name %>, Quantidade: <%= item.quantity*offer.orders.sum(:quantity) %>
+    <% end %>
+  <% end %>
 
-<% items << offer.purchases.sum(:total) %>
+  <%= ActionController::Base.helpers.strip_tags offer.description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
+
+  SUBTOTAL: <%= ActionController::Base.helpers.number_to_currency offer.value %> x <%= offer.orders.sum(:quantity) %> = <%= ActionController::Base.helpers.number_to_currency offer.purchases.sum(:total) %>
+
+  <% items << offer.purchases.sum(:total) %>
 <% end %>
 
 ==================

@@ -1,4 +1,4 @@
-- meta og: { title: "Tribo Viva - #{@offer.title}", description: "#{strip_tags @offer.products_description}",
+- meta og: { title: "Tribo Viva - #{@offer.title}", description: "#{strip_tags @offer.description}",
              url: request.url, image: @offer.image.url }
 
 section.offer-header
@@ -36,7 +36,24 @@ section.offer-info
           .col-sm-6.col-md-8
             .offer-info__products
               h2.title--up.text--green O que vem na oferta
-              p = simple_format @offer.products_description
+              - if @offer.offer_items.any?
+                .table-responsive
+                  table.table.table-brown-light
+                    tr
+                      th.text--green Nome
+                      th.text--green Quantidade
+                      th.text--green Preço Un.
+                      th.text--green Total
+                    - @offer.offer_items.each do |item|
+                      tr
+                        td = item.name
+                        td 
+                          span 
+                            | #{item.quantity} #{OfferItemUnit.t item.unit}
+                        td = number_to_currency item.unit_price
+                        td = number_to_currency item.total
+              p = simple_format @offer.description
+            
             .offer-info__collect
               h2.title--up.text--green Sobre a coleta
               .offer-info__coordinator
@@ -55,31 +72,32 @@ section.offer-info
                   p.hint.text--brown__medium Por motivos de segurança, o número do endereço só será fornecido para os participantes da oferta.
             .offer-info__tax
               h2.title--up.text--green Taxas operacionais
-              table.table.table-brown-light
-                tbody
-                  tr
-                    td.width-80
-                      strong.text--green VALOR DA COTA (repassados ao produtor)
-                    td.text-right
-                      = number_to_currency @offer.value
-                  - if @offer.operational_tax.present?
+              .table-responsive
+                table.table.table-brown-light
+                  tbody
                     tr
                       td.width-80
-                        strong.text--green = t('activerecord.attributes.offer.operational_tax')
+                        strong.text--green VALOR DA COTA (repassados ao produtor)
                       td.text-right
-                        = number_to_currency @offer.operational_tax
-                  - if @offer.coordinator_tax.present?
-                    tr
-                      td.width-80
-                        strong.text--green = t('activerecord.attributes.offer.coordinator_tax')
-                      td.text-right
-                        = number_to_currency @offer.coordinator_tax
+                        = number_to_currency @offer.value
+                    - if @offer.operational_tax.present?
+                      tr
+                        td.width-80
+                          strong.text--green = t('activerecord.attributes.offer.operational_tax')
+                        td.text-right
+                          = number_to_currency @offer.operational_tax
+                    - if @offer.coordinator_tax.present?
+                      tr
+                        td.width-80
+                          strong.text--green = t('activerecord.attributes.offer.coordinator_tax')
+                        td.text-right
+                          = number_to_currency @offer.coordinator_tax
 
           .col-sm-6.col-md-4
             h2.title--up.text--green Sobre o Produtor
             .offer-info__widget
               .offer-info__widget__info
                 .widget__info__producer
-                  .widget__producer__logo style="background-image: url(#{@offer.producer.logo.url(:thumb)});"
+                  .widget__producer__logo.img-responsive style="background-image: url(#{@offer.producer.logo.url(:thumb)});"
                   h4.widget__producer__name.text--yellow = @offer.producer.name
                 p = simple_format @offer.producer.description

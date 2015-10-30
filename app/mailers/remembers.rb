@@ -22,6 +22,7 @@ class Remembers < ApplicationMailer
     @offer = offer
     @deliver_coordinator = offer.deliver_coordinator
     @purchases = @offer.purchases.by_status(PurchaseStatus::PAID).includes(:orders)
+    @quotes_quantity = @purchases.includes(:orders).where(orders: {offer: @offer}).sum('orders.quantity')
     @day = Date.today
     mail to: @deliver_coordinator.email, subject: "Lembrete de entrega Tribo Viva"
   end
@@ -34,6 +35,7 @@ class Remembers < ApplicationMailer
   def buyer(user, offer)
     @user = user
     @offer = offer
+    @purchase = offer.purchases.includes(:orders).find_by(user: @user)
     @day = Date.today
     mail to: user.email, subject: "Lembrete de coleta Tribo Viva"
   end

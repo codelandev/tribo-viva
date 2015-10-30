@@ -10,7 +10,26 @@ section.purchase
               span.glyphicon.glyphicon-grain
               = @offer.producer.name
             .offer-info__products
-              p = simple_format @offer.products_description
+              .row
+                - if @offer.offer_items.any?
+                  table.table.table-striped
+                    tr
+                      th Nome
+                      th Quantidade
+                      th Unidade
+                      th Preço Unitário
+                      th Preço Total
+                    - @offer.offer_items.each do |item|
+                      tr
+                        td = item.name
+                        td = item.quantity
+                        td = OfferItemUnit.t item.unit
+                        td = number_to_currency item.unit_price
+                        td = number_to_currency item.total
+              
+              .row
+                p = simple_format @offer.description
+            
             .offer-info__collect
               h3.title--up.text--green Sobre a coleta
               .offer-info__coordinator

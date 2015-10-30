@@ -13,9 +13,22 @@ p Entregador: #{@offer.producer.contact_name} (Telefone: #{@offer.producer.phone
 p Horário de entrega: #{I18n.l @offer.collect_starts_at - 2.hours, format: :short} (aproximadamente).
 
 p
-  | Produtos:
+  | Produtos de todas as cotas:
   br
-== simple_format @offer.products_description
+
+- if @offer.offer_items.any?
+  table.table.table-striped
+    tr
+      th Nome
+      th Quantidade
+      th Unidade
+    - @offer.offer_items.each do |item|
+      tr
+        td = item.name
+        td = item.quantity*@quotes_quantity
+        td = OfferItemUnit.t item.unit
+
+== simple_format @offer.description
 
 hr
 
@@ -38,3 +51,7 @@ p
   | A Tribo Viva conta com um parceiro de entregas, caso você necessite de um.
   br
   | Para mais informações, clique #{link_to 'aqui', delivery_url}.
+
+h2 Dúvidas?
+
+p Qualquer dúvida ... ligue para gente: Pietro Rocha (51) 9856 1431 ou Marcos Delgado (51) 92056715

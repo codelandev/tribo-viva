@@ -11,7 +11,20 @@ p
   | Os ALIMENTOS a serem coletados por você são:
   br
   br
-== simple_format @offer.products_description
+
+- if @offer.offer_items.any?
+  table.table.table-striped
+    tr
+      th Nome
+      th Quantidade
+      th Unidade
+    - @offer.offer_items.each do |item|
+      tr
+        td = item.name
+        td = item.quantity*@purchase.orders.sum(:quantity)
+        td = OfferItemUnit.t item.unit
+
+== simple_format @offer.description
 
 h2 LOCAL, HORÁRIO, COORDENADOR
 p ENDEREÇO: #{@offer.deliver_coordinator.address}
