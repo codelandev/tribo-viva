@@ -38,7 +38,8 @@ section.offers
                           span.glyphicon.glyphicon-calendar
                           span.u-textUp = l(offer.collect_starts_at, format: '%a')
                           span.u-marginLft5.u-textBrownMedium = offer.collect_starts_at.strftime('%d/%m')
-                      h1.card__info__title.title--up.u-marginBot5.u-marginTop5 = link_to offer.title, offer_path(offer)
+                      h1.card__info__title.title--up.u-marginBot5.u-marginTop5
+                        = link_to offer.decorate.title_with_items, offer_path(offer)
                       span.card__info__place title="Nome do Produtor"
                         span.glyphicon.glyphicon-grain
                         = offer.producer.name

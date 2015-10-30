@@ -9,7 +9,7 @@ section.offer-header
           .col-sm-6.col-md-8
             .offer__header__image style="background-image: url(#{@offer.image.url(:show_cover)});"
           .col-sm-6.col-md-4
-            h1.offer__header__title.title--up.text--yellow = @offer.title
+            h1.offer__header__title.title--up.text--yellow = @offer.decorate.title_with_items
             .offer__header__producer
               span.glyphicon.glyphicon-grain
               = @offer.producer.name

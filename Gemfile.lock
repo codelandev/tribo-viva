@@ -140,6 +140,11 @@ GEM
     dotenv-rails (2.0.2)
       dotenv (= 2.0.2)
       railties (~> 4.0)
+    draper (1.4.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
     ejs (1.1.1)
     enumerate_it (1.2.8)
       activesupport (>= 3.0.0)
@@ -379,6 +384,7 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.2)
+    request_store (1.2.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rest-client (1.8.0)
@@ -500,6 +506,7 @@ DEPENDENCIES
   devise (~> 3.5.1)
   devise-i18n
   dotenv-rails
+  draper
   enumerate_it
   fog
   font-awesome-rails
