@@ -3,7 +3,9 @@
   width: 100%;
   margin-bottom: 30px;
 
-  a:hover { text-decoration: none }
+  a:hover {
+    text-decoration: none;
+  }
 }
 
 .card__image {
@@ -14,7 +16,21 @@
   width: 100%;
 }
 
-.card__info { padding: 20px 30px 0px 30px; }
+// # Coordinator
+// # =================================================================
+.cardNeighborhood {
+  background-color: $brown-medium;
+  color: white;
+  padding: 10px 30px;
+
+  .fa {
+    margin-right: 5px;
+  }
+}
+
+.card__info {
+  padding: 10px 30px 0px 30px;
+}
 
 .card__info__price {
   color: white;
@@ -30,9 +46,10 @@
 
 .card__info__title {
   color: $yellow-medium;
-  font-size: 24px;
+  font-size: 28px;
   margin-top: 0;
   margin-bottom: 0;
+  font-weight: 400;
 
   a {
     color: $yellow-medium;
@@ -47,13 +64,14 @@
 }
 
 .card__action {
-  padding: 20px 30px 10px 30px;
+  padding: 15px 30px 10px 30px;
 }
 
 .card__progress {
   color: white;
   font-size: 13px;
   padding: 10px 30px 20px 30px;
+
   .span {
     font-weight: bold;
     line-height: 0.8;
@@ -63,4 +81,45 @@
     color: $brown-medium;
     margin-bottom: 3px;
   }
+}
+
+// # Coordinator
+// # =================================================================
+.cardCoordinator {
+  padding: 15px 20px;
+  float: right;
+  text-align: right;
+}
+
+.cardCoordinator-name {
+  background-color: $brown-dark;
+  padding: 5px 35px 4px 10px;
+  margin-right: 20px;
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 14px;
+
+  p {
+    color: white;
+    margin-bottom: 1px;
+    line-height: 1em;
+  }
+
+  .small {
+    font-size: 80%;
+    color: $brown-medium;
+  }
+}
+
+.cardCoordinator-avatar {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 55px 55px;
+  background-position: center center;
+  border-radius: 55px;
+  height: 55px;
+  width: 55px;
+  display: inline-block;
+  border: 2px solid $brown-dark;
+  right: 30px;
 }

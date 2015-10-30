@@ -30,11 +30,11 @@
   }
 
   .u-marginBot#{$value} {
-    margin-bottom: #{$value}px;
+    margin-bottom: #{$value}px !important;
   }
 
   .u-marginTop#{$value} {
-    margin-top: #{$value}px;
+    margin-top: #{$value}px !important;
   }
 
   .u-paddingLft#{$value} {
@@ -140,12 +140,30 @@
   font-weight: 700;
 }
 
+.u-textBigger {
+  font-size: 130%;
+}
+
+// # Text Color
+// # =================================================================
+.u-textBrownMedium {
+  color: $brown-medium;
+}
+
+.u-textYellow {
+  color: $yellow-medium;
+}
+
 // # Misc
 // # =================================================================
 .u-imageReplace {
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
+}
+
+.u-borderBrownMedium {
+  border-color: $brown-medium;
 }
 
 // # Print
