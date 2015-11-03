@@ -35,6 +35,7 @@ DeliverCoordinator.blueprint do
   partial_address { "Rua do coordenador" }
   cpf { "000.000.000-00" }
   avatar { File.open('spec/support/example.jpg') }
+  neighborhood { 'Bairro do coordenador' }
 end
 
 BankAccount.blueprint do
