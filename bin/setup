@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'pathname'
+require 'fileutils'
 
 # path to your application root.
 APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
@@ -13,9 +14,34 @@ Dir.chdir APP_ROOT do
   system "bundle check || bundle install"
 
   puts "\n== Copying sample files =="
-  unless File.exist?("config/database.yml")
-  system "cp config/database.yml.sample config/database.yml"
-  system "vi config/database.yml"
+  unless File.exist?(APP_ROOT.join('config', 'database.yml'))
+    FileUtils.cp APP_ROOT.join('config', 'database.yml.sample',), APP_ROOT.join('config', 'database.yml')
+    system "vi config/database.yml"
+  end
+
+  unless File.exist?(APP_ROOT.join('.git', 'hooks', 'pre-push'))
+
+    git_version = Gem::Version.new(`git --version`.gsub('git version', ''))
+    if git_version > Gem::Version.new('1.8.2')
+      puts "\n== Creating git pre-push hook"
+
+      pre_hook = <<EOF
+#!/bin/sh
+
+branch=`git rev-parse --abbrev-ref HEAD`
+exit_code=$(bin/rspec --fail-fast --out /dev/null --format progress > /dev/null 2>/dev/null )$?
+if [ $exit_code -gt 0 ]; then
+  echo "Did not push $branch because of failing tests"
+fi
+exit $exit_code
+EOF
+
+      File.open(APP_ROOT.join('.git', 'hooks', 'pre-push'), 'w+') do |file|
+        file.write(pre_hook)
+      end
+
+      FileUtils.chmod('+x', APP_ROOT.join('.git', 'hooks', 'pre-push'))
+    end
   end
 
   puts "\n== Preparing database =="
