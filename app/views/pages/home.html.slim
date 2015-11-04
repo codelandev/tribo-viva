@@ -76,15 +76,24 @@ section.old-offers
             .col-sm-6.col-md-4
               article.card
                 .card__image style="background-image: url(#{offer.image.url(:home_thumb)});"
+                  .cardCoordinator
+                    .cardCoordinator-name
+                      p = offer.deliver_coordinator.name
+                      .small coordenador(a) de entrega
+                    .cardCoordinator-avatar style="background-image: url(#{offer.deliver_coordinator.avatar.url(:mini_thumb)});"
+                - if offer.deliver_coordinator.neighborhood.present?
+                  .cardNeighborhood.u-textCenter.small
+                    span.fa.fa-map-marker.u-textYellow
+                    span.u-textBold.u-textUp = "Bairro #{offer.deliver_coordinator.neighborhood}"
                 .card__info
                   span.card__info__price title="Preço total da cota"
-                    = number_to_currency offer.coordinator_tax + offer.operational_tax + offer.value
-                    span.small
-                      |  / 1 cota
+                    span.u-textBigger = number_to_currency offer.coordinator_tax + offer.operational_tax + offer.value
                     span.pull-right title="Data da Coleta"
                       span.glyphicon.glyphicon-calendar
-                      = offer.collect_starts_at.strftime('%d/%m')
-                  h1.card__info__title.title--up = link_to offer.title, offer_path(offer)
+                      span.u-textUp = l(offer.collect_starts_at, format: '%a')
+                      span.u-marginLft5.u-textBrownMedium = offer.collect_starts_at.strftime('%d/%m')
+                  h1.card__info__title.title--up.u-marginBot5.u-marginTop5
+                    = link_to offer.decorate.title_with_items, offer_path(offer)
                   span.card__info__place title="Nome do Produtor"
                     span.glyphicon.glyphicon-grain
                     = offer.producer.name
