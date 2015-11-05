@@ -25,7 +25,8 @@ section.producer-info
               span.bold CERTIFICAÇÃO:&nbsp
               span = @producer.certification
               .clearfix
-              iframe.youtube-embedded width="100%" height="380" src="#{@producer.video_url}" frameborder="0" allowfullscreen
+              - if @producer.video_url.present?
+                iframe.youtube-embedded width="100%" height="380" src="#{@producer.video_url}" frameborder="0" allowfullscreen
       
           .col-sm-6.col-md-4
             h2.title--up.text--green Contato
@@ -39,6 +40,7 @@ section.producer-info
                     span &nbsp
                     = link_to @producer.email, "mailto:#{@producer.email}"
                     br
-                    span.fa.fa-mouse-pointer.u-textBrownMedium
-                    = link_to 'Website','http://google.com'
+                    - if @producer.website.present?
+                      span.fa.fa-mouse-pointer.u-textBrownMedium
+                      = link_to @producer.website, "http://#{@producer.website}", target: "_blank"
 

@@ -1,5 +1,5 @@
 ActiveAdmin.register Producer do
-  permit_params :name, :address, :logo, :description, :contact_name, :phone, :email, :cover_image, :video_url, :certification
+  permit_params :name, :address, :logo, :description, :contact_name, :phone, :email, :cover_image, :video_url, :certification, :website
 
   menu priority: 6
 
@@ -48,6 +48,7 @@ ActiveAdmin.register Producer do
       f.input :contact_name
       f.input :certification
       f.input :video_url
+      f.input :website
       f.input :description, as: :html_editor
     end
 
