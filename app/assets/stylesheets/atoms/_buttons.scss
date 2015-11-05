@@ -26,6 +26,15 @@
   }
 }
 
+.btn--brown-alt {
+  background-color: $brown-dark;
+  color: #EEE !important;
+  &:hover {
+    color: #EEE !important;
+    background-color: $brown-medium;
+  }
+}
+
 .btn--yellow {
   background-color: $yellow-medium;
   color: $brown-dark !important;

@@ -1,5 +1,5 @@
 ActiveAdmin.register Producer do
-  permit_params :name, :address, :logo, :description, :contact_name, :phone, :email
+  permit_params :name, :address, :logo, :description, :contact_name, :phone, :email, :cover_image, :video_url, :certification, :website
 
   menu priority: 6
 
@@ -21,6 +21,9 @@ ActiveAdmin.register Producer do
       row :logo do
         image_tag producer.logo.url, size: '100x100'
       end
+      row :cover_image do
+        image_tag producer.cover_image, size: '200x100'
+      end
       row :name
       row :phone
       row :email
@@ -29,17 +32,23 @@ ActiveAdmin.register Producer do
       row :description do
         simple_format producer.description
       end
+      row :certification
+      row :video_url
     end
   end
 
   form do |f|
     f.inputs "Conteúdo 'Cover'" do
       f.input :logo
+      f.input :cover_image
       f.input :name
       f.input :phone
       f.input :email
       f.input :address
       f.input :contact_name
+      f.input :certification
+      f.input :video_url
+      f.input :website
       f.input :description, as: :html_editor
     end
 

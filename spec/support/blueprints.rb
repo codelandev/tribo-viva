@@ -25,6 +25,7 @@ Producer.blueprint do
   description { "Lorem ipsum." }
   contact_name { "Contato Produtor" }
   logo { File.open('spec/support/example.jpg') }
+  cover_image { File.open('spec/support/example.jpg') }
 end
 
 DeliverCoordinator.blueprint do
