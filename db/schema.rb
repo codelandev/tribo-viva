@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151030193229) do
+ActiveRecord::Schema.define(version: 20151105131129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,15 +136,18 @@ ActiveRecord::Schema.define(version: 20151030193229) do
   add_index "orders", ["purchase_id"], name: "index_orders_on_purchase_id", using: :btree
 
   create_table "producers", force: :cascade do |t|
-    t.text     "description",  default: "", null: false
-    t.string   "name",         default: "", null: false
-    t.string   "logo",         default: "", null: false
-    t.string   "phone",        default: "", null: false
-    t.string   "email",        default: "", null: false
-    t.string   "address",      default: "", null: false
-    t.string   "contact_name", default: "", null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.text     "description",   default: "", null: false
+    t.string   "name",          default: "", null: false
+    t.string   "logo",          default: "", null: false
+    t.string   "phone",         default: "", null: false
+    t.string   "email",         default: "", null: false
+    t.string   "address",       default: "", null: false
+    t.string   "contact_name",  default: "", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "certification"
+    t.string   "video_url"
+    t.string   "cover_image"
   end
 
   create_table "purchases", force: :cascade do |t|

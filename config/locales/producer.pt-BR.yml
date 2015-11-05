@@ -14,3 +14,6 @@ pt-BR:
         address: 'Endereço'
         description: 'Descrição'
         contact_name: 'Nome do contato'
+        certification: 'Certificação'
+        video_url: 'URL do vídeo'
+        cover_image: 'Imagem de capa'

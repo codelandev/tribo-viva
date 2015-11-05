@@ -1,5 +1,5 @@
 ActiveAdmin.register Producer do
-  permit_params :name, :address, :logo, :description, :contact_name, :phone, :email
+  permit_params :name, :address, :logo, :description, :contact_name, :phone, :email, :cover_image, :video_url, :certification
 
   menu priority: 6
 
@@ -35,11 +35,14 @@ ActiveAdmin.register Producer do
   form do |f|
     f.inputs "Conteúdo 'Cover'" do
       f.input :logo
+      f.input :cover_image
       f.input :name
       f.input :phone
       f.input :email
       f.input :address
       f.input :contact_name
+      f.input :certification
+      f.input :video_url
       f.input :description, as: :html_editor
     end
 
