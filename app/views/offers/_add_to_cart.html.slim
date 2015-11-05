@@ -1,0 +1,21 @@
+- if @errors.present?
+  .modal-header
+    button type="button" class="close" data-dismiss="modal" aria-label="Close"
+      span aria-hidden="true" &times;
+
+  .modal-body
+    h2 Aconteceu os seguintes erros ao adicionar o produto ao carrinho:
+    p = errors
+    
+    = link_to 'Continuar comprando', '', data: { dismiss: "modal" }
+
+- else
+  .modal-header
+    button type="button" class="close" data-dismiss="modal" aria-label="Close"
+      span aria-hidden="true" &times;
+
+  .modal-body
+    h2 Item adicionado com sucesso!
+    p O que gostaria de fazer agora?
+    = link_to 'Ir para o carrinho', cart_path
+    = link_to 'Continuar comprando', '', data: { dismiss: "modal" }

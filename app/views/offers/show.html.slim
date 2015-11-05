@@ -24,7 +24,15 @@ section.offer-header
               .small valor de 1 cota
             .offer__header__action
               - if @offer.is_valid_offer?
-                = link_to 'COMPRAR', add_to_cart_offer_path(@offer), method: :post, class: 'btn btn--md btn--block btn--yellow'
+                = link_to 'COMPRAR', add_to_cart_offer_path(@offer), method: :post,
+                  class: 'btn btn--md btn--block btn--yellow', 
+                  data: { toggle: "modal", target: "#add_to_cart_modal", remote: true}
+                
+                // Used to load the success modal inside
+                .modal.fade#add_to_cart_modal
+                  .modal-dialog
+                    .modal-content
+              
               - else
                 = link_to 'OFERTA FINALIZADA', '#', class: 'btn btn--md btn--block btn--disable'
 
