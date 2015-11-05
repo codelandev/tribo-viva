@@ -13,6 +13,8 @@ footer.footer
                 li style="#{'display: none;' if params[:controller] == 'checkouts' || params[:controller] == 'purchases'}"
                   = link_to 'Como Funciona', about_path, title: 'Como Funciona'
                 li style="#{'display: none;' if params[:controller] == 'checkouts' || params[:controller] == 'purchases'}"
+                  = link_to 'Produtores', producers_path, title: 'Produtores'
+                li style="#{'display: none;' if params[:controller] == 'checkouts' || params[:controller] == 'purchases'}"
                   = link_to 'Entregas', delivery_path, title: 'Entregas'
                 li
                   = link_to 'Termos de Compras', terms_path, title: 'Termos de Compras'
