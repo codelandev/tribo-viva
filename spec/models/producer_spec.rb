@@ -9,6 +9,7 @@ RSpec.describe Producer, type: :model do
     it { should validate_presence_of :address }
     it { should validate_presence_of :description }
     it { should validate_presence_of :contact_name }
+    it { should validate_presence_of :cover_image }
   end
 
   describe "relations" do

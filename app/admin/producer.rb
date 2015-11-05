@@ -21,6 +21,9 @@ ActiveAdmin.register Producer do
       row :logo do
         image_tag producer.logo.url, size: '100x100'
       end
+      row :cover_image do
+        image_tag producer.cover_image, size: '200x100'
+      end
       row :name
       row :phone
       row :email
@@ -29,6 +32,8 @@ ActiveAdmin.register Producer do
       row :description do
         simple_format producer.description
       end
+      row :certification
+      row :video_url
     end
   end
 
