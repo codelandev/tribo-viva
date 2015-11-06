@@ -1,1 +1,1 @@
-$('.modal-content').append("<%= escape_javascript(render 'add_to_cart', errors: @errors) %>");
+$('.modal-content').html("<%= escape_javascript(render 'add_to_cart', errors: @errors) %>");
