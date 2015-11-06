@@ -6,7 +6,7 @@
     h2.u-textUp.u-textRed.u-marginTop10.u-marginBot30 Aconteceram os seguintes problemas:
     p.u-marginBot30 = errors
 
-    = link_to 'Continuar comprando', '', class: 'btn btn--md btn--block btn--brown', data: { dismiss: "modal" }
+    = link_to 'Continuar comprando', root_path, class: 'btn btn--md btn--block btn--brown'
 
 - else
   .modal-body
@@ -16,4 +16,4 @@
     h2.u-textUp.u-textBrownDark.u-marginTop10.u-marginBot30 Item adicionado com sucesso!
     p.u-marginBot30 O que gostaria de fazer agora?
     = link_to 'Ir para o carrinho', cart_path, class: 'btn btn--md btn--block btn--yellow u-marginBot15'
-    = link_to 'Continuar comprando', '', class: 'btn btn--md btn--block btn--brown', data: { dismiss: "modal" }
+    = link_to 'Continuar comprando', root_path, class: 'btn btn--md btn--block btn--brown'
