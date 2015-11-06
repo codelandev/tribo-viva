@@ -22,12 +22,13 @@ section.producer-info
 
               h2.title--up.text--green Quem somos
               p = simple_format(@producer.description)
-              span.bold CERTIFICAÇÃO:&nbsp
-              span = @producer.certification
+              - if @producer.certification.present?
+                span.bold CERTIFICAÇÃO:&nbsp
+                span = @producer.certification
               .clearfix
               - if @producer.video_url.present?
                 iframe.youtube-embedded width="100%" height="380" src="#{@producer.video_url}" frameborder="0" allowfullscreen
-      
+          
           .col-sm-6.col-md-4
             h2.title--up.text--green Contato
             iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="200" src="https://maps.google.com/maps?hl=en&q=#{@producer.address}&ie=UTF8&t=m&z=6&iwloc=B&output=embed">

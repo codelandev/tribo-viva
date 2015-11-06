@@ -1,0 +1,15 @@
+section.producer-body
+  .container
+    .row
+      .col-sm-10.col-md-8.col-centered
+        - @producers.each do |producer|
+          = link_to producer_path(producer)
+            .producer-box
+              .row.
+                .col-sm-10.col-md-5.producer-logo
+                  = image_tag producer.logo, width: '100%', height: '160'
+                .col-sm-10.col-md-6.producer-info
+                  h3.u-textUp = producer.name
+                  span.glyphicon.glyphicon-map-marker
+                  span.address = producer.address
+                  p = truncate(simple_format(producer.description), escape: false, length: 245, separador: ' ')

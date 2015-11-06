@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :producers, only: :show, path: 'produtores'
+  resources :producers, only: [:show, :index], path: 'produtores'
 
   get 'minhas-compras', to: 'purchases#index', as: :purchases
   # checkout/update is used by Iugu to trigger payment update callbacks

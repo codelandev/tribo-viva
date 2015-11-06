@@ -1,0 +1,26 @@
+.producer-body{
+  background-color: $brown-medium;
+  padding: 80px 0px;
+}
+
+.producer-box{
+  margin: 20px 0px;
+  background-color: $brown-dark;
+  .producer-logo{
+    padding: 24px 40px 24px 40px;
+  }
+  .producer-info{
+    padding: 0px 20px 20px 20px;
+    margin-top: 30px;
+  }
+  h3{
+    color: $yellow-medium !important;
+    margin-top: 0px;
+    margin-bottom: 8px;
+  }
+  p{
+    color: white;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+}

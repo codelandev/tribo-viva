@@ -107,7 +107,9 @@ section.offer-info
                 .widget__info__producer
                   .widget__producer__logo.img-responsive style="background-image: url(#{@offer.producer.logo.url(:thumb)});"
                   h4.widget__producer__name.text--yellow = @offer.producer.name
-                p = simple_format @offer.producer.description
+                p = truncate(simple_format(@offer.producer.description), escape: false, length: 430, separador: ' ')
+                .col-md-11.col-centered
+                  = link_to 'SAIBA MAIS', producer_path(@offer.producer), class: 'btn btn--md btn--block btn--yellow'
             br
             h2.title--up.text--green Entregas
             .offer-info__widget
