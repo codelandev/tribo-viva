@@ -1,21 +1,19 @@
 - if @errors.present?
-  .modal-header
+  .modal-body
     button type="button" class="close" data-dismiss="modal" aria-label="Close"
       span aria-hidden="true" &times;
+    i.fa.fa-times.u-textRed
+    h2.u-textUp.u-textRed.u-marginTop10.u-marginBot30 Aconteceram os seguintes problemas:
+    p.u-marginBot30 = errors
 
-  .modal-body
-    h2 Aconteceu os seguintes erros ao adicionar o produto ao carrinho:
-    p = errors
-    
-    = link_to 'Continuar comprando', '', data: { dismiss: "modal" }
+    = link_to 'Continuar comprando', '', class: 'btn btn--md btn--block btn--brown', data: { dismiss: "modal" }
 
 - else
-  .modal-header
+  .modal-body
     button type="button" class="close" data-dismiss="modal" aria-label="Close"
       span aria-hidden="true" &times;
-
-  .modal-body
-    h2 Item adicionado com sucesso!
-    p O que gostaria de fazer agora?
-    = link_to 'Ir para o carrinho', cart_path
-    = link_to 'Continuar comprando', '', data: { dismiss: "modal" }
+    i.fa.fa-check.u-textGreen
+    h2.u-textUp.u-textBrownDark.u-marginTop10.u-marginBot30 Item adicionado com sucesso!
+    p.u-marginBot30 O que gostaria de fazer agora?
+    = link_to 'Ir para o carrinho', cart_path, class: 'btn btn--md btn--block btn--yellow u-marginBot15'
+    = link_to 'Continuar comprando', '', class: 'btn btn--md btn--block btn--brown', data: { dismiss: "modal" }

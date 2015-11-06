@@ -25,14 +25,13 @@ section.offer-header
             .offer__header__action
               - if @offer.is_valid_offer?
                 = link_to 'COMPRAR', add_to_cart_offer_path(@offer), method: :post,
-                  class: 'btn btn--md btn--block btn--yellow', 
-                  data: { toggle: "modal", target: "#add_to_cart_modal", remote: true}
-                
+                  class: 'btn btn--md btn--block btn--yellow',
+                  data: { toggle: "modal", target: "#add_to_cart_modal", remote: true }
                 // Used to load the success modal inside
                 .modal.fade#add_to_cart_modal
                   .modal-dialog
                     .modal-content
-              
+
               - else
                 = link_to 'OFERTA FINALIZADA', '#', class: 'btn btn--md btn--block btn--disable'
 
@@ -55,13 +54,13 @@ section.offer-info
                     - @offer.offer_items.each do |item|
                       tr
                         td = item.name
-                        td 
-                          span 
+                        td
+                          span
                             | #{item.quantity} #{OfferItemUnit.t item.unit}
                         td = number_to_currency item.unit_price
                         td = number_to_currency item.total
               p = simple_format @offer.description
-            
+
             .offer-info__collect
               h2.title--up.text--green Sobre a coleta
               .offer-info__coordinator
@@ -117,28 +116,28 @@ section.offer-info
                   .widget__delivery__icon
                     .fa.fa-bicycle.u-textCenter
                   h4.widget__producer__name.text--yellow TELEBIKE
-                  p  
+                  p
                     span.fa.fa-user.u-textBrownMedium
                     |  JOÃO RUIZ
                     br
                     span.fa.fa-phone.u-textBrownMedium
-                    |  (51) 9136-0348 
+                    |  (51) 9136-0348
                     br
                     span.fa.fa-clock-o.u-textBrownMedium
-                    |  SEG a SÁB 
+                    |  SEG a SÁB
                     br
                     span.fa.fa-map-marker.u-textBrownMedium
                     |  não cobre a Zona Sul de POA
-                    br 
+                    br
                     = link_to 'Confira a Fan Page', 'https://www.facebook.com/TeleBikeEntregas', target: '_blank', class: 'text--yellow'
                   hr.u-borderBrownMedium
                   h4.widget__producer__name.text--yellow  EcoBike Courier
                   p.text--white
                     span.fa.fa-user.u-textBrownMedium
-                    |  VICTÓRIA MELGAREJO 
+                    |  VICTÓRIA MELGAREJO
                     br
                     span.fa.fa-phone.u-textBrownMedium
-                    |  (51) 3016-8770 
+                    |  (51) 3016-8770
                     br
                     span.fa.fa-clock-o.u-textBrownMedium
                     |  SEG a SEX
