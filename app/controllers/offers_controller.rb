@@ -5,11 +5,14 @@ class OffersController < ApplicationController
 
   def add_to_cart
     offer = Offer.find(params[:id])
+
     if cart_session.add(offer, params[:quantity])
-      redirect_to cart_path, notice: 'Cota adicionada ao carrinho!'
+      @errors = nil
     else
-      redirect_to cart_path, alert: cart_session.errors.join('; ')
+      @errors = cart_session.errors.join('; ')
     end
+
+    render layout: false
   end
 
   def remove_from_cart

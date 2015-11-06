@@ -1,0 +1,27 @@
+.modal-content {
+  border-radius: 0;
+}
+
+.modal-body {
+  text-align: center;
+  padding: 40px 80px 80px;
+  color: $brown-medium;
+
+  .fa {
+    font-size: 61px;
+  }
+
+  .close {
+    font-size: 40px;
+    line-height: 40px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-body {
+    padding: 30px 40px 40px;
+  }
+}
