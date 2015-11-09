@@ -1,0 +1,48 @@
+{
+  "addons": [
+    "heroku-postgresql:hobby-dev",
+    "logentries:le_tryit",
+    "scheduler:standard",
+    "sendgrid:starter"
+  ],
+  "description": "Plataforma de consumo colaborativo",
+  "env": {
+    "AWS_ACCESS_KEY_ID": {
+      "required": true
+    },
+    "AWS_BUCKET_NAME": {
+      "required": true
+    },
+    "AWS_REGION": {
+      "required": true
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "required": true
+    },
+    "HEROKU_APP_NAME": {
+      "required": true
+    },
+    "HEROKU_PARENT_APP_NAME": {
+      "required": true
+    },
+    "IUGU_ACCOUNT_ID": {
+      "required": true
+    },
+    "IUGU_API_KEY": {
+      "required": true
+    },
+    "IUGU_AUTH_CODE": {
+      "required": true
+    },
+    "SECRET_KEY_BASE": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    }
+  },
+  "name": "Tribo Viva",
+  "repository": "https://github.com/codelandev/tribo-viva",
+  "scripts": {
+    "postdeploy": "bin/rake db:setup"
+  },
+  "website": "https://triboviva.com.br/"
+}
