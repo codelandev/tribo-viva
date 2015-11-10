@@ -30,7 +30,7 @@ h2 LOCAL, HORÁRIO, COORDENADOR
 p ENDEREÇO: #{@offer.deliver_coordinator.address}
 p HORÁRIO: #{@offer.delivery_time_range}.
 p COORDENADOR(A) DE ENTREGA: #{@offer.deliver_coordinator.name} - #{@offer.deliver_coordinator.phone}
-iframe src="#{'https://maps.google.com/?q='+URI.encode(@offer.deliver_coordinator.address)+'&output=embed'}" width="600" height="450" frameborder="0" style="border:0"
+iframe[src="#{'https://maps.google.com/?q='+URI.encode(@offer.deliver_coordinator.address)+'&output=embed'}" width="600" height="450" frameborder="0" style="border:0"]
 
 h2 PARCEIRO DE ENTREGAS
 
