@@ -359,6 +359,15 @@ RSpec.describe CartSession do
       it 'element.quantity == quantity' do
         expect(subject.cart_list.first.quantity).to eq(2)
       end
+
+      context 'cart with deleted offer' do
+        before { Order.destroy_all }
+
+        it 'removes the item' do
+          offer.destroy
+          expect(subject.cart_list).to eq([])
+        end
+      end
     end
   end
 
