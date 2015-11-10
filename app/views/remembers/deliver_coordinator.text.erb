@@ -11,10 +11,10 @@ Horário de entrega: <%= I18n.l @offer.collect_starts_at - 2.hours, format: :sho
 Produtos de CADA UMA das cotas:
 <%= ActionController::Base.helpers.strip_tags @offer.description.gsub(/<\/(p|li|ul|br)>/, "\n") %>
 
-- quotes_quantity = @purchases.includes(:orders).where(orders: {offer: @offer}).sum('orders.quantity')
+<% quotes_quantity = @purchases.includes(:orders).where(orders: {offer: @offer}).sum('orders.quantity') %>
 <% if @offer.offer_items.any? %>
   <% @offer.offer_items.each do |item| %>
-    Nome: <%= item.name %>, Quantidade: <%= item.quantity*quotes_quantity %>
+    Nome: <%= item.name %>, Quantidade: <%= item.quantity * quotes_quantity %>
   <% end %>
 <% end %>
 
