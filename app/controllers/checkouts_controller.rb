@@ -1,5 +1,5 @@
 class CheckoutsController < ApplicationController
-  before_action :authenticate_user!, only: %i(checkout)
+  before_action :authenticate_user!, only: %i(checkout process_payment)
   before_action :store_location, only: [:transfer, :checkout]
 
   # Used to show the page to upload the transfer receipt
