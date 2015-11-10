@@ -1,5 +1,5 @@
-spec/**/*
-test/**/*
+spec/**/*.rb
+test/**/*.rb
 README.md
 lib/tasks/payment_migration.rake
 db/database.yml.sample
