@@ -56,7 +56,7 @@ section.offer-info
                         td = item.name
                         td
                           span
-                            | #{item.quantity} #{OfferItemUnit.t item.unit}
+                            | #{number_with_precision item.quantity, strip_insignificant_zeros: true, precision: 2} #{item.unit_humanize}
                         td = number_to_currency item.unit_price
                         td = number_to_currency item.total
               p = simple_format @offer.description
