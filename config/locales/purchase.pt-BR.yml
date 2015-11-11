@@ -13,6 +13,7 @@ pt-BR:
         taxes: 'Taxas'
         status: 'Status'
         receipt: 'Recibo'
+        quantity: 'Quantidade'
 
   enumerations:
     purchase_status:

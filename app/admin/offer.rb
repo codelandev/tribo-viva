@@ -89,6 +89,9 @@ ActiveAdmin.register Offer do
         column :total do |purchase|
           number_to_currency purchase.total
         end
+        column :quantity do |purchase|
+          purchase.orders.where(offer: offer).sum(:quantity)
+        end
       end
     end
   end
