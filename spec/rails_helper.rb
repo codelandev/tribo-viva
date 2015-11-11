@@ -19,7 +19,7 @@ require Rails.root.join('spec', 'support', 'blueprints.rb')
 require Rails.root.join('spec', 'support', 'controller_macros.rb')
 
 if ENV['CI']
-  WebMock.disable_net_connect!(:allow => 'codeclimate.com')
+  WebMock.disable_net_connect!(allow: 'codeclimate.com')
 else
   WebMock.disable_net_connect!
 end

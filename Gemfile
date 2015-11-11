@@ -58,7 +58,7 @@ gem 'business_time'
 # Send assets to S3 instead of serving through Heroku
 gem 'asset_sync', github: 'rumblelabs/asset_sync'
 # For better decorators
-gem 'draper'
+gem 'draper', '~> 2.1.0'
 
 group :development do
   gem 'letter_opener'

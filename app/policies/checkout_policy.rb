@@ -6,7 +6,4 @@ class CheckoutPolicy < ApplicationPolicy
   def process_payment?
     checkout?
   end
-
-  def permitted_attributes
-  end
 end

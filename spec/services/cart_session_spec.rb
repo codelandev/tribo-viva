@@ -184,7 +184,7 @@ RSpec.describe CartSession do
         end
       end
 
-      context 'all quantity' do
+      context 'max quantity' do
         let(:quantity) { 3 }
 
         it 'keeps session[:shopping_cart]' do
@@ -206,36 +206,53 @@ RSpec.describe CartSession do
     end
 
     context 'without item in cart' do
+      let!(:other_offer) { Offer.make! }
       after do
-        it 'keeps session[:shopping_cart]' do
-          expect {
-            subject.remove(offer, quantity)
-          }.not_to change{ session[:shopping_cart] }
-        end
+        expect {
+          subject.remove(other_offer, quantity)
+        }.not_to change{ session[:shopping_cart] }
       end
 
       context '0 quantity' do
         let(:quantity) { 0 }
+
+        it 'keeps session[:shopping_cart]' do
+        end
       end
 
       context '1 quantity' do
         let(:quantity) { 1 }
+
+        it 'keeps session[:shopping_cart]' do
+        end
       end
 
       context 'nil quantity' do
         let(:quantity) { nil }
+
+        it 'keeps session[:shopping_cart]' do
+        end
       end
 
       context 'in the middle quantity' do
         let(:quantity) { 2 }
+
+        it 'keeps session[:shopping_cart]' do
+        end
       end
 
-      context 'all quantity' do
+      context 'max quantity' do
         let(:quantity) { 3 }
+
+        it 'keeps session[:shopping_cart]' do
+        end
       end
 
       context 'more quantity than have' do
         let(:quantity) { 4 }
+
+        it 'keeps session[:shopping_cart]' do
+        end
       end
     end
   end
@@ -272,6 +289,7 @@ RSpec.describe CartSession do
       let(:session) do
         ActionController::TestSession.new(shopping_cart: [])
       end
+      it { expect(subject.items_count).to be_zero }
     end
 
     context 'cart with items' do
@@ -358,6 +376,15 @@ RSpec.describe CartSession do
 
       it 'element.quantity == quantity' do
         expect(subject.cart_list.first.quantity).to eq(2)
+      end
+
+      context 'cart with deleted offer' do
+        before { Order.destroy_all }
+
+        it 'removes the item' do
+          offer.destroy
+          expect(subject.cart_list).to eq([])
+        end
       end
     end
   end

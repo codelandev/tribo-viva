@@ -1,14 +1,8 @@
-# encoding: utf-8
-
 class DeliverCoordinatorUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
-
-  # Choose what kind of storage to use for this uploader:
-  # storage :file
-  # storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -33,7 +27,7 @@ class DeliverCoordinatorUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :mini_thumb do
-    process :resize_to_fit => [55, 55]
+    process resize_to_fit: [55, 55]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

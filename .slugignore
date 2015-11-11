@@ -1,0 +1,9 @@
+spec/**/*.rb
+test/**/*.rb
+README.md
+lib/tasks/payment_migration.rake
+db/database.yml.sample
+db/database.yml.travis
+config/environments/development.rb
+config/environments/test.rb
+bin/rspec

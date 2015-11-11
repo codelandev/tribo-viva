@@ -28,11 +28,4 @@ class OffersController < ApplicationController
       redirect_to cart_path, alert: 'Erro ao limpar carrinho.'
     end
   end
-
-  private
-
-  def permitted_params
-    attrs = %i(email name cpf phone address amount)
-    params.require(:purchase_form).permit(*attrs)
-  end
 end
