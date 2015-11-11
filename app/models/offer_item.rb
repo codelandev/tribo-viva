@@ -3,6 +3,8 @@ class OfferItem < ActiveRecord::Base
 
   validates :name, :unit, :quantity, :unit_price, presence: true
 
+  validates :quantity, :unit_price, numericality: true
+
   def total
     unit_price * quantity
   end
