@@ -92,7 +92,7 @@ end
 Purchase.blueprint do
   user
   invoice_id { 'h43u24h3u2h4u32hu' }
-  status { 'confirmed' }
+  status { PurchaseStatus::PAID }
   total { 1_000_00 }
 end
 

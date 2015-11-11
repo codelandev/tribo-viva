@@ -83,7 +83,7 @@ ActiveAdmin.register Offer do
           link_to purchase.invoice_id, admin_purchase_path(purchase)
         end
         column :status do |purchase|
-          PurchaseStatus.t purchase.status
+          purchase.status_humanize
         end
         column :user
         column :total do |purchase|

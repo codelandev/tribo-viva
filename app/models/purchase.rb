@@ -7,6 +7,8 @@ class Purchase < ActiveRecord::Base
   # Check PurchaseStatus class to all statuses availables
   scope :by_status, -> (status) { where(status: status) }
 
+  has_enumeration_for :status, with: PurchaseStatus, create_helpers: true
+
   mount_uploader :receipt, PurchaseUploader
 
   def total_with_taxes
