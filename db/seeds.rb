@@ -67,7 +67,7 @@ if Rails.env.development? || Rails.env.staging?
     10.times do |item|
       OfferItem.create!(
       name: "Item de nome #{item}",
-      unit: OfferItemUnit.to_a.sample[0],
+      unit: OfferItemUnit.to_a.sample[1],
       offer: Offer.last,
       quantity: item,
       unit_price: 5+item
