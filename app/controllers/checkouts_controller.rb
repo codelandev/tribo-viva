@@ -7,7 +7,8 @@ class CheckoutsController < ApplicationController
     @purchase = Purchase.find_by(invoice_id: params[:invoice_id])
 
     if @purchase.has_invalid_offers?
-      redirect_to root_path, alert: 'Uma ou mais ofertas desta compram já foram encerradas'
+      alert = 'Uma ou mais ofertas desta compram já foram encerradas'
+      redirect_to root_path, alert: alert, status: :found
     end
 
     @bank_account = BankAccount.first
