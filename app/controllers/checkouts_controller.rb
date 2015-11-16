@@ -5,6 +5,11 @@ class CheckoutsController < ApplicationController
   # Used to show the page to upload the transfer receipt
   def transfer
     @purchase = Purchase.find_by(invoice_id: params[:invoice_id])
+
+    if @purchase.has_invalid_offers?
+      redirect_to root_path, alert: 'Uma ou mais ofertas desta compram já foram encerradas'
+    end
+
     @bank_account = BankAccount.first
   end
 
