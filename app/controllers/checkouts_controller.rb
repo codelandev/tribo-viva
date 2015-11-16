@@ -1,16 +1,11 @@
 class CheckoutsController < ApplicationController
-  before_action :authenticate_user!, only: %i(checkout process_payment)
+  before_action :authenticate_user!, only: %i(checkout process_payment transfer)
   before_action :store_location, only: [:transfer, :checkout]
 
   # Used to show the page to upload the transfer receipt
   def transfer
     @purchase = Purchase.find_by(invoice_id: params[:invoice_id])
-
-    if @purchase.has_invalid_offers?
-      alert = 'Uma ou mais ofertas desta compram já foram encerradas'
-      redirect_to root_path, alert: alert, status: :found
-    end
-
+    authorize(@purchase)
     @bank_account = BankAccount.first
   end
 
@@ -53,8 +48,11 @@ class CheckoutsController < ApplicationController
   protected
 
   def user_not_authorized
-    flash[:alert] = "Para realizar pagamento você deve ter items no carrinho"
-    redirect_to cart_path
+    if @purchase && !policy(@purchase).transfer?
+      redirect_to root_path, flash: { alert: I18n.t('checkouts.upload_denied') }
+    else
+      redirect_to cart_path, flash: { alert: I18n.t('checkouts.must_have_items_in_cart') }
+    end
   end
 
   def purchase_params

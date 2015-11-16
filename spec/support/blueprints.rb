@@ -11,7 +11,7 @@ require 'machinist/active_record'
 User.blueprint do
   cpf { '12345678901' }
   name { 'User Test' }
-  email { 'user@test.com' }
+  email { "user#{sn}@test.com" }
   phone { '(51) 3779-9710' }
   address { 'Felipe Neri, 128' }
   password { '123123123' }
@@ -66,23 +66,6 @@ Offer.blueprint do
   collect_ends_at { 20.days.from_now }
 end
 
-Offer.blueprint(:invalid) do
-  producer
-  deliver_coordinator
-  bank_account
-  title { "Oferta" }
-  image { File.open('spec/support/example.jpg') }
-  value { 49.90 }
-  stock { 10 }
-  description { "Lorem ipsum." }
-  operational_tax { 4.99 }
-  coordinator_tax { 4.99 }
-  offer_starts_at { 1.day.ago }
-  offer_ends_at { 9.day.ago }
-  collect_starts_at { 10.day.ago }
-  collect_ends_at { 20.days.ago }
-end
-
 OldPurchase.blueprint(:pending) do
   user
   offer
@@ -108,14 +91,7 @@ end
 
 Purchase.blueprint do
   user
-  invoice_id { 'h43u24h3u2h4u32hu' }
-  status { PurchaseStatus::PAID }
-  total { 1_000_00 }
-end
-
-Purchase.blueprint(:invalid) do
-  user
-  invoice_id { 'invalid' }
+  invoice_id { SecureRandom.hex(32) }
   status { PurchaseStatus::PENDING }
   total { 1_000_00 }
 end
@@ -128,8 +104,8 @@ Order.blueprint do
 end
 
 Order.blueprint(:invalid) do
-  offer(:invalid)
-  purchase(:invalid)
+  offer
+  purchase
   quantity { 1 }
   offer_value { 49.99 }
 end
