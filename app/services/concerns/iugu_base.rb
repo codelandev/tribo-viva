@@ -58,6 +58,7 @@ module IuguBase
   def invoice
     @invoice ||= Iugu::Invoice.create(due_date.merge({
       email: user.email,
+      customer_id: user.iugu_customer,
       items: items
     }))
   end

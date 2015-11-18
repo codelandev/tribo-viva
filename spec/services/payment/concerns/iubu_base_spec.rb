@@ -35,6 +35,7 @@ RSpec.describe Payment::Base do
       expect(Iugu::Invoice).to receive(:create).with({
         due_date: '22/06/2015',
         email: user.email,
+        customer_id: user.iugu_customer,
         items: [
           { description: offer.title, quantity: 1, price_cents: (offer.total * 100).to_i },
           { description: 'Taxa da transação', quantity: 1, price_cents: 178 }
