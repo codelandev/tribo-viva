@@ -3,8 +3,7 @@
   task producers: :environment do
     puts "=== ENVIANDO EMAIL PARA PRODUTORES ... "
     offers = Offer.where(collect_starts_at: Date.tomorrow.beginning_of_day..Date.tomorrow.end_of_day)
-    offers.group_by(&:producer).each do |producer, _offers|
-      valid_offers = _offers.select{ |offer| offer.remaining <= 0 }
+    offers.group_by(&:producer).each do |producer, valid_offers|
       if valid_offers.size > 0
         puts "=== Enviando email produtor #{producer.email} ===\n"
         Remembers.producer(producer, valid_offers).deliver_now
@@ -18,10 +17,8 @@
     puts "=== ENVIANDO EMAIL PARA COORDENADORES ... "
     offers = Offer.where(collect_starts_at: Date.today.beginning_of_day..Date.today.end_of_day)
     offers.find_each do |offer|
-      if offer.remaining <= 0
-        puts "=== Enviando email coordenador #{offer.deliver_coordinator.email} ===\n"
-        Remembers.deliver_coordinator(offer).deliver_now
-      end
+      puts "=== Enviando email coordenador #{offer.deliver_coordinator.email} ===\n"
+      Remembers.deliver_coordinator(offer).deliver_now
     end
     puts "FIM === \n\n"
   end
@@ -31,12 +28,10 @@
     puts "=== ENVIANDO EMAIL PARA COMPRADORES ... "
     offers = Offer.where(collect_starts_at: Date.today.beginning_of_day..Date.today.end_of_day)
     offers.find_each do |offer|
-      if offer.remaining <= 0
-        offer.purchases.by_status(PurchaseStatus::PAID).each do |purchase|
-          if purchase.user != offer.deliver_coordinator
-            puts "=== Enviando email usuário #{purchase.user.email} ===\n"
-            Remembers.buyer(purchase.user, offer).deliver_now
-          end
+      offer.purchases.by_status(PurchaseStatus::PAID).each do |purchase|
+        if purchase.user != offer.deliver_coordinator
+          puts "=== Enviando email usuário #{purchase.user.email} ===\n"
+          Remembers.buyer(purchase.user, offer).deliver_now
         end
       end
     end
