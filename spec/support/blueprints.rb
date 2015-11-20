@@ -11,7 +11,7 @@ require 'machinist/active_record'
 User.blueprint do
   cpf { '12345678901' }
   name { 'User Test' }
-  email { 'user@test.com' }
+  email { "user#{sn}@test.com" }
   phone { '(51) 3779-9710' }
   address { 'Felipe Neri, 128' }
   password { '123123123' }
@@ -91,12 +91,19 @@ end
 
 Purchase.blueprint do
   user
-  invoice_id { 'h43u24h3u2h4u32hu' }
-  status { PurchaseStatus::PAID }
+  invoice_id { SecureRandom.hex(32) }
+  status { PurchaseStatus::PENDING }
   total { 1_000_00 }
 end
 
 Order.blueprint do
+  offer
+  purchase
+  quantity { 1 }
+  offer_value { 49.99 }
+end
+
+Order.blueprint(:invalid) do
   offer
   purchase
   quantity { 1 }

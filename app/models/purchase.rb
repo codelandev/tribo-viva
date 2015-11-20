@@ -1,6 +1,7 @@
 class Purchase < ActiveRecord::Base
   belongs_to :user, polymorphic: true
   has_many :orders, dependent: :destroy
+  has_many :offers, through: :orders
 
   validates :user, :status, :total, :invoice_id, presence: true
 
@@ -21,5 +22,9 @@ class Purchase < ActiveRecord::Base
 
   def cancel!
     update_attributes(status: PurchaseStatus::CANCELED)
+  end
+
+  def has_invalid_offers?
+    offers.finished_offers.any?
   end
 end
