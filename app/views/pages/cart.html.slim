@@ -5,7 +5,7 @@ section.cart
         .col-sm-12.col-md-9.col-centered
           .form.brown-dark
             h1.title--up.text--yellow Meu carrinho de compras
-            .table.table-responsive  
+            .table.table-responsive
               table.table.table-cart.table-bordered
                 thead
                   tr
@@ -50,7 +50,9 @@ section.cart
         .col-sm-12.col-md-9.col-centered
           .form.brown-dark
             h1.title--up.text--yellow.text-center Não há produtos no seu carrinho
-          br
+            br
+            .col-sm-6.col-centered
+              = link_to 'Ver Ofertas', root_path, class: 'btn btn--md btn--yellow btn--block'
           br
           br
           br

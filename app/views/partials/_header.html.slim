@@ -1,4 +1,4 @@
-header.header style="#{'display: none;' if params[:action] == 'new_purchase' || params[:controller] == 'purchases'}"
+header.header
   nav.navbar.navbar-default
     .container
       .navbar-header
@@ -20,6 +20,7 @@ header.header style="#{'display: none;' if params[:action] == 'new_purchase' || 
             = link_to 'Entregas', delivery_path, title: 'Entregas'
 
           - if user_signed_in?
+            li = link_to 'Minhas Compras', purchases_path, title: 'Minhas Compras'
             li = link_to 'Sair', destroy_user_session_path, method: :delete, title: 'Sair de sua conta'
           - else
             li = link_to 'Entre', new_user_session_path, title: 'Entre com sua conta'
