@@ -1,19 +1,43 @@
-h1 Minhas compras
+.myPurchases
+  .container
+    .row
+      .col-sm-12.col-md-9.col-centered
+        .boxContent.brown-dark
+          - if collection.any?
+            h1.title--up.text--yellow Histórico de Compras
+            .purchaseList
+              - collection.each do |purchase|
+                .purchaseList-item
+                  - purchase.orders.each do |order|
+                    .row
+                      .col-sm-4
+                        .purchaseItem-image style="background-image: url(#{order.offer.image.url(:home_thumb)})"
+                      .col-sm-8
+                        i.fa.fa-map-marker.u-textYellow.u-marginRgt5
+                        span.u-textBold.u-textUp.small = "Bairro #{order.offer.deliver_coordinator.neighborhood}"
+                        .pull-right
+                          span.u-marginRgt15 = number_to_currency order.offer_value
+                          span.glyphicon.glyphicon-calendar
+                          span.u-textUp.u-textBold = l(order.offer.collect_starts_at, format: '%a')
+                          span.u-marginLft5.u-textBrownMedium.u-textBold = order.offer.collect_starts_at.strftime('%d/%m')
+                        h2.title--up.text--yellow.u-marginBot5.u-marginTop10 = order.offer.title
+                        i.glyphicon.glyphicon-grain
+                        span.small = order.offer.producer.name
+                        br
+                        div.u-marginTop10
+                          span = t('offer', count: order.quantity)
+                          span.u-marginLft10
+                            | Total: 
+                            = number_to_currency purchase.total_with_taxes
+                        p.small
+                          | Compra realizada em: 
+                          = l(purchase.created_at, format: :long)
+                        p
+                          | Status: 
+                          span.title--up.text--yellow = purchase.status_humanize
 
-- if collection.any?
-  table.table-bordered
-    - collection.each do |purchase|
-      tr
-        th = purchase.invoice_id
-        th = purchase.created_at
-        th = purchase.status_humanize
-        th = purchase.total_with_taxes
-      - purchase.orders.each do |order|
-        tr
-          td = order.offer.title
-          td = number_to_currency order.offer_value
-          td = order.quantity
-          td = number_to_currency order.total
-
-- else
-  p Você ainda não realizou nenhuma compra
+          - else
+            h1.title--up.text--yellow.text-center Você ainda não realizou nenhuma compra
+            br
+            .col-sm-6.col-centered
+              = link_to 'Ver Ofertas da Semana', root_path, class: 'btn btn--md btn--yellow btn--block'

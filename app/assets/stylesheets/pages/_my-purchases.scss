@@ -1,0 +1,21 @@
+.myPurchases {
+  background-color: $brown-medium;
+  padding: 80px 0 80px 0;
+}
+
+.purchaseList-item {
+  color: white;
+  border: 1px solid $brown-medium;
+  padding: 20px;
+
+  &:not(:last-of-type) {
+    margin-bottom: 20px;
+  }
+}
+
+.purchaseItem-image {
+  height: 200px;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+}

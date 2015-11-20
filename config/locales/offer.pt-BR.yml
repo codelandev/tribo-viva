@@ -21,3 +21,6 @@ pt-BR:
         collect_ends_at: 'Coleta termina em'
         collect_starts_at: 'Coleta inicia em'
         deliver_coordinator: 'Coordenador de entrega'
+  offer:
+    one: '1 cota'
+    other: '%{count} cotas'

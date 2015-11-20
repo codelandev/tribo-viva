@@ -14,6 +14,6 @@ class PurchasesController < ApplicationController
   protected
 
   def collection
-    current_user.purchases
+    current_user.purchases.includes(:orders)
   end
 end
