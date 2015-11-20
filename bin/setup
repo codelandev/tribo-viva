@@ -19,6 +19,10 @@ Dir.chdir APP_ROOT do
     system "vi config/database.yml"
   end
 
+  unless File.exist?(APP_ROOT.join('.env'))
+    FileUtils.cp APP_ROOT.join('.env.example',), APP_ROOT.join('.env')
+  end
+
   unless File.exist?(APP_ROOT.join('.git', 'hooks', 'pre-push'))
 
     git_version = Gem::Version.new(`git --version`.gsub('git version', ''))
