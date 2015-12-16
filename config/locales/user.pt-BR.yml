@@ -11,7 +11,7 @@ pt-BR:
         name: 'Nome completo'
         phone: 'Telefone'
         email: 'Email'
-        address: 'Endereço'
+        address: 'Endereço completo'
         password: 'Senha'
         remember_me: 'Mantenha-me conectado'
         current_password: 'Senha atual'
