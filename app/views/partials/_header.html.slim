@@ -11,25 +11,31 @@ header.header
       .collapse.navbar-collapse#navbar-collapse
         ul.nav.navbar-nav.navbar-right
           li
-            = link_to 'Como Funciona', about_path, title: 'Como funciona a Tribo Viva'
+            = link_to 'como funciona', about_path, title: 'Como funciona a Tribo Viva'
           li
-            = link_to 'Contato', 'mailto:tribo@triboviva.com.br?subject=Olá Tribo Viva!', title: 'Envie um email para a Tribo Viva'
+            = link_to 'contato', 'mailto:tribo@triboviva.com.br?subject=Olá Tribo Viva!', title: 'Envie um email para a Tribo Viva'
           li
-            = link_to 'Produtores', producers_path, title: 'Produtores'
+            = link_to 'entregas', delivery_path, title: 'Entregas'
           li
-            = link_to 'Entregas', delivery_path, title: 'Entregas'
+            = link_to 'produtores', producers_path, title: 'Produtores'
 
           - if user_signed_in?
-            li = link_to 'Histórico de Compras', purchases_path, title: 'Histórico de Compras'
-            li = link_to 'Sair', destroy_user_session_path, method: :delete, title: 'Sair de sua conta'
+            li.dropdown
+              a.dropdown-toggle href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                | #{truncate(current_user.name, length: 15)}
+                i.fa.fa-angle-down.u-textYellow
+              ul.dropdown-menu
+                li = link_to 'editar dados', edit_user_registration_path, title: 'Editar Dados'
+                li = link_to 'histórico de sompras', purchases_path, title: 'Histórico de Compras'
+                li = link_to 'sair', destroy_user_session_path, method: :delete, title: 'Sair de sua conta'
           - else
-            li = link_to 'Entre', new_user_session_path, title: 'Entre com sua conta'
-            li = link_to 'Cadastre-se', new_user_registration_path, title: 'Cadastre-se no TriboViva'
+            li = link_to 'entre', new_user_session_path, title: 'Entre com sua conta'
+            li = link_to 'cadastre-se', new_user_registration_path, title: 'Cadastre-se no TriboViva'
 
           - if cart_session.items_count > 0
             li = link_to cart_path, title: "#{cart_session.items_count} Produtos no carrinho" do
-              span.fa.fa-shopping-cart
+              i.fa.fa-shopping-cart
               span.badge = cart_session.items_count
           - else
             li = link_to cart_path, title: 'Meu Carrinho' do
-              span.fa.fa-shopping-cart
+              i.fa.fa-shopping-cart
