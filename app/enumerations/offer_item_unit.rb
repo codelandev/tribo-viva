@@ -3,5 +3,6 @@ class OfferItemUnit < EnumerateIt::Base
                    bottle: 'bottle',
                    pack: 'pack',
                    stem: 'stem',
-                   head: 'head'
+                   head: 'head',
+                   unit: 'unit'
 end
