@@ -6,7 +6,7 @@ section.purchase
           - if @purchase.payment_method == 'credit_card' || @purchase.payment_method == 'transfer'
             h1.title--up.text--green SUCESSO!
             p 
-              | Sua compra foi realizada com sucesso. Agende a entrega da sua compra atavés dos nossos 
+              | Sua compra foi realizada com sucesso. Se preferir, agende a entrega da sua compra atavés dos nossos 
               = link_to 'parceiros de entregas', delivery_path, class: 'text--green u-textBold', target: '_blank'
               | .
             hr

@@ -1,6 +1,16 @@
 - meta og: { title: "Tribo Viva - #{@offer.title}", description: "#{strip_tags @offer.description}",
              url: request.url, image: @offer.image.url }
 
+#fb-root
+  javascript:
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=678058652212891";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
 section.offer-header
   .container
     .row
@@ -34,6 +44,8 @@ section.offer-header
 
               - else
                 = link_to 'OFERTA FINALIZADA', '#', class: 'btn btn--md btn--block btn--disable'
+            .offer__header__share
+              div class="fb-share-button" data-href="#{request.original_url}" data-layout="button"
 
 section.offer-info
   .container
@@ -99,7 +111,6 @@ section.offer-info
                           strong.text--green = t('activerecord.attributes.offer.coordinator_tax')
                         td.text-right
                           = number_to_currency @offer.coordinator_tax
-
           .col-sm-6.col-md-4
             h2.title--up.text--green Sobre o Produtor
             .offer-info__widget
