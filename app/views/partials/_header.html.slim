@@ -26,7 +26,7 @@ header.header
                 i.fa.fa-angle-down.u-textYellow
               ul.dropdown-menu
                 li = link_to 'editar dados', edit_user_registration_path, title: 'Editar Dados'
-                li = link_to 'histórico de sompras', purchases_path, title: 'Histórico de Compras'
+                li = link_to 'histórico de compras', purchases_path, title: 'Histórico de Compras'
                 li = link_to 'sair', destroy_user_session_path, method: :delete, title: 'Sair de sua conta'
           - else
             li = link_to 'entre', new_user_session_path, title: 'Entre com sua conta'
