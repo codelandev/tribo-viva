@@ -1,6 +1,6 @@
 h1 Olá #{@producer.name}!
 
-p Seguem as informações sobre as #{@offers.count} entregas de amanhã, #{I18n.l @day, format: :long}
+p Seguem as informações sobre a(s) #{@offers.count} entrega(s) de amanhã, #{I18n.l @day, format: :long}
 
 - items = []
 - @offers.each_with_index do |offer, index|
@@ -22,10 +22,10 @@ p Seguem as informações sobre as #{@offers.count} entregas de amanhã, #{I18n.
       - offer.offer_items.each do |item|
         tr
           td = item.name
-          td = item.quantity*offer.orders.sum(:quantity)
+          td = item.quantity*offer.purchases.sum('orders.quantity')
 
   == simple_format offer.description
-  p SUBTOTAL = "#{ActionController::Base.helpers.number_to_currency offer.value} x #{offer.orders.sum(:quantity)} = #{ActionController::Base.helpers.number_to_currency offer.purchases.sum(:total)}"
+  p SUBTOTAL = "#{ActionController::Base.helpers.number_to_currency offer.value} x #{offer.purchases.sum('orders.quantity')} = #{ActionController::Base.helpers.number_to_currency offer.purchases.sum(:total)}"
 
   iframe src="#{'https://maps.google.com/?q='+URI.encode(offer.deliver_coordinator.address)+'&output=embed'}" width="600" height="450" frameborder="0" style="border:0"
 
