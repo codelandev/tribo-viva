@@ -8,7 +8,7 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Últimas 10 compras realizadas HOJE" do
           purchases = Purchase.where(status: PurchaseStatus::PAID,
-                                     created_at: 1.month.ago.beginning_of_day..1.month.ago.end_of_day)
+                                     created_at: Date.today.beginning_of_day..Date.today.end_of_day)
                               .last(10)
           table do
             th "Usuário"
@@ -33,8 +33,8 @@ ActiveAdmin.register_page "Dashboard" do
       end
 
       column do
-        panel "Churn rate do mês de #{l 1.month.ago, format: '%B'}" do
-          month             = 1.month.ago.beginning_of_month..1.month.ago.end_of_month
+        panel "Churn rate do mês de #{l Date.today, format: '%B'}" do
+          month             = Date.today.beginning_of_month..Date.today.end_of_month
           new_users         = User.joins(:purchases).where(purchases: {created_at: month}).group('users.id').having('count(purchases.id) = 1').length
           recurrent_users   = User.joins(:purchases).where(purchases: {created_at: month}).group('users.id').having('count(purchases.id) > 1').length
           total_buyer_users = (new_users+recurrent_users)
