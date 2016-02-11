@@ -34,21 +34,22 @@ ActiveAdmin.register_page "Dashboard" do
 
       column do
         panel "Churn rate do mês de #{l Date.today, format: '%B'}" do
-          month             = Date.today.beginning_of_month..Date.today.end_of_month
-          new_users         = User.joins(:purchases).where(purchases: {created_at: month}).group('users.id').having('count(purchases.id) = 1').length
-          recurrent_users   = User.joins(:purchases).where(purchases: {created_at: month}).group('users.id').having('count(purchases.id) > 1').length
-          total_buyer_users = (new_users+recurrent_users)
+          month           = Date.today.beginning_of_month..Date.today.end_of_month
+          query           = User.joins(:purchases).where(purchases: {created_at: month}).group('users.id')
+          buyers          = query.having('count(purchases.id) > 0').length
+          new_users       = query.having('count(purchases.id) = 1').length
+          recurrent_users = query.having('count(purchases.id) > 1').length
 
           table do
-            th "Total de usuários"
+            th "Total de compradores"
             th "Usuários com 1 compra"
             th "Usuários com 1+ compras"
             th "Chorn Rate este mês"
             tr do
-              td User.count
+              td buyers
               td new_users
               td recurrent_users
-              td number_to_percentage(recurrent_users*100/total_buyer_users, precision: 2)
+              td number_to_percentage(recurrent_users*100.0/buyers, precision: 2)
             end
           end
         end
