@@ -7,7 +7,7 @@ ActiveAdmin.register DeliverCoordinator do
   index do
     column :id
     column :avatar do |coordinator|
-      image_tag coordinator.avatar.url, size: '100x100'
+      image_tag coordinator.avatar.url(:admin), size: '100x100'
     end
     column :name
     column :email
@@ -22,7 +22,7 @@ ActiveAdmin.register DeliverCoordinator do
   show do
     attributes_table do
       row :avatar do
-        image_tag deliver_coordinator.avatar.url, size: '200x200'
+        image_tag deliver_coordinator.avatar.url(:admin), size: '200x200'
       end
       row :name
       row :phone
