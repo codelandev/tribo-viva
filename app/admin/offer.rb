@@ -10,7 +10,7 @@ ActiveAdmin.register Offer do
     column :id
     column :title
     column :image do |offer|
-      image_tag offer.image.url, size: '150x150'
+      image_tag offer.image.url(:admin_thumb)
     end
     column :value do |offer|
       number_to_currency offer.value
@@ -28,7 +28,7 @@ ActiveAdmin.register Offer do
   show do
     attributes_table do
       row :image do |offer|
-        image_tag offer.image.url, size: '150x150'
+        image_tag offer.image.url(:admin_thumb)
       end
       row :producer
       row :deliver_coordinator
@@ -98,11 +98,15 @@ ActiveAdmin.register Offer do
 
   form do |f|
     f.inputs do
-      image_tag offer.image.url, size: '150x150'
+      image_tag offer.image.url(:admin_thumb)
       f.input :producer, collection: Producer.order(name: :asc)
       f.input :bank_account, collection: BankAccount.all.map{|w| [w.bank, w.id]}, include_blank: false
       f.input :deliver_coordinator, collection: DeliverCoordinator.order(name: :asc)
-      f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image.url, size: '200x200') : content_tag(:span, "Nenhuma imagem presente.")
+      f.input :image,
+        as: :file,
+        hint: f.object.image.present? ?
+          image_tag(f.object.image.url(:admin_thumb)) :
+          content_tag(:span, "Nenhuma imagem presente.")
       f.input :title
       f.input :value, label: 'Valor da Cota'
       f.input :operational_tax
