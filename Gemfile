@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.2.3'
+
+ruby_version_file = Pathname.new(__FILE__) + '../.ruby-version'
+ruby IO.read(ruby_version_file).strip
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 gem 'rails-i18n', '~> 4.0.4'
