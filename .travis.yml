@@ -4,6 +4,8 @@ cache: bundler
 rvm:
   - 2.3.0
 addons:
+  code_climate:
+    repo_token: 44a9f9ae37b5d8925d809436c44b8fae54fa418196f1b01527acb694f5acae5a
   postgresql: '9.3'
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
