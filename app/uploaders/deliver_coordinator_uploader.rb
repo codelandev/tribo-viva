@@ -1,4 +1,4 @@
-class DeliverCoordinatorUploader < BaseUploader
+class DeliverCoordinatorUploader < ImageUploader
   version :mini_thumb do
     process resize_to_fit: [55, 55]
   end

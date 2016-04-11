@@ -1,4 +1,4 @@
-class OfferUploader < BaseUploader
+class OfferUploader < ImageUploader
   version :home_thumb do
     process resize_to_fit: [240, 200]
   end
