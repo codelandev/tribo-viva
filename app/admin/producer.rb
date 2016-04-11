@@ -6,7 +6,7 @@ ActiveAdmin.register Producer do
   index do
     column :id
     column :logo do |producer|
-      image_tag producer.logo.url, size: '100x100'
+      image_tag producer.logo.url(:admin_thumb)
     end
     column :name
     column :email
@@ -19,10 +19,10 @@ ActiveAdmin.register Producer do
   show do
     attributes_table do
       row :logo do
-        image_tag producer.logo.url, size: '100x100'
+        image_tag producer.logo.url(:admin_thumb)
       end
       row :cover_image do
-        image_tag producer.cover_image, size: '200x100'
+        image_tag producer.cover_image.url(:admin_cover)
       end
       row :name
       row :phone
