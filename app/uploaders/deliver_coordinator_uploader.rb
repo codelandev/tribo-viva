@@ -9,7 +9,7 @@ class DeliverCoordinatorUploader < CarrierWave::Uploader::Base
     process resize_to_fit: [55, 55]
   end
 
-  version :admin do
-    process resize_to_fit: [200, 200]
+  version :admin_thumb do
+    process resize_to_fit: [100, 100]
   end
 end
