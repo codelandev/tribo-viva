@@ -60,6 +60,7 @@ section.offer-info
                   table.table.table-brown-light
                     tr
                       th.text--green Produto
+                      th.text--green Quantidade
                       th.text--green Valor
                     - @offer.offer_items.each do |item|
                       tr
@@ -67,7 +68,8 @@ section.offer-info
                           = item.name
                           br
                           span.offer-info__unit__price #{number_to_currency(item.unit_price)} por #{item.unit_humanize.downcase}
-                        td #{number_to_currency(item.total)} / #{number_with_precision item.quantity, strip_insignificant_zeros: true, precision: 2} #{item.unit_humanize.downcase.pluralize(item.quantity)}
+                        td #{number_with_precision item.quantity, strip_insignificant_zeros: true, precision: 2} #{item.unit_humanize.downcase.pluralize(item.quantity)}
+                        td = number_to_currency(item.total)
               p = simple_format @offer.description
 
             .offer-info__collect
