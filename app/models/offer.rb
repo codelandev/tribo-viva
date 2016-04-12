@@ -1,6 +1,11 @@
 class Offer < ActiveRecord::Base
-  attr_accessor :offer_starts_at_time, :offer_ends_at_time, :collect_starts_at_time,
-    :collect_ends_at_time
+  TIME_ATTRIBUTES = %i(
+    collect_ends_at
+    collect_starts_at
+    offer_ends_at
+    offer_starts_at
+  )
+  attr_accessor *(TIME_ATTRIBUTES.map { |attr| "#{attr}_time" })
 
   after_create :create_coordinator_reservation
 

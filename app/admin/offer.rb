@@ -108,6 +108,21 @@ ActiveAdmin.register Offer do
   end
 
   form do |f|
+    def time_setting_from_datetime(form, attribute)
+      datetime = form.object.public_send(attribute)
+      value = form.object.public_send("#{attribute}_time") ||
+        datetime && "#{datetime.hour}:#{datetime.min}"
+      form.input "#{attribute}_time",
+        as: :string,
+        label: false,
+        wrapper_html: { class: 'time_picker_wrapper' },
+        input_html: {
+          value: value,
+          class: 'time_picker',
+          maxlength: 5
+        }
+    end
+
     f.inputs do
       image_tag offer.image.url(:admin_thumb)
       f.input :producer, collection: Producer.order(name: :asc)
@@ -127,51 +142,19 @@ ActiveAdmin.register Offer do
       columns do
         column do
           f.input :offer_starts_at, as: :date_picker
-          f.input :offer_starts_at_time,
-          as: :string,
-          label: false,
-          wrapper_html: { class: 'time_picker_wrapper' },
-          input_html: {
-            value: f.object.offer_starts_at_time || f.object.offer_starts_at && "#{f.object.offer_starts_at.hour}:#{f.object.offer_starts_at.min}",
-            class: 'time_picker',
-            maxlength: 5
-          }
+          time_setting_from_datetime(f, 'offer_starts_at')
         end
         column do
           f.input :offer_ends_at, as: :date_picker
-          f.input :offer_ends_at_time,
-            as: :string,
-            label: false,
-            wrapper_html: { class: 'time_picker_wrapper' },
-            input_html: {
-              value: f.object.offer_ends_at_time || f.object.offer_ends_at_time && "#{f.object.offer_ends_at.hour}:#{f.object.offer_ends_at.min}",
-              class: 'time_picker',
-              maxlength: 5
-            }
+          time_setting_from_datetime(f, 'offer_ends_at')
         end
         column do
           f.input :collect_starts_at, as: :date_picker
-          f.input :collect_starts_at_time,
-            as: :string,
-            label: false,
-            wrapper_html: { class: 'time_picker_wrapper' },
-            input_html: {
-              value: f.object.collect_starts_at_time || f.object.collect_starts_at_time && "#{f.object.collect_starts_at.hour}:#{f.object.collect_starts_at.min}",
-              class: 'time_picker',
-              maxlength: 5
-            }
+          time_setting_from_datetime(f, 'collect_starts_at')
         end
         column do
           f.input :collect_ends_at, as: :date_picker
-          f.input :collect_ends_at_time,
-            as: :string,
-            label: false,
-            wrapper_html: { class: 'time_picker_wrapper' },
-            input_html: {
-              value: f.object.collect_ends_at_time || f.object.collect_ends_at_time && "#{f.object.collect_ends_at.hour}:#{f.object.collect_ends_at.min}",
-              class: 'time_picker',
-              maxlength: 5
-            }
+          time_setting_from_datetime(f, 'collect_ends_at')
         end
       end
 
@@ -200,18 +183,11 @@ ActiveAdmin.register Offer do
     end
 
     def parse_datetime_params
-      date = params[:offer][:offer_starts_at]
-      time = params[:offer][:offer_starts_at_time]
-      params[:offer][:offer_starts_at] = "#{date} #{time}"
-      date = params[:offer][:offer_ends_at]
-      time = params[:offer][:offer_ends_at_time]
-      params[:offer][:offer_ends_at] = "#{date} #{time}"
-      date = params[:offer][:collect_starts_at]
-      time = params[:offer][:collect_starts_at_time]
-      params[:offer][:collect_starts_at] = "#{date} #{time}"
-      date = params[:offer][:collect_ends_at]
-      time = params[:offer][:collect_ends_at_time]
-      params[:offer][:collect_ends_at] = "#{date} #{time}"
+      Offer::TIME_ATTRIBUTES.each do |attribute|
+        date = params[:offer][attribute]
+        time = params[:offer]["#{attribute}_time"]
+        params[:offer][attribute] = "#{date} #{time}"
+      end
     end
   end
 end
