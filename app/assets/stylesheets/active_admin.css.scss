@@ -17,3 +17,7 @@
 //   .status_tag { background: #6090DB; }
 
 //= require active_admin/editor/wysiwyg
+
+input[readonly] {
+  background-color: #D4D4D4;
+}

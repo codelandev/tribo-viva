@@ -110,7 +110,10 @@ ActiveAdmin.register Offer do
       f.input :title
       f.input :value, label: 'Valor da Cota'
       f.input :operational_tax
-      f.input :coordinator_tax
+      f.input :coordinator_tax, input_html: {
+        readonly: true
+      }
+
       f.input :stock
       f.input :description, as: :html_editor
       f.input :offer_starts_at
