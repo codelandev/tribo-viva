@@ -2,7 +2,18 @@ ActiveAdmin.register Offer do
   permit_params :deliver_coordinator_id, :bank_account_id, :producer_id, :title, :image, :value, :stock,
                 :description, :offer_ends_at, :operational_tax, :coordinator_tax,
                 :collect_ends_at, :offer_starts_at, :collect_starts_at,
-                offer_items_attributes:[:id, :name, :unit, :quantity, :unit_price, :_destroy]
+                offer_items_attributes: [
+                  :id,
+                  :name,
+                  :unit,
+                  :quantity,
+                  :unit_price,
+                  :_destroy,
+                  :offer_starts_at_time,
+                  :offer_ends_at_time,
+                  :collect_starts_at_time,
+                  :collect_ends_at_time
+                ]
 
   menu priority: 7
 
@@ -113,10 +124,56 @@ ActiveAdmin.register Offer do
       f.input :coordinator_tax
       f.input :stock
       f.input :description, as: :html_editor
-      f.input :offer_starts_at
-      f.input :offer_ends_at
-      f.input :collect_starts_at
-      f.input :collect_ends_at
+      columns do
+        column do
+          f.input :offer_starts_at, as: :date_picker
+          f.input :offer_starts_at_time,
+          as: :string,
+          label: false,
+          wrapper_html: { class: 'time_picker_wrapper' },
+          input_html: {
+            value: f.object.offer_starts_at_time || f.object.offer_starts_at && "#{f.object.offer_starts_at.hour}:#{f.object.offer_starts_at.min}",
+            class: 'time_picker',
+            maxlength: 5
+          }
+        end
+        column do
+          f.input :offer_ends_at, as: :date_picker
+          f.input :offer_ends_at_time,
+            as: :string,
+            label: false,
+            wrapper_html: { class: 'time_picker_wrapper' },
+            input_html: {
+              value: f.object.offer_ends_at_time || f.object.offer_ends_at_time && "#{f.object.offer_ends_at.hour}:#{f.object.offer_ends_at.min}",
+              class: 'time_picker',
+              maxlength: 5
+            }
+        end
+        column do
+          f.input :collect_starts_at, as: :date_picker
+          f.input :collect_starts_at_time,
+            as: :string,
+            label: false,
+            wrapper_html: { class: 'time_picker_wrapper' },
+            input_html: {
+              value: f.object.collect_starts_at_time || f.object.collect_starts_at_time && "#{f.object.collect_starts_at.hour}:#{f.object.collect_starts_at.min}",
+              class: 'time_picker',
+              maxlength: 5
+            }
+        end
+        column do
+          f.input :collect_ends_at, as: :date_picker
+          f.input :collect_ends_at_time,
+            as: :string,
+            label: false,
+            wrapper_html: { class: 'time_picker_wrapper' },
+            input_html: {
+              value: f.object.collect_ends_at_time || f.object.collect_ends_at_time && "#{f.object.collect_ends_at.hour}:#{f.object.collect_ends_at.min}",
+              class: 'time_picker',
+              maxlength: 5
+            }
+        end
+      end
 
       panel '' do
         f.has_many :offer_items, allow_destroy: true do |a|
@@ -129,5 +186,32 @@ ActiveAdmin.register Offer do
     end
 
     f.actions
+  end
+
+  controller do
+    def create
+      parse_datetime_params
+      super
+    end
+
+    def update
+      parse_datetime_params
+      super
+    end
+
+    def parse_datetime_params
+      date = params[:offer][:offer_starts_at]
+      time = params[:offer][:offer_starts_at_time]
+      params[:offer][:offer_starts_at] = "#{date} #{time}"
+      date = params[:offer][:offer_ends_at]
+      time = params[:offer][:offer_ends_at_time]
+      params[:offer][:offer_ends_at] = "#{date} #{time}"
+      date = params[:offer][:collect_starts_at]
+      time = params[:offer][:collect_starts_at_time]
+      params[:offer][:collect_starts_at] = "#{date} #{time}"
+      date = params[:offer][:collect_ends_at]
+      time = params[:offer][:collect_ends_at_time]
+      params[:offer][:collect_ends_at] = "#{date} #{time}"
+    end
   end
 end

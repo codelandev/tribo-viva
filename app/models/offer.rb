@@ -1,4 +1,7 @@
 class Offer < ActiveRecord::Base
+  attr_accessor :offer_starts_at_time, :offer_ends_at_time, :collect_starts_at_time,
+    :collect_ends_at_time
+
   after_create :create_coordinator_reservation
 
   belongs_to :producer
