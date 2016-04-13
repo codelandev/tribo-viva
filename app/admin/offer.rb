@@ -2,7 +2,18 @@ ActiveAdmin.register Offer do
   permit_params :deliver_coordinator_id, :bank_account_id, :producer_id, :title, :image, :value, :stock,
                 :description, :offer_ends_at, :operational_tax, :coordinator_tax,
                 :collect_ends_at, :offer_starts_at, :collect_starts_at,
-                offer_items_attributes:[:id, :name, :unit, :quantity, :unit_price, :_destroy]
+                offer_items_attributes: [
+                  :id,
+                  :name,
+                  :unit,
+                  :quantity,
+                  :unit_price,
+                  :_destroy,
+                  :offer_starts_at_time,
+                  :offer_ends_at_time,
+                  :collect_starts_at_time,
+                  :collect_ends_at_time
+                ]
 
   menu priority: 7
 
@@ -97,6 +108,21 @@ ActiveAdmin.register Offer do
   end
 
   form do |f|
+    def time_setting_from_datetime(form, attribute)
+      datetime = form.object.public_send(attribute)
+      value = form.object.public_send("#{attribute}_time") ||
+        datetime && "#{datetime.hour}:#{datetime.min}"
+      form.input "#{attribute}_time",
+        as: :string,
+        label: false,
+        wrapper_html: { class: 'time_picker_wrapper' },
+        input_html: {
+          value: value,
+          class: 'time_picker',
+          maxlength: 5
+        }
+    end
+
     f.inputs do
       image_tag offer.image.url(:admin_thumb)
       f.input :producer, collection: Producer.order(name: :asc)
@@ -113,10 +139,24 @@ ActiveAdmin.register Offer do
       f.input :coordinator_tax
       f.input :stock
       f.input :description, as: :html_editor
-      f.input :offer_starts_at
-      f.input :offer_ends_at
-      f.input :collect_starts_at
-      f.input :collect_ends_at
+      columns do
+        column do
+          f.input :offer_starts_at, as: :date_picker
+          time_setting_from_datetime(f, 'offer_starts_at')
+        end
+        column do
+          f.input :offer_ends_at, as: :date_picker
+          time_setting_from_datetime(f, 'offer_ends_at')
+        end
+        column do
+          f.input :collect_starts_at, as: :date_picker
+          time_setting_from_datetime(f, 'collect_starts_at')
+        end
+        column do
+          f.input :collect_ends_at, as: :date_picker
+          time_setting_from_datetime(f, 'collect_ends_at')
+        end
+      end
 
       panel '' do
         f.has_many :offer_items, allow_destroy: true do |a|
@@ -129,5 +169,25 @@ ActiveAdmin.register Offer do
     end
 
     f.actions
+  end
+
+  controller do
+    def create
+      parse_datetime_params
+      super
+    end
+
+    def update
+      parse_datetime_params
+      super
+    end
+
+    def parse_datetime_params
+      Offer::TIME_ATTRIBUTES.each do |attribute|
+        date = params[:offer][attribute]
+        time = params[:offer]["#{attribute}_time"]
+        params[:offer][attribute] = "#{date} #{time}"
+      end
+    end
   end
 end

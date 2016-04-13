@@ -17,3 +17,20 @@
 //   .status_tag { background: #6090DB; }
 
 //= require active_admin/editor/wysiwyg
+
+.columns {
+  padding: 10px;
+}
+
+.label {
+  font-weight: bold;
+  color: #5E6469;
+}
+
+.time_picker[type="text"] {
+  width: calc(100% - 22px);
+}
+
+.time_picker_wrapper {
+  margin-top: 5px;
+}

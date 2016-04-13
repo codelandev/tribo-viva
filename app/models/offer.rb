@@ -1,4 +1,12 @@
 class Offer < ActiveRecord::Base
+  TIME_ATTRIBUTES = %i(
+    collect_ends_at
+    collect_starts_at
+    offer_ends_at
+    offer_starts_at
+  )
+  attr_accessor *(TIME_ATTRIBUTES.map { |attr| "#{attr}_time" })
+
   after_create :create_coordinator_reservation
 
   belongs_to :producer
