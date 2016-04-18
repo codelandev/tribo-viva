@@ -48,7 +48,9 @@ ActiveAdmin.register Offer do
     column :offer_ends_at
     column :collect_starts_at
     column :collect_ends_at
-    actions
+    actions defaults: true do |offer|
+      link_to('Duplicar', new_admin_offer_path(offer_id: offer.id))
+    end
   end
 
   show do
