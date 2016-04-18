@@ -13,6 +13,7 @@ ActiveAdmin.register Producer do
     end
     column :name
     column :email
+    column :phone
     column :address
     actions
   end
