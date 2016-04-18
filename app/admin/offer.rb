@@ -28,10 +28,12 @@ ActiveAdmin.register Offer do
 
   controller do
     def new
-      offer = Offer.find(params[:offer_id])
-      @offer = offer.dup
-      @offer.image = offer.image
-      @offer.offer_items << offer.offer_items.collect { |item| item.dup }
+      if params[:offer_id].present?
+        offer = Offer.find(params[:offer_id])
+        @offer = offer.dup
+        @offer.image = offer.image
+        @offer.offer_items << offer.offer_items.collect { |item| item.dup }
+      end
       super
     end
   end
