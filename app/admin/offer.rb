@@ -2,6 +2,7 @@ ActiveAdmin.register Offer do
   permit_params :deliver_coordinator_id, :bank_account_id, :producer_id, :title, :image, :value, :stock,
                 :description, :offer_ends_at, :operational_tax, :coordinator_tax,
                 :collect_ends_at, :offer_starts_at, :collect_starts_at,
+                :image_cache,
                 offer_items_attributes: [
                   :id,
                   :name,
@@ -16,6 +17,20 @@ ActiveAdmin.register Offer do
                 ]
 
   menu priority: 7
+
+  action_item only: :show do
+    link_to('Duplicar', new_admin_offer_path(offer_id: offer.id))
+  end
+
+  controller do
+    def new
+      offer = Offer.find(params[:offer_id])
+      @offer = offer.dup
+      @offer.image = offer.image
+      @offer.offer_items << offer.offer_items.collect { |item| item.dup }
+      super
+    end
+  end
 
   index do
     column :id
@@ -133,6 +148,7 @@ ActiveAdmin.register Offer do
         hint: f.object.image.present? ?
           image_tag(f.object.image.url(:admin_thumb)) :
           content_tag(:span, "Nenhuma imagem presente.")
+      f.input :image_cache, as: :hidden
       f.input :title
       f.input :value, label: 'Valor da Cota'
       f.input :operational_tax
