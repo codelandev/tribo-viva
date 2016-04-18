@@ -1,4 +1,8 @@
 ActiveAdmin.register User do
+  filter :email
+  filter :name
+  filter :cpf
+
   permit_params :cpf, :name, :email, :phone, :address, :password
   menu priority: 3
 
@@ -8,8 +12,6 @@ ActiveAdmin.register User do
     column :name
     column :email
     column :phone
-    column :cpf
-    column :address
     column :sign_in_count
     column :created_at
     actions

@@ -1,4 +1,7 @@
 ActiveAdmin.register DeliverCoordinator do
+  filter :name
+  filter :email
+
   permit_params :cpf, :name, :phone, :email, :avatar, :address, :partial_address,
                 :neighborhood
 
@@ -11,11 +14,8 @@ ActiveAdmin.register DeliverCoordinator do
     end
     column :name
     column :email
-    column :cpf
     column :phone
     column :address
-    column :neighborhood
-    column :partial_address
     actions
   end
 
