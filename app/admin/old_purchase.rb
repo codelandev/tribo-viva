@@ -1,6 +1,8 @@
 ActiveAdmin.register OldPurchase do
   permit_params :user, :offer, :amount, :status, :receipt
 
+  config.filters = false
+
   controller do
     defaults finder: :find_by_transaction_id
   end

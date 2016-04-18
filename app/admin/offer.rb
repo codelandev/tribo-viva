@@ -1,4 +1,8 @@
 ActiveAdmin.register Offer do
+  filter :producer
+  filter :offer_starts_at
+  filter :offer_ends_at
+
   permit_params :deliver_coordinator_id, :bank_account_id, :producer_id, :title, :image, :value, :stock,
                 :description, :offer_ends_at, :operational_tax, :coordinator_tax,
                 :collect_ends_at, :offer_starts_at, :collect_starts_at,
@@ -45,9 +49,6 @@ ActiveAdmin.register Offer do
       "Restam #{offer.remaining} de #{offer.stock}"
     end
     column :offer_starts_at
-    column :offer_ends_at
-    column :collect_starts_at
-    column :collect_ends_at
     actions defaults: true do |offer|
       link_to('Duplicar', new_admin_offer_path(offer_id: offer.id))
     end
@@ -107,13 +108,23 @@ ActiveAdmin.register Offer do
 
     panel 'Compras com esta oferta' do
       table_for offer.purchases.order(status: :desc) do
-        column :invoice_id do |purchase|
-          link_to purchase.invoice_id, admin_purchase_path(purchase)
-        end
+        column :user
         column :status do |purchase|
           purchase.status_humanize
         end
-        column :user
+        column :payment_method do |purchase|
+          case purchase.payment_method
+          when 'credit_card'
+            'Cartão'
+          when 'bank_slip'
+            'Boleto'
+          when 'transfer'
+            'Transferência'
+          end
+        end
+        column :invoice_id do |purchase|
+          link_to purchase.invoice_id, admin_purchase_path(purchase)
+        end
         column :total do |purchase|
           number_to_currency purchase.total
         end

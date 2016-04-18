@@ -1,4 +1,7 @@
 ActiveAdmin.register Producer do
+  filter :name
+  filter :email
+
   permit_params :name, :address, :logo, :description, :contact_name, :phone, :email, :cover_image, :video_url, :certification, :website
 
   menu priority: 6
@@ -12,7 +15,6 @@ ActiveAdmin.register Producer do
     column :email
     column :phone
     column :address
-    column :contact_name
     actions
   end
 

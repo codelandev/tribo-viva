@@ -1,15 +1,17 @@
 ActiveAdmin.register Purchase do
+  filter :status, as: :select
+  filter :user_name, as: :string
+
   permit_params :status, :total, :taxes, :receipt
 
   index do
     selectable_column
     id_column
-    column :invoice_id
+    column :user
     column :created_at
     column :status do |purchase|
       purchase.status_humanize
     end
-    column :invoice_url
     column :payment_method do |purchase|
       case purchase.payment_method
       when 'credit_card'
