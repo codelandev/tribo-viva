@@ -22,6 +22,15 @@ ActiveAdmin.register Offer do
 
   menu priority: 7
 
+  before_create do |offer|
+    total_sum = 0
+    offer.offer_items.map{|i| total_sum = total_sum+i.total}
+    offer.value = total_sum
+    offer.operational_tax = offer.value * 0.20
+    offer.coordinator_tax = offer.value * 0.10
+    offer.save
+  end
+
   action_item only: :show do
     link_to('Duplicar', new_admin_offer_path(offer_id: offer.id))
   end
@@ -165,9 +174,6 @@ ActiveAdmin.register Offer do
           content_tag(:span, "Nenhuma imagem presente.")
       f.input :image_cache, as: :hidden
       f.input :title
-      f.input :value, label: 'Valor da Cota'
-      f.input :operational_tax
-      f.input :coordinator_tax
       f.input :stock
       f.input :description, as: :html_editor
       columns do
