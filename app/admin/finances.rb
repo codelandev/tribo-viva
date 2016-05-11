@@ -29,7 +29,7 @@ ActiveAdmin.register_page "Faturamento" do
                   td offer.producer.name
                   td offer.collect_starts_at.strftime('%d/%m/%Y')
                   td offer.deliver_coordinator.neighborhood
-                  td offer.deliver_coordinator.name
+                  td truncate(offer.deliver_coordinator.name, length: 22)
                   td offer.stock
                   td offer.stock - offer.remaining
                   td number_to_currency(offer.value)
