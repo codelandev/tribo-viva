@@ -1,6 +1,6 @@
 h1 Olá #{@producer.name}!
 
-p Seguem as informações sobre a(s) #{@offers.count} entrega(s) de amanhã, #{I18n.l @day, format: :long}
+p Seguem as informações sobre a(s) #{@offers.count} entrega(s) de hoje, #{I18n.l @day, format: :long}
 
 - items = []
 - @offers.each_with_index do |offer, index|
