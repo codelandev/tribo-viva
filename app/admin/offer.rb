@@ -22,7 +22,7 @@ ActiveAdmin.register Offer do
 
   menu priority: 7
 
-  before_create do |offer|
+  before_save do |offer|
     total_sum = 0
     offer.offer_items.map{|i| total_sum = total_sum+i.total}
     offer.value = total_sum
