@@ -1,6 +1,6 @@
 Olá <%= @producer.name %>!
 
-Seguem as informações sobre as <%= @offers.count %> entregas de amanhã, <%= I18n.l @day, format: :long %>
+Seguem as informações sobre as <%= @offers.count %> entregas de hoje, <%= I18n.l @day, format: :long %>
 
 <% items = [] %>
 <% @offers.each_with_index do |offer, index| %>

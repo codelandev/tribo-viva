@@ -2,7 +2,7 @@
   desc 'Remember producers of tommorows delivers'
   task producers: :environment do
     puts "=== ENVIANDO EMAIL PARA PRODUTORES ... "
-    offers = Offer.where(collect_starts_at: Date.tomorrow.beginning_of_day..Date.tomorrow.end_of_day)
+    offers = Offer.where(collect_starts_at: Date.today.beginning_of_day..Date.today.end_of_day)
     offers.group_by(&:producer).each do |producer, valid_offers|
       if valid_offers.size > 0
         puts "=== Enviando email produtor #{producer.email} ===\n"
