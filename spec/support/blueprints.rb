@@ -66,29 +66,6 @@ Offer.blueprint do
   collect_ends_at { 20.days.from_now }
 end
 
-OldPurchase.blueprint(:pending) do
-  user
-  offer
-  amount { 2 }
-  status { OldPurchaseStatus::PENDING }
-end
-
-OldPurchase.blueprint(:confirmed) do
-  user
-  offer
-  amount { 2 }
-  status { OldPurchaseStatus::CONFIRMED }
-  receipt { File.open('spec/support/example.jpg') }
-end
-
-OldPurchase.blueprint(:canceled) do
-  user
-  offer
-  amount { 2 }
-  status { OldPurchaseStatus::CANCELED }
-  receipt { File.open('spec/support/example.jpg') }
-end
-
 Purchase.blueprint do
   user
   invoice_id { SecureRandom.hex(32) }

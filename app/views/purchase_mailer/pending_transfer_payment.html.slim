@@ -8,23 +8,21 @@ hr
 
 h3
   strong RESUMO DA COMPRA
-- if @purchase.is_a?(OldPurchase)
-- else
-  - @purchase.orders.each do |order|
-    ul
-      li OFERTA: #{order.offer.title}
-      li QUANTIDADE: #{order.quantity} cota(s)
-      li VALOR UNITÁRIO (repassados ao produtor): #{number_to_currency order.offer.value}
-      li 
-        | #{t('activerecord.attributes.offer.operational_tax')}:
-        |  #{number_to_currency order.offer.operational_tax}
-      li 
-        | #{t('activerecord.attributes.offer.coordinator_tax')}: 
-        |  #{number_to_currency order.offer.coordinator_tax}
-      li TOTAL DA OFERTA: #{number_to_currency order.total}
-      li A OFERTA EXPIRA EM: #{distance_of_time_in_words(order.offer.offer_ends_at, Time.now)} (ou quando todas as cotas tiverem sido adquiridas).
-  h2 TOTAL A PAGAR: #{number_to_currency @purchase.total}.
-  hr
+- @purchase.orders.each do |order|
+  ul
+    li OFERTA: #{order.offer.title}
+    li QUANTIDADE: #{order.quantity} cota(s)
+    li VALOR UNITÁRIO (repassados ao produtor): #{number_to_currency order.offer.value}
+    li 
+      | #{t('activerecord.attributes.offer.operational_tax')}:
+      |  #{number_to_currency order.offer.operational_tax}
+    li 
+      | #{t('activerecord.attributes.offer.coordinator_tax')}: 
+      |  #{number_to_currency order.offer.coordinator_tax}
+    li TOTAL DA OFERTA: #{number_to_currency order.total}
+    li A OFERTA EXPIRA EM: #{distance_of_time_in_words(order.offer.offer_ends_at, Time.now)} (ou quando todas as cotas tiverem sido adquiridas).
+h2 TOTAL A PAGAR: #{number_to_currency @purchase.total}.
+hr
 h3
   strong DADOS DA CONTA
 p

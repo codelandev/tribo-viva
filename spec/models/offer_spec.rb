@@ -20,7 +20,6 @@ RSpec.describe Offer, type: :model do
     it { should belong_to :producer }
     it { should have_many :offer_items }
     it { should belong_to :bank_account }
-    it { should have_many :old_purchases }
     it { should belong_to :deliver_coordinator }
   end
 
