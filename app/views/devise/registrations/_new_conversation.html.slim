@@ -1,0 +1,42 @@
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  .form-inputs
+    = f.input :name,
+      required: true,
+      autofocus: true,
+      placeholder: 'Francisca Edwiges Neves Gonzaga'
+    = f.input :nickname,
+      required: true,
+      autofocus: true,
+      placeholder: 'Chiquinha'
+    = f.input :email,
+      required: true,
+      placeholder: 'chiquinha@gmail.com'
+    .row
+      .col-sm-6
+        = f.input :cpf,
+          required: true,
+          input_html: { class: 'js-cpf' }
+        .hint.text--brown__medium Para emissão de notas fiscais
+      .col-sm-6
+        = f.input :phone,
+          required: true,
+          input_html: { class: 'js-phone' }
+        .hint.text--brown__medium Para possíveis avisos de última hora
+    = f.input :address,
+      required: true,
+      placeholder: 'Rua Cabral, 301 - Porto Alegre, RS'
+    .hint.text--brown__medium Para emissão de notas fiscais
+    .row
+      .col-sm-6
+        = f.input :password,
+          required: true,
+          minlength: @minimum_password_length
+        .hint.text--brown__medium = "Mínimo de #{@minimum_password_length} caracteres" if @minimum_password_length
+      .col-sm-6
+        = f.input :password_confirmation,
+          required: true
+
+  .form-actions
+    = f.button :submit,
+      'Cadastrar',
+      class: 'btn btn--md btn--block btn--yellow'

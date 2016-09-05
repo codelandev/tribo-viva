@@ -31,4 +31,6 @@ Rails.application.routes.draw do
   patch 'checkout/:invoice_id',        to: 'checkouts#update',          as: :checkout_update
 
   get '/index', format: :php, to: redirect('/')
+
+  mount Split::Dashboard, at: 'split'
 end
