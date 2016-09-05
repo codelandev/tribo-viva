@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411190944) do
+ActiveRecord::Schema.define(version: 20160903201424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,20 +109,6 @@ ActiveRecord::Schema.define(version: 20160411190944) do
   add_index "offers", ["deliver_coordinator_id"], name: "index_offers_on_deliver_coordinator_id", using: :btree
   add_index "offers", ["producer_id"], name: "index_offers_on_producer_id", using: :btree
 
-  create_table "old_purchases", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "offer_id"
-    t.integer  "amount",         default: 0,         null: false
-    t.string   "status",         default: "pending", null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.string   "transaction_id", default: "",        null: false
-    t.string   "receipt"
-  end
-
-  add_index "old_purchases", ["offer_id"], name: "index_old_purchases_on_offer_id", using: :btree
-  add_index "old_purchases", ["user_id"], name: "index_old_purchases_on_user_id", using: :btree
-
   create_table "orders", force: :cascade do |t|
     t.integer  "offer_id"
     t.integer  "purchase_id"
@@ -194,8 +180,6 @@ ActiveRecord::Schema.define(version: 20160411190944) do
   add_foreign_key "offers", "bank_accounts"
   add_foreign_key "offers", "deliver_coordinators"
   add_foreign_key "offers", "producers"
-  add_foreign_key "old_purchases", "offers"
-  add_foreign_key "old_purchases", "users"
   add_foreign_key "orders", "offers"
   add_foreign_key "orders", "purchases"
 end

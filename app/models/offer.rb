@@ -12,7 +12,6 @@ class Offer < ActiveRecord::Base
   belongs_to :producer
   belongs_to :bank_account
   belongs_to :deliver_coordinator
-  has_many :old_purchases
   has_many :orders
   has_many :purchases, -> { by_status(PurchaseStatus::PAID) }, through: :orders
   has_many :offer_items, dependent: :destroy
