@@ -1,7 +1,4 @@
 class PurchaseMailer < ActionMailer::Base
-  layout 'mailer'
-  default from: 'confirmacao@triboviva.com.br'
-
   def pending_transfer_payment(purchase)
     @purchase = purchase
     @bank_account = BankAccount.first
