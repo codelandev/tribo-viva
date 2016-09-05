@@ -1,11 +1,6 @@
-section.users
-  .container
-    .row
-      .col-sm-10.col-md-6.col-centered
-        .form.brown-dark
-          h1.title--up.text--yellow Cadastre-se
+h1.title--up.text--yellow Cadastre-se
 
-          - ab_test(:communication_style, 'direct', 'conversation') do |experiment_name|
-            = render "new_#{experiment_name}"
+- ab_test(:communication_style, 'direct', 'conversation') do |experiment_name|
+  = render "new_#{experiment_name}"
 
-            = render "devise/shared/links_#{experiment_name}"
+  = render "devise/shared/links_#{experiment_name}"

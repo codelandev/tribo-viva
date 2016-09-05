@@ -1,17 +1,6 @@
-section.users
-  .container
-    .row
-      .col-sm-10.col-md-6.col-centered
-        .form.brown-dark
-          h1.title--up.text--yellow Entre
+h1.title--up.text--yellow Entre
 
-          = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-            .form-inputs
-              = f.input :email, required: true, autofocus: true, placeholder: 'example@email.com', title: 'Seu email de cadastro'
-              = f.input :password, required: true, label: 'Sua senha', title: 'Sua senha de cadastro'
-              = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+- ab_test(:communication_style, 'direct', 'conversation') do |experiment_name|
+  = render "new_#{experiment_name}"
 
-            .form-actions
-              = f.button :submit, "Entrar", class: 'btn btn--md btn--block btn--yellow', title: 'Entrar'
-
-          = render "devise/shared/links"
+  = render "devise/shared/links_#{experiment_name}"
