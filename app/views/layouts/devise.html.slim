@@ -21,7 +21,12 @@ html
     = render 'pages/flash' if flash.any?
     = render 'partials/devise_header'
 
-    = yield
+    section.users
+      .container
+        .row
+          .col-sm-10.col-md-6.col-centered
+            .form.brown-dark
+              = yield
 
     = render 'partials/webfont'
     = render 'partials/analytics' if Rails.env.production?
