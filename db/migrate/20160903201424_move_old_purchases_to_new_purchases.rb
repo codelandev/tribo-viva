@@ -11,7 +11,6 @@ class MoveOldPurchasesToNewPurchases < ActiveRecord::Migration
     if table_exists?('old_purchases')
       ActiveRecord::Base.transaction do
         OldPurchase.includes(:offer).find_each do |old|
-          puts "fazendo id #{old.id}"
           purchase = Purchase.new(user: old.user,
                                   status: (old.status == 'confirmed' ? PurchaseStatus::PAID : old.status),
                                   payment_method: 'transfer',
@@ -20,9 +19,9 @@ class MoveOldPurchasesToNewPurchases < ActiveRecord::Migration
                                   created_at: old.created_at,
                                   updated_at: old.updated_at)
           if ProducerUploader.storage == CarrierWave::Storage::File
-            purchase.receipt = old.receipt.url.file
+            purchase.receipt = old.receipt.file if old.receipt?
           else
-            purchase.receipt_url = old.receipt.url
+            purchase.remote_receipt_url = old.receipt.url if old.receipt?
           end
           purchase.orders.build(offer: old.offer,
                                 quantity: old.amount,
@@ -52,7 +51,7 @@ class MoveOldPurchasesToNewPurchases < ActiveRecord::Migration
       # In production:
       # OldPurchase.maximum(:created_at)
       # => 2015-08-16 15:17:23 UTC
-      old_dates = DateTime.parse('2015-08-16 15:17:23 UTC')
+      old_dates = DateTime.parse('2015-08-16 15:17:24 UTC')
       Purchase.where('"purchases"."created_at" <= ?', old_dates).find_each do |purchase|
         old = OldPurchase.new(user: purchase.user,
                               offer: purchase.orders.first.offer,
@@ -62,9 +61,9 @@ class MoveOldPurchasesToNewPurchases < ActiveRecord::Migration
                               created_at: purchase.created_at,
                               updated_at: purchase.updated_at)
         if ProducerUploader.storage == CarrierWave::Storage::File
-          old.receipt = purchase.receipt.url.file
+          old.receipt = purchase.receipt.file if purchase.receipt?
         else
-          old.receipt_url = purchase.receipt.url
+          old.remote_receipt_url = purchase.receipt.url if purchase.receipt?
         end
         purchase.destroy
       end
