@@ -2,25 +2,23 @@ pt-BR:
   activerecord:
     models:
       purchase:
-        one: 'Compra'
-        other: 'Compras'
-
+        one: Compra
+        other: Compras
     attributes:
       purchase:
-        user: 'Usuário'
-        token: 'Token'
-        total: 'Total'
-        taxes: 'Taxas'
-        status: 'Status'
-        receipt: 'Recibo'
-        quantity: 'Quantidade'
-
+        user: Usuário
+        token: Token
+        total: Total
+        taxes: Taxas
+        status: Status
+        receipt: Recibo
+        quantity: Quantidade
   enumerations:
     purchase_status:
-      paid: 'Paga'
-      draft: 'Rascunho'
-      pending: 'Pendente'
-      expired: 'Expirada'
-      canceled: 'Cancelada'
-      refunded: 'Estornada'
-      partially_paid: 'Parcialmente paga'
+      paid: Paga
+      draft: Rascunho
+      pending: Pendente
+      expired: Expirada
+      canceled: Cancelada
+      refunded: Estornada
+      partially_paid: Parcialmente paga

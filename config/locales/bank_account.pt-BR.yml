@@ -2,15 +2,15 @@ pt-BR:
   activerecord:
     models:
       bank_account:
-        one: 'Conta Bancária'
-        other: 'Contas Bancárias'
+        one: Conta Bancária
+        other: Contas Bancárias
 
     attributes:
       bank_account:
-        cc: 'Conta Corrente'
-        bank: 'Nome do Banco'
-        agency: 'Agência'
-        cnpj_cpf: 'CPF/CNPJ'
-        owner_name: 'Nome/Razão Social'
-        bank_number: 'Número do Banco'
-        operation_code: 'Código da operação'
+        cc: Conta Corrente
+        bank: Nome do Banco
+        agency: Agência
+        cnpj_cpf: CPF/CNPJ
+        owner_name: Nome/Razão Social
+        bank_number: Número do Banco
+        operation_code: Código da operação

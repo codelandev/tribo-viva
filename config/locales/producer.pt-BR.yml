@@ -2,18 +2,17 @@ pt-BR:
   activerecord:
     models:
       producer:
-        one: 'Produtor'
-        other: 'Produtores'
-
+        one: Produtor
+        other: Produtores
     attributes:
       producer:
-        logo: 'Logotipo'
-        name: 'Nome do Produtor'
-        phone: 'Telefone'
-        email: 'Email'
-        address: 'Endereço'
-        description: 'Descrição'
-        contact_name: 'Nome do contato'
-        certification: 'Certificação'
-        video_url: 'URL do vídeo'
-        cover_image: 'Imagem de capa'
+        logo: Logotipo
+        name: Nome do Produtor
+        phone: Telefone
+        email: Email
+        address: Endereço
+        description: Descrição
+        contact_name: Nome do contato
+        certification: Certificação
+        video_url: URL do vídeo
+        cover_image: Imagem de capa
