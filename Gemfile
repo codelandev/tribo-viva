@@ -11,6 +11,7 @@ gem 'iugu', '~> 1.0.8'
 gem 'pg'
 gem 'pundit', '~> 1.0.0'
 gem 'rails', '4.2.4'
+gem 'split', '~> 2.1.0', require: 'split/dashboard'
 
 # Client side
 gem 'accountingjs-rails'
