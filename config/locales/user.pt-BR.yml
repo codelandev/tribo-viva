@@ -2,17 +2,16 @@ pt-BR:
   activerecord:
     models:
       user:
-        one: 'Usuário'
-        other: 'Usuários'
-
+        one: Usuário
+        other: Usuários
     attributes:
       user:
-        cpf: 'CPF'
-        name: 'Nome completo'
-        phone: 'Telefone'
-        email: 'Email'
-        address: 'Endereço completo'
-        password: 'Senha'
-        remember_me: 'Mantenha-me conectado'
-        current_password: 'Senha atual'
-        password_confirmation: 'Confirme sua senha'
+        cpf: CPF
+        name: Nome completo
+        phone: Telefone
+        email: Email
+        address: Endereço completo
+        password: Senha
+        remember_me: Mantenha-me conectado
+        current_password: Senha atual
+        password_confirmation: Confirme sua senha

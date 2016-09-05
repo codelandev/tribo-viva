@@ -1,4 +1,4 @@
 pt-BR:
   checkouts:
-    must_have_items_in_cart: 'Para realizar pagamento você deve ter items no carrinho'
-    upload_denied: 'Para realizar pagamento você deve ter items no carrinho'
+    must_have_items_in_cart: Para realizar pagamento você deve ter items no carrinho
+    upload_denied: Para realizar pagamento você deve ter items no carrinho

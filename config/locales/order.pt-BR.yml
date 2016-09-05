@@ -2,12 +2,11 @@ pt-BR:
   activerecord:
     models:
       order:
-        one: 'Ordem de Compra'
-        other: 'Ordens de Compras'
-
+        one: Ordem de Compra
+        other: Ordens de Compras
     attributes:
       order:
-        offer: 'Oferta'
-        quantity: 'Quantidade'
-        purchase: 'Compra'
-        offer_value: 'Valor da oferta na data'
+        offer: Oferta
+        quantity: Quantidade
+        purchase: Compra
+        offer_value: Valor da oferta na data
