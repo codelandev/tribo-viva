@@ -24,7 +24,7 @@ section.offer-header
               span.glyphicon.glyphicon-grain
               = @offer.producer.name
             .offer__header__stock
-              span = pluralize(@offer.remaining, 'cotas')
+              span = pluralize(@offer.remaining, 'cota', 'cotas')
               .small restantes (de #{@offer.stock})
             .offer__header__date
               span = distance_of_time_in_words(@offer.offer_ends_at, Time.now)
