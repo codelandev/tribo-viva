@@ -11,7 +11,11 @@ section.checkout
                 = form_tag process_payment_path, id: 'js-payment-form' do
                   = hidden_field_tag :token, nil, readonly: true, size: 64
 
-                  h3.title--up Selecione a opção de pagamento
+                  - ab_test(:communication_style, 'direct', 'conversation') do |experiment_name|
+                    - if experiment_name == 'direct'
+                      h3.title--up Selecione a opção de pagamento
+                    - elsif experiment_name == 'conversation'
+                      h3.title--up Como vai pagar?
                   .btn-group.payment-method-btn-group data-toggle="buttons"
                     label#js-transfer-checkbox-label.btn.btn--sm.btn--yellow.u-marginRgt5.active Transferência/Depósito
                     = check_box_tag :method, 'transfer', true, id: 'js-payment-method-transfer', style: 'display: none;'
@@ -40,24 +44,28 @@ section.checkout
                       .input-group.nmb_d
                         .icon.ccic-exp
                         = text_field_tag :card_expiration, nil, autocomplete: 'off', placeholder: 'MM/AA', class: 'js-credit-card-card-expiration', data: { iugu: 'expiration'}, title: 'Data de expiração do cartão'
-                    .hint.text--brown__medium Não armazenamos os dados do seu cartão.
+                    .hint.text--brown__medium Não armazenamos os dados do seu cartão
 
-                  h3.title--up Aceite os termos
+                  br
+                  br
                   .form-acceptance
                     = check_box_tag :terms, '1', false, class: 'js-terms', style: "margin-right: 10px;", title: 'Eu aceito os termos de compra'
                     = label_tag :terms, class: 'text--white' do
                       | Eu aceito os
                       = link_to ' termos de compras', terms_path, target: '_blank', title: 'Veja nossos Termos de Compras'
 
-                  h3.title--up Finalize a compra!
                   = submit_tag 'Pagar', class: 'js-submit-payment btn btn--md btn--yellow btn--block', disabled: true, title: 'Aceite os termos de compra para pagar', data: { disable_with: "Enviando..." }
                   br
                   br
                   br
-                  = link_to 'Voltar para o Carrinho', cart_path, title: 'Voltar para o Carrinho'
+                  = link_to 'Voltar para o carrinho', cart_path
 
               .col-sm-5
-                h3.title--up.text--brown__light Resumo do Carrinho
+                - ab_test(:communication_style, 'direct', 'conversation') do |experiment_name|
+                  - if experiment_name == 'direct'
+                    h3.title--up.text--brown__light Resumo do Carrinho
+                  - elsif experiment_name == 'conversation'
+                    h3.title--up.text--brown__light O que você leva para casa
                 - total = 0
                 - session[:shopping_cart].each do |item|
                   - offer = Offer.find(item['id'])
@@ -65,27 +73,14 @@ section.checkout
                   .text--brown__light
                     div
                       strong = offer.title
-                    div
-                      = item['quantity']
-                      |  cota(s)
-                    div
-                      | Valor Unitário:&nbsp;
-                      = number_to_currency offer.value
-                    div
-                      | Taxa coordenação:&nbsp;
-                      = number_to_currency offer.coordinator_tax
-                    div
-                      | Taxa operacional:&nbsp;
-                      = number_to_currency offer.operational_tax
-                    div
-                      strong Total:&nbsp;
-                      strong = number_to_currency (offer.value+offer.coordinator_tax+offer.operational_tax)*item['quantity']
+                    div #{pluralize(item['quantity'], 'cota')} - #{number_to_currency(offer.value+offer.coordinator_tax+offer.operational_tax)*item['quantity']}
+                      
                   br
                 div#fees data-card-fee="#{cart_session.total_card_fee}" data-bank-slip-fee="#{Payment::BankSlip.taxes}" data-total="#{cart_session.sub_total}"
                 h4.text--yellow.no-Margin = "Subtotal: #{number_to_currency cart_session.sub_total}"
-                h4.text--yellow.no-Margin.js-text-total-fee = "Custo da Transação: #{number_to_currency cart_session.total_card_fee}"
+                h4.text--yellow.no-Margin.js-text-total-fee = "Taxa transação: #{number_to_currency cart_session.total_card_fee}"
                 br
-                h3.text--yellow.no-Margin.js-text-total = "Total a Pagar: #{number_to_currency cart_session.total_value}"
+                h3.text--yellow.no-Margin.js-text-total = "Total a pagar: #{number_to_currency cart_session.total_value}"
 
   - else
     .container
