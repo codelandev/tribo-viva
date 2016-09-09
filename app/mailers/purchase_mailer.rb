@@ -1,4 +1,4 @@
-class PurchaseMailer < ActionMailer::Base
+class PurchaseMailer < ApplicationMailer
   def pending_transfer_payment(purchase)
     @purchase = purchase
     @bank_account = BankAccount.first
