@@ -32,6 +32,21 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << [:name, :cpf, :phone, :address]
+    parameters = %i(
+      address
+      cpf
+      current_password
+      email
+      name
+      password
+      password_confirmation
+      phone
+    )
+    devise_parameter_sanitizer.for(:sign_up) do |user|
+      user.permit(*parameters)
+    end
+    devise_parameter_sanitizer.for(:account_update) do |user|
+      user.permit(*parameters)
+    end
   end
 end
