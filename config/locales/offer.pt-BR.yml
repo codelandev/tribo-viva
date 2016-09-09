@@ -14,8 +14,8 @@ pt-BR:
         description: Descrição
         bank_account: Conta bancária
         offer_ends_at: Oferta encerra em
-        operational_tax: TAXA OPERACIONAL (sustentabilidade da Rede)
-        coordinator_tax: TAXA COORDENAÇÃO (cota coordenador de entrega)
+        operational_tax: Sustentabilidade da rede
+        coordinator_tax: Coordenador de entrega
         offer_starts_at: Oferta começa em
         collect_ends_at: Coleta termina em
         collect_starts_at: Coleta inicia em
