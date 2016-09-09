@@ -6,12 +6,11 @@ section.users
           h1.title--up.text--yellow Editar Dados
           = simple_form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :patch } do |f|
             .form-inputs
+              = f.input :current_password, required: true
+              .hint.text--brown__medium Precisamos da sua senha para qualquer atualização
+              hr
               = f.input :name, required: true, autofocus: true, placeholder: 'Seu nome completo'
               = f.input :email, required: true
-              - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-                p
-                  | Esperando confirmação para:
-                  = resource.unconfirmed_email
               .row
                 .col-md-6
                   = f.input :cpf, required: true, title: 'Seu CPF', input_html: { class: 'js-cpf' }
@@ -21,12 +20,11 @@ section.users
                   .hint.text--brown__medium Utilizado para avisos de coleta e emergências
               = f.input :address, required: true
               .hint.text--brown__medium Necessário para emissão da NF
-              = f.input :password, autocomplete: "off", hint: 'Deixe em branco se não quer alterar', required: false
-              = f.input :password_confirmation, required: false
-              hr
-              = f.input :current_password, hint: 'Precisamos da senha atual para realizar a atualização', required: true
+              = f.input :password, autocomplete: "off", required: false, label: 'Nova senha'
+              .hint.text--brown__medium Deixe em branco se não quiser alterar
+              = f.input :password_confirmation, required: false, label: 'Sua nova senha novamente'
             .form-actions
               = f.button :submit, 'Atualizar', class: 'btn btn--md btn--block btn--yellow'
+
           h3 Cancelar minha conta
-          p = link_to 'Voltar', :back
-          p = link_to 'Descontente? Cancelar minha conta', registration_path(resource_name), data: { confirm: 'Você tem certeza?' }, method: :delete
+          p = link_to 'Descontente? Cancelar conta', registration_path(resource_name), data: { confirm: 'Você tem certeza?' }, method: :delete

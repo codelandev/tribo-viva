@@ -25,8 +25,8 @@ TriboViva.Checkouts.Checkout =
     sub_total  = parseFloat(divFees.data('total'))
     total      = accounting.formatMoney(sub_total+fee, "R$ ", 2, ".", ",")
     fee_string = accounting.formatMoney(fee, "R$ ", 2, ".", ",")
-    $('.js-text-total-fee').text('Custo da Transação: ' + fee_string)
-    $('.js-text-total').text('Total a Pagar: ' + total)
+    $('.js-text-total-fee').text('Taxa transação: ' + fee_string)
+    $('.js-text-total').text('Total a pagar: ' + total)
 
     creditCardCheckBoxLabel.on 'click', ->
       creditCardCheckBoxLabel.addClass('active')
@@ -43,8 +43,8 @@ TriboViva.Checkouts.Checkout =
       sub_total = parseFloat(divFees.data('total'))
       total     = accounting.formatMoney(sub_total+fee, "R$ ", 2, ".", ",")
       fee_string = accounting.formatMoney(fee, "R$ ", 2, ".", ",")
-      $('.js-text-total-fee').text('Custo da Transação: ' + fee_string)
-      $('.js-text-total').text('Total a Pagar: ' + total)
+      $('.js-text-total-fee').text('Taxa transação: ' + fee_string)
+      $('.js-text-total').text('Total a pagar: ' + total)
 
     bankSlipCheckBoxLabel.on 'click', ->
       bankSlipCheckBoxLabel.addClass('active')
@@ -61,8 +61,8 @@ TriboViva.Checkouts.Checkout =
       sub_total = parseFloat(divFees.data('total'))
       total     = accounting.formatMoney(sub_total+fee, "R$ ", 2, ".", ",")
       fee_string = accounting.formatMoney(fee, "R$ ", 2, ".", ",")
-      $('.js-text-total-fee').text('Custo da Transação: ' + fee_string)
-      $('.js-text-total').text('Total a Pagar: ' + total)
+      $('.js-text-total-fee').text('Taxa transação: ' + fee_string)
+      $('.js-text-total').text('Total a pagar: ' + total)
 
     transferCheckBoxLabel.on 'click', ->
       transferCheckBoxLabel.addClass('active')
@@ -79,8 +79,8 @@ TriboViva.Checkouts.Checkout =
       sub_total  = parseFloat(divFees.data('total'))
       total      = accounting.formatMoney(sub_total+fee, "R$ ", 2, ".", ",")
       fee_string = accounting.formatMoney(fee, "R$ ", 2, ".", ",")
-      $('.js-text-total-fee').text('Custo da Transação: ' + fee_string)
-      $('.js-text-total').text('Total a Pagar: ' + total)
+      $('.js-text-total-fee').text('Taxa transação: ' + fee_string)
+      $('.js-text-total').text('Total a pagar: ' + total)
 
     creditCardTerms.on 'change', ->
       if $(this).is(':checked')

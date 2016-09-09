@@ -2,16 +2,15 @@ pt-BR:
   activerecord:
     models:
       deliver_coordinator:
-        one: 'Coordenador de Entrega'
-        other: 'Coordenadores de Entrega'
-
+        one: Coordenador de Entrega
+        other: Coordenadores de Entrega
     attributes:
       deliver_coordinator:
-        cpf: 'CPF'
-        name: 'Nome do Coordenador'
-        phone: 'Telefone'
-        email: 'Email'
-        avatar: 'Avatar'
-        address: 'Endereço'
-        neighborhood: 'Bairro'
-        partial_address: 'Endereço Parcial'
+        cpf: CPF
+        name: Nome do Coordenador
+        phone: Telefone
+        email: E-mail
+        avatar: Avatar
+        address: Endereço
+        neighborhood: Bairro
+        partial_address: Endereço Parcial

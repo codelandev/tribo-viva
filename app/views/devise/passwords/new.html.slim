@@ -1,15 +1,10 @@
-section.users
-  .container
-    .row
-      .col-sm-10.col-md-6.col-centered
-        .form.brown-dark
-          h1.title--up.text--yellow Esqueceu sua senha?
+h1.title--up.text--yellow Esqueceu sua senha?
 
-          = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-            = f.error_notification
-            .form-inputs
-              = f.input :email, required: true, autofocus: true, placeholder: 'exemplo@email.com', title: 'Seu email de cadastro'
-            .form-actions
-              = f.button :submit, "Trocar Senha", class: 'btn btn--md btn--block btn--yellow', title: 'Trocar senha'
+= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :email, required: true, autofocus: true, placeholder: 'exemplo@email.com', title: 'Seu e-mail de cadastro'
+  .form-actions
+    = f.button :submit, "Trocar Senha", class: 'btn btn--md btn--block btn--yellow', title: 'Trocar senha'
 
-          = render "devise/shared/links"
+= render "devise/shared/links"

@@ -4,7 +4,11 @@ section.cart
       .row
         .col-sm-12.col-md-9.col-centered
           .form.brown-dark
-            h1.title--up.text--yellow Meu carrinho de compras
+            - ab_test(:communication_style, 'direct', 'conversation') do |experiment_name|
+              - if experiment_name == 'direct'
+                h1.title--up.text--yellow Meu carrinho de compras
+              - elsif experiment_name == 'conversation'
+                h1.title--up.text--yellow Minha feirinha virtual
             .table.table-responsive
               table.table.table-cart.table-bordered
                 thead
@@ -17,32 +21,29 @@ section.cart
                 tbody
                   - cart_session.cart_list.each do |item|
                     tr
-                      td title="#{item.offer.title}"
-                        = item.offer.title
+                      td = item.offer.title
                       td
-                        = link_to '-', remove_from_cart_offer_path(item.offer), method: :delete, class: 'btn btn--sm btn--yellow', title: 'Remover item'
+                        = link_to '-', remove_from_cart_offer_path(item.offer), method: :delete, class: 'btn btn--sm btn--yellow'
                         span.cart-quantity = item.quantity
-                        = link_to '+', add_to_cart_offer_path(item.offer), method: :post, class: 'btn btn--sm btn--yellow', title: 'Adicionar item'
-                      td title="Valor unitário: #{number_to_currency item.piece_price}"
-                        = number_to_currency item.piece_price
-                      td title="Valor total: #{number_to_currency item.total_price}"
-                        = number_to_currency item.total_price
-                      td.small title="Remover item do carrinho"
+                        = link_to '+', add_to_cart_offer_path(item.offer), method: :post, class: 'btn btn--sm btn--yellow'
+                      td = number_to_currency item.piece_price
+                      td = number_to_currency item.total_price
+                      td.small
                         = link_to remove_from_cart_offer_path(item.offer, quantity: 3), method: :delete, data: { confirm: 'Tem certeza?' } do 
                           .fa.fa-trash-o
             .row
               .col-sm-6
-                .pull-left = link_to 'Limpar meu carrinho', clean_cart_path, method: :delete, data: { confirm: 'Tem certeza que deseja fazer isso?' }, title: 'Limpar meu carrinho'
+                .pull-left = link_to 'Limpar meu carrinho', clean_cart_path, method: :delete, data: { confirm: 'Tem certeza que deseja fazer isso?' }
               .col-sm-6
-                h2.pull-right.no-Margin title="Valor Total: #{number_to_currency cart_session.sub_total}" = "Valor Total: #{number_to_currency cart_session.sub_total}"
+                h2.pull-right.no-Margin = "Valor total: #{number_to_currency cart_session.sub_total}"
             .row
               .col-sm-6.col-sm-offset-6
                 br
-                = link_to 'Ir para o Pagamento', checkout_path, class: 'btn btn--md btn--yellow btn--block', title: 'Ir para o Pagamento'
-                br
-                br
-                br
-                .pull-right = link_to 'Continuar Comprando', root_path, title: 'Continuar Comprando'
+                - ab_test(:communication_style, 'direct', 'conversation') do |experiment_name|
+                  - if experiment_name == 'direct'
+                    = link_to 'Ir para o pagamento', checkout_path, class: 'btn btn--md btn--yellow btn--block'
+                  - elsif experiment_name == 'conversation'
+                    = link_to 'Ir para o caixa', checkout_path, class: 'btn btn--md btn--yellow btn--block'
 
   - else
     .container

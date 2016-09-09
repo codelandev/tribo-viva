@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "no-reply@triboviva.com.br"
+  default from: 'tribo@triboviva.com.br'
   layout 'mailer'
 end

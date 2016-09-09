@@ -12,7 +12,7 @@ RSpec.describe Remembers, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq('Entregas Tribo Viva')
       expect(mail.to).to eq([producer.email])
-      expect(mail.from).to eq(["no-reply@triboviva.com.br"])
+      expect(mail.from).to eq(["tribo@triboviva.com.br"])
     end
 
     it "renders the body" do
@@ -26,7 +26,7 @@ RSpec.describe Remembers, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq('Lembrete de entrega Tribo Viva')
       expect(mail.to).to eq([offer.deliver_coordinator.email])
-      expect(mail.from).to eq(["no-reply@triboviva.com.br"])
+      expect(mail.from).to eq(["tribo@triboviva.com.br"])
     end
 
     it "renders the body" do
@@ -40,7 +40,7 @@ RSpec.describe Remembers, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq('Lembrete de coleta Tribo Viva')
       expect(mail.to).to eq([user.email])
-      expect(mail.from).to eq(["no-reply@triboviva.com.br"])
+      expect(mail.from).to eq(["tribo@triboviva.com.br"])
     end
 
     it "renders the body" do

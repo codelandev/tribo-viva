@@ -2,17 +2,17 @@ pt-BR:
   activerecord:
     models:
       user:
-        one: 'Usuário'
-        other: 'Usuários'
-
+        one: Usuário
+        other: Usuários
     attributes:
       user:
-        cpf: 'CPF'
-        name: 'Nome completo'
-        phone: 'Telefone'
-        email: 'Email'
-        address: 'Endereço completo'
-        password: 'Senha'
-        remember_me: 'Mantenha-me conectado'
-        current_password: 'Senha atual'
-        password_confirmation: 'Confirme sua senha'
+        address: Endereço completo
+        cpf: Qual seu CPF?
+        current_password: Senha atual
+        email: Qual seu e-mail?
+        name: Qual nome deve ir em notas fiscais?
+        nickname: Como prefere ser chamado?
+        password_confirmation: Sua senha novamente
+        password: Sua senha
+        phone: E celular?
+        remember_me: Gravar usuário neste computador

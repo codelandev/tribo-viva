@@ -24,14 +24,14 @@ section.offer-header
               span.glyphicon.glyphicon-grain
               = @offer.producer.name
             .offer__header__stock
-              span = "#{@offer.remaining}/#{@offer.stock}"
-              .small cotas restantes
+              span = pluralize(@offer.remaining, 'cota', 'cotas')
+              .small restantes (de #{@offer.stock})
             .offer__header__date
               span = distance_of_time_in_words(@offer.offer_ends_at, Time.now)
               .small restantes
             .offer__header__price
               span = number_to_currency @offer.total
-              .small valor de 1 cota
+              .small por cota
             .offer__header__action
               - if @offer.is_valid_offer?
                 = link_to 'COMPRAR', add_to_cart_offer_path(@offer), method: :post,
@@ -54,32 +54,29 @@ section.offer-info
         .row
           .col-sm-6.col-md-8
             .offer-info__products
-              h2.title--up.text--green O que vem na oferta
-              - if @offer.offer_items.any?
-                .table-responsive
-                  table.table.table-brown-light
+              .table-responsive
+                table.table.table-brown-light
+                  tr
+                    th.text--green Produto
+                    th.text--green Quantidade
+                    th.text--green Valor
+                  - @offer.offer_items.each do |item|
                     tr
-                      th.text--green Produto
-                      th.text--green Quantidade
-                      th.text--green Valor
-                    - @offer.offer_items.each do |item|
-                      tr
-                        td
-                          = item.name
-                          br
-                          span.offer-info__unit__price #{number_to_currency(item.unit_price)} por #{item.unit_humanize.downcase}
-                        td #{number_with_precision item.quantity, strip_insignificant_zeros: true, precision: 2} #{item.unit_humanize.downcase.pluralize(item.quantity)}
-                        td = number_to_currency(item.total)
+                      td
+                        = item.name
+                        br
+                        span.offer-info__unit__price #{number_to_currency(item.unit_price)} por #{item.unit_humanize.downcase}
+                      td #{number_with_precision item.quantity, strip_insignificant_zeros: true, precision: 2} #{item.unit_humanize.downcase.pluralize(item.quantity)}
+                      td = number_to_currency(item.total)
               p = simple_format @offer.description
 
             .offer-info__collect
-              h2.title--up.text--green Sobre a coleta
+              h2.title--up.text--green Coleta
               .offer-info__coordinator
                 span.offer-info__coordinator__avatar style="background-image: url(#{@offer.deliver_coordinator.avatar.url(:mini_thumb)});"
                 span.offer-info__coordinator__name
                   p = @offer.deliver_coordinator.name
-                  .small Coordenador(a) de Entrega
-              p As compras devem ser retiradas na data e local abaixo:
+                  .small Coordenador de Entrega
               ul
                 li
                   span.glyphicon.glyphicon-calendar
@@ -87,31 +84,27 @@ section.offer-info
                 li
                   span.glyphicon.glyphicon-map-marker
                   span = @offer.deliver_coordinator.partial_address
-                  p.hint.text--brown__medium Por motivos de segurança, o número do endereço só será fornecido para os participantes da oferta.
+                  p.hint.text--brown__medium O endereço completo ficará disponível depois de confirmar a compra.
             .offer-info__tax
-              h2.title--up.text--green Taxas operacionais
+              h2.title--up.text--green Composição do preço
               .table-responsive
                 table.table.table-brown-light
                   tbody
                     tr
                       td.width-80
-                        strong.text--green VALOR DA COTA (repassados ao produtor)
+                        strong.text--green Produtor
                       td.text-right
                         = number_to_currency @offer.value
-                    - if @offer.operational_tax.present?
-                      tr
-                        td.width-80
-                          strong.text--green = t('activerecord.attributes.offer.operational_tax')
-                        td.text-right
-                          = number_to_currency @offer.operational_tax
-                    - if @offer.coordinator_tax.present?
-                      tr
-                        td.width-80
-                          strong.text--green = t('activerecord.attributes.offer.coordinator_tax')
-                        td.text-right
-                          = number_to_currency @offer.coordinator_tax
+                    tr
+                      td.width-80
+                        strong.text--green = t('activerecord.attributes.offer.operational_tax')
+                      td.text-right = number_to_currency @offer.operational_tax
+                    tr
+                      td.width-80
+                        strong.text--green = t('activerecord.attributes.offer.coordinator_tax')
+                      td.text-right = number_to_currency @offer.coordinator_tax
           .col-sm-6.col-md-4
-            h2.title--up.text--green Sobre o Produtor
+            h2.title--up.text--green O produtor
             .offer-info__widget
               .offer-info__widget__info
                 .widget__info__producer
