@@ -73,7 +73,7 @@ section.checkout
                   .text--brown__light
                     div
                       strong = offer.title
-                    div #{pluralize(item['quantity'], 'cota')} - #{number_to_currency(offer.value+offer.coordinator_tax+offer.operational_tax)*item['quantity']}
+                    div #{pluralize(item['quantity'], 'cota', 'cotas')} - #{number_to_currency(offer.value+offer.coordinator_tax+offer.operational_tax * item['quantity'])}
                       
                   br
                 div#fees data-card-fee="#{cart_session.total_card_fee}" data-bank-slip-fee="#{Payment::BankSlip.taxes}" data-total="#{cart_session.sub_total}"
