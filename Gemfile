@@ -3,98 +3,75 @@ source 'https://rubygems.org'
 ruby_version_file = Pathname.new(__FILE__) + '../.ruby-version'
 ruby IO.read(ruby_version_file).strip
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
-gem 'rails-i18n', '~> 4.0.4'
-# Use postgresql as the database for Active Record
-gem 'pg'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-# gem 'sdoc', '~> 0.4.0', group: :doc
-# For hypertext edit on active admin
-gem 'active_admin_editor', github: 'boontdustie/active_admin_editor'
-# For image uploader
-gem 'carrierwave'
-gem 'mini_magick'
-gem 'fog', require: 'fog/aws/storage'
-# For dynamic meta tags
-gem 'metamagic'
-# For better enumerations
-gem 'enumerate_it'
-# For beautiful masked inputs
-gem 'maskedinput-rails'
-# To organize JS files
-gem 'initjs', '~> 2.1.2'
-# Support for SLIM files
-gem 'slim-rails', '~> 3.0.1'
+gem 'business_time'
 gem 'devise', '~> 3.5.1'
-gem 'devise-i18n'
-# For administrative interface
-gem 'activeadmin', github: 'gregbell/active_admin'
-# Well...simple forms
-gem 'simple_form', '~> 3.2.0'
-# Handle authorizations
+gem 'draper', '~> 2.1.0'
+gem 'enumerate_it'
+gem 'iugu', '~> 1.0.8'
+gem 'pg'
 gem 'pundit', '~> 1.0.0'
+gem 'rails', '4.2.4'
+
+# Client side
+gem 'accountingjs-rails'
+gem 'asset_sync', github: 'rumblelabs/asset_sync'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3.3'
+gem 'coffee-rails', '~> 4.1.0'
 gem 'font-awesome-rails'
+gem 'initjs', '~> 2.1.2'
+gem 'jquery-rails'
+gem 'maskedinput-rails'
+gem 'metamagic'
 gem 'nprogress-rails'
-# Payment gateway
-gem 'iugu', '~> 1.0.8'
-# Format/Parse decimal numbers
-gem 'accountingjs-rails'
-# Calculate business days of the offers
-gem 'business_time'
-# Send assets to S3 instead of serving through Heroku
-gem 'asset_sync', github: 'rumblelabs/asset_sync'
-# For better decorators
-gem 'draper', '~> 2.1.0'
+gem 'sass-rails', '~> 5.0'
+gem 'simple_form', '~> 3.2.0'
+gem 'slim-rails', '~> 3.0.1'
+gem 'turbolinks'
+gem 'uglifier', '>= 1.3.0'
+
+# File processing
+gem 'carrierwave'
+gem 'fog', require: 'fog/aws/storage'
+gem 'mini_magick'
+
+# I18n
+gem 'devise-i18n'
+gem 'rails-i18n', '~> 4.0.4'
+
+# Admin
+gem 'active_admin_editor', github: 'boontdustie/active_admin_editor'
+gem 'activeadmin', github: 'gregbell/active_admin'
+
+group :production do
+  gem 'newrelic_rpm'
+  gem 'passenger', '~> 5.0'
+  gem 'rails_12factor', '~> 0.0.3'
+end
+
+group :development, :test do
+  gem 'awesome_print', '~> 1.6.1', require: false
+  gem 'byebug'
+  gem 'dotenv-rails'
+  gem 'machinist', '~> 2.0'
+  gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.3.2'
+  gem 'spring-commands-rspec', '~> 1.0.4'
+  gem 'spring'
+  gem 'thin', '~> 1.6.3'
+  gem 'web-console', '~> 2.0'
+end
 
 group :development do
   gem 'letter_opener'
 end
 
-group :development, :test do
-  gem 'machinist', '~> 2.0'
-  gem 'rspec-rails', '~> 3.3.2'
-  gem 'awesome_print', '~> 1.6.1', require: false
-  gem 'spring-commands-rspec', '~> 1.0.4'
-  gem 'thin', '~> 1.6.3'
-  gem 'pry-rails'
-  gem 'dotenv-rails'
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-end
-
 group :test do
-  gem 'simplecov', '~> 0.10.0', require: false
+  gem 'capybara'
   gem 'codeclimate-test-reporter', require: false
   gem 'database_cleaner', '~> 1.5.1'
-  gem 'shoulda-matchers', '~> 3.0.1'
-  gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 3.0.1'
+  gem 'simplecov', '~> 0.10.0', require: false
   gem 'webmock', '~> 1.22.1'
-end
-
-group :production do
-  gem 'rails_12factor', '~> 0.0.3'
-  gem 'passenger', '~> 5.0'
-  gem 'newrelic_rpm'
 end
