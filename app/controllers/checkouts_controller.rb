@@ -36,6 +36,7 @@ class CheckoutsController < ApplicationController
   end
 
   def process_payment
+    ab_finished(:communication_style)
     authorize cart_session
 
     redirect_to *Checkout.perform(cart_session, params.merge(user: current_user))
