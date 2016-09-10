@@ -22,7 +22,7 @@ class MoveOldPurchasesToNewPurchases < ActiveRecord::Migration
           if ProducerUploader.storage == CarrierWave::Storage::File
             purchase.receipt = old.receipt.url.file
           else
-            purchase.receipt_url = old.receipt.url
+            purchase.remote_receipt_url = old.receipt.url
           end
           purchase.orders.build(offer: old.offer,
                                 quantity: old.amount,
