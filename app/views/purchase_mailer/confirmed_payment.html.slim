@@ -1,39 +1,35 @@
-h1 Oi, #{@purchase.user.name}!
+= content_for :header, "Oi, #{@purchase.user.name}! Sua compra foi confirmada com sucesso!"
 
-p Sua compra foi confirmada com sucesso!
-
-h3
+p
   strong DADOS DA COMPRA:
 
-ul
-  - @purchase.orders.each do |order|
-    li OFERTA: #{order.offer.title}
-    li QUANTIDADE: #{order.quantity} cota(s)
-    li VALOR UNITÁRIO (repassados ao produtor): #{number_to_currency order.offer.value}
-    li 
-      | #{t('activerecord.attributes.offer.operational_tax')}:
-      |  #{number_to_currency order.offer.operational_tax}
-    li 
-      | #{t('activerecord.attributes.offer.coordinator_tax')}: 
-      |  #{number_to_currency order.offer.coordinator_tax}
-    li TOTAL DA OFERTA: #{number_to_currency order.total}
-    br
-    li COORDENADOR DE ENTREGA: #{order.offer.deliver_coordinator.name}
-    li DATA E HORÁRIO: #{order.offer.delivery_time_range}
-    li LOCAL: #{order.offer.deliver_coordinator.address}
-    li TELEFONE: #{order.offer.deliver_coordinator.phone}
-    li E-MAIL: #{order.offer.deliver_coordinator.email}
-    br
+  ul
+    - @purchase.orders.each do |order|
+      li OFERTA: #{order.offer.title}
+      li QUANTIDADE: #{order.quantity} cota(s)
+      li VALOR UNITÁRIO (repassados ao produtor): #{number_to_currency order.offer.value}
+      li 
+        | #{t('activerecord.attributes.offer.operational_tax')}:
+        |  #{number_to_currency order.offer.operational_tax}
+      li 
+        | #{t('activerecord.attributes.offer.coordinator_tax')}: 
+        |  #{number_to_currency order.offer.coordinator_tax}
+      li TOTAL DA OFERTA: #{number_to_currency order.total}
+      br
+      li COORDENADOR DE ENTREGA: #{order.offer.deliver_coordinator.name}
+      li DATA E HORÁRIO: #{order.offer.delivery_time_range}
+      li LOCAL: #{order.offer.deliver_coordinator.address}
+      li TELEFONE: #{order.offer.deliver_coordinator.phone}
+      li E-MAIL: #{order.offer.deliver_coordinator.email}
+
+  - if %w(bank_slip credit_card).include?(@purchase.payment_method)
+    strong VALOR DA TRANSAÇÃO: #{number_to_currency @purchase.taxes}.
     br
 
-- if @purchase.payment_method == 'bank_slip' || @purchase.payment_method == 'credit_card'
-  strong VALOR DA TRANSAÇÃO: #{number_to_currency @purchase.taxes}.
-  br
-h2 TOTAL PAGO: #{number_to_currency @purchase.total_with_taxes}.
+strong TOTAL PAGO: #{number_to_currency @purchase.total_with_taxes}.
 hr
 p * Você tem até 24h antes do horário da coleta para indicar uma pessoa para buscar sua cota em seu lugar. Essa pessoa deverá portar documento de identificação com foto.
 hr
-h3
-  strong  SUGESTÕES OU DÚVIDAS?
+strong  SUGESTÕES OU DÚVIDAS?
 
 p Envie e-mail para #{mail_to 'tribo@triboviva.com.br'}
