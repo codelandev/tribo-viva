@@ -1,4 +1,4 @@
-h1 Oi, #{@purchase.user.name}!
+= content_for :header, "Oi, #{@purchase.user.name}!"
 
 - if @purchase.payment_method == 'credit_card'
   p Você efetuou a compra de cotas de produtos através da opção de cartão de crédito.
