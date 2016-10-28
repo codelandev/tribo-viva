@@ -59,7 +59,7 @@ ActiveAdmin.register Offer do
     column :stock do |offer|
       "Restam #{offer.remaining} de #{offer.stock}"
     end
-    column :offer_starts_at
+    column :collect_starts_at
     actions defaults: true do |offer|
       link_to('Duplicar', new_admin_offer_path(offer_id: offer.id))
     end
